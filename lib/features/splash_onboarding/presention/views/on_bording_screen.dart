@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:locum_app/core/extensions/context-extensions.dart';
+import 'package:locum_app/core/router/app_routes_names.dart';
 import 'package:locum_app/core/widgets/circular_image_asset.dart';
 import 'package:locum_app/core/widgets/default_screen_padding.dart';
 import 'package:locum_app/core/widgets/sizer.dart';
@@ -21,7 +22,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     if (_currentPage < _onBoardingData.length - 1) {
       _pageController.nextPage(duration: const Duration(seconds: 1), curve: Curves.easeInOut);
     } else {
-      // TODO: NAVIGATE TO THE LOGIN SCREEN
+      Navigator.of(context).pushNamedAndRemoveUntil(
+        AppRoutesNames.signinScreen,
+        (_) => false,
+      );
     }
   }
 
@@ -89,7 +93,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final List<Map<String, String>> _onBoardingData = [
     {
       "image": AssetsData.onBoarding_1,
-      "title": "Welcome to LocumFinder",
+      "title": "Welcome to AM/PM\nLocum Finder",
       "description": "Discover the best locum opportunities tailored to your needs.",
     },
     {
