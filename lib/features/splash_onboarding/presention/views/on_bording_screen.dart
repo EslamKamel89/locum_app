@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:locum_app/core/extensions/context-extensions.dart';
+import 'package:locum_app/core/widgets/circular_image_asset.dart';
 import 'package:locum_app/core/widgets/default_screen_padding.dart';
 import 'package:locum_app/core/widgets/sizer.dart';
 import 'package:locum_app/utils/assets/assets.dart';
@@ -130,22 +131,7 @@ class OnBoardingContent extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         children: [
-          Material(
-            elevation: 5,
-            borderRadius: BorderRadius.circular(300.h),
-            child: Container(
-              height: 300.h,
-              clipBehavior: Clip.hardEdge,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-              ),
-              // padding: EdgeInsets.symmetric(vertical: 5.h),
-              child: Image.asset(
-                image,
-                fit: BoxFit.fitHeight,
-              ),
-            ),
-          ),
+          CircularImageAsset(image: image, height: 300.h),
           Sizer(height: 30.h),
           txt(title, e: St.bold25, textAlign: TextAlign.center),
           Sizer(height: 15.h),
