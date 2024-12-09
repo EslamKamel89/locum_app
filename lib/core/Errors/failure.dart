@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:locum_app/core/heleprs/print_helper.dart';
 
 abstract class Failure {
   final String message;
@@ -12,35 +13,51 @@ class ServerFailure extends Failure {
     return ServerFailure('Check Your Interent Connection!');
   }
   factory ServerFailure.formDioError(DioException e) {
-    String errorMessage = '';
-    switch (e.type) {
-      case DioExceptionType.connectionTimeout:
-        errorMessage = 'Connection Timeout with api server';
-        break;
-      case DioExceptionType.sendTimeout:
-        errorMessage = 'Send Timeout with api server';
-        break;
-      case DioExceptionType.receiveTimeout:
-        errorMessage = 'Recieve Timeout with api server';
-        break;
-      case DioExceptionType.badCertificate:
-        errorMessage = 'Bad Certificate with api server';
-        break;
-      case DioExceptionType.badResponse:
-        return ServerFailure.fromResponse(e.response!.statusCode ?? 404, e.response!.data);
-      // errorMessage = 'Bad Response with api server';
-      // break;
-      case DioExceptionType.cancel:
-        errorMessage = 'Request to Api server is canceled';
-        break;
-      case DioExceptionType.connectionError:
-        errorMessage = 'No Internet Connection';
-        break;
-      case DioExceptionType.unknown:
-        errorMessage = 'Opps There was an error, please try again';
-        break;
+    final t = prt(' ServerFailure.formDioError');
+    pr(e.response?.data, t);
+    try {
+      String? message = e.response?.data['message'];
+      List? errors = e.response?.data['errors'];
+      if (message != null || errors != null) {
+        message = e.response?.data['message'];
+        for (var error in errors!) {
+          message = '$message \n $error';
+        }
+        pr(message, '$t - error message');
+      }
+      // String errorMessage = '';
+      // switch (e.type) {
+      //   case DioExceptionType.connectionTimeout:
+      //     errorMessage = 'Connection Timeout with api server';
+      //     break;
+      //   case DioExceptionType.sendTimeout:
+      //     errorMessage = 'Send Timeout with api server';
+      //     break;
+      //   case DioExceptionType.receiveTimeout:
+      //     errorMessage = 'Recieve Timeout with api server';
+      //     break;
+      //   case DioExceptionType.badCertificate:
+      //     errorMessage = 'Bad Certificate with api server';
+      //     break;
+      //   case DioExceptionType.badResponse:
+      //     return ServerFailure.fromResponse(e.response!.statusCode ?? 404, e.response!.data);
+      //   // errorMessage = 'Bad Response with api server';
+      //   // break;
+      //   case DioExceptionType.cancel:
+      //     errorMessage = 'Request to Api server is canceled';
+      //     break;
+      //   case DioExceptionType.connectionError:
+      //     errorMessage = 'No Internet Connection';
+      //     break;
+      //   case DioExceptionType.unknown:
+      //     errorMessage = 'Opps There was an error, please try again';
+      //     break;
+      // }
+
+      return ServerFailure(message ?? 'Unknow Error');
+    } catch (e) {
+      return ServerFailure('Unknow Error');
     }
-    return ServerFailure(errorMessage);
   }
 
   factory ServerFailure.fromResponse(int statusCode, Map data) {

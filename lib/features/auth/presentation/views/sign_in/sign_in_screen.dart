@@ -93,6 +93,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       const SizedBox(height: 20),
                       ElevatedButton(
                         onPressed: () {
+                          FocusScope.of(context).unfocus();
                           if (_formKey.currentState!.validate()) {
                             controller.signIn(signInData: _collectData());
                           }

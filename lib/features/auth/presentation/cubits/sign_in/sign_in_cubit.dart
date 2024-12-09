@@ -5,6 +5,7 @@ import 'package:locum_app/core/Errors/failure.dart';
 import 'package:locum_app/core/enums/response_type.dart';
 import 'package:locum_app/core/globals.dart';
 import 'package:locum_app/core/heleprs/print_helper.dart';
+import 'package:locum_app/core/heleprs/snackbar.dart';
 import 'package:locum_app/core/router/app_routes_names.dart';
 import 'package:locum_app/features/auth/data/models/user_model.dart';
 import 'package:locum_app/features/auth/domain/entities/user_entity.dart';
@@ -25,6 +26,7 @@ class SignInCubit extends Cubit<SignInState> {
     result.fold(
       (Failure failure) {
         pr(failure.message, t);
+        showSnackbar('Server Error', failure.message, true);
         emit(state.copyWith(responseType: ResponseType.failed, errorMessage: failure.message));
       },
       (UserModel user) {

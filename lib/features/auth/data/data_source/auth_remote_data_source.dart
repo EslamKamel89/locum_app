@@ -13,7 +13,10 @@ class AuthRemoteDataSource {
     final t = prt('signIn - CommonDataRemoteSource');
     final data = await api.post(
       EndPoint.signin,
-      data: {"email": email, "password": password},
+      data: {
+        "email": email,
+        "password": password,
+      },
     );
     UserModel userModel = UserModel.fromJson(data['data']);
 
