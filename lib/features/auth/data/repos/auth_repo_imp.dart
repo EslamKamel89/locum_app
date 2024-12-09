@@ -24,4 +24,19 @@ class AuthRepoImp implements AuthRepo {
       return Left(ServerFailure(pr(e.toString(), t)));
     }
   }
+
+  @override
+  Future<Either<Failure, UserModel>> signup(SignUpParams params) async {
+    final t = prt('signIn  - AuthRepoImp');
+    try {
+      UserModel model = await authRemoteDataSource.signup(params);
+      return Right(pr(model, t));
+    } catch (e) {
+      pr(e.toString());
+      if (e is DioException) {
+        return Left(ServerFailure.formDioError(e));
+      }
+      return Left(ServerFailure(pr(e.toString(), t)));
+    }
+  }
 }

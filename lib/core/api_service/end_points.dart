@@ -6,4 +6,5 @@ class EndPoint {
   static const String fetchJobInfos = "$baseUrl/jobinfo";
   static const String fetchDistrictsData = "$baseUrl/districts";
   static const String signin = "$baseUrl/auth/login";
+  static const String signup = "$baseUrl/auth/register";
 }

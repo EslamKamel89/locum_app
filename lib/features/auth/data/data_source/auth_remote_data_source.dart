@@ -3,6 +3,7 @@ import 'package:locum_app/core/api_service/api_consumer.dart';
 import 'package:locum_app/core/api_service/end_points.dart';
 import 'package:locum_app/core/heleprs/print_helper.dart';
 import 'package:locum_app/features/auth/data/models/user_model.dart';
+import 'package:locum_app/features/auth/domain/repos/auth_repo.dart';
 
 class AuthRemoteDataSource {
   final ApiConsumer api;
@@ -17,6 +18,17 @@ class AuthRemoteDataSource {
         "email": email,
         "password": password,
       },
+    );
+    UserModel userModel = UserModel.fromJson(data['data']);
+
+    return pr(userModel, t);
+  }
+
+  Future<UserModel> signup(SignUpParams params) async {
+    final t = prt('signup - CommonDataRemoteSource');
+    final data = await api.post(
+      EndPoint.signup,
+      data: params.toMap(),
     );
     UserModel userModel = UserModel.fromJson(data['data']);
 

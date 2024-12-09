@@ -40,7 +40,10 @@ class AppRouter {
       case AppRoutesNames.signupScreen:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => SignUpCubit(commonDataRepo: serviceLocator())..fetchStates(),
+            create: (context) => SignUpCubit(
+              commonDataRepo: serviceLocator(),
+              authRepo: serviceLocator(),
+            )..fetchStates(),
             child: const SignUpScreen(),
           ),
           settings: routeSettings,

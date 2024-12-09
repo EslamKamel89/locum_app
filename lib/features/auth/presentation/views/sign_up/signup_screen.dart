@@ -7,6 +7,7 @@ import 'package:locum_app/core/widgets/custom_text_form_field.dart';
 import 'package:locum_app/core/widgets/default_screen_padding.dart';
 import 'package:locum_app/core/widgets/dropdown_widget.dart';
 import 'package:locum_app/core/widgets/searchable_dropdown_widget.dart';
+import 'package:locum_app/features/auth/domain/repos/auth_repo.dart';
 import 'package:locum_app/features/auth/presentation/cubits/sign_up/sign_up_cubit.dart';
 import 'package:locum_app/utils/styles/styles.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -138,7 +139,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         ?.map((districtModel) => districtModel?.name ?? '')
                                         .toList() ??
                                     [],
-                                handleSelectOption: (String option) {},
+                                handleSelectOption: (String option) {
+                                  controller.selectDistrict(option);
+                                },
                               ),
                         const SizedBox(height: 20),
                         DropDownWidget(
@@ -153,7 +156,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ElevatedButton(
                           onPressed: () {
                             FocusScope.of(context).unfocus();
-                            if (_formKey.currentState!.validate()) {}
+                            if (_formKey.currentState!.validate()) {
+                              controller.signUp(
+                                SignUpParams(
+                                  name: _collectData()['name'],
+                                  email: _collectData()['email'],
+                                  password: _collectData()['password'],
+                                  districtId: state.selectdDistrict?.id,
+                                  stateId: state.selectedState?.id,
+                                  userType: state.selectedUserType,
+                                ),
+                              );
+                            }
                           },
                           child: txt("Sign Up", e: St.reg16),
                         ),
