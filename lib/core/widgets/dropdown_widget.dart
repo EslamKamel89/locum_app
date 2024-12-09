@@ -3,9 +3,10 @@ import 'package:locum_app/core/extensions/context-extensions.dart';
 import 'package:locum_app/utils/styles/styles.dart';
 
 class DropDownWidget extends StatefulWidget {
-  const DropDownWidget({super.key, required this.options, required this.label});
+  const DropDownWidget({super.key, required this.options, required this.label, required this.onSelect});
   final List<String> options;
   final String label;
+  final Function onSelect;
   @override
   State<DropDownWidget> createState() => _DropDownWidgetState();
 }
@@ -23,6 +24,7 @@ class _DropDownWidgetState extends State<DropDownWidget> {
               ))
           .toList(),
       onChanged: (String? value) {
+        widget.onSelect(value);
         setState(() {
           selectedValue = value;
         });

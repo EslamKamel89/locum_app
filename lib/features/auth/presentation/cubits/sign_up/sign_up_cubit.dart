@@ -2,6 +2,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:locum_app/core/Errors/failure.dart';
 import 'package:locum_app/core/enums/response_type.dart';
+import 'package:locum_app/core/enums/user_type_enum.dart';
 import 'package:locum_app/core/heleprs/print_helper.dart';
 import 'package:locum_app/core/heleprs/snackbar.dart';
 import 'package:locum_app/features/auth/domain/entities/user_entity.dart';
@@ -53,5 +54,12 @@ class SignUpCubit extends Cubit<SignUpState> {
         emit(state.copyWith(districtsDataModel: districtsData, responseType: ResponseType.success, errorMessage: null));
       },
     );
+  }
+
+  void selectUserType(String userTypeStr) {
+    const t = 'selectUserType - SignUpCubit';
+    UserTypeEnum? selectedUserType =
+        UserTypeEnum.values.where((userType) => userType.toFullString() == userTypeStr).first;
+    emit(state.copyWith(selectedUserType: pr(selectedUserType, t), errorMessage: null));
   }
 }

@@ -11,6 +11,7 @@ class SignUpState {
   StateModel? selectedState;
   DistrictsDataModel? districtsDataModel;
   DistrictModel? selectdDistrict;
+  UserTypeEnum? selectedUserType;
   SignUpState({
     this.email,
     this.password,
@@ -21,6 +22,7 @@ class SignUpState {
     this.selectedState,
     this.districtsDataModel,
     this.selectdDistrict,
+    this.selectedUserType,
   });
 
   SignUpState copyWith({
@@ -33,6 +35,7 @@ class SignUpState {
     StateModel? selectedState,
     DistrictsDataModel? districtsDataModel,
     DistrictModel? selectdDistrict,
+    UserTypeEnum? selectedUserType,
   }) {
     return SignUpState(
       email: email ?? this.email,
@@ -44,11 +47,12 @@ class SignUpState {
       selectedState: selectedState ?? this.selectedState,
       districtsDataModel: districtsDataModel ?? this.districtsDataModel,
       selectdDistrict: selectdDistrict ?? this.selectdDistrict,
+      selectedUserType: selectedUserType ?? this.selectedUserType,
     );
   }
 
   @override
   String toString() {
-    return 'SignUpState(email: $email, password: $password, errorMessage: $errorMessage, userEntity: $userEntity, responseType: $responseType, states: $states, selectedState: $selectedState, districtsDataModel: $districtsDataModel, selectdDistrict: $selectdDistrict)';
+    return 'SignUpState(email: $email, password: $password, errorMessage: $errorMessage, userEntity: $userEntity, responseType: $responseType, states: $states, selectedState: $selectedState, districtsDataModel: $districtsDataModel, selectdDistrict: $selectdDistrict, selectedUserType: $selectedUserType)';
   }
 }

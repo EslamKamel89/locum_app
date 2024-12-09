@@ -142,8 +142,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ),
                         const SizedBox(height: 20),
                         DropDownWidget(
-                            options: UserTypeEnum.values.map((userType) => userType.toFullString()).toList(),
-                            label: 'Healthcare Provider or Professional'),
+                          options: UserTypeEnum.values.map((userType) => userType.toFullString()).toList(),
+                          label: 'Healthcare Provider or Professional',
+                          onSelect: (String? value) {
+                            if (value == null) return;
+                            controller.selectUserType(value);
+                          },
+                        ),
                         const SizedBox(height: 20),
                         ElevatedButton(
                           onPressed: () {
