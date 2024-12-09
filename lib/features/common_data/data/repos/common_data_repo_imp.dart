@@ -24,7 +24,7 @@ class CommonDataRepoImp implements CommonDataRepo {
       pr(e.toString());
       if (e is DioException) {
         pr(e.response?.data, t);
-        // return Left(ServerFailure.formDioError(e));
+        return Left(ServerFailure.formDioError(e));
       }
       return Left(ServerFailure(pr(e.toString(), t)));
     }
@@ -40,7 +40,7 @@ class CommonDataRepoImp implements CommonDataRepo {
       pr(e.toString());
       if (e is DioException) {
         pr(e.response?.data, t);
-        // return Left(ServerFailure.formDioError(e));
+        return Left(ServerFailure.formDioError(e));
       }
       return Left(ServerFailure(pr(e.toString(), t)));
     }
@@ -56,7 +56,7 @@ class CommonDataRepoImp implements CommonDataRepo {
       pr(e.toString());
       if (e is DioException) {
         pr(e.response?.data, t);
-        // return Left(ServerFailure.formDioError(e));
+        return Left(ServerFailure.formDioError(e));
       }
       return Left(ServerFailure(pr(e.toString(), t)));
     }
@@ -72,7 +72,7 @@ class CommonDataRepoImp implements CommonDataRepo {
       pr(e.toString());
       if (e is DioException) {
         pr(e.response?.data, t);
-        // return Left(ServerFailure.formDioError(e));
+        return Left(ServerFailure.formDioError(e));
       }
       return Left(ServerFailure(pr(e.toString(), t)));
     }
@@ -88,7 +88,7 @@ class CommonDataRepoImp implements CommonDataRepo {
       pr(e.toString());
       if (e is DioException) {
         pr(e.response?.data, t);
-        // return Left(ServerFailure.formDioError(e));
+        return Left(ServerFailure.formDioError(e));
       }
       return Left(ServerFailure(pr(e.toString(), t)));
     }

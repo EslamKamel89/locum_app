@@ -88,6 +88,7 @@ final ThemeData lightTheme = ThemeData(
   ),
   outlinedButtonTheme: OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
+      padding: EdgeInsets.symmetric(vertical: 10.h),
       foregroundColor: lightClr.primaryColor, // Button text color
       side: BorderSide(color: lightClr.primaryColor), // Border color
       textStyle: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
@@ -205,6 +206,7 @@ final ThemeData darkTheme = ThemeData(
   ),
   outlinedButtonTheme: OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
+      padding: EdgeInsets.symmetric(vertical: 10.h),
       foregroundColor: darkClr.primaryColor, // Button text color
       side: BorderSide(color: darkClr.primaryColor), // Border color
       textStyle: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),

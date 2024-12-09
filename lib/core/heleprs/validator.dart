@@ -4,7 +4,9 @@ String? valdiator({
   required bool isRequired,
   int? minChars,
   int? maxChars,
-  bool? isEmail,
+  bool isEmail = false,
+  bool isConfirmPassword = false,
+  String? firstPassword,
 }) {
   input = input ?? '';
   if (isRequired && (input.isEmpty)) {
@@ -16,8 +18,11 @@ String? valdiator({
   if (maxChars != null && input.length > maxChars) {
     return "$label can't be more than $maxChars characters ";
   }
-  if (isEmail != null && isEmail && !RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(input)) {
+  if (isEmail && !RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(input)) {
     return "Email address not valid";
+  }
+  if (isConfirmPassword && input != firstPassword) {
+    return "Confirm Password Don't match the Password";
   }
   return null;
 }

@@ -4,6 +4,7 @@ import 'package:locum_app/core/router/app_routes_names.dart';
 import 'package:locum_app/core/router/middleware.dart';
 import 'package:locum_app/core/service_locator/service_locator.dart';
 import 'package:locum_app/features/auth/presentation/cubits/sign_in/sign_in_cubit.dart';
+import 'package:locum_app/features/auth/presentation/cubits/sign_up/sign_up_cubit.dart';
 import 'package:locum_app/features/auth/presentation/views/sign_in/sign_in_screen.dart';
 import 'package:locum_app/features/auth/presentation/views/sign_up/signup_screen.dart';
 import 'package:locum_app/features/doctor/doctor_home_view.dart';
@@ -38,7 +39,10 @@ class AppRouter {
         );
       case AppRoutesNames.signupScreen:
         return MaterialPageRoute(
-          builder: (context) => const SignUpScreen(),
+          builder: (context) => BlocProvider(
+            create: (context) => SignUpCubit(commonDataRepo: serviceLocator())..fetchStates(),
+            child: const SignUpScreen(),
+          ),
           settings: routeSettings,
         );
       case AppRoutesNames.hospitalHomeScreen:

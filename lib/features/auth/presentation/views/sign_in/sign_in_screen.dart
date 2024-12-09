@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:locum_app/core/enums/response_type.dart';
 import 'package:locum_app/core/extensions/context-extensions.dart';
 import 'package:locum_app/core/heleprs/validator.dart';
 import 'package:locum_app/core/router/app_routes_names.dart';
@@ -91,18 +92,20 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      ElevatedButton(
-                        onPressed: () {
-                          FocusScope.of(context).unfocus();
-                          if (_formKey.currentState!.validate()) {
-                            controller.signIn(signInData: _collectData());
-                          }
-                        },
-                        child: txt(
-                          "Sign In",
-                          e: St.reg16,
-                        ),
-                      ),
+                      state.responseType == ResponseType.loading
+                          ? const Center(child: CircularProgressIndicator())
+                          : ElevatedButton(
+                              onPressed: () {
+                                FocusScope.of(context).unfocus();
+                                if (_formKey.currentState!.validate()) {
+                                  controller.signIn(signInData: _collectData());
+                                }
+                              },
+                              child: txt(
+                                "Sign In",
+                                e: St.reg16,
+                              ),
+                            ),
                       const SizedBox(height: 20),
                       Row(
                         children: [
