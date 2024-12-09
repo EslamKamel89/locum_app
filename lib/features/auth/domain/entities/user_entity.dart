@@ -1,3 +1,17 @@
+enum UserType {
+  hospital,
+  doctor;
+
+  static UserType fromStr(String userType) {
+    return userType == 'doctor' ? UserType.doctor : UserType.hospital;
+  }
+
+  @override
+  String toString() {
+    return this == UserType.doctor ? 'doctor' : 'hospital';
+  }
+}
+
 class UserEntity {
   int? id;
   String? name;
@@ -8,6 +22,7 @@ class UserEntity {
   dynamic stateId;
   dynamic districtId;
   String? token;
+  UserType? userType;
 
   UserEntity({
     this.id,
@@ -19,10 +34,11 @@ class UserEntity {
     this.stateId,
     this.districtId,
     this.token,
+    this.userType,
   });
 
   @override
   String toString() {
-    return 'UserEntity(id: $id, name: $name, email: $email, emailVerifiedAt: $emailVerifiedAt, createdAt: $createdAt, updatedAt: $updatedAt, stateId: $stateId, districtId: $districtId, token: $token)';
+    return 'UserEntity(id: $id, name: $name, email: $email, emailVerifiedAt: $emailVerifiedAt, createdAt: $createdAt, updatedAt: $updatedAt, stateId: $stateId, districtId: $districtId, token: $token , userType: $userType)';
   }
 }

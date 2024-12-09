@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:locum_app/core/extensions/context-extensions.dart';
 import 'package:locum_app/core/router/app_routes_names.dart';
+import 'package:locum_app/core/widgets/custom_text_form_field.dart';
+import 'package:locum_app/utils/styles/styles.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -15,118 +18,64 @@ class SignInScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Text(
-                "Welcome Back!",
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
+              txt("Welcome Back!", e: St.bold25, textAlign: TextAlign.center),
               const SizedBox(height: 10),
-              const Text(
-                "Sign in to continue",
-                style: TextStyle(fontSize: 16, color: Colors.grey),
-                textAlign: TextAlign.center,
-              ),
+              txt("Sign in to continue", e: St.reg16, c: Colors.grey, textAlign: TextAlign.center),
               const SizedBox(height: 40),
-              TextField(
-                decoration: InputDecoration(
-                  labelText: "Email Address",
-                  prefixIcon: const Icon(Icons.email_outlined),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
+              const CustomTextFormField(
+                labelText: "Email Address",
+                prefixIcon: Icon(Icons.email_outlined),
               ),
               const SizedBox(height: 20),
-              TextField(
+              const CustomTextFormField(
                 obscureText: true,
-                decoration: InputDecoration(
-                  labelText: "Password",
-                  prefixIcon: const Icon(Icons.lock_outline),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
+                labelText: "Password",
+                prefixIcon: Icon(Icons.lock_outline),
               ),
               const SizedBox(height: 10),
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
-                  onPressed: () {
-                    // Handle forgot password
-                  },
-                  child: const Text(
-                    "Forgot Password?",
-                    style: TextStyle(color: Colors.blue),
-                  ),
+                  onPressed: () {},
+                  child: txt("Forgot Password?", c: context.primaryColor),
                 ),
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
-                  // Handle sign-in logic
-                },
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 15),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                child: const Text(
+                onPressed: () {},
+                child: txt(
                   "Sign In",
-                  style: TextStyle(fontSize: 16),
+                  e: St.reg16,
                 ),
               ),
               const SizedBox(height: 20),
-              const Row(
+              Row(
                 children: [
-                  Expanded(child: Divider(thickness: 1)),
+                  const Expanded(child: Divider(thickness: 1)),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: Text(
-                      "OR",
-                      style: TextStyle(color: Colors.grey),
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: txt("OR", c: Colors.grey),
                   ),
-                  Expanded(child: Divider(thickness: 1)),
+                  const Expanded(child: Divider(thickness: 1)),
                 ],
               ),
               const SizedBox(height: 20),
               OutlinedButton.icon(
-                onPressed: () {
-                  // Handle Google sign-in
-                },
-                style: OutlinedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 15),
-                  side: const BorderSide(color: Colors.grey),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
+                onPressed: () {},
+                style: context.outlinedButtonTheme.style,
                 icon: Icon(MdiIcons.google),
-                label: const Text(
-                  "Sign in with Google",
-                  style: TextStyle(color: Colors.black, fontSize: 16),
-                ),
+                label: txt("Sign in with Google", c: Colors.black, e: St.reg16),
               ),
               const SizedBox(height: 40),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    "Don't have an account?",
-                    style: TextStyle(color: Colors.grey),
-                  ),
+                  txt("Don't have an account?", c: Colors.grey),
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pushNamed(AppRoutesNames.signupScreen);
                     },
-                    child: const Text(
-                      "Sign Up",
-                      style: TextStyle(color: Colors.blue),
-                    ),
+                    child: txt("Sign Up", c: Colors.blue),
                   ),
                 ],
               ),

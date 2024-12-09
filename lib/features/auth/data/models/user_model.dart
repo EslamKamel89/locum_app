@@ -1,6 +1,7 @@
 import 'package:locum_app/features/auth/domain/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
+  String? userTypeStr;
   UserModel({
     super.id,
     super.name,
@@ -11,7 +12,8 @@ class UserModel extends UserEntity {
     super.stateId,
     super.districtId,
     super.token,
-  });
+    this.userTypeStr,
+  }) : super(userType: UserType.fromStr(userTypeStr ?? ''));
 
   @override
   String toString() {
