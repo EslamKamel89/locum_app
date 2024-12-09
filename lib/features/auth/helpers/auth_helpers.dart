@@ -4,6 +4,7 @@ import 'package:locum_app/core/heleprs/print_helper.dart';
 import 'package:locum_app/core/service_locator/service_locator.dart';
 import 'package:locum_app/core/static_data/shared_prefrences_key.dart';
 import 'package:locum_app/features/auth/data/models/user_model.dart';
+import 'package:locum_app/features/auth/domain/entities/user_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthHelpers {
@@ -39,5 +40,11 @@ class AuthHelpers {
 
   static bool isSignedIn() {
     return getCachedToken() == null ? false : true;
+  }
+
+  static bool? isDoctor() {
+    final userType = getCachedUser()?.userType;
+    if (userType == null) return null;
+    return userType == UserType.doctor ? true : false;
   }
 }

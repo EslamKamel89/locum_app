@@ -1,8 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:locum_app/core/Errors/failure.dart';
 import 'package:locum_app/core/enums/response_type.dart';
+import 'package:locum_app/core/globals.dart';
 import 'package:locum_app/core/heleprs/print_helper.dart';
+import 'package:locum_app/core/router/app_routes_names.dart';
 import 'package:locum_app/features/auth/data/models/user_model.dart';
 import 'package:locum_app/features/auth/domain/entities/user_entity.dart';
 import 'package:locum_app/features/auth/domain/repos/auth_repo.dart';
@@ -28,7 +31,33 @@ class SignInCubit extends Cubit<SignInState> {
         pr(user, t);
         AuthHelpers.cacheUser(user);
         emit(state.copyWith(userEntity: user, responseType: ResponseType.success, errorMessage: null));
+        _navigateToHomeScreen();
       },
     );
+  }
+
+  Future _navigateToHomeScreen() async {
+    final t = prt('navigateToHomeScreen - SignInCubit');
+    Future.delayed(const Duration(seconds: 1)).then((_) {
+      final context = navigatorKey.currentContext;
+      final isDoctor = AuthHelpers.isDoctor();
+      if (context == null || isDoctor == null) {
+        pr('Error: context or isDoctor is null', t);
+        return;
+      }
+      if (isDoctor) {
+        pr('Navigate to doctors home page', t);
+        Navigator.of(navigatorKey.currentContext!).pushNamedAndRemoveUntil(
+          AppRoutesNames.doctorHomeScreen,
+          (_) => false,
+        );
+      } else {
+        pr('Navigate to hospitals home page', t);
+        Navigator.of(navigatorKey.currentContext!).pushNamedAndRemoveUntil(
+          AppRoutesNames.hospitalHomeScreen,
+          (_) => false,
+        );
+      }
+    });
   }
 }

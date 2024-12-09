@@ -6,6 +6,8 @@ import 'package:locum_app/core/service_locator/service_locator.dart';
 import 'package:locum_app/features/auth/presentation/cubits/sign_in/sign_in_cubit.dart';
 import 'package:locum_app/features/auth/presentation/views/sign_in/sign_in_screen.dart';
 import 'package:locum_app/features/auth/presentation/views/sign_up/signup_screen.dart';
+import 'package:locum_app/features/doctor/doctor_home_view.dart';
+import 'package:locum_app/features/hospital/hospital_home_view.dart';
 import 'package:locum_app/features/splash_onboarding/presention/views/on_bording_screen.dart';
 import 'package:locum_app/features/splash_onboarding/presention/views/splash_screen.dart';
 
@@ -39,7 +41,16 @@ class AppRouter {
           builder: (context) => const SignUpScreen(),
           settings: routeSettings,
         );
-
+      case AppRoutesNames.hospitalHomeScreen:
+        return MaterialPageRoute(
+          builder: (context) => const HospitalHomeScreen(),
+          settings: routeSettings,
+        );
+      case AppRoutesNames.doctorHomeScreen:
+        return MaterialPageRoute(
+          builder: (context) => const DoctorHomeScreen(),
+          settings: routeSettings,
+        );
       default:
         return null;
     }
