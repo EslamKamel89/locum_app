@@ -1,7 +1,11 @@
-abstract class CommonDataRepo {
-  Future<Either<Failure, List<SpecialtyModel>>> fetchSpecialties();
-  Future<Either<Failure, List<StateModel>>> fetchStates();
-  Future<Either<Failure, List<UniversityModel>>> fetchUniversities();
-  Future<Either<Failure, List<JobInfoModel>>> fetchJobInfos();
-  Future<Either<Failure, List<DistrictsDataModel>>> fetchDistrictsData(int stateId);
+abstract class AuthRepo {
+  Future<Either<Failure, UserModel>> signIn({required String email, required String password});
+}
+
+
+class AuthRepoImp implements AuthRepo {
+  @override
+  Future<Either<Failure, UserModel>> signIn({required String email, required String password}) {
+    throw UnimplementedError();
+  }
 }

@@ -17,7 +17,7 @@ class UserModel extends UserEntity {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, name: $name, email: $email, emailVerifiedAt: $emailVerifiedAt, createdAt: $createdAt, updatedAt: $updatedAt, stateId: $stateId, districtId: $districtId, token: $token)';
+    return 'UserModel(id: $id, name: $name, email: $email, emailVerifiedAt: $emailVerifiedAt, createdAt: $createdAt, updatedAt: $updatedAt, stateId: $stateId, districtId: $districtId, token: $token , userTypeStr: $userTypeStr)';
   }
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
@@ -30,6 +30,7 @@ class UserModel extends UserEntity {
         stateId: json['state_id'] as dynamic,
         districtId: json['district_id'] as dynamic,
         token: json['token'] as String?,
+        userTypeStr: json['type'] as String?,
       );
 
   Map<String, dynamic> toJson() => {
@@ -42,5 +43,6 @@ class UserModel extends UserEntity {
         'state_id': stateId,
         'district_id': districtId,
         'token': token,
+        'type': userTypeStr,
       };
 }
