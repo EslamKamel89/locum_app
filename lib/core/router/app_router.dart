@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:locum_app/core/router/app_routes_names.dart';
 import 'package:locum_app/core/router/middleware.dart';
+import 'package:locum_app/core/service_locator/service_locator.dart';
+import 'package:locum_app/features/auth/presentation/cubits/sign_in/sign_in_cubit.dart';
 import 'package:locum_app/features/auth/presentation/views/sign_in/sign_in_screen.dart';
 import 'package:locum_app/features/auth/presentation/views/sign_up/signup_screen.dart';
 import 'package:locum_app/features/splash_onboarding/presention/views/on_bording_screen.dart';
@@ -25,7 +28,10 @@ class AppRouter {
         );
       case AppRoutesNames.signinScreen:
         return MaterialPageRoute(
-          builder: (context) => const SignInScreen(),
+          builder: (context) => BlocProvider(
+            create: (context) => SignInCubit(authRepo: serviceLocator()),
+            child: const SignInScreen(),
+          ),
           settings: routeSettings,
         );
       case AppRoutesNames.signupScreen:
