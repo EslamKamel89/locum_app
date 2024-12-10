@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:locum_app/core/enums/response_type.dart';
 import 'package:locum_app/core/enums/user_type_enum.dart';
 import 'package:locum_app/core/extensions/context-extensions.dart';
 import 'package:locum_app/core/heleprs/validator.dart';
@@ -153,24 +154,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           },
                         ),
                         const SizedBox(height: 20),
-                        ElevatedButton(
-                          onPressed: () {
-                            FocusScope.of(context).unfocus();
-                            if (_formKey.currentState!.validate()) {
-                              controller.signUp(
-                                SignUpParams(
-                                  name: _collectData()['name'],
-                                  email: _collectData()['email'],
-                                  password: _collectData()['password'],
-                                  districtId: state.selectdDistrict?.id,
-                                  stateId: state.selectedState?.id,
-                                  userType: state.selectedUserType,
-                                ),
-                              );
-                            }
-                          },
-                          child: txt("Sign Up", e: St.reg16),
-                        ),
+                        state.responseType == ResponseType.loading
+                            ? const Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : ElevatedButton(
+                                onPressed: () {
+                                  FocusScope.of(context).unfocus();
+                                  if (_formKey.currentState!.validate()) {
+                                    controller.signUp(
+                                      SignUpParams(
+                                        name: _collectData()['name'],
+                                        email: _collectData()['email'],
+                                        password: _collectData()['password'],
+                                        districtId: state.selectdDistrict?.id,
+                                        stateId: state.selectedState?.id,
+                                        userType: state.selectedUserType,
+                                      ),
+                                    );
+                                  }
+                                },
+                                child: txt("Sign Up", e: St.reg16),
+                              ),
                         const SizedBox(height: 20),
                         Row(
                           children: [
