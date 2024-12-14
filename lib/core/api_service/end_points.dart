@@ -1,5 +1,6 @@
 class EndPoint {
   static const String baseUrl = "http://10.0.2.2:8000/api";
+  // static const String baseUrl = "http://ampm.islamdev.com/api";
   static const String fetchSpecialties = "$baseUrl/specialties";
   static const String fetchStates = "$baseUrl/states";
   static const String fetchUniversities = "$baseUrl/universities";

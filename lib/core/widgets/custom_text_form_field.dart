@@ -42,7 +42,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                       showPassword = !showPassword;
                     });
                   },
-                  icon: Icon(showPassword ? MdiIcons.eyeOffOutline : MdiIcons.eyeOutline, color: context.primaryColor),
+                  icon: Icon(
+                      showPassword
+                          ? MdiIcons.eyeOffOutline
+                          : MdiIcons.eyeOutline,
+                      color: context.primaryColor),
                 );
               })
             : null,

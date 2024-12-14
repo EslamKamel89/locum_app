@@ -22,7 +22,8 @@ class DefaultDrawer extends StatelessWidget {
               accountName: Text("Eslam Kamel"),
               accountEmail: Text("eslam@gmail.com"),
               currentAccountPicture: CircleAvatar(
-                backgroundImage: NetworkImage("https://via.placeholder.com/150"),
+                backgroundImage:
+                    NetworkImage("https://via.placeholder.com/150"),
               ),
               decoration: BoxDecoration(
                 color: Colors.transparent,
@@ -67,7 +68,9 @@ class DefaultDrawer extends StatelessWidget {
   }
 
   Widget _createDrawerItem(BuildContext context,
-      {required IconData icon, required String text, GestureTapCallback? onTap}) {
+      {required IconData icon,
+      required String text,
+      GestureTapCallback? onTap}) {
     return ListTile(
       title: Text(text, style: const TextStyle(color: Colors.white)),
       leading: Icon(icon, color: context.secondaryHeaderColor),

@@ -64,7 +64,8 @@ class ServerFailure extends Failure {
     if (statusCode == 404) {
       return ServerFailure('Your Request Not Found, Please Try Later');
     } else if (statusCode >= 500) {
-      return ServerFailure('There are a problem with the server, Please Try Later');
+      return ServerFailure(
+          'There are a problem with the server, Please Try Later');
       // status code == 400 >> bad respnse mainly wrong body sent to request
       // status code == 401 >> bad respnse mainly you send in the header wrong token
       // status code == 403 >> bad respnse mainly the token is correct but you are unauthorized to view this page

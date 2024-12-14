@@ -21,18 +21,24 @@ class SignInCubit extends Cubit<SignInState> {
   }) : super(SignInState());
   Future signIn({required Map<String, String> signInData}) async {
     final t = prt('signIn - SignInCubit');
-    emit(state.copyWith(responseType: ResponseType.loading, errorMessage: null));
-    final result = await authRepo.signIn(email: signInData['email']!, password: signInData['password']!);
+    emit(
+        state.copyWith(responseType: ResponseType.loading, errorMessage: null));
+    final result = await authRepo.signIn(
+        email: signInData['email']!, password: signInData['password']!);
     result.fold(
       (Failure failure) {
         pr(failure.message, t);
         showSnackbar('Server Error', failure.message, true);
-        emit(state.copyWith(responseType: ResponseType.failed, errorMessage: failure.message));
+        emit(state.copyWith(
+            responseType: ResponseType.failed, errorMessage: failure.message));
       },
       (UserModel user) {
         pr(user, t);
         AuthHelpers.cacheUser(user);
-        emit(state.copyWith(userEntity: user, responseType: ResponseType.success, errorMessage: null));
+        emit(state.copyWith(
+            userEntity: user,
+            responseType: ResponseType.success,
+            errorMessage: null));
         _navigateToHomeScreen();
       },
     );

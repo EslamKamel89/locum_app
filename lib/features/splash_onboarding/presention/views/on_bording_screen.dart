@@ -20,7 +20,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   int _currentPage = 0;
   void _onNextPagePressed() {
     if (_currentPage < _onBoardingData.length - 1) {
-      _pageController.nextPage(duration: const Duration(seconds: 1), curve: Curves.easeInOut);
+      _pageController.nextPage(
+          duration: const Duration(seconds: 1), curve: Curves.easeInOut);
     } else {
       Navigator.of(context).pushNamedAndRemoveUntil(
         AppRoutesNames.signinScreen,
@@ -68,7 +69,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       width: _currentPage == index ? 12.w : 8.w,
                       height: 8.w,
                       decoration: BoxDecoration(
-                          color: _currentPage == index ? context.primaryColor : Colors.grey,
+                          color: _currentPage == index
+                              ? context.primaryColor
+                              : Colors.grey,
                           borderRadius: BorderRadius.circular(4.w)),
                     );
                   },
@@ -79,7 +82,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: ElevatedButton(
                   onPressed: _onNextPagePressed,
-                  child: txt(_currentPage == _onBoardingData.length - 1 ? 'Continue' : 'Next'),
+                  child: txt(_currentPage == _onBoardingData.length - 1
+                      ? 'Continue'
+                      : 'Next'),
                 ),
               ),
               const SizedBox(height: 30),
@@ -94,17 +99,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     {
       "image": AssetsData.onBoarding_1,
       "title": "Welcome to AM/PM\nLocum Finder",
-      "description": "Discover the best locum opportunities tailored to your needs.",
+      "description":
+          "Discover the best locum opportunities tailored to your needs.",
     },
     {
       "image": AssetsData.onBoarding_2,
       "title": "Easy Job Search",
-      "description": "Quickly find locum positions with our advanced search filters.",
+      "description":
+          "Quickly find locum positions with our advanced search filters.",
     },
     {
       "image": AssetsData.onBoarding_3,
       "title": "A Real-Time Updates",
-      "description": "Stay updated with instant job alerts and important updates.",
+      "description":
+          "Stay updated with instant job alerts and important updates.",
     },
     {
       "image": AssetsData.onBoarding_4,
@@ -119,13 +127,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     {
       "image": AssetsData.onBoarding_6,
       "title": "Join Our Community",
-      "description": "Connect with top healthcare facilities and fellow professionals.",
+      "description":
+          "Connect with top healthcare facilities and fellow professionals.",
     },
   ];
 }
 
 class OnBoardingContent extends StatelessWidget {
-  const OnBoardingContent({super.key, required this.image, required this.title, required this.description});
+  const OnBoardingContent(
+      {super.key,
+      required this.image,
+      required this.title,
+      required this.description});
   final String image;
   final String title;
   final String description;

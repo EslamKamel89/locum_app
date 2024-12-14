@@ -11,9 +11,13 @@ class LanguageSelector extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {
         // Toggle between English and Arabic
-        context.setLocale(context.locale.languageCode == 'en' ? const Locale('ar') : const Locale('en'));
+        context.setLocale(context.locale.languageCode == 'en'
+            ? const Locale('ar')
+            : const Locale('en'));
       },
-      child: Text(context.locale.languageCode == 'en' ? 'Switch to Arabic' : 'Switch to English'),
+      child: Text(context.locale.languageCode == 'en'
+          ? 'Switch to Arabic'
+          : 'Switch to English'),
     );
   }
 }

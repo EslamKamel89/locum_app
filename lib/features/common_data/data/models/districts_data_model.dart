@@ -30,14 +30,18 @@ class DistrictsDataModel {
   factory DistrictsDataModel.fromJson(Map<String, dynamic> json) {
     List<DistrictModel?>? districts;
     if (json['districts'] != null) {
-      districts = (json['districts'] as List).map((json) => DistrictModel.fromJson(json)).toList();
+      districts = (json['districts'] as List)
+          .map((json) => DistrictModel.fromJson(json))
+          .toList();
     }
     return DistrictsDataModel(
-      stateName: json['state_name'] != null ? json['state_name'] as String : null,
+      stateName:
+          json['state_name'] != null ? json['state_name'] as String : null,
       districts: districts,
     );
   }
 
   @override
-  String toString() => 'DistrictsDataModel(stateName: $stateName, districts: $districts)';
+  String toString() =>
+      'DistrictsDataModel(stateName: $stateName, districts: $districts)';
 }

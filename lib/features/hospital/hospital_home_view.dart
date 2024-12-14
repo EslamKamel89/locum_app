@@ -17,7 +17,8 @@ class HospitalHomeScreen extends StatelessWidget {
         child: ElevatedButton(
             onPressed: () async {
               await serviceLocator<SharedPreferences>().clear();
-              Navigator.of(context).pushNamedAndRemoveUntil(AppRoutesNames.signinScreen, (_) => false);
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  AppRoutesNames.signinScreen, (_) => false);
             },
             child: txt('Log out')),
       ),

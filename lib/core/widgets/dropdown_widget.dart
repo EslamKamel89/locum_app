@@ -3,7 +3,11 @@ import 'package:locum_app/core/extensions/context-extensions.dart';
 import 'package:locum_app/utils/styles/styles.dart';
 
 class DropDownWidget extends StatefulWidget {
-  const DropDownWidget({super.key, required this.options, required this.label, required this.onSelect});
+  const DropDownWidget(
+      {super.key,
+      required this.options,
+      required this.label,
+      required this.onSelect});
   final List<String> options;
   final String label;
   final Function onSelect;

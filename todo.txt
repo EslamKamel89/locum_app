@@ -1,0 +1,9 @@
+Done todos {
+
+}
+
+todos {
+    # fetch the userInfo endpoint and cache the result in the cache
+    # save the token only when signing in. and depend always on the userInfo end point
+    # create the middleware for onboarding screen and login page
+}

@@ -11,10 +11,12 @@ class AuthRepoImp implements AuthRepo {
 
   AuthRepoImp({required this.authRemoteDataSource});
   @override
-  Future<Either<Failure, UserModel>> signIn({required String email, required String password}) async {
+  Future<Either<Failure, UserModel>> signIn(
+      {required String email, required String password}) async {
     final t = prt('signIn  - AuthRepoImp');
     try {
-      UserModel model = await authRemoteDataSource.signIn(email: email, password: password);
+      UserModel model =
+          await authRemoteDataSource.signIn(email: email, password: password);
       return Right(pr(model, t));
     } catch (e) {
       pr(e.toString());
