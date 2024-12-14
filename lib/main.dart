@@ -8,6 +8,7 @@ import 'package:locum_app/core/router/app_router.dart';
 import 'package:locum_app/core/router/app_routes_names.dart';
 import 'package:locum_app/core/service_locator/service_locator.dart';
 import 'package:locum_app/core/themes/theme_cubit.dart';
+import 'package:locum_app/features/common_data/cubits/user_info/user_info_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,9 +36,8 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(
-            create: (_) => ThemeCubit(),
-          )
+          BlocProvider(create: (_) => ThemeCubit()),
+          BlocProvider(create: (_) => UserInfoCubit(commonDataRepo: serviceLocator())),
         ],
         child: Builder(builder: (context) {
           final themeCubit = context.watch<ThemeCubit>();

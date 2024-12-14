@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:locum_app/core/extensions/context-extensions.dart';
-import 'package:locum_app/core/router/app_routes_names.dart';
+import 'package:locum_app/features/common_data/cubits/user_info/user_info_cubit.dart';
 import 'package:locum_app/utils/assets/assets.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -10,15 +11,15 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen>
-    with SingleTickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
+  late UserInfoCubit userInfoCubit;
   @override
   void initState() {
     super.initState();
-    _animationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 3));
+    userInfoCubit = context.read<UserInfoCubit>();
+    _animationController = AnimationController(vsync: this, duration: const Duration(seconds: 3));
     // _animation = CurvedAnimation(parent: _animationController, curve: Curves.easeInOut);
     _animation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
@@ -26,10 +27,7 @@ class _SplashScreenState extends State<SplashScreen>
     _animationController.forward();
     _animationController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        Future.delayed(const Duration(seconds: 1), () {
-          Navigator.of(context).pushNamedAndRemoveUntil(
-              AppRoutesNames.onboardingScreen, (_) => false);
-        });
+        userInfoCubit.fetchUserInfo();
       }
     });
   }

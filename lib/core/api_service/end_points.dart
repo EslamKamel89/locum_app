@@ -8,4 +8,5 @@ class EndPoint {
   static const String fetchDistrictsData = "$baseUrl/districts";
   static const String signin = "$baseUrl/auth/login";
   static const String signup = "$baseUrl/auth/register";
+  static const String userInfo = "$baseUrl/auth/user";
 }

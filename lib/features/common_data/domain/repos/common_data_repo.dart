@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:locum_app/core/Errors/failure.dart';
 import 'package:locum_app/features/common_data/data/models/districts_data_model.dart';
+import 'package:locum_app/features/common_data/data/models/doctor_user_model.dart';
+import 'package:locum_app/features/common_data/data/models/hospital_user_model.dart';
 import 'package:locum_app/features/common_data/data/models/job_info_model.dart';
 import 'package:locum_app/features/common_data/data/models/specialty_model.dart';
 import 'package:locum_app/features/common_data/data/models/state_model.dart';
@@ -12,4 +14,5 @@ abstract class CommonDataRepo {
   Future<Either<Failure, List<UniversityModel>>> fetchUniversities();
   Future<Either<Failure, List<JobInfoModel>>> fetchJobInfos();
   Future<Either<Failure, DistrictsDataModel>> fetchDistrictsData(int stateId);
+  Future<Either<Failure, Either<DoctorUserModel, HospitalUserModel>>> fetchUserInfo();
 }

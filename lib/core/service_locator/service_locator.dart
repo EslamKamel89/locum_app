@@ -15,22 +15,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 final GetIt serviceLocator = GetIt.instance;
 
 Future initServiceLocator() async {
-  serviceLocator.registerLazySingleton<Dio>(() => Dio());
-  serviceLocator.registerLazySingleton<ApiConsumer>(
-      () => DioConsumer(dio: serviceLocator()));
   final prefs = await SharedPreferences.getInstance();
   serviceLocator.registerLazySingleton<SharedPreferences>(() => prefs);
-  serviceLocator.registerLazySingleton<AppMiddleWare>(
-      () => AppMiddleWare(sharedPreferences: serviceLocator()));
-  serviceLocator.registerLazySingleton<AppRouter>(
-      () => AppRouter(appMiddleWare: serviceLocator()));
+  serviceLocator.registerLazySingleton<Dio>(() => Dio());
+  serviceLocator.registerLazySingleton<ApiConsumer>(() => DioConsumer(dio: serviceLocator()));
+  serviceLocator.registerLazySingleton<AppMiddleWare>(() => AppMiddleWare(sharedPreferences: serviceLocator()));
+  serviceLocator.registerLazySingleton<AppRouter>(() => AppRouter(appMiddleWare: serviceLocator()));
 
-  serviceLocator.registerLazySingleton<CommonDataRemoteSource>(
-      () => CommonDataRemoteSource(api: serviceLocator()));
-  serviceLocator.registerLazySingleton<CommonDataRepo>(
-      () => CommonDataRepoImp(commonDataRemoteSource: serviceLocator()));
-  serviceLocator.registerLazySingleton<AuthRemoteDataSource>(
-      () => AuthRemoteDataSource(api: serviceLocator()));
-  serviceLocator.registerLazySingleton<AuthRepo>(
-      () => AuthRepoImp(authRemoteDataSource: serviceLocator()));
+  serviceLocator.registerLazySingleton<CommonDataRemoteSource>(() => CommonDataRemoteSource(api: serviceLocator()));
+  serviceLocator
+      .registerLazySingleton<CommonDataRepo>(() => CommonDataRepoImp(commonDataRemoteSource: serviceLocator()));
+  serviceLocator.registerLazySingleton<AuthRemoteDataSource>(() => AuthRemoteDataSource(api: serviceLocator()));
+  serviceLocator.registerLazySingleton<AuthRepo>(() => AuthRepoImp(authRemoteDataSource: serviceLocator()));
 }

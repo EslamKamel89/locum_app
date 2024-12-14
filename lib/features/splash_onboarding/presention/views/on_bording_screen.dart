@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:locum_app/core/extensions/context-extensions.dart';
 import 'package:locum_app/core/router/app_routes_names.dart';
+import 'package:locum_app/core/service_locator/service_locator.dart';
 import 'package:locum_app/core/widgets/circular_image_asset.dart';
 import 'package:locum_app/core/widgets/default_screen_padding.dart';
 import 'package:locum_app/core/widgets/sizer.dart';
+import 'package:locum_app/features/common_data/domain/repos/common_data_repo.dart';
 import 'package:locum_app/utils/assets/assets.dart';
 import 'package:locum_app/utils/styles/styles.dart';
 
@@ -20,8 +22,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   int _currentPage = 0;
   void _onNextPagePressed() {
     if (_currentPage < _onBoardingData.length - 1) {
-      _pageController.nextPage(
-          duration: const Duration(seconds: 1), curve: Curves.easeInOut);
+      _pageController.nextPage(duration: const Duration(seconds: 1), curve: Curves.easeInOut);
     } else {
       Navigator.of(context).pushNamedAndRemoveUntil(
         AppRoutesNames.signinScreen,
@@ -30,8 +31,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     }
   }
 
+  void testUserInfo() {
+    serviceLocator<CommonDataRepo>().fetchUserInfo();
+  }
+
   @override
   Widget build(BuildContext context) {
+    testUserInfo();
+
     return SafeArea(
       child: Scaffold(
         body: DefaultScreenPadding(
@@ -69,9 +76,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       width: _currentPage == index ? 12.w : 8.w,
                       height: 8.w,
                       decoration: BoxDecoration(
-                          color: _currentPage == index
-                              ? context.primaryColor
-                              : Colors.grey,
+                          color: _currentPage == index ? context.primaryColor : Colors.grey,
                           borderRadius: BorderRadius.circular(4.w)),
                     );
                   },
@@ -82,9 +87,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: ElevatedButton(
                   onPressed: _onNextPagePressed,
-                  child: txt(_currentPage == _onBoardingData.length - 1
-                      ? 'Continue'
-                      : 'Next'),
+                  child: txt(_currentPage == _onBoardingData.length - 1 ? 'Continue' : 'Next'),
                 ),
               ),
               const SizedBox(height: 30),
@@ -99,20 +102,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     {
       "image": AssetsData.onBoarding_1,
       "title": "Welcome to AM/PM\nLocum Finder",
-      "description":
-          "Discover the best locum opportunities tailored to your needs.",
+      "description": "Discover the best locum opportunities tailored to your needs.",
     },
     {
       "image": AssetsData.onBoarding_2,
       "title": "Easy Job Search",
-      "description":
-          "Quickly find locum positions with our advanced search filters.",
+      "description": "Quickly find locum positions with our advanced search filters.",
     },
     {
       "image": AssetsData.onBoarding_3,
       "title": "A Real-Time Updates",
-      "description":
-          "Stay updated with instant job alerts and important updates.",
+      "description": "Stay updated with instant job alerts and important updates.",
     },
     {
       "image": AssetsData.onBoarding_4,
@@ -127,18 +127,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     {
       "image": AssetsData.onBoarding_6,
       "title": "Join Our Community",
-      "description":
-          "Connect with top healthcare facilities and fellow professionals.",
+      "description": "Connect with top healthcare facilities and fellow professionals.",
     },
   ];
 }
 
 class OnBoardingContent extends StatelessWidget {
-  const OnBoardingContent(
-      {super.key,
-      required this.image,
-      required this.title,
-      required this.description});
+  const OnBoardingContent({super.key, required this.image, required this.title, required this.description});
   final String image;
   final String title;
   final String description;

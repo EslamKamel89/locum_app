@@ -6,6 +6,7 @@ import 'package:locum_app/core/api_service/api_consumer.dart';
 import 'package:locum_app/core/api_service/api_interceptors.dart';
 import 'package:locum_app/core/api_service/check_internet.dart';
 import 'package:locum_app/core/api_service/end_points.dart';
+import 'package:locum_app/features/auth/helpers/auth_helpers.dart';
 
 class DioConsumer extends ApiConsumer {
   final Dio dio;
@@ -14,8 +15,8 @@ class DioConsumer extends ApiConsumer {
     dio.options.baseUrl = EndPoint.baseUrl;
     dio.options.connectTimeout = const Duration(seconds: 60);
     dio.options.receiveTimeout = const Duration(seconds: 60);
-    dio.interceptors
-        .add(DioInterceptor()); // i use the interceptor to add the header
+    dio.options.headers = {"Authorization": 'Bearer ${AuthHelpers.getCachedToken()}'};
+    dio.interceptors.add(DioInterceptor()); // i use the interceptor to add the header
     dio.interceptors.add(LogInterceptor(
       request: true,
       requestHeader: true,

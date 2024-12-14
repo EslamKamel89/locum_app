@@ -1,25 +1,22 @@
+import 'package:locum_app/features/auth/data/models/user_model.dart';
 import 'package:locum_app/features/auth/domain/entities/user_entity.dart';
 import 'package:locum_app/features/common_data/data/models/district_model.dart';
 import 'package:locum_app/features/common_data/data/models/hospital_model.dart';
 import 'package:locum_app/features/common_data/data/models/state_model.dart';
 
-class HospitalUserModel {
-  int? id;
-  String? name;
-  String? email;
-  int? stateId;
-  int? districtId;
+class HospitalUserModel extends UserModel {
   UserType? type;
   DistrictModel? district;
   StateModel? state;
   HospitalModel? hospital;
 
   HospitalUserModel({
-    this.id,
-    this.name,
-    this.email,
-    this.stateId,
-    this.districtId,
+    super.id,
+    super.name,
+    super.email,
+    super.stateId,
+    super.districtId,
+    super.userTypeStr,
     this.type,
     this.district,
     this.state,
@@ -39,21 +36,10 @@ class HospitalUserModel {
       stateId: json['state_id'] as int?,
       districtId: json['district_id'] as int?,
       type: json['type'] == null ? null : UserType.fromStr(json['type']),
+      userTypeStr: json['type'] as String,
       district: json['district'] == null ? null : DistrictModel.fromJson(json['district']),
       state: json['state'] == null ? null : StateModel.fromJson(json['state']),
       hospital: json['hospital'] == null ? null : HospitalModel.fromJson(json['hospital']),
     );
   }
-
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'email': email,
-        'state_id': stateId,
-        'district_id': districtId,
-        'type': type,
-        'district': district,
-        'state': state,
-        'hospital': hospital,
-      };
 }
