@@ -8,9 +8,9 @@ import 'package:locum_app/features/auth/domain/entities/user_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthHelpers {
-  static void cacheUser(UserModel user) {
+  static Future cacheUser(UserModel user) async {
     final prefs = serviceLocator<SharedPreferences>();
-    prefs.setString(ShPrefKey.user, jsonEncode(user.toJson()));
+    await prefs.setString(ShPrefKey.user, jsonEncode(user.toJson()));
     if (user.token != null) prefs.setString(ShPrefKey.token, user.token!);
   }
 

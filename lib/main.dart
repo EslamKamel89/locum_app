@@ -37,7 +37,12 @@ class MyApp extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(create: (_) => ThemeCubit()),
-          BlocProvider(create: (_) => UserInfoCubit(commonDataRepo: serviceLocator())),
+          BlocProvider(
+            create: (_) => UserInfoCubit(
+              commonDataRepo: serviceLocator(),
+              sharedPreferences: serviceLocator(),
+            ),
+          ),
         ],
         child: Builder(builder: (context) {
           final themeCubit = context.watch<ThemeCubit>();

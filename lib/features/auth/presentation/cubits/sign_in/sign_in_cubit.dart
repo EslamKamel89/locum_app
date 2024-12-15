@@ -11,6 +11,7 @@ import 'package:locum_app/features/auth/data/models/user_model.dart';
 import 'package:locum_app/features/auth/domain/entities/user_entity.dart';
 import 'package:locum_app/features/auth/domain/repos/auth_repo.dart';
 import 'package:locum_app/features/auth/helpers/auth_helpers.dart';
+import 'package:locum_app/features/common_data/cubits/user_info/user_info_cubit.dart';
 
 part 'sign_in_state.dart';
 
@@ -29,9 +30,10 @@ class SignInCubit extends Cubit<SignInState> {
         showSnackbar('Server Error', failure.message, true);
         emit(state.copyWith(responseType: ResponseType.failed, errorMessage: failure.message));
       },
-      (UserModel user) {
+      (UserModel user) async {
         pr(user, t);
-        AuthHelpers.cacheUser(user);
+        await AuthHelpers.cacheUser(user);
+        await _updateUserInfoState();
         emit(state.copyWith(userEntity: user, responseType: ResponseType.success, errorMessage: null));
         _navigateToHomeScreen();
       },
@@ -40,26 +42,30 @@ class SignInCubit extends Cubit<SignInState> {
 
   Future _navigateToHomeScreen() async {
     final t = prt('navigateToHomeScreen - SignInCubit');
-    Future.delayed(const Duration(seconds: 1)).then((_) {
-      final context = navigatorKey.currentContext;
-      final isDoctor = AuthHelpers.isDoctor();
-      if (context == null || isDoctor == null) {
-        pr('Error: context or isDoctor is null', t);
-        return;
-      }
-      if (isDoctor) {
-        pr('Navigate to doctors home page', t);
-        Navigator.of(navigatorKey.currentContext!).pushNamedAndRemoveUntil(
-          AppRoutesNames.doctorHomeScreen,
-          (_) => false,
-        );
-      } else {
-        pr('Navigate to hospitals home page', t);
-        Navigator.of(navigatorKey.currentContext!).pushNamedAndRemoveUntil(
-          AppRoutesNames.hospitalHomeScreen,
-          (_) => false,
-        );
-      }
-    });
+    final context = navigatorKey.currentContext;
+    final isDoctor = AuthHelpers.isDoctor();
+    if (context == null || isDoctor == null) {
+      pr('Error: context or isDoctor is null', t);
+      return;
+    }
+    if (isDoctor) {
+      pr('Navigate to doctors home page', t);
+      Navigator.of(context).pushNamedAndRemoveUntil(
+        AppRoutesNames.doctorHomeScreen,
+        (_) => false,
+      );
+    } else {
+      pr('Navigate to hospitals home page', t);
+      Navigator.of(context).pushNamedAndRemoveUntil(
+        AppRoutesNames.hospitalHomeScreen,
+        (_) => false,
+      );
+    }
+  }
+
+  Future _updateUserInfoState() async {
+    final context = navigatorKey.currentContext;
+    if (context == null) return;
+    await context.read<UserInfoCubit>().fetchUserInfo();
   }
 }

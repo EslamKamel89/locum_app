@@ -7,8 +7,9 @@ import 'package:locum_app/features/auth/presentation/cubits/sign_in/sign_in_cubi
 import 'package:locum_app/features/auth/presentation/cubits/sign_up/sign_up_cubit.dart';
 import 'package:locum_app/features/auth/presentation/views/sign_in/sign_in_screen.dart';
 import 'package:locum_app/features/auth/presentation/views/sign_up/signup_screen.dart';
-import 'package:locum_app/features/doctor/doctor_home_view.dart';
-import 'package:locum_app/features/hospital/hospital_home_view.dart';
+import 'package:locum_app/features/doctor/doctor_home/doctor_home_view.dart';
+import 'package:locum_app/features/doctor/doctor_profile/presentation/views/doctor_profile_view.dart';
+import 'package:locum_app/features/hospital/hospital_home/hospital_home_view.dart';
 import 'package:locum_app/features/splash_onboarding/presention/views/on_bording_screen.dart';
 import 'package:locum_app/features/splash_onboarding/presention/views/splash_screen.dart';
 
@@ -20,17 +21,17 @@ class AppRouter {
     String? routeName = appMiddleWare.middlleware(routeSettings.name);
     switch (routeName) {
       case AppRoutesNames.splashScreen:
-        return MaterialPageRoute(
+        return CustomPageRoute(
           builder: (context) => const SplashScreen(),
           settings: routeSettings,
         );
       case AppRoutesNames.onboardingScreen:
-        return MaterialPageRoute(
+        return CustomPageRoute(
           builder: (context) => const OnboardingScreen(),
           settings: routeSettings,
         );
       case AppRoutesNames.signinScreen:
-        return MaterialPageRoute(
+        return CustomPageRoute(
           builder: (context) => BlocProvider(
             create: (context) => SignInCubit(authRepo: serviceLocator()),
             child: const SignInScreen(),
@@ -38,7 +39,7 @@ class AppRouter {
           settings: routeSettings,
         );
       case AppRoutesNames.signupScreen:
-        return MaterialPageRoute(
+        return CustomPageRoute(
           builder: (context) => BlocProvider(
             create: (context) => SignUpCubit(
               commonDataRepo: serviceLocator(),
@@ -49,17 +50,38 @@ class AppRouter {
           settings: routeSettings,
         );
       case AppRoutesNames.hospitalHomeScreen:
-        return MaterialPageRoute(
+        return CustomPageRoute(
           builder: (context) => const HospitalHomeScreen(),
           settings: routeSettings,
         );
       case AppRoutesNames.doctorHomeScreen:
-        return MaterialPageRoute(
+        return CustomPageRoute(
           builder: (context) => const DoctorHomeScreen(),
+          settings: routeSettings,
+        );
+      case AppRoutesNames.doctorProfileScreen:
+        return CustomPageRoute(
+          builder: (context) => const DoctorProfileView(),
           settings: routeSettings,
         );
       default:
         return null;
     }
+  }
+}
+
+class CustomPageRoute<T> extends MaterialPageRoute<T> {
+  CustomPageRoute({required super.builder, required RouteSettings super.settings});
+  @override
+  Widget buildTransitions(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    return FadeTransition(
+      opacity: animation,
+      child: child,
+    );
   }
 }

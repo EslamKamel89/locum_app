@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     _animationController.forward();
     _animationController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        userInfoCubit.fetchUserInfo();
+        userInfoCubit.fetchUserInfo(true);
       }
     });
   }

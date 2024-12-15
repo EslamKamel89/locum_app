@@ -5,4 +5,5 @@ class AppRoutesNames {
   static const String signupScreen = '/signupScreen';
   static const String doctorHomeScreen = '/doctorHomeScreen';
   static const String hospitalHomeScreen = '/hospitalHomeScreen';
+  static const String doctorProfileScreen = '/doctorProfileScreen';
 }

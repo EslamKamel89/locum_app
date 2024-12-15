@@ -6,30 +6,36 @@ import 'package:locum_app/core/Errors/failure.dart';
 import 'package:locum_app/core/enums/response_type.dart';
 import 'package:locum_app/core/globals.dart';
 import 'package:locum_app/core/heleprs/print_helper.dart';
-import 'package:locum_app/core/heleprs/snackbar.dart';
 import 'package:locum_app/core/router/app_routes_names.dart';
 import 'package:locum_app/features/auth/domain/entities/user_entity.dart';
 import 'package:locum_app/features/auth/helpers/auth_helpers.dart';
 import 'package:locum_app/features/common_data/data/models/doctor_user_model.dart';
 import 'package:locum_app/features/common_data/data/models/hospital_user_model.dart';
 import 'package:locum_app/features/common_data/domain/repos/common_data_repo.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'user_info_state.dart';
 
 class UserInfoCubit extends Cubit<UserInfoState> {
   final CommonDataRepo commonDataRepo;
+  final SharedPreferences sharedPreferences;
   UserInfoCubit({
     required this.commonDataRepo,
+    required this.sharedPreferences,
   }) : super(UserInfoState());
 
-  Future fetchUserInfo() async {
+  Future fetchUserInfo([bool navigate = false]) async {
     final t = prt('fetchUserInfo - UserInfoCubit');
     emit(UserInfoState(responseType: ResponseType.loading));
+    if (!AuthHelpers.isSignedIn()) {
+      _navigateToOnBoardingScreen();
+      return;
+    }
     final result = await commonDataRepo.fetchUserInfo();
     result.fold(
       (Failure failure) {
         pr(failure.message, t);
-        showSnackbar('Server Error', failure.message, true);
+        // showSnackbar('Server Error', failure.message, true);
         emit(UserInfoState(responseType: ResponseType.failed, errorMessage: failure.message));
       },
       (Either<DoctorUserModel, HospitalUserModel> doctorOrHospital) {
@@ -45,8 +51,17 @@ class UserInfoCubit extends Cubit<UserInfoState> {
                 hospitalUserModel: hospital, userType: UserType.hospital, responseType: ResponseType.success));
           },
         );
-        _navigateToHomeScreen();
+        if (navigate) _navigateToHomeScreen();
       },
+    );
+  }
+
+  Future _navigateToOnBoardingScreen() async {
+    final t = prt('navigateToOnBoardingScreen - UserInfoCubit');
+    pr('navigating to on boarding screen because the cached token is null', t);
+    Navigator.of(navigatorKey.currentContext!).pushNamedAndRemoveUntil(
+      AppRoutesNames.onboardingScreen,
+      (_) => false,
     );
   }
 
@@ -82,5 +97,13 @@ class UserInfoCubit extends Cubit<UserInfoState> {
       );
       return;
     }
+  }
+
+  Future handleSignOut() async {
+    sharedPreferences.clear();
+    emit(UserInfoState());
+    BuildContext? context = navigatorKey.currentContext;
+    if (context == null) return;
+    Navigator.of(context).pushNamedAndRemoveUntil(AppRoutesNames.signinScreen, (_) => false);
   }
 }
