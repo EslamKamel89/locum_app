@@ -44,7 +44,7 @@ class DoctorModel {
 
   @override
   String toString() {
-    return 'DoctorModel(id: $id, userId: $userId, specialtyId: $specialtyId, jobInfoId: $jobInfoId, dateOfBirth: $dateOfBirth, gender: $gender, address: $address, phone: $phone, willingToRelocate: $willingToRelocate, photo: $photo, doctorInfo: $doctorInfo, doctorDocuments: $doctorDocuments, skills: $skills, langs: $langs, specialty: $specialty, jobInfo: $jobInfo)';
+    return 'DoctorModel(id: $id, userId: $userId, specialtyId: $specialtyId, jobInfoId: $jobInfoId, dateOfBirth: $dateOfBirth, gender: $gender, address: $address, phone: $phone, willingToRelocate: $willingToRelocate, photo: $photo, doctorInfo: $doctorInfo, doctorDocuments: $doctorDocuments, skills: $skills, langs: $langs, specialty: $specialty, jobInfo: $jobInfo )';
   }
 
   factory DoctorModel.fromJson(Map<String, dynamic> json) => DoctorModel(
@@ -58,30 +58,16 @@ class DoctorModel {
         phone: json['phone'] as String?,
         willingToRelocate: json['willing_to_relocate'] as bool?,
         photo: json['photo'] as String?,
-        doctorInfo: json['doctor_info'] == null
-            ? null
-            : DoctorInfoModel.fromJson(json['doctor_info']),
+        doctorInfo: json['doctor_info'] == null ? null : DoctorInfoModel.fromJson(json['doctor_info']),
         doctorDocuments: json['doctor_documents'] == null
             ? null
-            : (json['doctor_documents'] as List)
-                .map((json) => DoctorDocumentModel.fromJson(json))
-                .toList(),
-        skills: json['skills'] == null
-            ? null
-            : (json['skills'] as List)
-                .map((json) => SkillModel.fromJson(json))
-                .toList(),
-        langs: json['langs'] == null
-            ? null
-            : (json['langs'] as List)
-                .map((json) => LanguageModel.fromJson(json))
-                .toList(),
-        specialty: json['specialty'] == null
-            ? null
-            : SpecialtyModel.fromJson(json['specialty']),
-        jobInfo: json['job_info'] == null
-            ? null
-            : JobInfoModel.fromJson(json['job_info']),
+            : (json['doctor_documents'] as List).map((json) => DoctorDocumentModel.fromJson(json)).toList(),
+        skills:
+            json['skills'] == null ? null : (json['skills'] as List).map((json) => SkillModel.fromJson(json)).toList(),
+        langs:
+            json['langs'] == null ? null : (json['langs'] as List).map((json) => LanguageModel.fromJson(json)).toList(),
+        specialty: json['specialty'] == null ? null : SpecialtyModel.fromJson(json['specialty']),
+        jobInfo: json['job_info'] == null ? null : JobInfoModel.fromJson(json['job_info']),
       );
 
   Map<String, dynamic> toJson() => {

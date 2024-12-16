@@ -1,3 +1,5 @@
+import 'package:locum_app/features/common_data/data/models/university_model.dart';
+
 class DoctorInfoModel {
   int? id;
   int? doctorId;
@@ -12,6 +14,7 @@ class DoctorInfoModel {
   String? workExperience;
   dynamic cv;
   String? biography;
+  UniversityModel? university;
 
   DoctorInfoModel({
     this.id,
@@ -27,11 +30,12 @@ class DoctorInfoModel {
     this.workExperience,
     this.cv,
     this.biography,
+    this.university,
   });
 
   @override
   String toString() {
-    return 'DoctorInfoModel(id: $id, doctorId: $doctorId, professionalLicenseNumber: $professionalLicenseNumber, licenseState: $licenseState, licenseIssueDate: $licenseIssueDate, licenseExpiryDate: $licenseExpiryDate, universityId: $universityId, highestDegree: $highestDegree, fieldOfStudy: $fieldOfStudy, graduationYear: $graduationYear, workExperience: $workExperience, cv: $cv, biography: $biography)';
+    return 'DoctorInfoModel(id: $id, doctorId: $doctorId, professionalLicenseNumber: $professionalLicenseNumber, licenseState: $licenseState, licenseIssueDate: $licenseIssueDate, licenseExpiryDate: $licenseExpiryDate, universityId: $universityId, highestDegree: $highestDegree, fieldOfStudy: $fieldOfStudy, graduationYear: $graduationYear, workExperience: $workExperience, cv: $cv, biography: $biography, university: $university)';
   }
 
   factory DoctorInfoModel.fromJson(Map<String, dynamic> json) {
@@ -49,6 +53,7 @@ class DoctorInfoModel {
       workExperience: json['work_experience'] as String?,
       cv: json['cv'] as dynamic,
       biography: json['biography'] as String?,
+      university: json['university'] == null ? null : UniversityModel.fromJson(json['university']),
     );
   }
 

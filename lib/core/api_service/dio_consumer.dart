@@ -6,6 +6,7 @@ import 'package:locum_app/core/api_service/api_consumer.dart';
 import 'package:locum_app/core/api_service/api_interceptors.dart';
 import 'package:locum_app/core/api_service/check_internet.dart';
 import 'package:locum_app/core/api_service/end_points.dart';
+import 'package:locum_app/core/heleprs/print_helper.dart';
 import 'package:locum_app/features/auth/helpers/auth_helpers.dart';
 
 class DioConsumer extends ApiConsumer {
@@ -15,7 +16,7 @@ class DioConsumer extends ApiConsumer {
     dio.options.baseUrl = EndPoint.baseUrl;
     dio.options.connectTimeout = const Duration(seconds: 60);
     dio.options.receiveTimeout = const Duration(seconds: 60);
-    dio.options.headers = {"Authorization": 'Bearer ${AuthHelpers.getCachedToken()}'};
+
     dio.interceptors.add(DioInterceptor()); // i use the interceptor to add the header
     dio.interceptors.add(LogInterceptor(
       request: true,
@@ -34,6 +35,8 @@ class DioConsumer extends ApiConsumer {
     Map<String, dynamic>? queryParameter,
   }) async {
     try {
+      pr(AuthHelpers.getCachedToken(), 'Token in DioConsumer');
+      dio.options.headers = {"Authorization": 'Bearer ${AuthHelpers.getCachedToken()}', "Accept": "application/json"};
       if (!(await checkInternet())) {
         throw OfflineException();
       }
@@ -55,6 +58,8 @@ class DioConsumer extends ApiConsumer {
     Map<String, dynamic>? queryParameter,
     bool isFormData = false,
   }) async {
+    pr(AuthHelpers.getCachedToken(), 'Token in DioConsumer');
+    dio.options.headers = {"Authorization": 'Bearer ${AuthHelpers.getCachedToken()}', "Accept": "application/json"};
     try {
       if (!(await checkInternet())) {
         throw OfflineException();
@@ -77,6 +82,8 @@ class DioConsumer extends ApiConsumer {
     Map<String, dynamic>? queryParameter,
     bool isFormData = false,
   }) async {
+    pr(AuthHelpers.getCachedToken(), 'Token in DioConsumer');
+    dio.options.headers = {"Authorization": 'Bearer ${AuthHelpers.getCachedToken()}', "Accept": "application/json"};
     try {
       if (!(await checkInternet())) {
         throw OfflineException();
@@ -99,6 +106,8 @@ class DioConsumer extends ApiConsumer {
     Map<String, dynamic>? queryParameter,
     bool isFormData = false,
   }) async {
+    pr(AuthHelpers.getCachedToken(), 'Token in DioConsumer');
+    dio.options.headers = {"Authorization": 'Bearer ${AuthHelpers.getCachedToken()}', "Accept": "application/json"};
     try {
       if (!(await checkInternet())) {
         throw OfflineException();
