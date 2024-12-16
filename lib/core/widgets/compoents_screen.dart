@@ -27,7 +27,7 @@ class _ComponentScreenState extends State<ComponentScreen> {
         onPressed: () {},
         child: const Icon(Icons.add),
       ),
-      drawer: const DefaultDrawer(),
+      drawer: const DefaultDoctorDrawer(),
       bottomNavigationBar: DefaultBottomNavigationBar(
         handleNavigation: (int index) {},
       ),

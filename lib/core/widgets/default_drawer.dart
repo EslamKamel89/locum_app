@@ -1,16 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:locum_app/core/extensions/context-extensions.dart';
+import 'package:locum_app/core/themes/theme_cubit.dart';
+import 'package:locum_app/core/themes/toogle_theme_switch.dart';
+import 'package:locum_app/core/widgets/circular_image_asset.dart';
+import 'package:locum_app/core/widgets/show_are_you_sure_dialog.dart';
+import 'package:locum_app/features/common_data/cubits/user_info/user_info_cubit.dart';
+import 'package:locum_app/utils/assets/assets.dart';
+import 'package:locum_app/utils/styles/styles.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class DefaultDrawer extends StatelessWidget {
-  const DefaultDrawer({super.key});
+class DefaultDoctorDrawer extends StatelessWidget {
+  const DefaultDoctorDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final userInfoCubit = context.read<UserInfoCubit>();
+    final user = userInfoCubit.state.doctorUserModel;
     return Drawer(
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [context.primaryColor, context.secondaryHeaderColor],
+            colors: [context.primaryColor.withOpacity(0.2), context.primaryColor.withOpacity(0.9)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -18,21 +30,30 @@ class DefaultDrawer extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            const UserAccountsDrawerHeader(
-              accountName: Text("Eslam Kamel"),
-              accountEmail: Text("eslam@gmail.com"),
-              currentAccountPicture: CircleAvatar(
-                backgroundImage:
-                    NetworkImage("https://via.placeholder.com/150"),
-              ),
-              decoration: BoxDecoration(
-                color: Colors.transparent,
+            Center(
+              child: Column(
+                children: [
+                  const SizedBox(height: 12),
+                  CircularCachedImage(
+                    imageUrl: user?.doctor?.photo ?? '',
+                    imageAsset:
+                        user?.doctor?.gender == 'male' ? AssetsData.malePlacholder : AssetsData.femalePlacholder,
+                    height: 100.h,
+                    width: 100.h,
+                  ),
+                  const SizedBox(height: 12),
+                  txt(user?.name ?? '', e: St.bold16),
+                  const SizedBox(height: 4),
+                  txt(user?.email ?? '', e: St.reg12),
+                ],
               ),
             ),
+            const SizedBox(height: 25),
+            const Divider(color: Colors.white70),
             _createDrawerItem(
               context,
               icon: Icons.home,
-              text: 'Home',
+              text: 'Your Applications',
               onTap: () {
                 Navigator.pop(context);
               },
@@ -55,12 +76,42 @@ class DefaultDrawer extends StatelessWidget {
             ),
             const Divider(color: Colors.white70),
             ListTile(
-              title: const Text('About', style: TextStyle(color: Colors.white)),
-              leading: Icon(Icons.info, color: context.secondaryHeaderColor),
+              title: const Text('About'),
+              leading: Icon(Icons.info, color: context.primaryColor),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
+            BlocBuilder<ThemeCubit, ThemeData>(
+              builder: (context, state) {
+                return ListTile(
+                  leading: Icon(MdiIcons.themeLightDark, color: context.primaryColor),
+                  title: Row(
+                    children: [
+                      // SizedBox(width: 15.w),
+                      // Icon(MdiIcons.themeLightDark),
+                      // SizedBox(width: 10.w),
+                      Text(state.brightness == Brightness.dark ? 'Light Theme' : 'Dark Theme'),
+                      SizedBox(width: 10.w),
+                      const ToggleThemeSwitch(),
+                    ],
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(MdiIcons.logout, color: context.primaryColor),
+              title: InkWell(
+                onTap: () async {
+                  bool result = (await showAreYouSureDialog()) ?? false;
+                  if (result) {
+                    context.read<UserInfoCubit>().handleSignOut();
+                  }
+                },
+                child: const Text('Sign Out'),
+              ),
+            ),
+            SizedBox(height: 15.h),
           ],
         ),
       ),
@@ -68,12 +119,10 @@ class DefaultDrawer extends StatelessWidget {
   }
 
   Widget _createDrawerItem(BuildContext context,
-      {required IconData icon,
-      required String text,
-      GestureTapCallback? onTap}) {
+      {required IconData icon, required String text, GestureTapCallback? onTap}) {
     return ListTile(
-      title: Text(text, style: const TextStyle(color: Colors.white)),
-      leading: Icon(icon, color: context.secondaryHeaderColor),
+      title: Text(text),
+      leading: Icon(icon, color: context.primaryColor),
       onTap: onTap,
     );
   }

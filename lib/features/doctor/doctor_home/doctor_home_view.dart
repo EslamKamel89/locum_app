@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:locum_app/core/widgets/bottom_navigation_bar.dart';
+import 'package:locum_app/core/widgets/default_drawer.dart';
 import 'package:locum_app/core/widgets/main_scaffold.dart';
 
 class DoctorHomeScreen extends StatefulWidget {
@@ -20,6 +21,8 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
   Widget build(BuildContext context) {
     return MainScaffold(
       appBarTitle: 'Doctor Home Page',
+      bottomNavigationBar: doctorBottomNavigationBar,
+      drawer: const DefaultDoctorDrawer(),
       child: ElevatedButton(
         child: const Text('Profile'),
         onPressed: () {

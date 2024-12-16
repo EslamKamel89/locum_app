@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:locum_app/core/enums/response_type.dart';
+import 'package:locum_app/core/extensions/context-extensions.dart';
+import 'package:locum_app/core/globals.dart';
 import 'package:locum_app/core/heleprs/print_helper.dart';
+import 'package:locum_app/core/widgets/badge_wrap.dart';
+import 'package:locum_app/core/widgets/bottom_navigation_bar.dart';
 import 'package:locum_app/core/widgets/circular_image_asset.dart';
+import 'package:locum_app/core/widgets/default_drawer.dart';
 import 'package:locum_app/core/widgets/main_scaffold.dart';
 import 'package:locum_app/features/common_data/cubits/user_info/user_info_cubit.dart';
 import 'package:locum_app/features/common_data/data/models/doctor_document_model.dart';
@@ -28,9 +33,11 @@ class _DoctorProfileViewState extends State<DoctorProfileView> {
 
   @override
   Widget build(BuildContext context) {
-    return const MainScaffold(
+    return MainScaffold(
       appBarTitle: 'Profile',
-      child: SingleChildScrollView(
+      bottomNavigationBar: doctorBottomNavigationBar,
+      drawer: const DefaultDoctorDrawer(),
+      child: const SingleChildScrollView(
         child: DoctorProfileContent(),
       ),
     );
@@ -81,8 +88,8 @@ class DoctorProfileContent extends StatelessWidget {
               _sectionCard(
                 children: [
                   _buildSectionHeader('Basic Information'),
-                  _buildInfo('State Name', user?.state?.name),
-                  _buildInfo('District Name', user?.district?.name),
+                  _buildInfo('State', user?.state?.name),
+                  _buildInfo('District', user?.district?.name),
                 ],
                 visibility: user != null,
               ),
@@ -141,7 +148,9 @@ class DoctorProfileContent extends StatelessWidget {
                   return _sectionCard(
                     children: [
                       _buildSectionHeader('Languages Spoken'),
-                      _buildInfo(null, langsStr, isRow: false),
+                      // _buildInfo(null, langsStr, isRow: false),
+                      const SizedBox(height: 5),
+                      BadgeWrap(items: langs.map((lang) => lang.name ?? '').toList())
                     ],
                     visibility: langs.isNotEmpty,
                   );
@@ -162,7 +171,9 @@ class DoctorProfileContent extends StatelessWidget {
                   return _sectionCard(
                     children: [
                       _buildSectionHeader('Skills'),
-                      _buildInfo(null, skillsStr, isRow: false),
+                      // _buildInfo(null, skillsStr, isRow: false),
+                      const SizedBox(height: 5),
+                      BadgeWrap(items: skills.map((skill) => skill.name ?? '').toList())
                     ],
                     visibility: skills.isNotEmpty,
                   );
@@ -182,16 +193,7 @@ class DoctorProfileContent extends StatelessWidget {
                   visibility: documents.isNotEmpty,
                 );
               }),
-              SizedBox(height: 15.h),
-              Align(
-                alignment: Alignment.center,
-                child: ElevatedButton(
-                  onPressed: () {
-                    context.read<UserInfoCubit>().handleSignOut();
-                  },
-                  child: txt('Sign Out', e: St.bold12),
-                ),
-              ),
+
               SizedBox(height: 15.h),
             ],
           );
@@ -203,10 +205,10 @@ class DoctorProfileContent extends StatelessWidget {
   ) {
     return Text(
       title,
-      style: const TextStyle(
+      style: TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.bold,
-        color: Colors.blueAccent,
+        color: navigatorKey.currentContext!.primaryColor,
       ),
     );
   }
@@ -219,15 +221,18 @@ class DoctorProfileContent extends StatelessWidget {
           ? const SizedBox()
           : Text(
               label,
-              style: const TextStyle(fontWeight: FontWeight.w600),
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                color: navigatorKey.currentContext!.primaryColor.withRed(5),
+              ),
             ),
       label == null ? const SizedBox() : SizedBox(width: 15.w, height: 5.w),
       Text(
         value,
         textAlign: isRow ? TextAlign.end : TextAlign.start,
         style: const TextStyle(
-          color: Colors.black54,
-        ),
+            // color: Colors.black54,
+            ),
         maxLines: isRow ? 1 : null,
         overflow: isRow ? TextOverflow.clip : null,
       ),
