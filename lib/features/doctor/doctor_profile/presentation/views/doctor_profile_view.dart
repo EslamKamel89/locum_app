@@ -5,6 +5,7 @@ import 'package:locum_app/core/enums/response_type.dart';
 import 'package:locum_app/core/extensions/context-extensions.dart';
 import 'package:locum_app/core/globals.dart';
 import 'package:locum_app/core/heleprs/print_helper.dart';
+import 'package:locum_app/core/router/app_routes_names.dart';
 import 'package:locum_app/core/widgets/badge_wrap.dart';
 import 'package:locum_app/core/widgets/bottom_navigation_bar.dart';
 import 'package:locum_app/core/widgets/circular_image_asset.dart';
@@ -14,8 +15,10 @@ import 'package:locum_app/features/common_data/cubits/user_info/user_info_cubit.
 import 'package:locum_app/features/common_data/data/models/doctor_document_model.dart';
 import 'package:locum_app/features/common_data/data/models/language_model.dart';
 import 'package:locum_app/features/common_data/data/models/skill_model.dart';
+import 'package:locum_app/features/doctor/doctor_profile/presentation/views/widgets/profile_not_complete_widgets.dart';
 import 'package:locum_app/utils/assets/assets.dart';
 import 'package:locum_app/utils/styles/styles.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class DoctorProfileView extends StatefulWidget {
   const DoctorProfileView({super.key});
@@ -70,7 +73,7 @@ class DoctorProfileContent extends StatelessWidget {
                     CircularCachedImage(
                       imageUrl: user?.doctor?.photo ?? '',
                       imageAsset:
-                          user?.doctor?.gender == 'male' ? AssetsData.malePlacholder : AssetsData.femalePlacholder,
+                          user?.doctor?.gender == 'female' ? AssetsData.femalePlacholder : AssetsData.malePlacholder,
                       height: 100.h,
                       width: 100.h,
                     ),
@@ -83,7 +86,6 @@ class DoctorProfileContent extends StatelessWidget {
               ),
 
               const SizedBox(height: 24),
-
               // Section 2: User Information
               _sectionCard(
                 children: [
@@ -97,6 +99,7 @@ class DoctorProfileContent extends StatelessWidget {
               SizedBox(height: 15.h),
 
               // Section 3: Main Professional Information
+
               _sectionCard(
                 children: [
                   _buildSectionHeader('Main Professional Information'),
@@ -113,13 +116,13 @@ class DoctorProfileContent extends StatelessWidget {
                 ],
                 visibility: user?.doctor != null,
               ),
-
-              SizedBox(height: 15.h),
-
               // Section 4: Additional Professional Information
+
               _sectionCard(
                 children: [
-                  _buildSectionHeader('Additional Professional Information'),
+                  _buildSectionHeader('Additional Professional Information', handleEdit: () {
+                    Navigator.of(context).pushNamed(AppRoutesNames.doctorInfoForm);
+                  }),
                   _buildInfo('Professional License No.', user?.doctor?.doctorInfo?.professionalLicenseNumber),
                   _buildInfo('License State', user?.doctor?.doctorInfo?.licenseState),
                   _buildInfo('License Issue Date', user?.doctor?.doctorInfo?.licenseIssueDate),
@@ -133,8 +136,6 @@ class DoctorProfileContent extends StatelessWidget {
                 ],
                 visibility: user?.doctor?.doctorInfo != null,
               ),
-
-              SizedBox(height: 15.h),
 
               // Section 5: Languages Spoken
               Builder(
@@ -157,8 +158,6 @@ class DoctorProfileContent extends StatelessWidget {
                 },
               ),
 
-              SizedBox(height: 15.h),
-
               // Section 6: Doctor Skills
               Builder(
                 builder: (context) {
@@ -180,8 +179,6 @@ class DoctorProfileContent extends StatelessWidget {
                 },
               ),
 
-              SizedBox(height: 15.h),
-
               // Section 7: Doctor Documents
               Builder(builder: (context) {
                 List<DoctorDocumentModel> documents = user?.doctor?.doctorDocuments ?? [];
@@ -193,23 +190,34 @@ class DoctorProfileContent extends StatelessWidget {
                   visibility: documents.isNotEmpty,
                 );
               }),
-
+              DoctorProfileNotCompleteWidgets(user: user),
               SizedBox(height: 15.h),
             ],
           );
   }
 
   // Helper to build section headers
-  Widget _buildSectionHeader(
-    String title,
-  ) {
-    return Text(
-      title,
-      style: TextStyle(
-        fontSize: 18,
-        fontWeight: FontWeight.bold,
-        color: navigatorKey.currentContext!.primaryColor,
-      ),
+  Widget _buildSectionHeader(String title, {void Function()? handleEdit}) {
+    BuildContext? context = navigatorKey.currentContext;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: navigatorKey.currentContext!.primaryColor,
+          ),
+        ),
+        IconButton(
+          onPressed: handleEdit,
+          icon: Icon(
+            MdiIcons.circleEditOutline,
+            color: context?.primaryColor,
+          ),
+        )
+      ],
     );
   }
 
@@ -286,6 +294,7 @@ class DoctorProfileContent extends StatelessWidget {
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: 15.h),
               ...children,
               Divider(color: Colors.grey.withOpacity(0.5)),
             ],

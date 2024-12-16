@@ -37,9 +37,13 @@ class HospitalUserModel extends UserModel {
       districtId: json['district_id'] as int?,
       type: json['type'] == null ? null : UserType.fromStr(json['type']),
       userTypeStr: json['type'] as String,
-      district: json['district'] == null ? null : DistrictModel.fromJson(json['district']),
+      district: json['district'] == null
+          ? null
+          : DistrictModel.fromJson(json['district']),
       state: json['state'] == null ? null : StateModel.fromJson(json['state']),
-      hospital: json['hospital'] == null ? null : HospitalModel.fromJson(json['hospital']),
+      hospital: json['hospital'] == null
+          ? null
+          : HospitalModel.fromJson(json['hospital']),
     );
   }
 }

@@ -73,7 +73,8 @@ class CircularCachedImage extends StatelessWidget {
               ),
             );
           },
-          placeholder: (context, url) => CustomFadingWidget(child: Image.asset(imageAsset)),
+          placeholder: (context, url) =>
+              CustomFadingWidget(child: Image.asset(imageAsset)),
           errorWidget: (context, url, error) => Image.asset(imageAsset),
         ),
       ),

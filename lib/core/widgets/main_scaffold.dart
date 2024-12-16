@@ -6,13 +6,13 @@ class MainScaffold extends StatelessWidget {
     super.key,
     required this.appBarTitle,
     required this.child,
-    required this.bottomNavigationBar,
-    required this.drawer,
+    this.bottomNavigationBar,
+    this.drawer,
   });
   final String appBarTitle;
   final Widget child;
-  final Widget bottomNavigationBar;
-  final Widget drawer;
+  final Widget? bottomNavigationBar;
+  final Widget? drawer;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -21,7 +21,8 @@ class MainScaffold extends StatelessWidget {
           title: Text(appBarTitle),
         ),
         bottomNavigationBar: bottomNavigationBar,
-        drawer: drawer,
+        // drawer: drawer,
+        endDrawer: drawer,
         body: DefaultScreenPadding(
           child: child,
         ),

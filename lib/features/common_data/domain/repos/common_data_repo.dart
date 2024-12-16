@@ -14,5 +14,6 @@ abstract class CommonDataRepo {
   Future<Either<Failure, List<UniversityModel>>> fetchUniversities();
   Future<Either<Failure, List<JobInfoModel>>> fetchJobInfos();
   Future<Either<Failure, DistrictsDataModel>> fetchDistrictsData(int stateId);
-  Future<Either<Failure, Either<DoctorUserModel, HospitalUserModel>>> fetchUserInfo();
+  Future<Either<Failure, Either<DoctorUserModel, HospitalUserModel>>>
+      fetchUserInfo();
 }

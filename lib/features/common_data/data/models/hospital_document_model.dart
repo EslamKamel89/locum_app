@@ -16,7 +16,8 @@ class HospitalDocumentModel {
     return 'HospitalDocumentModel(id: $id, hospitalId: $hospitalId, type: $type, file: $file, )';
   }
 
-  factory HospitalDocumentModel.fromJson(Map<String, dynamic> json) => HospitalDocumentModel(
+  factory HospitalDocumentModel.fromJson(Map<String, dynamic> json) =>
+      HospitalDocumentModel(
         id: json['id'] as int?,
         hospitalId: json['hospital_id'] as int?,
         type: json['type'] as String?,

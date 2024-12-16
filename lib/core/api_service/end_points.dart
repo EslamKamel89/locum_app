@@ -9,4 +9,6 @@ class EndPoint {
   static const String signin = "$baseUrl/auth/login";
   static const String signup = "$baseUrl/auth/register";
   static const String userInfo = "$baseUrl/auth/user";
+  static const String doctorInfoCreate = "$baseUrl/doctor-infos";
+  static String doctorInfoUpdate(int? id) => "$baseUrl/doctor-infos/$id";
 }

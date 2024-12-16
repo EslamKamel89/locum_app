@@ -53,7 +53,9 @@ class DoctorInfoModel {
       workExperience: json['work_experience'] as String?,
       cv: json['cv'] as dynamic,
       biography: json['biography'] as String?,
-      university: json['university'] == null ? null : UniversityModel.fromJson(json['university']),
+      university: json['university'] == null
+          ? null
+          : UniversityModel.fromJson(json['university']),
     );
   }
 

@@ -1,8 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:locum_app/core/extensions/context-extensions.dart';
+import 'package:locum_app/core/themes/theme_cubit.dart';
 
 class BadgeWrap extends StatelessWidget {
   BadgeWrap({super.key, required this.items});
@@ -10,6 +12,7 @@ class BadgeWrap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<ThemeCubit>();
     return Wrap(
       spacing: 8.w,
       runSpacing: 8.w,
@@ -37,7 +40,7 @@ class BadgeWrap extends StatelessWidget {
     );
   }
 
-  final List<Color> _colors = [
+  final List<Color> _lightThemeColors = [
     Colors.black,
     Colors.blueGrey,
     Colors.brown,
@@ -49,9 +52,24 @@ class BadgeWrap extends StatelessWidget {
     Colors.blue[900]!,
     Colors.green[900]!,
   ];
+  final List<Color> _darkThemeColors = [
+    Colors.lightBlueAccent,
+    Colors.lightGreenAccent,
+    Colors.yellowAccent,
+    Colors.orangeAccent,
+    Colors.pinkAccent,
+    Colors.amberAccent,
+    Colors.limeAccent,
+    Colors.cyanAccent,
+    Colors.tealAccent,
+    // Colors.purpleAccent,
+  ];
   Color _getRandomColor(BuildContext context) {
     Color randomColor = context.primaryColor;
+    List<Color> color = context.read<ThemeCubit>().isDarkMode()
+        ? _darkThemeColors
+        : _lightThemeColors;
     final random = Random();
-    return _colors[random.nextInt(_colors.length)];
+    return color[random.nextInt(color.length)];
   }
 }
