@@ -1,4 +1,4 @@
-enum ResponseType {
+enum ResponseEnum {
   initial,
   loading,
   success,

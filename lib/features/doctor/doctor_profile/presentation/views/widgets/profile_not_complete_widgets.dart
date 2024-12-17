@@ -31,7 +31,7 @@ class DoctorProfileNotCompleteWidgets extends StatelessWidget {
                     "Tell us more about your work experience so we can connect you with the best locum opportunities.",
                 isVisible: user?.doctor?.doctorInfo == null,
                 onTap: () {
-                  Navigator.of(context).pushNamed(AppRoutesNames.doctorInfoForm);
+                  Navigator.of(context).pushNamed(AppRoutesNames.doctorInfoForm, arguments: {'create': true});
                 },
               ),
               AddDoctorInfoWidget(

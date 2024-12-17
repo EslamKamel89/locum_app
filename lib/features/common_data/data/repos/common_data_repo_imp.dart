@@ -17,12 +17,10 @@ class CommonDataRepoImp implements CommonDataRepo {
 
   CommonDataRepoImp({required this.commonDataRemoteSource});
   @override
-  Future<Either<Failure, DistrictsDataModel>> fetchDistrictsData(
-      int stateId) async {
+  Future<Either<Failure, DistrictsDataModel>> fetchDistrictsData(int stateId) async {
     final t = prt('fetchDistrictsData  - CommonDataRepoImp');
     try {
-      DistrictsDataModel model =
-          await commonDataRemoteSource.fetchDistrictsData(stateId);
+      DistrictsDataModel model = await commonDataRemoteSource.fetchDistrictsData(stateId);
       return Right(pr(model, t));
     } catch (e) {
       pr(e.toString());
@@ -54,8 +52,7 @@ class CommonDataRepoImp implements CommonDataRepo {
   Future<Either<Failure, List<SpecialtyModel>>> fetchSpecialties() async {
     final t = prt('fetchSpecialties  - CommonDataRepoImp');
     try {
-      List<SpecialtyModel> models =
-          await commonDataRemoteSource.fetchSpecialties();
+      List<SpecialtyModel> models = await commonDataRemoteSource.fetchSpecialties();
       return Right(pr(models, t));
     } catch (e) {
       pr(e.toString());
@@ -87,8 +84,7 @@ class CommonDataRepoImp implements CommonDataRepo {
   Future<Either<Failure, List<UniversityModel>>> fetchUniversities() async {
     final t = prt('fetchUniversities  - CommonDataRepoImp');
     try {
-      List<UniversityModel> models =
-          await commonDataRemoteSource.fetchUniversities();
+      List<UniversityModel> models = await commonDataRemoteSource.fetchUniversities();
       return Right(pr(models, t));
     } catch (e) {
       pr(e.toString());
@@ -101,12 +97,10 @@ class CommonDataRepoImp implements CommonDataRepo {
   }
 
   @override
-  Future<Either<Failure, Either<DoctorUserModel, HospitalUserModel>>>
-      fetchUserInfo() async {
+  Future<Either<Failure, Either<DoctorUserModel, HospitalUserModel>>> fetchUserInfo() async {
     final t = prt('fetchUserInfo  - CommonDataRepoImp');
     try {
-      Either<DoctorUserModel, HospitalUserModel> model =
-          await commonDataRemoteSource.fetchUserInfo();
+      Either<DoctorUserModel, HospitalUserModel> model = await commonDataRemoteSource.fetchUserInfo();
       return Right(pr(model, t));
     } catch (e) {
       pr(e.toString());

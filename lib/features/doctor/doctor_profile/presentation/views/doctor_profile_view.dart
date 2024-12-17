@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:locum_app/core/enums/response_type.dart';
 import 'package:locum_app/core/extensions/context-extensions.dart';
 import 'package:locum_app/core/globals.dart';
-import 'package:locum_app/core/heleprs/print_helper.dart';
 import 'package:locum_app/core/router/app_routes_names.dart';
 import 'package:locum_app/core/widgets/badge_wrap.dart';
 import 'package:locum_app/core/widgets/bottom_navigation_bar.dart';
@@ -54,10 +53,8 @@ class DoctorProfileContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final userInfoCubit = context.watch<UserInfoCubit>();
     final user = userInfoCubit.state.doctorUserModel;
-    const t = 'Profile Screen';
-    pr(userInfoCubit.state, '$t - userInfoCubit.state');
-    pr(user?.doctor?.doctorInfo, '$t - user?.doctor?.doctorInfo');
-    return userInfoCubit.state.responseType == ResponseType.loading
+
+    return userInfoCubit.state.responseType == ResponseEnum.loading
         ? Container(
             height: 700.h,
             alignment: Alignment.center,
@@ -121,7 +118,7 @@ class DoctorProfileContent extends StatelessWidget {
               _sectionCard(
                 children: [
                   _buildSectionHeader('Additional Professional Information', handleEdit: () {
-                    Navigator.of(context).pushNamed(AppRoutesNames.doctorInfoForm);
+                    Navigator.of(context).pushNamed(AppRoutesNames.doctorInfoForm, arguments: {'create': false});
                   }),
                   _buildInfo('Professional License No.', user?.doctor?.doctorInfo?.professionalLicenseNumber),
                   _buildInfo('License State', user?.doctor?.doctorInfo?.licenseState),

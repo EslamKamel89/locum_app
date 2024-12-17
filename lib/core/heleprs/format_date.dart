@@ -1,6 +1,5 @@
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-import 'package:locum_app/core/heleprs/print_helper.dart';
 
 String formateDateToArabic(DateTime dateTime) {
   initializeDateFormatting();
@@ -12,7 +11,7 @@ String formateDateToArabic(DateTime dateTime) {
 }
 
 String formatDateForApi(DateTime dateTime) {
-  String formattedDate = DateFormat('dd-MM-yyyy', 'en').format(dateTime);
-  pr(formattedDate);
+  String formattedDate = DateFormat('yyyy-MM-dd', 'en').format(dateTime);
+  formattedDate;
   return formattedDate;
 }

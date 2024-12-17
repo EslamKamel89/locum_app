@@ -17,8 +17,7 @@ class DioConsumer extends ApiConsumer {
     dio.options.connectTimeout = const Duration(seconds: 60);
     dio.options.receiveTimeout = const Duration(seconds: 60);
 
-    dio.interceptors
-        .add(DioInterceptor()); // i use the interceptor to add the header
+    dio.interceptors.add(DioInterceptor()); // i use the interceptor to add the header
     dio.interceptors.add(LogInterceptor(
       request: true,
       requestHeader: true,
@@ -37,10 +36,7 @@ class DioConsumer extends ApiConsumer {
   }) async {
     try {
       pr(AuthHelpers.getCachedToken(), 'Token in DioConsumer');
-      dio.options.headers = {
-        "Authorization": 'Bearer ${AuthHelpers.getCachedToken()}',
-        "Accept": "application/json"
-      };
+      dio.options.headers = {"Authorization": 'Bearer ${AuthHelpers.getCachedToken()}', "Accept": "application/json"};
       if (!(await checkInternet())) {
         throw OfflineException();
       }
@@ -63,10 +59,7 @@ class DioConsumer extends ApiConsumer {
     bool isFormData = false,
   }) async {
     pr(AuthHelpers.getCachedToken(), 'Token in DioConsumer');
-    dio.options.headers = {
-      "Authorization": 'Bearer ${AuthHelpers.getCachedToken()}',
-      "Accept": "application/json"
-    };
+    dio.options.headers = {"Authorization": 'Bearer ${AuthHelpers.getCachedToken()}', "Accept": "application/json"};
     try {
       if (!(await checkInternet())) {
         throw OfflineException();
@@ -90,10 +83,7 @@ class DioConsumer extends ApiConsumer {
     bool isFormData = false,
   }) async {
     pr(AuthHelpers.getCachedToken(), 'Token in DioConsumer');
-    dio.options.headers = {
-      "Authorization": 'Bearer ${AuthHelpers.getCachedToken()}',
-      "Accept": "application/json"
-    };
+    dio.options.headers = {"Authorization": 'Bearer ${AuthHelpers.getCachedToken()}', "Accept": "application/json"};
     try {
       if (!(await checkInternet())) {
         throw OfflineException();
@@ -117,10 +107,19 @@ class DioConsumer extends ApiConsumer {
     bool isFormData = false,
   }) async {
     pr(AuthHelpers.getCachedToken(), 'Token in DioConsumer');
-    dio.options.headers = {
-      "Authorization": 'Bearer ${AuthHelpers.getCachedToken()}',
-      "Accept": "application/json"
-    };
+    if (isFormData) {
+      dio.options.headers = {
+        "Authorization": 'Bearer ${AuthHelpers.getCachedToken()}',
+        "Accept": "application/json",
+        'Content-Type': 'multipart/form-data',
+      };
+    } else {
+      dio.options.headers = {
+        "Authorization": 'Bearer ${AuthHelpers.getCachedToken()}',
+        "Accept": "application/json",
+      };
+    }
+
     try {
       if (!(await checkInternet())) {
         throw OfflineException();

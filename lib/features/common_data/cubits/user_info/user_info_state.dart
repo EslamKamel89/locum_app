@@ -6,7 +6,7 @@ class UserInfoState {
   DoctorUserModel? doctorUserModel;
   HospitalUserModel? hospitalUserModel;
   String? errorMessage;
-  ResponseType? responseType = ResponseType.initial;
+  ResponseEnum? responseType = ResponseEnum.initial;
   UserInfoState({
     this.userType,
     this.doctorUserModel,
@@ -20,7 +20,7 @@ class UserInfoState {
     DoctorUserModel? doctorUserModel,
     HospitalUserModel? hospitalUserModel,
     String? errorMessage,
-    ResponseType? responseType,
+    ResponseEnum? responseType,
   }) {
     return UserInfoState(
       userType: userType ?? this.userType,

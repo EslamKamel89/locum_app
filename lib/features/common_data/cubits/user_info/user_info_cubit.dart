@@ -26,35 +26,30 @@ class UserInfoCubit extends Cubit<UserInfoState> {
 
   Future fetchUserInfo([bool navigate = false]) async {
     final t = prt('fetchUserInfo - UserInfoCubit');
-    emit(UserInfoState(responseType: ResponseType.loading));
-    if (!AuthHelpers.isSignedIn()) {
-      _navigateToOnBoardingScreen();
-      return;
-    }
+    emit(UserInfoState(responseType: ResponseEnum.loading));
+    // if (!AuthHelpers.isSignedIn()) {
+    //   _navigateToOnBoardingScreen();
+    //   return;
+    // }
     final result = await commonDataRepo.fetchUserInfo();
     result.fold(
       (Failure failure) {
         pr(failure.message, t);
         // showSnackbar('Server Error', failure.message, true);
-        emit(UserInfoState(
-            responseType: ResponseType.failed, errorMessage: failure.message));
+        _navigateToOnBoardingScreen();
+        emit(UserInfoState(responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
       (Either<DoctorUserModel, HospitalUserModel> doctorOrHospital) {
         pr(doctorOrHospital, t);
         doctorOrHospital.fold(
           (DoctorUserModel doctor) {
             AuthHelpers.cacheUser(doctor);
-            emit(UserInfoState(
-                doctorUserModel: doctor,
-                userType: UserType.doctor,
-                responseType: ResponseType.success));
+            emit(UserInfoState(doctorUserModel: doctor, userType: UserType.doctor, responseType: ResponseEnum.success));
           },
           (HospitalUserModel hospital) {
             AuthHelpers.cacheUser(hospital);
             emit(UserInfoState(
-                hospitalUserModel: hospital,
-                userType: UserType.hospital,
-                responseType: ResponseType.success));
+                hospitalUserModel: hospital, userType: UserType.hospital, responseType: ResponseEnum.success));
           },
         );
         if (navigate) _navigateToHomeScreen();
@@ -110,7 +105,6 @@ class UserInfoCubit extends Cubit<UserInfoState> {
     emit(UserInfoState());
     BuildContext? context = navigatorKey.currentContext;
     if (context == null) return;
-    Navigator.of(context)
-        .pushNamedAndRemoveUntil(AppRoutesNames.signinScreen, (_) => false);
+    Navigator.of(context).pushNamedAndRemoveUntil(AppRoutesNames.signinScreen, (_) => false);
   }
 }

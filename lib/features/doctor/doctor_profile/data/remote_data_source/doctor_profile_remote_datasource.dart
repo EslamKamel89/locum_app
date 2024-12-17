@@ -14,23 +14,19 @@ class DoctorProfileRemoteDataSource {
     int? id,
   }) async {
     final t = prt('updateOrCreateDoctorInfo - DoctorProfileRemoteDataSource');
-
-    if (create) {
-      final data = await api.post(
-        EndPoint.doctorInfoCreate,
-        data: params.toJson(),
-      );
-      DoctorInfoModel doctorInfoModel = DoctorInfoModel.fromJson(data['data']);
-
-      return pr(doctorInfoModel, t);
-    } else {
-      final data = await api.patch(
-        EndPoint.doctorInfoUpdate(id),
-        data: params.toJson(),
-      );
-      DoctorInfoModel doctorInfoModel = DoctorInfoModel.fromJson(data['data']);
-
-      return pr(doctorInfoModel, t);
+    // Map<String, dynamic> requestData = create ? params.toJson() : params.toJson()
+    //   ..addAll({'id': id});
+    Map<String, dynamic> requestData = await params.toJson();
+    if (!create) {
+      requestData.addAll({'id': id});
     }
+    final data = await api.post(
+      EndPoint.doctorInfoCreateOrUpdate,
+      isFormData: true,
+      data: requestData,
+    );
+    DoctorInfoModel doctorInfoModel = DoctorInfoModel.fromJson(data['data']);
+
+    return pr(doctorInfoModel, t);
   }
 }

@@ -1,43 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 class CustomDateField extends StatefulWidget {
-  CustomDateField(
-    this.label,
-    this.selectedDate, {
+  const CustomDateField({
     super.key,
-    required this.licenseIssueDate,
-    required this.licenseExpiryDate,
-    required this.isIssueDate,
+    required this.onDateSubmit,
+    required this.label,
+    required this.initialDate,
+    required this.textEditingController,
+    this.validator,
   });
   final String label;
-  final DateTime? selectedDate;
-  final bool isIssueDate;
-  DateTime licenseIssueDate;
-  DateTime licenseExpiryDate;
+  final DateTime? initialDate;
+  final Function(DateTime date) onDateSubmit;
+  final String? Function(String?)? validator;
+  final TextEditingController textEditingController;
   @override
   State<CustomDateField> createState() => _CustomDateFieldState();
 }
 
 class _CustomDateFieldState extends State<CustomDateField> {
+  // final dateEditingController = TextEditingController();
+  DateTime? selectedDate;
+  @override
+  void initState() {
+    selectedDate = widget.initialDate;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: GestureDetector(
-        onTap: () => _selectDate(context, isIssueDate: widget.isIssueDate),
+        onTap: () => _selectDate(context),
         child: AbsorbPointer(
           child: TextFormField(
+            controller: widget.textEditingController,
             decoration: InputDecoration(
               labelText: widget.label,
-              hintText: widget.selectedDate != null
-                  ? '${widget.selectedDate?.year}-${widget.selectedDate?.month.toString().padLeft(2, '0')}-${widget.selectedDate?.day.toString().padLeft(2, '0')}'
+              hintText: widget.initialDate != null
+                  ? '${widget.initialDate?.year}-${widget.initialDate?.month.toString().padLeft(2, '0')}-${widget.initialDate?.day.toString().padLeft(2, '0')}'
                   : 'Select a date',
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
             ),
-            validator: (_) => widget.selectedDate == null
-                ? '${widget.label} is required'
-                : null,
+            // validator: (_) => widget.selectedDate == null ? '${widget.label} is required' : null,
+            validator: widget.validator,
           ),
         ),
       ),
@@ -45,8 +53,7 @@ class _CustomDateFieldState extends State<CustomDateField> {
   }
 
   // Method to pick a date
-  Future<void> _selectDate(BuildContext context,
-      {required bool isIssueDate}) async {
+  Future<void> _selectDate(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -56,11 +63,10 @@ class _CustomDateFieldState extends State<CustomDateField> {
 
     if (pickedDate != null) {
       setState(() {
-        if (isIssueDate) {
-          widget.licenseIssueDate = pickedDate;
-        } else {
-          widget.licenseExpiryDate = pickedDate;
-        }
+        selectedDate = pickedDate;
+        widget.onDateSubmit(pickedDate);
+        widget.textEditingController.text =
+            '${selectedDate?.year}-${selectedDate?.month.toString().padLeft(2, '0')}-${selectedDate?.day.toString().padLeft(2, '0')}';
       });
     }
   }
@@ -76,7 +82,8 @@ class CustomBiographyForm extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
         controller: controller,
-        maxLines: 4,
+        maxLines: 20,
+        minLines: 2,
         decoration: InputDecoration(
           labelText: 'Biography',
           hintText: 'Write a brief biography',
@@ -94,12 +101,15 @@ class CustomTextField extends StatelessWidget {
     this.hint, {
     super.key,
     this.inputType = TextInputType.text,
+    this.validator,
+    this.showMulitLine = false,
   });
   final String label;
   final TextEditingController controller;
   final String hint;
   final TextInputType inputType;
-
+  final String? Function(String?)? validator;
+  final bool showMulitLine;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -112,8 +122,80 @@ class CustomTextField extends StatelessWidget {
           hintText: hint,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
         ),
-        validator: (value) =>
-            value == null || value.isEmpty ? '$label is required' : null,
+        validator: validator,
+        maxLines: showMulitLine ? 20 : null,
+        minLines: showMulitLine ? 2 : null,
+      ),
+    );
+  }
+}
+
+class CustomTextFormFieldWithSuggestions extends StatefulWidget {
+  const CustomTextFormFieldWithSuggestions({
+    super.key,
+    required this.label,
+    required this.suggestions,
+    required this.onSelected,
+    required this.controller,
+    this.validator,
+  });
+  final List<String> suggestions;
+  final String label;
+  final Function(String) onSelected;
+  final TextEditingController controller;
+  final String? Function(String?)? validator;
+  @override
+  State<CustomTextFormFieldWithSuggestions> createState() => _CustomTextFormFieldWithSuggestionsState();
+}
+
+class _CustomTextFormFieldWithSuggestionsState extends State<CustomTextFormFieldWithSuggestions> {
+  String selectedValue = '';
+  @override
+  void initState() {
+    selectedValue = widget.controller.text;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // widget.controller.text = selectedValue;
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: TypeAheadField<String>(
+        controller: widget.controller,
+        suggestionsCallback: (search) {
+          final result = widget.suggestions
+              .where((String suggestion) => suggestion.toLowerCase().trim().contains(search.trim().toLowerCase()))
+              .toList();
+          return result;
+        },
+        builder: (context, controller, focusNode) {
+          // controller.text = selectedValue;
+          return TextFormField(
+            controller: controller,
+            focusNode: focusNode,
+            validator: widget.validator,
+            // autofocus: true,
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              labelText: widget.label,
+            ),
+            // onChanged: ,
+          );
+        },
+        itemBuilder: (context, option) {
+          return ListTile(
+            title: Text(option),
+            // subtitle: Text(city.country),
+          );
+        },
+        onSelected: (String option) {
+          widget.controller.text = option;
+          widget.onSelected(option);
+          setState(() {
+            selectedValue = option;
+          });
+        },
       ),
     );
   }

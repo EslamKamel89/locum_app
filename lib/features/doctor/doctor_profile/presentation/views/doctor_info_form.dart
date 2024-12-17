@@ -1,16 +1,30 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:locum_app/core/enums/response_type.dart';
+import 'package:locum_app/core/heleprs/format_date.dart';
+import 'package:locum_app/core/heleprs/if_str_empty_return_null.dart';
+import 'package:locum_app/core/heleprs/parse_int.dart';
+import 'package:locum_app/core/heleprs/pick_file.dart';
+import 'package:locum_app/core/heleprs/print_helper.dart';
+import 'package:locum_app/core/heleprs/validator.dart';
+import 'package:locum_app/core/service_locator/service_locator.dart';
 import 'package:locum_app/core/widgets/default_drawer.dart';
 import 'package:locum_app/core/widgets/main_scaffold.dart';
+import 'package:locum_app/features/common_data/cubits/state/state_cubit.dart';
+import 'package:locum_app/features/common_data/cubits/university/university_cubit.dart';
 import 'package:locum_app/features/common_data/cubits/user_info/user_info_cubit.dart';
 import 'package:locum_app/features/common_data/data/models/doctor_info_model.dart';
 import 'package:locum_app/features/common_data/data/models/doctor_user_model.dart';
+import 'package:locum_app/features/doctor/doctor_profile/domain/repo/doctor_profile_repo.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/cubits/doctor_info/doctor_info_cubit.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/widgets/custom_form_widgets.dart';
+import 'package:locum_app/features/doctor/doctor_profile/presentation/views/widgets/file_upload_button.dart';
 
 class DoctorInfoForm extends StatefulWidget {
-  const DoctorInfoForm({super.key});
-
+  const DoctorInfoForm({super.key, required this.create});
+  final bool create;
   @override
   State<DoctorInfoForm> createState() => DoctorInfoFormState();
 }
@@ -21,47 +35,41 @@ class DoctorInfoFormState extends State<DoctorInfoForm> {
   // Controllers for text fields
   final TextEditingController _licenseNumberController = TextEditingController();
   final TextEditingController _licenseStateController = TextEditingController();
-  final TextEditingController _universityNameController = TextEditingController();
+  final TextEditingController _licenseIssueDateController = TextEditingController();
+  final TextEditingController _licenseExpireDateController = TextEditingController();
   final TextEditingController _highestDegreeController = TextEditingController();
   final TextEditingController _fieldOfStudyController = TextEditingController();
   final TextEditingController _graduationYearController = TextEditingController();
   final TextEditingController _workExperienceController = TextEditingController();
   final TextEditingController _biographyController = TextEditingController();
+  final TextEditingController _universityController = TextEditingController();
 
   // Date fields
-  DateTime? _licenseIssueDate;
-  DateTime? _licenseExpiryDate;
+  DateTime? licenseIssueDate;
+  DateTime? licenseExpiryDate;
+  String? _selectedUniversity;
 
-  // CV upload
-  String? _cvFilePath;
+  File? selectedFile;
   late final DoctorInfoCubit controller;
   late DoctorUserModel? doctorUserModel;
+  late DoctorInfoModel? doctorInfoModel;
   @override
   void initState() {
     controller = context.read<DoctorInfoCubit>();
     doctorUserModel = context.read<UserInfoCubit>().state.doctorUserModel;
-    DoctorInfoModel? doctorInfoModel = doctorUserModel?.doctor?.doctorInfo;
-    if (doctorInfoModel == null) return;
-    _licenseNumberController.text = doctorInfoModel.professionalLicenseNumber ?? '';
-    _licenseStateController.text = doctorInfoModel.licenseState ?? '';
-    _universityNameController.text = doctorInfoModel.university?.name ?? '';
-    _highestDegreeController.text = doctorInfoModel.highestDegree ?? '';
-    _fieldOfStudyController.text = doctorInfoModel.fieldOfStudy ?? '';
-    _graduationYearController.text = doctorInfoModel.graduationYear.toString();
-    _workExperienceController.text = doctorInfoModel.workExperience ?? '';
-    _biographyController.text = doctorInfoModel.biography ?? '';
+    doctorInfoModel = doctorUserModel?.doctor?.doctorInfo;
+    _initializeTextFieldIfUpdating();
     super.initState();
-  }
-
-  Future<void> _uploadCV() async {
-    setState(() {
-      _cvFilePath = "sample_cv.pdf";
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DoctorInfoCubit, DoctorInfoState>(
+    return BlocConsumer<DoctorInfoCubit, DoctorInfoState>(
+      listener: (context, state) {
+        if (state.responseType == ResponseEnum.success) {
+          Navigator.of(context).pop();
+        }
+      },
       builder: (context, state) {
         return MainScaffold(
           appBarTitle: 'Professional Information',
@@ -73,45 +81,143 @@ class DoctorInfoFormState extends State<DoctorInfoForm> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomTextField('License Number', _licenseNumberController, 'Enter license number'),
-                  CustomTextField('License State', _licenseStateController, 'Enter license state'),
+                  CustomTextField(
+                    'License Number *',
+                    _licenseNumberController,
+                    'Enter license number',
+                    validator: (String? value) {
+                      return valdiator(
+                        input: value,
+                        label: 'License Number',
+                        isRequired: true,
+                      );
+                    },
+                  ),
+                  // CustomTextField('License State', _licenseStateController, 'Enter license state'),
+                  BlocProvider(
+                    create: (context) => StateCubit(serviceLocator())..fetchStates(),
+                    child: BlocBuilder<StateCubit, StateState>(
+                      builder: (context, state) {
+                        return CustomTextFormFieldWithSuggestions(
+                          label: 'License State *',
+                          suggestions: (state.stateModels ?? []).map((university) => university.name ?? '').toList(),
+                          onSelected: (String state) {},
+                          controller: _licenseStateController,
+                          validator: (String? value) {
+                            return valdiator(
+                              input: value,
+                              label: 'License State',
+                              isRequired: true,
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
+
                   CustomDateField(
-                    'License Issue Date',
-                    _licenseIssueDate,
-                    isIssueDate: true,
-                    licenseExpiryDate: _licenseExpiryDate ?? DateTime.now(),
-                    licenseIssueDate: _licenseIssueDate ?? DateTime.now(),
+                    label: 'License Issue Date *',
+                    initialDate: licenseIssueDate,
+                    onDateSubmit: (date) => licenseIssueDate = date,
+                    textEditingController: _licenseIssueDateController,
+                    validator: (String? value) {
+                      return valdiator(
+                        input: value,
+                        label: 'License Issue Date',
+                        isRequired: true,
+                      );
+                    },
                   ),
                   CustomDateField(
-                    'License Expiry Date',
-                    _licenseExpiryDate,
-                    isIssueDate: false,
-                    licenseExpiryDate: _licenseExpiryDate ?? DateTime.now(),
-                    licenseIssueDate: _licenseIssueDate ?? DateTime.now(),
+                    label: 'License Expiry Date *',
+                    initialDate: licenseExpiryDate,
+                    onDateSubmit: (date) => licenseExpiryDate = date,
+                    textEditingController: _licenseExpireDateController,
+                    validator: (String? value) {
+                      return valdiator(
+                        input: value,
+                        label: 'License Issue Date',
+                        isRequired: true,
+                      );
+                    },
                   ),
-                  CustomTextField('University Name', _universityNameController, 'Enter university name'),
-                  CustomTextField('Highest Degree', _highestDegreeController, 'Enter highest degree'),
-                  CustomTextField('Field of Study', _fieldOfStudyController, 'Enter field of study'),
+                  BlocProvider(
+                    create: (context) => UniversityCubit(serviceLocator())..fetchUniversities(),
+                    child: BlocBuilder<UniversityCubit, UniversityState>(
+                      builder: (context, state) {
+                        return CustomTextFormFieldWithSuggestions(
+                          label: 'University Name',
+                          suggestions:
+                              (state.universityModels ?? []).map((university) => university.name ?? '').toList(),
+                          onSelected: (String university) {
+                            _selectedUniversity = university;
+                          },
+                          controller: _universityController,
+                        );
+                      },
+                    ),
+                  ),
+
+                  CustomTextField(
+                    'Highest Degree *',
+                    _highestDegreeController,
+                    'Enter highest degree',
+                    validator: (String? value) {
+                      return valdiator(
+                        input: value,
+                        label: 'Highest Degree',
+                        isRequired: true,
+                      );
+                    },
+                  ),
+                  CustomTextField(
+                    'Field of Study *',
+                    _fieldOfStudyController,
+                    'Enter field of study',
+                    validator: (String? value) {
+                      return valdiator(
+                        input: value,
+                        label: 'Field of Study',
+                        isRequired: true,
+                      );
+                    },
+                  ),
                   CustomTextField(
                     'Graduation Year',
                     _graduationYearController,
                     'Enter graduation year',
                     inputType: TextInputType.number,
                   ),
-                  CustomTextField('Work Experience', _workExperienceController, 'Enter work experience'),
+                  CustomTextField(
+                    'Work Experience',
+                    _workExperienceController,
+                    'Enter work experience',
+                    showMulitLine: true,
+                  ),
                   CustomBiographyForm(controller: _biographyController),
-                  CustomBiographyForm(controller: _biographyController),
-                  const SizedBox(height: 24),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        // Perform save or update actions here
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Data saved successfully!')),
-                        );
-                      }
+                  FileUploadButton(
+                    onFileSelected: () async {
+                      selectedFile = await pickFile();
+                      return selectedFile;
                     },
-                    child: const Text('Save'),
+                    fileUrl: doctorInfoModel?.cv,
+                    // fileUrl: 'https://www.google.com/',
+                  ),
+
+                  const SizedBox(height: 24),
+                  Row(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          _sendRequest();
+                        },
+                        child: const Text('Save'),
+                      ),
+                      const SizedBox(width: 10),
+                      state.responseType == ResponseEnum.loading
+                          ? const Align(alignment: Alignment.centerLeft, child: CircularProgressIndicator())
+                          : const SizedBox(),
+                    ],
                   ),
                 ],
               ),
@@ -122,25 +228,44 @@ class DoctorInfoFormState extends State<DoctorInfoForm> {
     );
   }
 
-  Widget _buildFileUploadField() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        children: [
-          ElevatedButton(
-            onPressed: _uploadCV,
-            child: Text(_cvFilePath == null ? 'Upload CV' : 'Change CV'),
+  void _sendRequest() {
+    if (_formKey.currentState!.validate()) {
+      final params = pr(
+          DoctorInfoParams(
+            professionalLicenseNumber: ifStrEmptyReturnNull(_licenseNumberController.text),
+            licenseState: ifStrEmptyReturnNull(_licenseStateController.text),
+            licenseIssueDate:
+                licenseIssueDate != null ? formatDateForApi(licenseIssueDate!) : doctorInfoModel?.licenseIssueDate,
+            licenseExpiryDate:
+                licenseExpiryDate != null ? formatDateForApi(licenseExpiryDate!) : doctorInfoModel?.licenseExpiryDate,
+            universityName: ifStrEmptyReturnNull(_universityController.text),
+            highestDegree: ifStrEmptyReturnNull(_highestDegreeController.text),
+            fieldOfStudy: ifStrEmptyReturnNull(_fieldOfStudyController.text),
+            graduationYear: parseInt(ifStrEmptyReturnNull(_graduationYearController.text)),
+            workExperience: ifStrEmptyReturnNull(_workExperienceController.text),
+            cv: selectedFile,
+            biography: ifStrEmptyReturnNull(_biographyController.text),
           ),
-          const SizedBox(width: 16),
-          if (_cvFilePath != null)
-            Expanded(
-              child: Text(
-                'Selected: $_cvFilePath',
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-        ],
-      ),
-    );
+          'DoctorInfoParams');
+      controller.updateOrCreateDoctorInfo(
+        params: params,
+        create: widget.create,
+        id: doctorInfoModel?.id,
+      );
+    }
+  }
+
+  void _initializeTextFieldIfUpdating() {
+    if (widget.create || doctorInfoModel == null) return;
+    _licenseNumberController.text = doctorInfoModel?.professionalLicenseNumber ?? '';
+    _licenseStateController.text = doctorInfoModel?.licenseState ?? '';
+    _highestDegreeController.text = doctorInfoModel?.highestDegree ?? '';
+    _fieldOfStudyController.text = doctorInfoModel?.fieldOfStudy ?? '';
+    _graduationYearController.text = doctorInfoModel?.graduationYear?.toString() ?? '';
+    _workExperienceController.text = doctorInfoModel?.workExperience ?? '';
+    _biographyController.text = doctorInfoModel?.biography ?? '';
+    _universityController.text = doctorInfoModel?.university?.name ?? '';
+    _licenseIssueDateController.text = doctorInfoModel?.licenseIssueDate ?? '';
+    _licenseExpireDateController.text = doctorInfoModel?.licenseExpiryDate ?? '';
   }
 }

@@ -3,7 +3,7 @@ part of 'doctor_info_cubit.dart';
 
 class DoctorInfoState {
   String? errorMessage;
-  ResponseType? responseType = ResponseType.initial;
+  ResponseEnum? responseType = ResponseEnum.initial;
   DoctorInfoParams? doctorInfoParams;
   DoctorInfoModel? doctorInfoModel;
   DoctorInfoState({
@@ -15,7 +15,7 @@ class DoctorInfoState {
 
   DoctorInfoState copyWith({
     String? errorMessage,
-    ResponseType? responseType,
+    ResponseEnum? responseType,
     DoctorInfoParams? doctorInfoParams,
     DoctorInfoModel? doctorInfoModel,
   }) {

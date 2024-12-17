@@ -20,7 +20,7 @@ class DoctorInfoCubit extends Cubit<DoctorInfoState> {
   }) async {
     final t = prt('updateOrCreateDoctorInfo - DoctorInfoCubit');
     emit(state.copyWith(
-      responseType: ResponseType.loading,
+      responseType: ResponseEnum.loading,
       errorMessage: null,
       doctorInfoParams: params,
     ));
@@ -33,12 +33,12 @@ class DoctorInfoCubit extends Cubit<DoctorInfoState> {
       (Failure failure) {
         pr(failure.message, t);
         showSnackbar('Server Error', failure.message, true);
-        emit(state.copyWith(responseType: ResponseType.failed, errorMessage: failure.message));
+        emit(state.copyWith(responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
       (DoctorInfoModel doctorInfoModel) async {
         pr(doctorInfoModel, t);
         await _updateUserInfoState();
-        emit(state.copyWith(doctorInfoModel: doctorInfoModel, responseType: ResponseType.success, errorMessage: null));
+        emit(state.copyWith(doctorInfoModel: doctorInfoModel, responseType: ResponseEnum.success, errorMessage: null));
       },
     );
   }

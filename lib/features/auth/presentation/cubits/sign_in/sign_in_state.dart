@@ -6,7 +6,7 @@ class SignInState {
   String? password;
   String? errorMessage;
   UserEntity? userEntity;
-  ResponseType? responseType = ResponseType.initial;
+  ResponseEnum? responseType = ResponseEnum.initial;
   SignInState({
     this.email,
     this.password,
@@ -25,7 +25,7 @@ class SignInState {
     String? password,
     String? errorMessage,
     UserEntity? userEntity,
-    ResponseType? responseType,
+    ResponseEnum? responseType,
   }) {
     return SignInState(
       email: email ?? this.email,

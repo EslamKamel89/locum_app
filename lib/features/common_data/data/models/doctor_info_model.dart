@@ -49,13 +49,16 @@ class DoctorInfoModel {
       universityId: json['university_id'] as int?,
       highestDegree: json['highest_degree'] as String?,
       fieldOfStudy: json['field_of_study'] as String?,
-      graduationYear: json['graduation_year'] as int?,
+      graduationYear: json['graduation_year'] == null
+          ? null
+          : json['graduation_year'] is String
+              ? int.parse(json['graduation_year'])
+              : json['graduation_year'],
+      // graduationYear: json['graduation_year'] as int?,
       workExperience: json['work_experience'] as String?,
       cv: json['cv'] as dynamic,
       biography: json['biography'] as String?,
-      university: json['university'] == null
-          ? null
-          : UniversityModel.fromJson(json['university']),
+      university: json['university'] == null ? null : UniversityModel.fromJson(json['university']),
     );
   }
 

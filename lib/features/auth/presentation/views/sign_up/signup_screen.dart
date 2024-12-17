@@ -24,8 +24,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _passwordConfirmController =
-      TextEditingController();
+  final TextEditingController _passwordConfirmController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   Map<String, String> _collectData() => {
         "name": _nameController.text,
@@ -59,13 +58,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        txt("Create an Account",
-                            e: St.bold25, textAlign: TextAlign.center),
+                        txt("Create an Account", e: St.bold25, textAlign: TextAlign.center),
                         const SizedBox(height: 10),
-                        txt("Sign up to get started",
-                            e: St.reg16,
-                            c: Colors.grey,
-                            textAlign: TextAlign.center),
+                        txt("Sign up to get started", e: St.reg16, c: Colors.grey, textAlign: TextAlign.center),
                         const SizedBox(height: 40),
                         CustomTextFormField(
                           labelText: "Full Name",
@@ -129,17 +124,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           label: 'State',
                           hintText: 'Select State',
                           isRequired: true,
-                          options: state.states
-                                  ?.map((stateModel) => stateModel.name ?? '')
-                                  .toList() ??
-                              [],
+                          options: state.states?.map((stateModel) => stateModel.name ?? '').toList() ?? [],
                           handleSelectOption: (String option) {
                             controller.fetchDistrict(option);
                           },
                         ),
-                        state.districtsDataModel == null
-                            ? const SizedBox()
-                            : const SizedBox(height: 20),
+                        state.districtsDataModel == null ? const SizedBox() : const SizedBox(height: 20),
                         state.districtsDataModel == null
                             ? const SizedBox()
                             : SearchableDropdownWidget(
@@ -147,8 +137,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 hintText: 'Select District',
                                 isRequired: false,
                                 options: state.districtsDataModel?.districts
-                                        ?.map((districtModel) =>
-                                            districtModel?.name ?? '')
+                                        ?.map((districtModel) => districtModel?.name ?? '')
                                         .toList() ??
                                     [],
                                 handleSelectOption: (String option) {
@@ -157,9 +146,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ),
                         const SizedBox(height: 20),
                         DropDownWidget(
-                          options: UserTypeEnum.values
-                              .map((userType) => userType.toFullString())
-                              .toList(),
+                          options: UserTypeEnum.values.map((userType) => userType.toFullString()).toList(),
                           label: 'Healthcare Provider or Professional',
                           onSelect: (String? value) {
                             if (value == null) return;
@@ -167,7 +154,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           },
                         ),
                         const SizedBox(height: 20),
-                        state.responseType == ResponseType.loading
+                        state.responseType == ResponseEnum.loading
                             ? const Center(
                                 child: CircularProgressIndicator(),
                               )
@@ -194,8 +181,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           children: [
                             const Expanded(child: Divider(thickness: 1)),
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
+                              padding: const EdgeInsets.symmetric(horizontal: 10),
                               child: txt("OR", c: Colors.grey),
                             ),
                             const Expanded(child: Divider(thickness: 1)),
@@ -208,8 +194,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           },
                           style: context.outlinedButtonTheme.style,
                           icon: Icon(MdiIcons.google),
-                          label: txt("Sign up with Google",
-                              c: Colors.black, e: St.reg16),
+                          label: txt("Sign up with Google", c: Colors.black, e: St.reg16),
                         ),
                         const SizedBox(height: 40),
                         Row(
@@ -219,8 +204,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             TextButton(
                               onPressed: () {
                                 // Handle navigation to sign-in screen
-                                Navigator.pop(
-                                    context); // Navigate back to Sign In
+                                Navigator.pop(context); // Navigate back to Sign In
                               },
                               child: txt("Sign In", c: Colors.blue),
                             ),

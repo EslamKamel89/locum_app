@@ -6,7 +6,7 @@ class SignUpState {
   String? password;
   String? errorMessage;
   UserEntity? userEntity;
-  ResponseType? responseType = ResponseType.initial;
+  ResponseEnum? responseType = ResponseEnum.initial;
   List<StateModel>? states = [];
   StateModel? selectedState;
   DistrictsDataModel? districtsDataModel;
@@ -30,7 +30,7 @@ class SignUpState {
     String? password,
     String? errorMessage,
     UserEntity? userEntity,
-    ResponseType? responseType,
+    ResponseEnum? responseType,
     List<StateModel>? states,
     StateModel? selectedState,
     DistrictsDataModel? districtsDataModel,

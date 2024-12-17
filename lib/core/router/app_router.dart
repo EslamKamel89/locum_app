@@ -19,7 +19,7 @@ class AppRouter {
   AppMiddleWare appMiddleWare;
   AppRouter({required this.appMiddleWare});
   Route? onGenerateRoute(RouteSettings routeSettings) {
-    final args = routeSettings.arguments;
+    final args = routeSettings.arguments as Map<String, dynamic>?;
     String? routeName = appMiddleWare.middlleware(routeSettings.name);
     switch (routeName) {
       case AppRoutesNames.splashScreen:
@@ -70,7 +70,9 @@ class AppRouter {
         return CustomPageRoute(
           builder: (context) => BlocProvider(
             create: (context) => DoctorInfoCubit(doctorProfileRepo: serviceLocator()),
-            child: const DoctorInfoForm(),
+            child: DoctorInfoForm(
+              create: args?['create'] ?? true,
+            ),
           ),
           settings: routeSettings,
         );

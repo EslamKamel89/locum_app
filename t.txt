@@ -1,0 +1,29 @@
+Done todos {
+    # fetch the userInfo endpoint and cache the result in the cache
+    # always navigate to onboarding if you can't find any cached token
+    # handle signout in userInfo cubit 
+    # refresh userInfo after sign in and register 
+    # don't refresh the userInfo in the home page
+    # update the database seeder to contain the imageUrl method in the faker helper intead of the url method
+    # structure the project folders to reflect the three main section of the botton naviation sheet
+    # add drawer with user information and additional setting with change theme button
+    # accept the bool create param in the doctor info screen
+    # stop initializing the variables in doctor_info_form if i an creating a resource and extract the initialization code into function
+    # stop scrolling in biography field and remove duplication 
+    # attempt to create doctorInfoParams for update 
+    #  solve the issue and expiry date problem
+    # displaying state suggestion 
+    # solve university problem
+    # creating one api for creating or updating resoure depending on the store method
+    # licenens issue date is not initialized 
+    # update resource without file uploads
+    # file upload
+    # fix work experience one line problem
+    # there is a bug when you want to update doctor info the universtiy will be null if not selected
+}
+
+todos {
+    # view file uploaded
+    # create doctor info 
+    # fix the issue of the image url 
+}
