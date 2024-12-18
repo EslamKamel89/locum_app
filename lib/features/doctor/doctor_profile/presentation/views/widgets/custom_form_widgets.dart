@@ -42,7 +42,8 @@ class _CustomDateFieldState extends State<CustomDateField> {
               hintText: widget.initialDate != null
                   ? '${widget.initialDate?.year}-${widget.initialDate?.month.toString().padLeft(2, '0')}-${widget.initialDate?.day.toString().padLeft(2, '0')}'
                   : 'Select a date',
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
             ),
             // validator: (_) => widget.selectedDate == null ? '${widget.label} is required' : null,
             validator: widget.validator,
@@ -138,21 +139,26 @@ class CustomTextFormFieldWithSuggestions extends StatefulWidget {
     required this.onSelected,
     required this.controller,
     this.validator,
+    this.onSave,
   });
   final List<String> suggestions;
   final String label;
   final Function(String) onSelected;
   final TextEditingController controller;
   final String? Function(String?)? validator;
+  final void Function()? onSave;
   @override
-  State<CustomTextFormFieldWithSuggestions> createState() => _CustomTextFormFieldWithSuggestionsState();
+  State<CustomTextFormFieldWithSuggestions> createState() =>
+      _CustomTextFormFieldWithSuggestionsState();
 }
 
-class _CustomTextFormFieldWithSuggestionsState extends State<CustomTextFormFieldWithSuggestions> {
+class _CustomTextFormFieldWithSuggestionsState
+    extends State<CustomTextFormFieldWithSuggestions> {
   String selectedValue = '';
   @override
   void initState() {
     selectedValue = widget.controller.text;
+
     super.initState();
   }
 
@@ -165,7 +171,10 @@ class _CustomTextFormFieldWithSuggestionsState extends State<CustomTextFormField
         controller: widget.controller,
         suggestionsCallback: (search) {
           final result = widget.suggestions
-              .where((String suggestion) => suggestion.toLowerCase().trim().contains(search.trim().toLowerCase()))
+              .where((String suggestion) => suggestion
+                  .toLowerCase()
+                  .trim()
+                  .contains(search.trim().toLowerCase()))
               .toList();
           return result;
         },
@@ -175,10 +184,21 @@ class _CustomTextFormFieldWithSuggestionsState extends State<CustomTextFormField
             controller: controller,
             focusNode: focusNode,
             validator: widget.validator,
+
             // autofocus: true,
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
               labelText: widget.label,
+              suffix: widget.onSave == null
+                  ? null
+                  : InkWell(
+                      onTap: () {
+                        widget.onSave!();
+                        widget.controller.text = '';
+                        focusNode.unfocus();
+                      },
+                      child: const Icon(Icons.save),
+                    ),
             ),
             // onChanged: ,
           );
@@ -191,7 +211,7 @@ class _CustomTextFormFieldWithSuggestionsState extends State<CustomTextFormField
         },
         onSelected: (String option) {
           widget.controller.text = option;
-          widget.onSelected(option);
+          // widget.onSelected(option);
           setState(() {
             selectedValue = option;
           });

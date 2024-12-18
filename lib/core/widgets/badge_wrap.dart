@@ -7,9 +7,9 @@ import 'package:locum_app/core/extensions/context-extensions.dart';
 import 'package:locum_app/core/themes/theme_cubit.dart';
 
 class BadgeWrap extends StatelessWidget {
-  BadgeWrap({super.key, required this.items});
+  BadgeWrap({super.key, required this.items, this.onDelete});
   final List<String> items;
-
+  final void Function(String)? onDelete;
   @override
   Widget build(BuildContext context) {
     context.watch<ThemeCubit>();
@@ -22,21 +22,42 @@ class BadgeWrap extends StatelessWidget {
 
   Widget _buildBadge(BuildContext context, String item) {
     Color color = _getRandomColor(context);
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: color),
-      ),
-      child: Text(
-        item,
-        style: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-          color: color,
+    return Stack(
+      children: [
+        Padding(
+          padding: onDelete == null
+              ? const EdgeInsets.all(0)
+              : const EdgeInsets.only(top: 15, right: 15),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            decoration: BoxDecoration(
+              color: color.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: color),
+            ),
+            child: Text(
+              item,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: color,
+              ),
+            ),
+          ),
         ),
-      ),
+        if (onDelete != null)
+          Positioned(
+            top: -5,
+            right: -5,
+            child: IconButton(
+              onPressed: () => onDelete!(item),
+              icon: const Icon(
+                Icons.delete,
+                color: Colors.redAccent,
+              ),
+            ),
+          )
+      ],
     );
   }
 

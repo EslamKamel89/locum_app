@@ -13,18 +13,23 @@ class UniversityCubit extends Cubit<UniversityState> {
   UniversityCubit(this.commonDataRepo) : super(UniversityState());
   Future fetchUniversities() async {
     final t = prt('fetchUniversities - UniversityCubit');
-    emit(state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
+    emit(
+        state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
     final result = await commonDataRepo.fetchUniversities();
     result.fold(
       (Failure failure) {
         pr(failure.message, t);
         showSnackbar('Server Error', failure.message, true);
-        emit(state.copyWith(responseType: ResponseEnum.failed, errorMessage: failure.message));
+        emit(state.copyWith(
+            responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
       (List<UniversityModel> universities) async {
         pr(universities, t);
         emit(
-          state.copyWith(universities: universities, responseType: ResponseEnum.success, errorMessage: null),
+          state.copyWith(
+              universities: universities,
+              responseType: ResponseEnum.success,
+              errorMessage: null),
         );
       },
     );

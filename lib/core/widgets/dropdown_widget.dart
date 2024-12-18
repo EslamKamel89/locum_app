@@ -7,16 +7,26 @@ class DropDownWidget extends StatefulWidget {
       {super.key,
       required this.options,
       required this.label,
-      required this.onSelect});
+      required this.onSelect,
+      this.initialValueIndex});
   final List<String> options;
   final String label;
   final Function onSelect;
+  final int? initialValueIndex;
   @override
   State<DropDownWidget> createState() => _DropDownWidgetState();
 }
 
 class _DropDownWidgetState extends State<DropDownWidget> {
   String? selectedValue;
+  @override
+  void initState() {
+    if (widget.initialValueIndex != null) {
+      selectedValue = widget.options[widget.initialValueIndex!];
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
@@ -34,6 +44,7 @@ class _DropDownWidgetState extends State<DropDownWidget> {
         });
       },
       validator: (value) => value == null ? 'Please Select A Value' : null,
+      value: selectedValue,
     );
   }
 

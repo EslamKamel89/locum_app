@@ -1,21 +1,23 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:locum_app/core/Errors/failure.dart';
 import 'package:locum_app/core/enums/response_type.dart';
 import 'package:locum_app/core/heleprs/print_helper.dart';
 import 'package:locum_app/core/heleprs/snackbar.dart';
-import 'package:locum_app/features/common_data/data/models/state_model.dart';
+import 'package:locum_app/features/common_data/data/models/job_info_model.dart';
 import 'package:locum_app/features/common_data/domain/repos/common_data_repo.dart';
 
-part 'state_state.dart';
+part 'job_info_state.dart';
 
-class StateCubit extends Cubit<StateState> {
+class JobInfoCubit extends Cubit<JobInfoState> {
   final CommonDataRepo commonDataRepo;
-  StateCubit(this.commonDataRepo) : super(StateState());
-  Future fetchStates() async {
-    final t = prt('fetchStates - StateCubit');
+  JobInfoCubit(this.commonDataRepo) : super(JobInfoState());
+
+  Future fetchJobInfos() async {
+    final t = prt('fetchJobInfos - JobInfoCubit');
     emit(
         state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
-    final result = await commonDataRepo.fetchStates();
+    final result = await commonDataRepo.fetchJobInfos();
     result.fold(
       (Failure failure) {
         pr(failure.message, t);
@@ -23,11 +25,11 @@ class StateCubit extends Cubit<StateState> {
         emit(state.copyWith(
             responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
-      (List<StateModel> states) async {
-        pr(states, t);
+      (List<JobInfoModel> jobInfos) async {
+        pr(jobInfos, t);
         emit(
           state.copyWith(
-              stateModels: states,
+              jobInfoModels: jobInfos,
               responseType: ResponseEnum.success,
               errorMessage: null),
         );

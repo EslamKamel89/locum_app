@@ -8,6 +8,8 @@ import 'package:locum_app/features/common_data/data/models/districts_data_model.
 import 'package:locum_app/features/common_data/data/models/doctor_user_model.dart';
 import 'package:locum_app/features/common_data/data/models/hospital_user_model.dart';
 import 'package:locum_app/features/common_data/data/models/job_info_model.dart';
+import 'package:locum_app/features/common_data/data/models/language_model.dart';
+import 'package:locum_app/features/common_data/data/models/skill_model.dart';
 import 'package:locum_app/features/common_data/data/models/specialty_model.dart';
 import 'package:locum_app/features/common_data/data/models/state_model.dart';
 import 'package:locum_app/features/common_data/data/models/university_model.dart';
@@ -79,5 +81,28 @@ class CommonDataRemoteSource {
     }
     pr('Error: type in response is not doctor or hospital', t);
     throw ServerFailure('Unkwon error occured');
+  }
+
+  Future<List<LanguageModel>> fetchLanguages() async {
+    final t = prt('fetchLanguages - CommonDataRemoteSource');
+    final data = await api.get(
+      EndPoint.fetchLangs,
+    );
+    List<LanguageModel> languageModels = data['data']
+        .map<LanguageModel>((e) => LanguageModel.fromJson(e))
+        .toList();
+
+    return pr(languageModels, t);
+  }
+
+  Future<List<SkillModel>> fetchSkills() async {
+    final t = prt('fetchSkills - CommonDataRemoteSource');
+    final data = await api.get(
+      EndPoint.fetchSkills,
+    );
+    List<SkillModel> skillModels =
+        data['data'].map<SkillModel>((e) => SkillModel.fromJson(e)).toList();
+
+    return pr(skillModels, t);
   }
 }

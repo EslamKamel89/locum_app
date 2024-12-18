@@ -5,7 +5,8 @@ import 'package:locum_app/core/extensions/context-extensions.dart';
 import 'package:locum_app/core/heleprs/launch_url.dart';
 
 class FileUploadButton extends StatefulWidget {
-  const FileUploadButton({super.key, this.fileUrl, required this.onFileSelected});
+  const FileUploadButton(
+      {super.key, this.fileUrl, required this.onFileSelected});
 
   final String? fileUrl;
   final Future<File?> Function() onFileSelected;
@@ -20,7 +21,8 @@ class _FileUploadButtonState extends State<FileUploadButton> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Stand out by uploading your CV. It will help us find the perfect job for you.'),
+        const Text(
+            'Stand out by uploading your CV. It will help us find the perfect job for you.'),
         Row(
           children: [
             InkWell(

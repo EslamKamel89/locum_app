@@ -19,7 +19,9 @@ class DoctorProfileNotCompleteWidgets extends StatelessWidget {
         ProfileIncompleteWidget(
           title: 'Your Main Professional Information Incomplete',
           isVisible: user?.doctor == null,
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).pushNamed(AppRoutesNames.doctorForm, arguments: {'create': true});
+          },
         ),
         Visibility(
           visible: user?.doctor != null,
@@ -34,15 +36,16 @@ class DoctorProfileNotCompleteWidgets extends StatelessWidget {
                   Navigator.of(context).pushNamed(AppRoutesNames.doctorInfoForm, arguments: {'create': true});
                 },
               ),
-              AddDoctorInfoWidget(
-                title: 'No Languages Added',
-                message: "Let us know which languages you speak so we can match you with the perfect job!",
-                buttonContent: "Add Language",
-                isVisible: user?.doctor?.langs?.isEmpty ?? true,
-              ),
-              AddDoctorInfoWidget(
-                isVisible: user?.doctor?.skills?.isEmpty ?? true,
-              ),
+              // AddDoctorInfoWidget(
+              //   title: 'No Languages Added',
+              //   message:
+              //       "Let us know which languages you speak so we can match you with the perfect job!",
+              //   buttonContent: "Add Language",
+              //   isVisible: user?.doctor?.langs?.isEmpty ?? true,
+              // ),
+              // AddDoctorInfoWidget(
+              //   isVisible: user?.doctor?.skills?.isEmpty ?? true,
+              // ),
               AddDoctorInfoWidget(
                 title: 'No Documents added',
                 message: "Upload your related documents to help healthcare professionals find what they need.",

@@ -5,10 +5,16 @@ import 'package:dartz/dartz.dart';
 import 'package:locum_app/core/Errors/failure.dart';
 import 'package:locum_app/core/api_service/upload_file_to_api.dart';
 import 'package:locum_app/features/common_data/data/models/doctor_info_model.dart';
+import 'package:locum_app/features/common_data/data/models/doctor_model.dart';
 
 abstract class DoctorProfileRepo {
   Future<Either<Failure, DoctorInfoModel>> updateOrCreateDoctorInfo({
     required DoctorInfoParams params,
+    required bool create,
+    int? id,
+  });
+  Future<Either<Failure, DoctorModel>> updateOrCreateDoctor({
+    required DoctorParams params,
     required bool create,
     int? id,
   });
@@ -58,4 +64,48 @@ class DoctorInfoParams {
   String toString() {
     return 'DoctorInfoParams(professionalLicenseNumber: $professionalLicenseNumber, licenseState: $licenseState, licenseIssueDate: $licenseIssueDate, licenseExpiryDate: $licenseExpiryDate, universityName: $universityName, highestDegree: $highestDegree, fieldOfStudy: $fieldOfStudy, graduationYear: $graduationYear, workExperience: $workExperience, cv: $cv, biography: $biography)';
   }
+}
+
+class DoctorParams {
+  String? specialtyName;
+  String? jobInfoName;
+  String? dateOfBirth;
+  String? gender;
+  String? address;
+  String? phone;
+  bool? willingToRelocate;
+  File? photo;
+  String? langs;
+  String? skills;
+
+  DoctorParams({
+    this.specialtyName,
+    this.jobInfoName,
+    this.dateOfBirth,
+    this.gender,
+    this.address,
+    this.phone,
+    this.willingToRelocate,
+    this.photo,
+    this.langs,
+    this.skills,
+  });
+
+  @override
+  String toString() {
+    return 'DoctorParams(specialtyName: $specialtyName, jobInfoName: $jobInfoName, dateOfBirth: $dateOfBirth, gender: $gender, address: $address, phone: $phone, willingToRelocate: $willingToRelocate, photo: $photo, langs: $langs, skills: $skills)';
+  }
+
+  Future<Map<String, dynamic>> toJson() async => {
+        'specialty_name': specialtyName,
+        'job_info_name': jobInfoName,
+        'date_of_birth': dateOfBirth,
+        'gender': gender,
+        'address': address,
+        'phone': phone,
+        'willing_to_relocate': willingToRelocate == true ? 1 : 0,
+        'photo': photo == null ? null : (await uploadFileToApi(photo!)),
+        'langs': langs,
+        'skills': skills,
+      };
 }

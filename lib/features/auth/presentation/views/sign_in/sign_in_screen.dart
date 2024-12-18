@@ -48,9 +48,13 @@ class _SignInScreenState extends State<SignInScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      txt("Welcome Back!", e: St.bold25, textAlign: TextAlign.center),
+                      txt("Welcome Back!",
+                          e: St.bold25, textAlign: TextAlign.center),
                       const SizedBox(height: 10),
-                      txt("Sign in to continue", e: St.reg16, c: Colors.grey, textAlign: TextAlign.center),
+                      txt("Sign in to continue",
+                          e: St.reg16,
+                          c: Colors.grey,
+                          textAlign: TextAlign.center),
                       const SizedBox(height: 40),
                       CustomTextFormField(
                         controller: _emailController,
@@ -88,7 +92,8 @@ class _SignInScreenState extends State<SignInScreen> {
                         alignment: Alignment.centerRight,
                         child: TextButton(
                           onPressed: () {},
-                          child: txt("Forgot Password?", c: context.primaryColor),
+                          child:
+                              txt("Forgot Password?", c: context.primaryColor),
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -122,7 +127,8 @@ class _SignInScreenState extends State<SignInScreen> {
                         onPressed: () {},
                         style: context.outlinedButtonTheme.style,
                         icon: Icon(MdiIcons.google),
-                        label: txt("Sign in with Google", c: Colors.black, e: St.reg16),
+                        label: txt("Sign in with Google",
+                            c: Colors.black, e: St.reg16),
                       ),
                       const SizedBox(height: 40),
                       Row(
@@ -131,7 +137,8 @@ class _SignInScreenState extends State<SignInScreen> {
                           txt("Don't have an account?", c: Colors.grey),
                           TextButton(
                             onPressed: () {
-                              Navigator.of(context).pushNamed(AppRoutesNames.signupScreen);
+                              Navigator.of(context)
+                                  .pushNamed(AppRoutesNames.signupScreen);
                             },
                             child: txt("Sign Up", c: Colors.blue),
                           ),

@@ -20,10 +20,21 @@ Done todos {
     # file upload
     # fix work experience one line problem
     # there is a bug when you want to update doctor info the universtiy will be null if not selected
+    # create doctor info 
+    # lang and skill is dublicated
+    # job info not displayed 
+    # fetch the data for the specialities and job titles
+    # create the main text fields for the doctor form
+    # create language selector and dispaly widget
+    # create langs and skills cubit
+    # work on profile image
+    # work in the sync of the langs and skills 
+    # fix the issue of the image url 
 }
 
 todos {
     # view file uploaded
-    # create doctor info 
-    # fix the issue of the image url 
+    # test the update doctor
+    # test create doctor
+    # fix the scope issue with type ahead widget
 }

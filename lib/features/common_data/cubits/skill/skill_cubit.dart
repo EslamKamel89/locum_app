@@ -1,21 +1,23 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:locum_app/core/Errors/failure.dart';
 import 'package:locum_app/core/enums/response_type.dart';
 import 'package:locum_app/core/heleprs/print_helper.dart';
 import 'package:locum_app/core/heleprs/snackbar.dart';
-import 'package:locum_app/features/common_data/data/models/state_model.dart';
+import 'package:locum_app/features/common_data/data/models/skill_model.dart';
 import 'package:locum_app/features/common_data/domain/repos/common_data_repo.dart';
 
-part 'state_state.dart';
+part 'skill_state.dart';
 
-class StateCubit extends Cubit<StateState> {
+class SkillCubit extends Cubit<SkillState> {
   final CommonDataRepo commonDataRepo;
-  StateCubit(this.commonDataRepo) : super(StateState());
-  Future fetchStates() async {
-    final t = prt('fetchStates - StateCubit');
+  SkillCubit(this.commonDataRepo) : super(SkillState());
+
+  Future fetchSkills() async {
+    final t = prt('fetchSkills - LanguageCubit');
     emit(
         state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
-    final result = await commonDataRepo.fetchStates();
+    final result = await commonDataRepo.fetchSkills();
     result.fold(
       (Failure failure) {
         pr(failure.message, t);
@@ -23,11 +25,11 @@ class StateCubit extends Cubit<StateState> {
         emit(state.copyWith(
             responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
-      (List<StateModel> states) async {
-        pr(states, t);
+      (List<SkillModel> skills) async {
+        pr(skills, t);
         emit(
           state.copyWith(
-              stateModels: states,
+              skillModels: skills,
               responseType: ResponseEnum.success,
               errorMessage: null),
         );

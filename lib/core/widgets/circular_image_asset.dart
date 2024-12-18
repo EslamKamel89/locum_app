@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:locum_app/core/widgets/custom_fading_widget.dart';
@@ -76,6 +78,39 @@ class CircularCachedImage extends StatelessWidget {
           placeholder: (context, url) =>
               CustomFadingWidget(child: Image.asset(imageAsset)),
           errorWidget: (context, url, error) => Image.asset(imageAsset),
+        ),
+      ),
+    );
+  }
+}
+
+class CircularImageFile extends StatelessWidget {
+  const CircularImageFile({
+    super.key,
+    required this.image,
+    required this.height,
+    this.width,
+  });
+
+  final File image;
+  final double height;
+  final double? width;
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      elevation: 5,
+      borderRadius: BorderRadius.circular(height),
+      child: Container(
+        height: height,
+        width: width,
+        clipBehavior: Clip.hardEdge,
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+        ),
+        // padding: EdgeInsets.symmetric(vertical: 5.h),
+        child: Image.file(
+          image,
+          fit: BoxFit.cover,
         ),
       ),
     );

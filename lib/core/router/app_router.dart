@@ -8,7 +8,9 @@ import 'package:locum_app/features/auth/presentation/cubits/sign_up/sign_up_cubi
 import 'package:locum_app/features/auth/presentation/views/sign_in/sign_in_screen.dart';
 import 'package:locum_app/features/auth/presentation/views/sign_up/signup_screen.dart';
 import 'package:locum_app/features/doctor/doctor_home/doctor_home_view.dart';
+import 'package:locum_app/features/doctor/doctor_profile/presentation/cubits/doctor/doctor_cubit.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/cubits/doctor_info/doctor_info_cubit.dart';
+import 'package:locum_app/features/doctor/doctor_profile/presentation/views/doctor_form.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/doctor_info_form.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/doctor_profile_view.dart';
 import 'package:locum_app/features/hospital/hospital_home/hospital_home_view.dart';
@@ -72,6 +74,16 @@ class AppRouter {
             create: (context) => DoctorInfoCubit(doctorProfileRepo: serviceLocator()),
             child: DoctorInfoForm(
               create: args?['create'] ?? true,
+            ),
+          ),
+          settings: routeSettings,
+        );
+      case AppRoutesNames.doctorForm:
+        return CustomPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => DoctorCubit(serviceLocator()),
+            child: DoctorForm(
+              create: args?['create'],
             ),
           ),
           settings: routeSettings,

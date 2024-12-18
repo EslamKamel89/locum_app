@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:locum_app/core/api_service/end_points.dart';
 import 'package:locum_app/core/enums/response_type.dart';
 import 'package:locum_app/core/extensions/context-extensions.dart';
 import 'package:locum_app/core/globals.dart';
@@ -68,7 +69,7 @@ class DoctorProfileContent extends StatelessWidget {
                 child: Column(
                   children: [
                     CircularCachedImage(
-                      imageUrl: user?.doctor?.photo ?? '',
+                      imageUrl: "${EndPoint.imgBaseUrl}${user?.doctor?.photo ?? ''}",
                       imageAsset:
                           user?.doctor?.gender == 'female' ? AssetsData.femalePlacholder : AssetsData.malePlacholder,
                       height: 100.h,
@@ -86,7 +87,7 @@ class DoctorProfileContent extends StatelessWidget {
               // Section 2: User Information
               _sectionCard(
                 children: [
-                  _buildSectionHeader('Basic Information'),
+                  _buildSectionHeader('Basic Information', handleEdit: () {}),
                   _buildInfo('State', user?.state?.name),
                   _buildInfo('District', user?.district?.name),
                 ],
@@ -99,8 +100,14 @@ class DoctorProfileContent extends StatelessWidget {
 
               _sectionCard(
                 children: [
-                  _buildSectionHeader('Main Professional Information'),
+                  _buildSectionHeader('Main Professional Information', handleEdit: () {
+                    Navigator.of(context).pushNamed(
+                      AppRoutesNames.doctorForm,
+                      arguments: {'create': false},
+                    );
+                  }),
                   _buildInfo('Specialty', user?.doctor?.specialty?.name),
+                  _buildInfo('Job Title', user?.doctor?.jobInfo?.name),
                   _buildInfo('Date of Birth', user?.doctor?.dateOfBirth),
                   _buildInfo('Gender', user?.doctor?.gender),
                   _buildInfo('Address', user?.doctor?.address),
@@ -110,6 +117,51 @@ class DoctorProfileContent extends StatelessWidget {
                       user?.doctor?.willingToRelocate == null || user?.doctor?.willingToRelocate == false
                           ? 'No'
                           : 'Yes'),
+                  //  Languages Spoken
+                  Builder(
+                    builder: (context) {
+                      List<LanguageModel> langs = user?.doctor?.langs ?? [];
+                      String langsStr = '';
+                      for (var lang in langs) {
+                        langsStr = '$langsStr , ${lang.name} ';
+                      }
+                      langsStr = langsStr.replaceFirst(',', '').trim();
+                      return _sectionCard(
+                        children: [
+                          _buildSectionHeader(
+                            'Languages Spoken',
+                          ),
+                          // _buildInfo(null, langsStr, isRow: false),
+                          const SizedBox(height: 5),
+                          BadgeWrap(items: langs.map((lang) => lang.name ?? '').toList())
+                        ],
+                        visibility: langs.isNotEmpty,
+                        showDivider: false,
+                      );
+                    },
+                  ),
+
+                  //  Doctor Skills
+                  Builder(
+                    builder: (context) {
+                      List<SkillModel> skills = user?.doctor?.skills ?? [];
+                      String skillsStr = '';
+                      for (var skill in skills) {
+                        skillsStr = '$skillsStr , ${skill.name} ';
+                      }
+                      skillsStr = skillsStr.replaceFirst(',', '').trim();
+                      return _sectionCard(
+                        children: [
+                          _buildSectionHeader('Skills'),
+                          // _buildInfo(null, skillsStr, isRow: false),
+                          const SizedBox(height: 5),
+                          BadgeWrap(items: skills.map((skill) => skill.name ?? '').toList())
+                        ],
+                        visibility: skills.isNotEmpty,
+                        showDivider: false,
+                      );
+                    },
+                  ),
                 ],
                 visibility: user?.doctor != null,
               ),
@@ -134,54 +186,12 @@ class DoctorProfileContent extends StatelessWidget {
                 visibility: user?.doctor?.doctorInfo != null,
               ),
 
-              // Section 5: Languages Spoken
-              Builder(
-                builder: (context) {
-                  List<LanguageModel> langs = user?.doctor?.langs ?? [];
-                  String langsStr = '';
-                  for (var lang in langs) {
-                    langsStr = '$langsStr , ${lang.name} ';
-                  }
-                  langsStr = langsStr.replaceFirst(',', '').trim();
-                  return _sectionCard(
-                    children: [
-                      _buildSectionHeader('Languages Spoken'),
-                      // _buildInfo(null, langsStr, isRow: false),
-                      const SizedBox(height: 5),
-                      BadgeWrap(items: langs.map((lang) => lang.name ?? '').toList())
-                    ],
-                    visibility: langs.isNotEmpty,
-                  );
-                },
-              ),
-
-              // Section 6: Doctor Skills
-              Builder(
-                builder: (context) {
-                  List<SkillModel> skills = user?.doctor?.skills ?? [];
-                  String skillsStr = '';
-                  for (var skill in skills) {
-                    skillsStr = '$skillsStr , ${skill.name} ';
-                  }
-                  skillsStr = skillsStr.replaceFirst(',', '').trim();
-                  return _sectionCard(
-                    children: [
-                      _buildSectionHeader('Skills'),
-                      // _buildInfo(null, skillsStr, isRow: false),
-                      const SizedBox(height: 5),
-                      BadgeWrap(items: skills.map((skill) => skill.name ?? '').toList())
-                    ],
-                    visibility: skills.isNotEmpty,
-                  );
-                },
-              ),
-
               // Section 7: Doctor Documents
               Builder(builder: (context) {
                 List<DoctorDocumentModel> documents = user?.doctor?.doctorDocuments ?? [];
                 return _sectionCard(
                   children: [
-                    _buildSectionHeader('Documents'),
+                    _buildSectionHeader('Documents', handleEdit: () {}),
                     ...documents.map((document) => _buildDocumentRow(document.type ?? '', document.file ?? '')),
                   ],
                   visibility: documents.isNotEmpty,
@@ -207,13 +217,14 @@ class DoctorProfileContent extends StatelessWidget {
             color: navigatorKey.currentContext!.primaryColor,
           ),
         ),
-        IconButton(
-          onPressed: handleEdit,
-          icon: Icon(
-            MdiIcons.circleEditOutline,
-            color: context?.primaryColor,
-          ),
-        )
+        if (handleEdit != null)
+          IconButton(
+            onPressed: handleEdit,
+            icon: Icon(
+              MdiIcons.circleEditOutline,
+              color: context?.primaryColor,
+            ),
+          )
       ],
     );
   }
@@ -286,14 +297,14 @@ class DoctorProfileContent extends StatelessWidget {
     );
   }
 
-  Widget _sectionCard({required List<Widget> children, bool visibility = true}) {
+  Widget _sectionCard({required List<Widget> children, bool visibility = true, bool showDivider = true}) {
     return visibility
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 15.h),
               ...children,
-              Divider(color: Colors.grey.withOpacity(0.5)),
+              if (showDivider) Divider(color: Colors.grey.withOpacity(0.5)),
             ],
           )
         : const SizedBox();

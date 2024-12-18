@@ -3,19 +3,19 @@ import 'package:locum_app/core/Errors/failure.dart';
 import 'package:locum_app/core/enums/response_type.dart';
 import 'package:locum_app/core/heleprs/print_helper.dart';
 import 'package:locum_app/core/heleprs/snackbar.dart';
-import 'package:locum_app/features/common_data/data/models/state_model.dart';
+import 'package:locum_app/features/common_data/data/models/specialty_model.dart';
 import 'package:locum_app/features/common_data/domain/repos/common_data_repo.dart';
 
-part 'state_state.dart';
+part 'speciality_state.dart';
 
-class StateCubit extends Cubit<StateState> {
+class SpecialtyCubit extends Cubit<SpecialtyState> {
   final CommonDataRepo commonDataRepo;
-  StateCubit(this.commonDataRepo) : super(StateState());
-  Future fetchStates() async {
-    final t = prt('fetchStates - StateCubit');
+  SpecialtyCubit(this.commonDataRepo) : super(SpecialtyState());
+  Future fetchSpecialties() async {
+    final t = prt('fetchSpecialties - SpecialityCubit');
     emit(
         state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
-    final result = await commonDataRepo.fetchStates();
+    final result = await commonDataRepo.fetchSpecialties();
     result.fold(
       (Failure failure) {
         pr(failure.message, t);
@@ -23,11 +23,11 @@ class StateCubit extends Cubit<StateState> {
         emit(state.copyWith(
             responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
-      (List<StateModel> states) async {
-        pr(states, t);
+      (List<SpecialtyModel> sepecialties) async {
+        pr(sepecialties, t);
         emit(
           state.copyWith(
-              stateModels: states,
+              specialtyModels: sepecialties,
               responseType: ResponseEnum.success,
               errorMessage: null),
         );
