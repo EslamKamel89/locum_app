@@ -17,9 +17,9 @@ import 'package:locum_app/features/common_data/data/models/doctor_user_model.dar
 import 'package:locum_app/features/doctor/doctor_profile/domain/repo/doctor_profile_repo.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/cubits/doctor/doctor_cubit.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/widgets/custom_form_widgets.dart';
+import 'package:locum_app/features/doctor/doctor_profile/presentation/views/widgets/doctor_profile_image_view_upload.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/widgets/mulitple_lang_selector.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/widgets/mulitple_skill_selector.dart';
-import 'package:locum_app/features/doctor/doctor_profile/presentation/views/widgets/profile_image_view_upload_widget.dart';
 
 class DoctorForm extends StatefulWidget {
   const DoctorForm({super.key, required this.create});
@@ -73,7 +73,7 @@ class _DoctorFormState extends State<DoctorForm> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ProfileImageUploadView(
+                  DoctorProfileImageUploadView(
                     onImageSelected: (File file) {
                       selectedPhoto = file;
                     },

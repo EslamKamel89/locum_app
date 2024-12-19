@@ -10,27 +10,30 @@ import 'package:locum_app/core/heleprs/pick_image.dart';
 import 'package:locum_app/core/widgets/choose_camera_or_gallery.dart';
 import 'package:locum_app/core/widgets/circular_image_asset.dart';
 import 'package:locum_app/features/common_data/cubits/user_info/user_info_cubit.dart';
-import 'package:locum_app/features/common_data/data/models/doctor_model.dart';
-import 'package:locum_app/features/common_data/data/models/doctor_user_model.dart';
+import 'package:locum_app/features/common_data/data/models/hospital_model.dart';
+import 'package:locum_app/features/common_data/data/models/hospital_user_model.dart';
 import 'package:locum_app/utils/assets/assets.dart';
 
-class ProfileImageUploadView extends StatefulWidget {
-  const ProfileImageUploadView({super.key, required this.onImageSelected});
+class HospitalProfileImageUploadView extends StatefulWidget {
+  const HospitalProfileImageUploadView(
+      {super.key, required this.onImageSelected});
   final Function(File file) onImageSelected;
 
   @override
-  State<ProfileImageUploadView> createState() => _ProfileImageUploadViewState();
+  State<HospitalProfileImageUploadView> createState() =>
+      _HospitalProfileImageUploadViewState();
 }
 
-class _ProfileImageUploadViewState extends State<ProfileImageUploadView> {
-  late DoctorUserModel? doctorUserModel;
-  late DoctorModel? doctorModel;
+class _HospitalProfileImageUploadViewState
+    extends State<HospitalProfileImageUploadView> {
+  late HospitalUserModel? hospitalUserModel;
+  late HospitalModel? hospitalModel;
   File? selectedPhoto;
 
   @override
   void initState() {
-    doctorUserModel = context.read<UserInfoCubit>().state.doctorUserModel;
-    doctorModel = doctorUserModel?.doctor;
+    hospitalUserModel = context.read<UserInfoCubit>().state.hospitalUserModel;
+    hospitalModel = hospitalUserModel?.hospital;
     super.initState();
   }
 
@@ -51,10 +54,8 @@ class _ProfileImageUploadViewState extends State<ProfileImageUploadView> {
                 );
               }
               return CircularCachedImage(
-                imageUrl: "${EndPoint.imgBaseUrl}${doctorModel?.photo ?? ''}",
-                imageAsset: doctorModel?.gender == 'female'
-                    ? AssetsData.femalePlacholder
-                    : AssetsData.malePlacholder,
+                imageUrl: "${EndPoint.imgBaseUrl}${hospitalModel?.photo ?? ''}",
+                imageAsset: AssetsData.malePlacholder,
                 height: 100.h,
                 width: 100.h,
               );

@@ -1,25 +1,25 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-part of 'user_doctor_cubit.dart';
+part of 'user_update_cubit.dart';
 
-class UserDoctorState {
+class UserUpdateState {
   String? errorMessage;
   ResponseEnum? responseType = ResponseEnum.initial;
   UserDoctorParams? doctorInfoParams;
   UserModel? userModel;
-  UserDoctorState({
+  UserUpdateState({
     this.errorMessage,
     this.responseType,
     this.doctorInfoParams,
     this.userModel,
   });
 
-  UserDoctorState copyWith({
+  UserUpdateState copyWith({
     String? errorMessage,
     ResponseEnum? responseType,
     UserDoctorParams? doctorInfoParams,
     UserModel? userModel,
   }) {
-    return UserDoctorState(
+    return UserUpdateState(
       errorMessage: errorMessage ?? this.errorMessage,
       responseType: responseType ?? this.responseType,
       doctorInfoParams: doctorInfoParams ?? this.doctorInfoParams,

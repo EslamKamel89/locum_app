@@ -19,7 +19,8 @@ abstract class DoctorProfileRepo {
     required bool create,
     int? id,
   });
-  Future<Either<Failure, UserModel>> updateUserDoctor({required UserDoctorParams params});
+  Future<Either<Failure, UserModel>> updateUserDoctor(
+      {required UserDoctorParams params});
 }
 
 class UserDoctorParams {

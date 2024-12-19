@@ -27,10 +27,12 @@ final hospitalBottomNavigationBar = DefaultBottomNavigationBar(
     if (context == null) return;
     switch (index) {
       case 0:
-        // Navigator.of(context).pushNamedAndRemoveUntil(AppRoutesNames.doctorHomeScreen, (_) => false);
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            AppRoutesNames.hospitalHomeScreen, (_) => false);
         break;
       case 2:
-        // Navigator.of(context).pushNamedAndRemoveUntil(AppRoutesNames.doctorProfileScreen, (_) => false);
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            AppRoutesNames.hospitalProfileScreen, (_) => false);
         break;
     }
   },
@@ -38,17 +40,17 @@ final hospitalBottomNavigationBar = DefaultBottomNavigationBar(
 
 class DefaultBottomNavigationBar extends StatelessWidget {
   DefaultBottomNavigationBar({super.key, required this.handleNavigation});
-  ValueNotifier<int> currentIndex = ValueNotifier(0);
+  ValueNotifier<int> currentIndexNotifier = ValueNotifier(0);
   final Function(int) handleNavigation;
   void navigateTo(int index) {
-    currentIndex.value = index;
+    currentIndexNotifier.value = index;
     handleNavigation(index);
   }
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-        valueListenable: currentIndex,
+        valueListenable: currentIndexNotifier,
         builder: (context, value, child) {
           return Container(
             decoration: BoxDecoration(
@@ -63,9 +65,9 @@ class DefaultBottomNavigationBar extends StatelessWidget {
               ],
             ),
             child: BottomNavigationBar(
-              currentIndex: currentIndex.value,
+              currentIndex: currentIndexNotifier.value,
               onTap: (index) {
-                currentIndex.value = index;
+                currentIndexNotifier.value = index;
                 handleNavigation(
                   index,
                 );

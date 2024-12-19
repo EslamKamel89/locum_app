@@ -87,15 +87,15 @@ class _SignInScreenState extends State<SignInScreen> {
                           );
                         },
                       ),
-                      const SizedBox(height: 10),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                          onPressed: () {},
-                          child:
-                              txt("Forgot Password?", c: context.primaryColor),
-                        ),
-                      ),
+                      // const SizedBox(height: 10),
+                      // Align(
+                      //   alignment: Alignment.centerRight,
+                      //   child: TextButton(
+                      //     onPressed: () {},
+                      //     child:
+                      //         txt("Forgot Password?", c: context.primaryColor),
+                      //   ),
+                      // ),
                       const SizedBox(height: 20),
                       state.responseType == ResponseEnum.loading
                           ? const Center(child: CircularProgressIndicator())

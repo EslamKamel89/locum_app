@@ -53,19 +53,23 @@ class HospitalModel {
         contactPhone: json['contact_phone'] as String?,
         address: json['address'] as String?,
         servicesOffered: json['services_offered'] as String?,
-        numberOfBeds: json['number_of_beds'] as int?,
+        numberOfBeds: json['number_of_beds'] == null
+            ? null
+            : json['number_of_beds'] is String
+                ? int.parse(json['number_of_beds'])
+                : json['number_of_beds'] as int?,
         websiteUrl: json['website_url'] as String?,
-        yearEstablished: json['year_established'] as int?,
+        yearEstablished: json['year_established'] == null
+            ? null
+            : json['year_established'] is String
+                ? int.parse(json['year_established'])
+                : json['year_established'] as int?,
         overview: json['overview'] as String?,
         photo: json['photo'] as String?,
-        hospitalInfo: json['hospital_info'] == null
-            ? null
-            : HospitalInfoModel.fromJson(json['hospital_info']),
+        hospitalInfo: json['hospital_info'] == null ? null : HospitalInfoModel.fromJson(json['hospital_info']),
         hospitalDocuments: json['hospital_documents'] == null
             ? []
-            : (json['hospital_documents'] as List)
-                .map((json) => HospitalDocumentModel.fromJson(json))
-                .toList(),
+            : (json['hospital_documents'] as List).map((json) => HospitalDocumentModel.fromJson(json)).toList(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -84,7 +88,6 @@ class HospitalModel {
         'overview': overview,
         'photo': photo,
         'hospital_info': hospitalInfo?.toJson(),
-        'hospital_documents': hospitalDocuments
-            ?.map((hospitalDocument) => hospitalDocument.toJson()),
+        'hospital_documents': hospitalDocuments?.map((hospitalDocument) => hospitalDocument.toJson()),
       };
 }

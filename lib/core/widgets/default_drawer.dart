@@ -136,3 +136,127 @@ class DefaultDoctorDrawer extends StatelessWidget {
     );
   }
 }
+
+class DefaultHospitalDrawer extends StatelessWidget {
+  const DefaultHospitalDrawer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final userInfoCubit = context.read<UserInfoCubit>();
+    final user = userInfoCubit.state.hospitalUserModel;
+    return Drawer(
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              context.primaryColor.withOpacity(0.2),
+              context.primaryColor.withOpacity(0.9)
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            Center(
+              child: Column(
+                children: [
+                  const SizedBox(height: 12),
+                  CircularCachedImage(
+                    imageUrl: user?.hospital?.photo ?? '',
+                    imageAsset: AssetsData.malePlacholder,
+                    height: 100.h,
+                    width: 100.h,
+                  ),
+                  const SizedBox(height: 12),
+                  txt(user?.name ?? '', e: St.bold16),
+                  const SizedBox(height: 4),
+                  txt(user?.email ?? '', e: St.reg12),
+                ],
+              ),
+            ),
+            const SizedBox(height: 25),
+            const Divider(color: Colors.white70),
+            _createDrawerItem(
+              context,
+              icon: Icons.home,
+              text: 'Your Applications',
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            _createDrawerItem(
+              context,
+              icon: Icons.settings,
+              text: 'Settings',
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            _createDrawerItem(
+              context,
+              icon: Icons.contact_mail,
+              text: 'Contact Us',
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            const Divider(color: Colors.white70),
+            ListTile(
+              title: const Text('About'),
+              leading: Icon(Icons.info, color: context.primaryColor),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            BlocBuilder<ThemeCubit, ThemeData>(
+              builder: (context, state) {
+                return ListTile(
+                  leading: Icon(MdiIcons.themeLightDark,
+                      color: context.primaryColor),
+                  title: Row(
+                    children: [
+                      // SizedBox(width: 15.w),
+                      // Icon(MdiIcons.themeLightDark),
+                      // SizedBox(width: 10.w),
+                      Text(state.brightness == Brightness.dark
+                          ? 'Light Theme'
+                          : 'Dark Theme'),
+                      SizedBox(width: 10.w),
+                      const ToggleThemeSwitch(),
+                    ],
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(MdiIcons.logout, color: context.primaryColor),
+              title: InkWell(
+                onTap: () async {
+                  bool result = (await showAreYouSureDialog()) ?? false;
+                  if (result) {
+                    context.read<UserInfoCubit>().handleSignOut();
+                  }
+                },
+                child: const Text('Sign Out'),
+              ),
+            ),
+            SizedBox(height: 15.h),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _createDrawerItem(BuildContext context,
+      {required IconData icon,
+      required String text,
+      GestureTapCallback? onTap}) {
+    return ListTile(
+      title: Text(text),
+      leading: Icon(icon, color: context.primaryColor),
+      onTap: onTap,
+    );
+  }
+}

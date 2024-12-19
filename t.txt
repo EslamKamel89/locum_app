@@ -35,10 +35,19 @@ Done todos {
     # fix the scope issue with type ahead widget
     # work on the basic informatio edit 
     # prepare the back end for update user basic database
+    # preapre the front end to send the data
+    # test update user basic data
+    # create new doctor user from the beginning
+    # remove forget password from the ui in the login screen
+    # create the basic scaffolding for the hospital ( bottom navigation bar - home view - profile view)
+    # doctor profile view
+    # basic hospital form 
+    # Main facility information form ui
+    # Main facility information form backend
 }
 
 todos {
     # view file uploaded
-    # preapre the front end to send the data
-
+    # if you change the doctor image in the update method and come back the profile page the image is not updated in the ui only but it's updated successfully to the backend
+    # preparing the front to connect with the backend
 }

@@ -15,7 +15,7 @@ class DoctorProfileRepoImp implements DoctorProfileRepo {
   @override
   Future<Either<Failure, DoctorInfoModel>> updateOrCreateDoctorInfo(
       {required DoctorInfoParams params, required bool create, int? id}) async {
-    final t = prt('updateOrCreateDoctorInfo  - DoctorProfileRemoteDataSource');
+    final t = prt('updateOrCreateDoctorInfo  - DoctorProfileRepoImp');
     try {
       DoctorInfoModel model = await doctorProfileRemoteDataSource.updateOrCreateDoctorInfo(
         params: params,
@@ -35,7 +35,7 @@ class DoctorProfileRepoImp implements DoctorProfileRepo {
   @override
   Future<Either<Failure, DoctorModel>> updateOrCreateDoctor(
       {required DoctorParams params, required bool create, int? id}) async {
-    final t = prt('updateOrCreateDoctor  - DoctorProfileRemoteDataSource');
+    final t = prt('updateOrCreateDoctor  - DoctorProfileRepoImp');
     try {
       DoctorModel model = await doctorProfileRemoteDataSource.updateOrCreateDoctor(
         params: params,
@@ -54,7 +54,7 @@ class DoctorProfileRepoImp implements DoctorProfileRepo {
 
   @override
   Future<Either<Failure, UserModel>> updateUserDoctor({required UserDoctorParams params}) async {
-    final t = prt('updateUserDoctor  - DoctorProfileRemoteDataSource');
+    final t = prt('updateUserDoctor  - DoctorProfileRepoImp');
     try {
       UserModel model = await doctorProfileRemoteDataSource.updateUserDoctor(
         params: params,

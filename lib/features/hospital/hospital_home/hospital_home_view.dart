@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:locum_app/core/heleprs/print_helper.dart';
+import 'package:locum_app/core/widgets/bottom_navigation_bar.dart';
+import 'package:locum_app/core/widgets/default_drawer.dart';
+import 'package:locum_app/core/widgets/main_scaffold.dart';
 import 'package:locum_app/features/common_data/cubits/user_info/user_info_cubit.dart';
-import 'package:locum_app/utils/styles/styles.dart';
+import 'package:locum_app/features/common_data/data/models/hospital_user_model.dart';
 
 class HospitalHomeScreen extends StatefulWidget {
   const HospitalHomeScreen({super.key});
@@ -19,16 +23,18 @@ class _HospitalHomeScreenState extends State<HospitalHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Hospital Home View'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-            onPressed: () async {
-              context.read<UserInfoCubit>().handleSignOut();
-            },
-            child: txt('Log out')),
+    final HospitalUserModel? user =
+        context.read<UserInfoCubit>().state.hospitalUserModel;
+    pr(user, 'user');
+    return MainScaffold(
+      appBarTitle: 'Hospital Home Page',
+      bottomNavigationBar: hospitalBottomNavigationBar,
+      drawer: const DefaultHospitalDrawer(),
+      child: ElevatedButton(
+        child: const Text('Profile'),
+        onPressed: () {
+          hospitalBottomNavigationBar.navigateTo(2);
+        },
       ),
     );
   }

@@ -12,21 +12,21 @@ import 'package:locum_app/features/common_data/cubits/state/state_cubit.dart';
 import 'package:locum_app/features/common_data/cubits/user_info/user_info_cubit.dart';
 import 'package:locum_app/features/common_data/data/models/district_model.dart';
 import 'package:locum_app/features/common_data/data/models/districts_data_model.dart';
-import 'package:locum_app/features/common_data/data/models/doctor_user_model.dart';
+import 'package:locum_app/features/common_data/data/models/hospital_user_model.dart';
 import 'package:locum_app/features/common_data/data/models/state_model.dart';
 import 'package:locum_app/features/doctor/doctor_profile/domain/repo/doctor_profile_repo.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/cubits/user_update/user_update_cubit.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/widgets/custom_form_widgets.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/widgets/update_password.dart';
 
-class UserDoctorForm extends StatefulWidget {
-  const UserDoctorForm({super.key});
+class UserHospitalForm extends StatefulWidget {
+  const UserHospitalForm({super.key});
 
   @override
-  State<UserDoctorForm> createState() => _UserDoctorFormState();
+  State<UserHospitalForm> createState() => _UserHospitalFormState();
 }
 
-class _UserDoctorFormState extends State<UserDoctorForm> {
+class _UserHospitalFormState extends State<UserHospitalForm> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -34,14 +34,14 @@ class _UserDoctorFormState extends State<UserDoctorForm> {
   final TextEditingController _passwordConfirmController =
       TextEditingController();
   late UserUpdateCubit controller;
-  late DoctorUserModel? _doctorUserModel;
+  late HospitalUserModel? _hospitalUserModel;
   String _selectedState = '';
   int? _selectedStateId;
   String _selectedDistrict = '';
   int? _selectedDistrictId;
   @override
   void initState() {
-    _doctorUserModel = context.read<UserInfoCubit>().state.doctorUserModel;
+    _hospitalUserModel = context.read<UserInfoCubit>().state.hospitalUserModel;
     controller = context.read<UserUpdateCubit>();
     _initializeTextFieldIfUpdating();
     super.initState();
@@ -111,7 +111,7 @@ class _UserDoctorFormState extends State<UserDoctorForm> {
                               label: 'State',
                               hintText: 'Select State',
                               isRequired: true,
-                              initalValue: _doctorUserModel?.state?.name,
+                              initalValue: _hospitalUserModel?.state?.name,
                               options: stateController.state.stateModels
                                       ?.map(
                                           (stateModel) => stateModel.name ?? '')
@@ -132,7 +132,7 @@ class _UserDoctorFormState extends State<UserDoctorForm> {
                               label: 'District (Optional)',
                               hintText: 'Select District',
                               isRequired: false,
-                              initalValue: _doctorUserModel?.district?.name,
+                              initalValue: _hospitalUserModel?.district?.name,
                               options: districtDataController
                                       .state.districtsDataModel?.districts
                                       ?.map((districtModel) =>
@@ -189,8 +189,8 @@ class _UserDoctorFormState extends State<UserDoctorForm> {
           name: _nameController.text,
           email: _emailController.text,
           password: _passwordController.text,
-          stateId: _selectedStateId ?? _doctorUserModel?.state?.id,
-          districtId: _selectedDistrictId ?? _doctorUserModel?.district?.id,
+          stateId: _selectedStateId ?? _hospitalUserModel?.state?.id,
+          districtId: _selectedDistrictId ?? _hospitalUserModel?.district?.id,
         ),
         'userDoctorParams',
       );
@@ -225,10 +225,10 @@ class _UserDoctorFormState extends State<UserDoctorForm> {
   }
 
   void _initializeTextFieldIfUpdating() {
-    if (_doctorUserModel == null) return;
-    _nameController.text = _doctorUserModel?.name ?? '';
-    _emailController.text = _doctorUserModel?.email ?? '';
-    _selectedState = _doctorUserModel?.state?.name ?? '';
-    _selectedDistrict = _doctorUserModel?.district?.name ?? '';
+    if (_hospitalUserModel == null) return;
+    _nameController.text = _hospitalUserModel?.name ?? '';
+    _emailController.text = _hospitalUserModel?.email ?? '';
+    _selectedState = _hospitalUserModel?.state?.name ?? '';
+    _selectedDistrict = _hospitalUserModel?.district?.name ?? '';
   }
 }

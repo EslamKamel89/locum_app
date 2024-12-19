@@ -10,12 +10,16 @@ import 'package:locum_app/features/auth/presentation/views/sign_up/signup_screen
 import 'package:locum_app/features/doctor/doctor_home/doctor_home_view.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/cubits/doctor/doctor_cubit.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/cubits/doctor_info/doctor_info_cubit.dart';
-import 'package:locum_app/features/doctor/doctor_profile/presentation/cubits/user_doctor/user_doctor_cubit.dart';
+import 'package:locum_app/features/doctor/doctor_profile/presentation/cubits/user_update/user_update_cubit.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/doctor_form.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/doctor_info_form.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/doctor_profile_view.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/user_doctor_form.dart';
 import 'package:locum_app/features/hospital/hospital_home/hospital_home_view.dart';
+import 'package:locum_app/features/hospital/hospital_profile/presentation/cubits/hospital/hospital_cubit.dart';
+import 'package:locum_app/features/hospital/hospital_profile/presentation/views/hospital_form.dart';
+import 'package:locum_app/features/hospital/hospital_profile/presentation/views/hospital_profile_view.dart';
+import 'package:locum_app/features/hospital/hospital_profile/presentation/views/user_hospital_form.dart';
 import 'package:locum_app/features/splash_onboarding/presention/views/on_bording_screen.dart';
 import 'package:locum_app/features/splash_onboarding/presention/views/splash_screen.dart';
 
@@ -55,11 +59,7 @@ class AppRouter {
           ),
           settings: routeSettings,
         );
-      case AppRoutesNames.hospitalHomeScreen:
-        return CustomPageRoute(
-          builder: (context) => const HospitalHomeScreen(),
-          settings: routeSettings,
-        );
+
       case AppRoutesNames.doctorHomeScreen:
         return CustomPageRoute(
           builder: (context) => const DoctorHomeScreen(),
@@ -93,8 +93,34 @@ class AppRouter {
       case AppRoutesNames.userDoctorForm:
         return CustomPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => UserDoctorCubit(serviceLocator()),
+            create: (context) => UserUpdateCubit(serviceLocator()),
             child: const UserDoctorForm(),
+          ),
+          settings: routeSettings,
+        );
+      case AppRoutesNames.hospitalHomeScreen:
+        return CustomPageRoute(
+          builder: (context) => const HospitalHomeScreen(),
+          settings: routeSettings,
+        );
+      case AppRoutesNames.hospitalProfileScreen:
+        return CustomPageRoute(
+          builder: (context) => const HospitalProfileView(),
+          settings: routeSettings,
+        );
+      case AppRoutesNames.userHospitalForm:
+        return CustomPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => UserUpdateCubit(serviceLocator()),
+            child: const UserHospitalForm(),
+          ),
+          settings: routeSettings,
+        );
+      case AppRoutesNames.hospitalForm:
+        return CustomPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => HospitalCubit(serviceLocator()),
+            child: HospitalForm(create: args?['create']),
           ),
           settings: routeSettings,
         );

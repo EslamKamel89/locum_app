@@ -6,28 +6,25 @@ import 'package:locum_app/core/enums/response_type.dart';
 import 'package:locum_app/core/extensions/context-extensions.dart';
 import 'package:locum_app/core/globals.dart';
 import 'package:locum_app/core/router/app_routes_names.dart';
-import 'package:locum_app/core/widgets/badge_wrap.dart';
 import 'package:locum_app/core/widgets/bottom_navigation_bar.dart';
 import 'package:locum_app/core/widgets/circular_image_asset.dart';
 import 'package:locum_app/core/widgets/default_drawer.dart';
 import 'package:locum_app/core/widgets/main_scaffold.dart';
 import 'package:locum_app/features/common_data/cubits/user_info/user_info_cubit.dart';
-import 'package:locum_app/features/common_data/data/models/doctor_document_model.dart';
-import 'package:locum_app/features/common_data/data/models/language_model.dart';
-import 'package:locum_app/features/common_data/data/models/skill_model.dart';
-import 'package:locum_app/features/doctor/doctor_profile/presentation/views/widgets/doctor_profile_not_complete_widgets.dart';
+import 'package:locum_app/features/common_data/data/models/hospital_document_model.dart';
+import 'package:locum_app/features/hospital/hospital_profile/presentation/views/widgets/hospital_profile_not_complete.dart';
 import 'package:locum_app/utils/assets/assets.dart';
 import 'package:locum_app/utils/styles/styles.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class DoctorProfileView extends StatefulWidget {
-  const DoctorProfileView({super.key});
+class HospitalProfileView extends StatefulWidget {
+  const HospitalProfileView({super.key});
 
   @override
-  State<DoctorProfileView> createState() => _DoctorProfileViewState();
+  State<HospitalProfileView> createState() => _HospitalProfileViewState();
 }
 
-class _DoctorProfileViewState extends State<DoctorProfileView> {
+class _HospitalProfileViewState extends State<HospitalProfileView> {
   @override
   void initState() {
     context.read<UserInfoCubit>().fetchUserInfo();
@@ -38,23 +35,28 @@ class _DoctorProfileViewState extends State<DoctorProfileView> {
   Widget build(BuildContext context) {
     return MainScaffold(
       appBarTitle: 'Profile',
-      bottomNavigationBar: doctorBottomNavigationBar,
-      drawer: const DefaultDoctorDrawer(),
+      bottomNavigationBar: hospitalBottomNavigationBar,
+      drawer: const DefaultHospitalDrawer(),
       child: const SingleChildScrollView(
-        child: DoctorProfileContent(),
+        child: HospitalProfileContent(),
+        // child: SizedBox(),
       ),
     );
   }
 }
 
-class DoctorProfileContent extends StatelessWidget {
-  const DoctorProfileContent({super.key});
+class HospitalProfileContent extends StatefulWidget {
+  const HospitalProfileContent({super.key});
 
+  @override
+  State<HospitalProfileContent> createState() => _HospitalProfileContentState();
+}
+
+class _HospitalProfileContentState extends State<HospitalProfileContent> {
   @override
   Widget build(BuildContext context) {
     final userInfoCubit = context.watch<UserInfoCubit>();
-    final user = userInfoCubit.state.doctorUserModel;
-
+    final user = userInfoCubit.state.hospitalUserModel;
     return userInfoCubit.state.responseType == ResponseEnum.loading
         ? Container(
             height: 700.h,
@@ -64,16 +66,13 @@ class DoctorProfileContent extends StatelessWidget {
         : Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Section 1: User Photo, Name, and Email
               Center(
                 child: Column(
                   children: [
                     CircularCachedImage(
                       imageUrl:
-                          "${EndPoint.imgBaseUrl}${user?.doctor?.photo ?? ''}",
-                      imageAsset: user?.doctor?.gender == 'female'
-                          ? AssetsData.femalePlacholder
-                          : AssetsData.malePlacholder,
+                          "${EndPoint.imgBaseUrl}${user?.hospital?.photo ?? ''}",
+                      imageAsset: AssetsData.malePlacholder,
                       height: 100.h,
                       width: 100.h,
                     ),
@@ -84,14 +83,12 @@ class DoctorProfileContent extends StatelessWidget {
                   ],
                 ),
               ),
-
               const SizedBox(height: 24),
-              // Section 2: User Information
               _sectionCard(
                 children: [
                   _buildSectionHeader('Basic Information', handleEdit: () {
                     Navigator.of(context).pushNamed(
-                        AppRoutesNames.userDoctorForm,
+                        AppRoutesNames.userHospitalForm,
                         arguments: {'create': false});
                   }),
                   _buildInfo('State', user?.state?.name),
@@ -99,124 +96,63 @@ class DoctorProfileContent extends StatelessWidget {
                 ],
                 visibility: user != null,
               ),
-
               SizedBox(height: 15.h),
-
-              // Section 3: Main Professional Information
-
               _sectionCard(
                 children: [
-                  _buildSectionHeader('Main Professional Information',
+                  _buildSectionHeader('Main Facility Information',
                       handleEdit: () {
                     Navigator.of(context).pushNamed(
-                      AppRoutesNames.doctorForm,
+                      AppRoutesNames.hospitalForm,
                       arguments: {'create': false},
                     );
                   }),
-                  _buildInfo('Specialty', user?.doctor?.specialty?.name),
-                  _buildInfo('Job Title', user?.doctor?.jobInfo?.name),
-                  _buildInfo('Date of Birth', user?.doctor?.dateOfBirth),
-                  _buildInfo('Gender', user?.doctor?.gender),
-                  _buildInfo('Address', user?.doctor?.address),
-                  _buildInfo('Phone', user?.doctor?.phone),
+                  _buildInfo('Facility Name', user?.hospital?.facilityName),
+                  _buildInfo('Facility Type', user?.hospital?.type),
+                  _buildInfo('Contact Person', user?.hospital?.contactPerson),
+                  _buildInfo('Contact Email', user?.hospital?.contactEmail),
+                  _buildInfo('Contact Phone', user?.hospital?.contactPhone),
+                  _buildInfo('Address', user?.hospital?.address),
                   _buildInfo(
-                      'Willing to Relocate',
-                      user?.doctor?.willingToRelocate == null ||
-                              user?.doctor?.willingToRelocate == false
-                          ? 'No'
-                          : 'Yes'),
-                  //  Languages Spoken
-                  Builder(
-                    builder: (context) {
-                      List<LanguageModel> langs = user?.doctor?.langs ?? [];
-                      String langsStr = '';
-                      for (var lang in langs) {
-                        langsStr = '$langsStr , ${lang.name} ';
-                      }
-                      langsStr = langsStr.replaceFirst(',', '').trim();
-                      return _sectionCard(
-                        children: [
-                          _buildSectionHeader(
-                            'Languages Spoken',
-                          ),
-                          // _buildInfo(null, langsStr, isRow: false),
-                          const SizedBox(height: 5),
-                          BadgeWrap(
-                              items:
-                                  langs.map((lang) => lang.name ?? '').toList())
-                        ],
-                        visibility: langs.isNotEmpty,
-                        showDivider: false,
-                      );
-                    },
-                  ),
-
-                  //  Doctor Skills
-                  Builder(
-                    builder: (context) {
-                      List<SkillModel> skills = user?.doctor?.skills ?? [];
-                      String skillsStr = '';
-                      for (var skill in skills) {
-                        skillsStr = '$skillsStr , ${skill.name} ';
-                      }
-                      skillsStr = skillsStr.replaceFirst(',', '').trim();
-                      return _sectionCard(
-                        children: [
-                          _buildSectionHeader('Skills'),
-                          // _buildInfo(null, skillsStr, isRow: false),
-                          const SizedBox(height: 5),
-                          BadgeWrap(
-                              items: skills
-                                  .map((skill) => skill.name ?? '')
-                                  .toList())
-                        ],
-                        visibility: skills.isNotEmpty,
-                        showDivider: false,
-                      );
-                    },
-                  ),
+                      'Services Offered', user?.hospital?.servicesOffered,
+                      isRow: false),
+                  _buildInfo('Number of beds',
+                      user?.hospital?.numberOfBeds?.toString()),
+                  _buildInfo('Website Url', user?.hospital?.websiteUrl,
+                      isRow: false),
+                  _buildInfo('Year Established',
+                      user?.hospital?.yearEstablished?.toString()),
+                  _buildInfo('Facility Overview', user?.hospital?.overview,
+                      isRow: false),
                 ],
-                visibility: user?.doctor != null,
+                visibility: user?.hospital != null,
+                showDivider: true,
               ),
-              // Section 4: Additional Professional Information
-
+              SizedBox(height: 15.h),
               _sectionCard(
                 children: [
-                  _buildSectionHeader('Additional Professional Information',
-                      handleEdit: () {
-                    Navigator.of(context).pushNamed(
-                        AppRoutesNames.doctorInfoForm,
-                        arguments: {'create': false});
+                  _buildSectionHeader('Additional Information', handleEdit: () {
+                    // Navigator.of(context).pushNamed(
+                    //   AppRoutesNames.doctorForm,
+                    //   arguments: {'create': false},
+                    // );
                   }),
-                  _buildInfo('Professional License No.',
-                      user?.doctor?.doctorInfo?.professionalLicenseNumber),
-                  _buildInfo(
-                      'License State', user?.doctor?.doctorInfo?.licenseState),
+                  _buildInfo('License Number',
+                      user?.hospital?.hospitalInfo?.licenseNumber),
+                  _buildInfo('License State',
+                      user?.hospital?.hospitalInfo?.licenseState),
                   _buildInfo('License Issue Date',
-                      user?.doctor?.doctorInfo?.licenseIssueDate),
+                      user?.hospital?.hospitalInfo?.licenseIssueDate),
                   _buildInfo('License Expiry Date',
-                      user?.doctor?.doctorInfo?.licenseExpiryDate),
-                  _buildInfo(
-                      'University', user?.doctor?.doctorInfo?.university?.name),
-                  _buildInfo('Highest Degree',
-                      user?.doctor?.doctorInfo?.highestDegree),
-                  _buildInfo(
-                      'Field of Study', user?.doctor?.doctorInfo?.fieldOfStudy),
-                  _buildInfo('Graduation Year',
-                      user?.doctor?.doctorInfo?.graduationYear.toString()),
-                  _buildInfo('Work Experience',
-                      user?.doctor?.doctorInfo?.workExperience,
-                      isRow: false),
-                  _buildInfo('Biography', user?.doctor?.doctorInfo?.biography,
-                      isRow: false),
+                      user?.hospital?.hospitalInfo?.licenseExpiryDate),
+                  _buildInfo('Operating Hours',
+                      user?.hospital?.hospitalInfo?.operatingHours),
                 ],
-                visibility: user?.doctor?.doctorInfo != null,
+                visibility: user?.hospital != null,
+                showDivider: true,
               ),
-
-              // Section 7: Doctor Documents
               Builder(builder: (context) {
-                List<DoctorDocumentModel> documents =
-                    user?.doctor?.doctorDocuments ?? [];
+                List<HospitalDocumentModel> documents =
+                    user?.hospital?.hospitalDocuments ?? [];
                 return _sectionCard(
                   children: [
                     _buildSectionHeader('Documents', handleEdit: () {}),
@@ -226,7 +162,7 @@ class DoctorProfileContent extends StatelessWidget {
                   visibility: documents.isNotEmpty,
                 );
               }),
-              DoctorProfileNotCompleteWidgets(user: user),
+              HopitalProfileNotCompleteWidgets(user: user),
               SizedBox(height: 15.h),
             ],
           );

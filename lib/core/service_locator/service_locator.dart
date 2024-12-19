@@ -14,6 +14,9 @@ import 'package:locum_app/features/common_data/domain/repos/common_data_repo.dar
 import 'package:locum_app/features/doctor/doctor_profile/data/remote_data_source/doctor_profile_remote_datasource.dart';
 import 'package:locum_app/features/doctor/doctor_profile/data/repo/doctor_profile_repo_imp.dart';
 import 'package:locum_app/features/doctor/doctor_profile/domain/repo/doctor_profile_repo.dart';
+import 'package:locum_app/features/hospital/hospital_profile/data/remote_data_source/hospital_profile_remote_datasource.dart';
+import 'package:locum_app/features/hospital/hospital_profile/data/repo/hospital_profile_repo_imp.dart';
+import 'package:locum_app/features/hospital/hospital_profile/domain/repo/hospital_profile_repo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final GetIt serviceLocator = GetIt.instance;
@@ -23,25 +26,25 @@ Future initServiceLocator() async {
   serviceLocator.registerLazySingleton<SharedPreferences>(() => prefs);
   serviceLocator.registerLazySingleton<ImagePicker>(() => ImagePicker());
   serviceLocator.registerLazySingleton<Dio>(() => Dio());
-  serviceLocator.registerLazySingleton<ApiConsumer>(
-      () => DioConsumer(dio: serviceLocator()));
-  serviceLocator.registerLazySingleton<AppMiddleWare>(
-      () => AppMiddleWare(sharedPreferences: serviceLocator()));
-  serviceLocator.registerLazySingleton<AppRouter>(
-      () => AppRouter(appMiddleWare: serviceLocator()));
+  serviceLocator.registerLazySingleton<ApiConsumer>(() => DioConsumer(dio: serviceLocator()));
+  serviceLocator.registerLazySingleton<AppMiddleWare>(() => AppMiddleWare(sharedPreferences: serviceLocator()));
+  serviceLocator.registerLazySingleton<AppRouter>(() => AppRouter(appMiddleWare: serviceLocator()));
   //!
-  serviceLocator.registerLazySingleton<CommonDataRemoteSource>(
-      () => CommonDataRemoteSource(api: serviceLocator()));
-  serviceLocator.registerLazySingleton<CommonDataRepo>(
-      () => CommonDataRepoImp(commonDataRemoteSource: serviceLocator()));
+  serviceLocator.registerLazySingleton<CommonDataRemoteSource>(() => CommonDataRemoteSource(api: serviceLocator()));
+  serviceLocator
+      .registerLazySingleton<CommonDataRepo>(() => CommonDataRepoImp(commonDataRemoteSource: serviceLocator()));
   //!
-  serviceLocator.registerLazySingleton<AuthRemoteDataSource>(
-      () => AuthRemoteDataSource(api: serviceLocator()));
-  serviceLocator.registerLazySingleton<AuthRepo>(
-      () => AuthRepoImp(authRemoteDataSource: serviceLocator()));
+  serviceLocator.registerLazySingleton<AuthRemoteDataSource>(() => AuthRemoteDataSource(api: serviceLocator()));
+  serviceLocator.registerLazySingleton<AuthRepo>(() => AuthRepoImp(authRemoteDataSource: serviceLocator()));
   //!
-  serviceLocator.registerLazySingleton<DoctorProfileRemoteDataSource>(
-      () => DoctorProfileRemoteDataSource(api: serviceLocator()));
-  serviceLocator.registerLazySingleton<DoctorProfileRepo>(() =>
-      DoctorProfileRepoImp(doctorProfileRemoteDataSource: serviceLocator()));
+  serviceLocator
+      .registerLazySingleton<DoctorProfileRemoteDataSource>(() => DoctorProfileRemoteDataSource(api: serviceLocator()));
+  serviceLocator.registerLazySingleton<DoctorProfileRepo>(
+      () => DoctorProfileRepoImp(doctorProfileRemoteDataSource: serviceLocator()));
+
+  //!
+  serviceLocator.registerLazySingleton<HospitalProfileRemoteDatasource>(
+      () => HospitalProfileRemoteDatasource(api: serviceLocator()));
+  serviceLocator.registerLazySingleton<HospitalProfileRepo>(
+      () => HospitalProfileRepoImp(hospitalProfileRemoteDatasource: serviceLocator()));
 }

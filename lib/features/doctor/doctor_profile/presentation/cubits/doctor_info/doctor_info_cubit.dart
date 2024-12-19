@@ -33,12 +33,16 @@ class DoctorInfoCubit extends Cubit<DoctorInfoState> {
       (Failure failure) {
         pr(failure.message, t);
         showSnackbar('Server Error', failure.message, true);
-        emit(state.copyWith(responseType: ResponseEnum.failed, errorMessage: failure.message));
+        emit(state.copyWith(
+            responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
       (DoctorInfoModel doctorInfoModel) async {
         pr(doctorInfoModel, t);
         await _updateUserInfoState();
-        emit(state.copyWith(doctorInfoModel: doctorInfoModel, responseType: ResponseEnum.success, errorMessage: null));
+        emit(state.copyWith(
+            doctorInfoModel: doctorInfoModel,
+            responseType: ResponseEnum.success,
+            errorMessage: null));
       },
     );
   }

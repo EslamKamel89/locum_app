@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:locum_app/core/router/app_routes_names.dart';
 import 'package:locum_app/features/common_data/cubits/user_info/user_info_cubit.dart';
-import 'package:locum_app/features/common_data/data/models/doctor_user_model.dart';
+import 'package:locum_app/features/common_data/data/models/hospital_user_model.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/widgets/add_info_widget.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/widgets/update_profile_widget.dart';
 
-class DoctorProfileNotCompleteWidgets extends StatelessWidget {
-  const DoctorProfileNotCompleteWidgets({super.key, required this.user});
-  final DoctorUserModel? user;
+class HopitalProfileNotCompleteWidgets extends StatelessWidget {
+  const HopitalProfileNotCompleteWidgets({super.key, required this.user});
+  final HospitalUserModel? user;
   @override
   Widget build(BuildContext context) {
     context.watch<UserInfoCubit>();
@@ -17,25 +16,25 @@ class DoctorProfileNotCompleteWidgets extends StatelessWidget {
       children: [
         SizedBox(height: 15.h),
         ProfileIncompleteWidget(
-          title: 'Your Main Professional Information Incomplete',
-          isVisible: user?.doctor == null,
+          title: 'Your Facility Main Information Incomplete',
+          isVisible: user?.hospital == null,
           onTap: () {
-            Navigator.of(context).pushNamed(AppRoutesNames.doctorForm,
-                arguments: {'create': true});
+            // Navigator.of(context).pushNamed(AppRoutesNames.doctorForm,
+            //     arguments: {'create': true});
           },
         ),
         Visibility(
-          visible: user?.doctor != null,
+          visible: user?.hospital != null,
           child: Column(
             children: [
               ProfileIncompleteWidget(
-                title: 'Your Additional Professional Information Incomplete',
+                title: 'Your Information Incomplete',
                 message:
-                    "Tell us more about your work experience so we can connect you with the best locum opportunities.",
-                isVisible: user?.doctor?.doctorInfo == null,
+                    "Tell us more about your facility so we can connect you with the best locum talents.",
+                isVisible: user?.hospital?.hospitalInfo == null,
                 onTap: () {
-                  Navigator.of(context).pushNamed(AppRoutesNames.doctorInfoForm,
-                      arguments: {'create': true});
+                  // Navigator.of(context).pushNamed(AppRoutesNames.doctorInfoForm,
+                  //     arguments: {'create': true});
                 },
               ),
               // AddDoctorInfoWidget(
@@ -53,7 +52,7 @@ class DoctorProfileNotCompleteWidgets extends StatelessWidget {
                 message:
                     "Upload your related documents to help healthcare professionals find what they need.",
                 buttonContent: "Add Document",
-                isVisible: user?.doctor?.doctorDocuments?.isEmpty ?? true,
+                isVisible: user?.hospital?.hospitalDocuments?.isEmpty ?? true,
               ),
             ],
           ),

@@ -9,11 +9,11 @@ import 'package:locum_app/features/auth/data/models/user_model.dart';
 import 'package:locum_app/features/common_data/cubits/user_info/user_info_cubit.dart';
 import 'package:locum_app/features/doctor/doctor_profile/domain/repo/doctor_profile_repo.dart';
 
-part 'user_doctor_state.dart';
+part 'user_update_state.dart';
 
-class UserDoctorCubit extends Cubit<UserDoctorState> {
+class UserUpdateCubit extends Cubit<UserUpdateState> {
   final DoctorProfileRepo doctorProfileRepo;
-  UserDoctorCubit(this.doctorProfileRepo) : super(UserDoctorState());
+  UserUpdateCubit(this.doctorProfileRepo) : super(UserUpdateState());
   Future updateUserDoctor({required UserDoctorParams params}) async {
     final t = prt('updateUserDoctor - UserDoctorCubit');
     emit(state.copyWith(
@@ -28,12 +28,16 @@ class UserDoctorCubit extends Cubit<UserDoctorState> {
       (Failure failure) {
         pr(failure.message, t);
         showSnackbar('Server Error', failure.message, true);
-        emit(state.copyWith(responseType: ResponseEnum.failed, errorMessage: failure.message));
+        emit(state.copyWith(
+            responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
       (UserModel userModel) async {
         pr(userModel, t);
         await _updateUserInfoState();
-        emit(state.copyWith(userModel: userModel, responseType: ResponseEnum.success, errorMessage: null));
+        emit(state.copyWith(
+            userModel: userModel,
+            responseType: ResponseEnum.success,
+            errorMessage: null));
       },
     );
   }
