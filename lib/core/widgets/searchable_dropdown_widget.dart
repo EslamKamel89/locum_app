@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:locum_app/core/widgets/custom_text_form_field.dart';
+import 'package:locum_app/core/widgets/auth_text_form_field.dart';
 import 'package:locum_app/utils/styles/styles.dart';
 
 class SearchableDropdownWidget extends StatefulWidget {
@@ -11,12 +11,14 @@ class SearchableDropdownWidget extends StatefulWidget {
     required this.label,
     required this.hintText,
     required this.isRequired,
+    this.initalValue,
   });
   final List<String> options;
   final Function handleSelectOption;
   final String label;
   final String hintText;
   final bool isRequired;
+  final String? initalValue;
   @override
   State<SearchableDropdownWidget> createState() =>
       _SearchableDropdownWidgetState();
@@ -42,6 +44,12 @@ class _SearchableDropdownWidgetState extends State<SearchableDropdownWidget> {
       });
       widget.handleSelectOption(result);
     }
+  }
+
+  @override
+  void initState() {
+    selectedOption = widget.initalValue;
+    super.initState();
   }
 
   @override
@@ -127,7 +135,7 @@ class _SearchDialogState extends State<SearchDialog> {
               mainAxisAlignment: MainAxisAlignment.center,
               // mainAxisSize: MainAxisSize.min,
               children: [
-                CustomTextFormField(
+                AuthTextFormField(
                   labelText: 'Search',
                   controller: searchController,
                   prefixIcon: const Icon(Icons.search),

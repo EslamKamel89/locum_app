@@ -67,6 +67,7 @@ class _MuiltipleValueLangsSelectorState
                           .add(textEditingController.text.toLowerCase().trim());
                     }
                     widget.onLangSelect(concatenateLangs(selectedLangs));
+                    textEditingController.text = '';
                   });
                 },
               );

@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:locum_app/core/Errors/failure.dart';
 import 'package:locum_app/core/api_service/upload_file_to_api.dart';
+import 'package:locum_app/features/auth/data/models/user_model.dart';
 import 'package:locum_app/features/common_data/data/models/doctor_info_model.dart';
 import 'package:locum_app/features/common_data/data/models/doctor_model.dart';
 
@@ -18,6 +19,46 @@ abstract class DoctorProfileRepo {
     required bool create,
     int? id,
   });
+  Future<Either<Failure, UserModel>> updateUserDoctor({required UserDoctorParams params});
+}
+
+class UserDoctorParams {
+  String? name;
+  String? email;
+  String? password;
+  int? stateId;
+  int? districtId;
+
+  UserDoctorParams({
+    this.name,
+    this.email,
+    this.password,
+    this.stateId,
+    this.districtId,
+  });
+
+  @override
+  String toString() {
+    return 'UserDoctorParams(name: $name, email: $email, password: $password, stateId: $stateId, districtId: $districtId)';
+  }
+
+  factory UserDoctorParams.fromJson(Map<String, dynamic> json) {
+    return UserDoctorParams(
+      name: json['name'] as String?,
+      email: json['email'] as String?,
+      password: json['password'] as String?,
+      stateId: json['state_id'] as int?,
+      districtId: json['district_id'] as int?,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'email': email,
+        'password': password,
+        'state_id': stateId,
+        'district_id': districtId,
+      };
 }
 
 class DoctorInfoParams {

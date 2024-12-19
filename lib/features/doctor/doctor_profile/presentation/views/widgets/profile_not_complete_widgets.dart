@@ -20,7 +20,8 @@ class DoctorProfileNotCompleteWidgets extends StatelessWidget {
           title: 'Your Main Professional Information Incomplete',
           isVisible: user?.doctor == null,
           onTap: () {
-            Navigator.of(context).pushNamed(AppRoutesNames.doctorForm, arguments: {'create': true});
+            Navigator.of(context).pushNamed(AppRoutesNames.doctorForm,
+                arguments: {'create': true});
           },
         ),
         Visibility(
@@ -33,7 +34,8 @@ class DoctorProfileNotCompleteWidgets extends StatelessWidget {
                     "Tell us more about your work experience so we can connect you with the best locum opportunities.",
                 isVisible: user?.doctor?.doctorInfo == null,
                 onTap: () {
-                  Navigator.of(context).pushNamed(AppRoutesNames.doctorInfoForm, arguments: {'create': true});
+                  Navigator.of(context).pushNamed(AppRoutesNames.doctorInfoForm,
+                      arguments: {'create': true});
                 },
               ),
               // AddDoctorInfoWidget(
@@ -48,7 +50,8 @@ class DoctorProfileNotCompleteWidgets extends StatelessWidget {
               // ),
               AddDoctorInfoWidget(
                 title: 'No Documents added',
-                message: "Upload your related documents to help healthcare professionals find what they need.",
+                message:
+                    "Upload your related documents to help healthcare professionals find what they need.",
                 buttonContent: "Add Document",
                 isVisible: user?.doctor?.doctorDocuments?.isEmpty ?? true,
               ),

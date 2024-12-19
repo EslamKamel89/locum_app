@@ -10,9 +10,11 @@ import 'package:locum_app/features/auth/presentation/views/sign_up/signup_screen
 import 'package:locum_app/features/doctor/doctor_home/doctor_home_view.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/cubits/doctor/doctor_cubit.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/cubits/doctor_info/doctor_info_cubit.dart';
+import 'package:locum_app/features/doctor/doctor_profile/presentation/cubits/user_doctor/user_doctor_cubit.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/doctor_form.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/doctor_info_form.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/doctor_profile_view.dart';
+import 'package:locum_app/features/doctor/doctor_profile/presentation/views/user_doctor_form.dart';
 import 'package:locum_app/features/hospital/hospital_home/hospital_home_view.dart';
 import 'package:locum_app/features/splash_onboarding/presention/views/on_bording_screen.dart';
 import 'package:locum_app/features/splash_onboarding/presention/views/splash_screen.dart';
@@ -85,6 +87,14 @@ class AppRouter {
             child: DoctorForm(
               create: args?['create'],
             ),
+          ),
+          settings: routeSettings,
+        );
+      case AppRoutesNames.userDoctorForm:
+        return CustomPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => UserDoctorCubit(serviceLocator()),
+            child: const UserDoctorForm(),
           ),
           settings: routeSettings,
         );

@@ -4,7 +4,7 @@ import 'package:locum_app/core/enums/response_type.dart';
 import 'package:locum_app/core/extensions/context-extensions.dart';
 import 'package:locum_app/core/heleprs/validator.dart';
 import 'package:locum_app/core/router/app_routes_names.dart';
-import 'package:locum_app/core/widgets/custom_text_form_field.dart';
+import 'package:locum_app/core/widgets/auth_text_form_field.dart';
 import 'package:locum_app/core/widgets/default_screen_padding.dart';
 import 'package:locum_app/features/auth/presentation/cubits/sign_in/sign_in_cubit.dart';
 import 'package:locum_app/utils/styles/styles.dart';
@@ -56,7 +56,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           c: Colors.grey,
                           textAlign: TextAlign.center),
                       const SizedBox(height: 40),
-                      CustomTextFormField(
+                      AuthTextFormField(
                         controller: _emailController,
                         labelText: "Email Address",
                         prefixIcon: const Icon(Icons.email_outlined),
@@ -72,7 +72,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         },
                       ),
                       const SizedBox(height: 20),
-                      CustomTextFormField(
+                      AuthTextFormField(
                         controller: _passwordController,
                         obscureText: true,
                         labelText: "Password",

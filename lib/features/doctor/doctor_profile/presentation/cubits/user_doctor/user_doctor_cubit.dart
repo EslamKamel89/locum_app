@@ -5,44 +5,35 @@ import 'package:locum_app/core/enums/response_type.dart';
 import 'package:locum_app/core/globals.dart';
 import 'package:locum_app/core/heleprs/print_helper.dart';
 import 'package:locum_app/core/heleprs/snackbar.dart';
+import 'package:locum_app/features/auth/data/models/user_model.dart';
 import 'package:locum_app/features/common_data/cubits/user_info/user_info_cubit.dart';
-import 'package:locum_app/features/common_data/data/models/doctor_model.dart';
 import 'package:locum_app/features/doctor/doctor_profile/domain/repo/doctor_profile_repo.dart';
 
-part 'doctor_state.dart';
+part 'user_doctor_state.dart';
 
-class DoctorCubit extends Cubit<DoctorState> {
+class UserDoctorCubit extends Cubit<UserDoctorState> {
   final DoctorProfileRepo doctorProfileRepo;
-  DoctorCubit(
-    this.doctorProfileRepo,
-  ) : super(DoctorState());
-  Future updateOrCreateDoctor(
-      {required DoctorParams params, required bool create, int? id}) async {
-    final t = prt('updateOrCreateDoctor - DoctorCubit');
+  UserDoctorCubit(this.doctorProfileRepo) : super(UserDoctorState());
+  Future updateUserDoctor({required UserDoctorParams params}) async {
+    final t = prt('updateUserDoctor - UserDoctorCubit');
     emit(state.copyWith(
       responseType: ResponseEnum.loading,
       errorMessage: null,
-      doctorParams: params,
+      doctorInfoParams: params,
     ));
-    final result = await doctorProfileRepo.updateOrCreateDoctor(
+    final result = await doctorProfileRepo.updateUserDoctor(
       params: params,
-      create: create,
-      id: id,
     );
     result.fold(
       (Failure failure) {
         pr(failure.message, t);
         showSnackbar('Server Error', failure.message, true);
-        emit(state.copyWith(
-            responseType: ResponseEnum.failed, errorMessage: failure.message));
+        emit(state.copyWith(responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
-      (DoctorModel doctorModel) async {
-        pr(doctorModel, t);
+      (UserModel userModel) async {
+        pr(userModel, t);
         await _updateUserInfoState();
-        emit(state.copyWith(
-            doctorModel: doctorModel,
-            responseType: ResponseEnum.success,
-            errorMessage: null));
+        emit(state.copyWith(userModel: userModel, responseType: ResponseEnum.success, errorMessage: null));
       },
     );
   }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:locum_app/core/api_service/end_points.dart';
 import 'package:locum_app/core/extensions/context-extensions.dart';
 import 'package:locum_app/core/heleprs/pick_image.dart';
 import 'package:locum_app/core/widgets/choose_camera_or_gallery.dart';
@@ -41,19 +42,23 @@ class _ProfileImageUploadViewState extends State<ProfileImageUploadView> {
         children: [
           Padding(
             padding: const EdgeInsets.only(right: 20),
-            child: selectedPhoto == null
-                ? CircularCachedImage(
-                    imageUrl: doctorModel?.photo ?? '',
-                    imageAsset:
-                        doctorModel?.gender == 'female' ? AssetsData.femalePlacholder : AssetsData.malePlacholder,
-                    height: 100.h,
-                    width: 100.h,
-                  )
-                : CircularImageFile(
-                    image: selectedPhoto!,
-                    height: 100.h,
-                    width: 100.h,
-                  ),
+            child: Builder(builder: (context) {
+              if (selectedPhoto != null) {
+                return CircularImageFile(
+                  image: selectedPhoto!,
+                  height: 100.h,
+                  width: 100.h,
+                );
+              }
+              return CircularCachedImage(
+                imageUrl: "${EndPoint.imgBaseUrl}${doctorModel?.photo ?? ''}",
+                imageAsset: doctorModel?.gender == 'female'
+                    ? AssetsData.femalePlacholder
+                    : AssetsData.malePlacholder,
+                height: 100.h,
+                width: 100.h,
+              );
+            }),
           ),
           Positioned(
             top: 0,

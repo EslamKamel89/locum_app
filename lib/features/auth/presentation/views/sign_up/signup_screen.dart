@@ -4,7 +4,7 @@ import 'package:locum_app/core/enums/response_type.dart';
 import 'package:locum_app/core/enums/user_type_enum.dart';
 import 'package:locum_app/core/extensions/context-extensions.dart';
 import 'package:locum_app/core/heleprs/validator.dart';
-import 'package:locum_app/core/widgets/custom_text_form_field.dart';
+import 'package:locum_app/core/widgets/auth_text_form_field.dart';
 import 'package:locum_app/core/widgets/default_screen_padding.dart';
 import 'package:locum_app/core/widgets/dropdown_widget.dart';
 import 'package:locum_app/core/widgets/searchable_dropdown_widget.dart';
@@ -67,7 +67,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             c: Colors.grey,
                             textAlign: TextAlign.center),
                         const SizedBox(height: 40),
-                        CustomTextFormField(
+                        AuthTextFormField(
                           labelText: "Full Name",
                           prefixIcon: const Icon(Icons.person_outline),
                           controller: _nameController,
@@ -80,7 +80,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ),
                         const SizedBox(height: 20),
-                        CustomTextFormField(
+                        AuthTextFormField(
                           labelText: "Email Address",
                           prefixIcon: const Icon(Icons.email_outlined),
                           controller: _emailController,
@@ -94,7 +94,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ),
                         const SizedBox(height: 20),
-                        CustomTextFormField(
+                        AuthTextFormField(
                           obscureText: true,
                           labelText: "Password",
                           prefixIcon: const Icon(Icons.lock_outline),
@@ -108,7 +108,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ),
                         const SizedBox(height: 20),
-                        CustomTextFormField(
+                        AuthTextFormField(
                             obscureText: true,
                             labelText: "Confirm Password",
                             prefixIcon: const Icon(Icons.lock_outline),

@@ -30,11 +30,15 @@ Done todos {
     # work on profile image
     # work in the sync of the langs and skills 
     # fix the issue of the image url 
+    # test the update doctor
+    # test create doctor
+    # fix the scope issue with type ahead widget
+    # work on the basic informatio edit 
+    # prepare the back end for update user basic database
 }
 
 todos {
     # view file uploaded
-    # test the update doctor
-    # test create doctor
-    # fix the scope issue with type ahead widget
+    # preapre the front end to send the data
+
 }

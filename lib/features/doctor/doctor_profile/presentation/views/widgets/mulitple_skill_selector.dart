@@ -66,6 +66,7 @@ class _MuiltipleValueSkillSelectorState
                           .add(textEditingController.text.toLowerCase().trim());
                     }
                     widget.onSkillSelect(concatenateSkills(selectedSkills));
+                    textEditingController.text = '';
                   });
                 },
               );

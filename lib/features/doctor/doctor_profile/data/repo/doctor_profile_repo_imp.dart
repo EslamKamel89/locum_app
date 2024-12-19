@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:locum_app/core/Errors/failure.dart';
 import 'package:locum_app/core/heleprs/print_helper.dart';
+import 'package:locum_app/features/auth/data/models/user_model.dart';
 import 'package:locum_app/features/common_data/data/models/doctor_info_model.dart';
 import 'package:locum_app/features/common_data/data/models/doctor_model.dart';
 import 'package:locum_app/features/doctor/doctor_profile/data/remote_data_source/doctor_profile_remote_datasource.dart';
@@ -40,6 +41,23 @@ class DoctorProfileRepoImp implements DoctorProfileRepo {
         params: params,
         create: create,
         id: id,
+      );
+      return Right(pr(model, t));
+    } catch (e) {
+      pr(e.toString());
+      if (e is DioException) {
+        return Left(ServerFailure.formDioError(e));
+      }
+      return Left(ServerFailure(pr(e.toString(), t)));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserModel>> updateUserDoctor({required UserDoctorParams params}) async {
+    final t = prt('updateUserDoctor  - DoctorProfileRemoteDataSource');
+    try {
+      UserModel model = await doctorProfileRemoteDataSource.updateUserDoctor(
+        params: params,
       );
       return Right(pr(model, t));
     } catch (e) {

@@ -184,21 +184,22 @@ class _CustomTextFormFieldWithSuggestionsState
             controller: controller,
             focusNode: focusNode,
             validator: widget.validator,
-
             // autofocus: true,
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
               labelText: widget.label,
-              suffix: widget.onSave == null
-                  ? null
-                  : InkWell(
-                      onTap: () {
-                        widget.onSave!();
-                        widget.controller.text = '';
-                        focusNode.unfocus();
-                      },
-                      child: const Icon(Icons.save),
-                    ),
+              suffix:
+                  // widget.onSave == null
+                  //     ? null
+                  //     :
+                  InkWell(
+                onTap: () {
+                  if (widget.onSave != null) widget.onSave!();
+                  // widget.controller.text = '';
+                  focusNode.unfocus();
+                },
+                child: const Icon(Icons.save),
+              ),
             ),
             // onChanged: ,
           );

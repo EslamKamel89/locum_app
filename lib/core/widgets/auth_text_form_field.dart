@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:locum_app/core/extensions/context-extensions.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class CustomTextFormField extends StatefulWidget {
-  const CustomTextFormField(
+class AuthTextFormField extends StatefulWidget {
+  const AuthTextFormField(
       {super.key,
       required this.labelText,
       required this.controller,
@@ -19,10 +19,10 @@ class CustomTextFormField extends StatefulWidget {
   final void Function(String)? onChanged;
 
   @override
-  State<CustomTextFormField> createState() => _CustomTextFormFieldState();
+  State<AuthTextFormField> createState() => _AuthTextFormFieldState();
 }
 
-class _CustomTextFormFieldState extends State<CustomTextFormField> {
+class _AuthTextFormFieldState extends State<AuthTextFormField> {
   bool showPassword = false;
   @override
   Widget build(BuildContext context) {
