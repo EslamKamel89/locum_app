@@ -6,25 +6,27 @@ import 'package:locum_app/core/globals.dart';
 import 'package:locum_app/core/heleprs/print_helper.dart';
 import 'package:locum_app/core/heleprs/snackbar.dart';
 import 'package:locum_app/features/common_data/cubits/user_info/user_info_cubit.dart';
-import 'package:locum_app/features/common_data/data/models/hospital_model.dart';
+import 'package:locum_app/features/common_data/data/models/hospital_info_model.dart';
 import 'package:locum_app/features/hospital/hospital_profile/domain/repo/hospital_profile_repo.dart';
 
-part 'hospital_state.dart';
+part 'hospital_info_state.dart';
 
-class HospitalCubit extends Cubit<HospitalState> {
+class HospitalInfoCubit extends Cubit<HospitalInfoState> {
   final HospitalProfileRepo hospitalProfileRepo;
-  HospitalCubit(
-    this.hospitalProfileRepo,
-  ) : super(HospitalState());
-  Future updateOrCreateHospital(
-      {required HospitalParams params, required bool create, int? id}) async {
-    final t = prt('updateOrCreateHospital - HospitalCubit');
+  HospitalInfoCubit(this.hospitalProfileRepo) : super(HospitalInfoState());
+
+  Future updateOrCreateHospitalInfo({
+    required HospitalInfoParams params,
+    required bool create,
+    int? id,
+  }) async {
+    final t = prt('updateOrCreateHospitalInfo - HospitalInfoCubit');
     emit(state.copyWith(
       responseType: ResponseEnum.loading,
       errorMessage: null,
-      hospitalParams: params,
+      hospitalInfoParams: params,
     ));
-    final result = await hospitalProfileRepo.updateOrCreateHospital(
+    final result = await hospitalProfileRepo.updateOrCreateHospitalInfo(
       params: params,
       create: create,
       id: id,
@@ -36,11 +38,11 @@ class HospitalCubit extends Cubit<HospitalState> {
         emit(state.copyWith(
             responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
-      (HospitalModel hospitalModel) async {
-        pr(hospitalModel, t);
+      (HospitalInfoModel hospitalInfoModel) async {
+        pr(hospitalInfoModel, t);
         await _updateUserInfoState();
         emit(state.copyWith(
-            hospitalModel: hospitalModel,
+            hospitalInfoModel: hospitalInfoModel,
             responseType: ResponseEnum.success,
             errorMessage: null));
       },

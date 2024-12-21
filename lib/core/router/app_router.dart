@@ -8,6 +8,10 @@ import 'package:locum_app/features/auth/presentation/cubits/sign_up/sign_up_cubi
 import 'package:locum_app/features/auth/presentation/views/sign_in/sign_in_screen.dart';
 import 'package:locum_app/features/auth/presentation/views/sign_up/signup_screen.dart';
 import 'package:locum_app/features/doctor/doctor_home/doctor_home_view.dart';
+import 'package:locum_app/features/doctor/doctor_locum/presentation/cubits/show_all_add/show_all_adds_cubit.dart';
+import 'package:locum_app/features/doctor/doctor_locum/presentation/cubits/show_job_add/show_job_add_cubit.dart';
+import 'package:locum_app/features/doctor/doctor_locum/presentation/view/doctor_job_add_view.dart';
+import 'package:locum_app/features/doctor/doctor_locum/presentation/view/doctor_locum_view.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/cubits/doctor/doctor_cubit.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/cubits/doctor_info/doctor_info_cubit.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/cubits/user_update/user_update_cubit.dart';
@@ -16,8 +20,10 @@ import 'package:locum_app/features/doctor/doctor_profile/presentation/views/doct
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/doctor_profile_view.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/user_doctor_form.dart';
 import 'package:locum_app/features/hospital/hospital_home/hospital_home_view.dart';
+import 'package:locum_app/features/hospital/hospital_profile/presentation/cubits/hospital-info/hospital_info_cubit.dart';
 import 'package:locum_app/features/hospital/hospital_profile/presentation/cubits/hospital/hospital_cubit.dart';
 import 'package:locum_app/features/hospital/hospital_profile/presentation/views/hospital_form.dart';
+import 'package:locum_app/features/hospital/hospital_profile/presentation/views/hospital_info_form.dart';
 import 'package:locum_app/features/hospital/hospital_profile/presentation/views/hospital_profile_view.dart';
 import 'package:locum_app/features/hospital/hospital_profile/presentation/views/user_hospital_form.dart';
 import 'package:locum_app/features/splash_onboarding/presention/views/on_bording_screen.dart';
@@ -121,6 +127,30 @@ class AppRouter {
           builder: (context) => BlocProvider(
             create: (context) => HospitalCubit(serviceLocator()),
             child: HospitalForm(create: args?['create']),
+          ),
+          settings: routeSettings,
+        );
+      case AppRoutesNames.hospitalInfoForm:
+        return CustomPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => HospitalInfoCubit(serviceLocator()),
+            child: HospitalInfoForm(create: args?['create']),
+          ),
+          settings: routeSettings,
+        );
+      case AppRoutesNames.doctorLocumScreen:
+        return CustomPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => ShowAllAddsCubit(serviceLocator()),
+            child: const DoctorLocumView(),
+          ),
+          settings: routeSettings,
+        );
+      case AppRoutesNames.doctorJobDetailsScreen:
+        return CustomPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => ShowJobAddCubit(serviceLocator()),
+            child: DoctorJobAddDetailsView(id: args?['id']),
           ),
           settings: routeSettings,
         );

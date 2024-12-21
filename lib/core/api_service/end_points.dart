@@ -17,4 +17,7 @@ class EndPoint {
   static String doctorInfoUpdate(int? id) => "$baseUrl/doctor-infos/$id";
   static const String updateUser = "$baseUrl/auth/user";
   static const String hospitalCreateOrUpdate = "$baseUrl/hospitals";
+  static const String hospitalInfoCreateOrUpdate = "$baseUrl/hospital-infos";
+  static String showJobAdd(int id) => "$baseUrl/job-add/$id";
+  static String showAllJobAdds = "$baseUrl/job-add";
 }

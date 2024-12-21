@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:locum_app/core/Errors/failure.dart';
 import 'package:locum_app/core/api_service/upload_file_to_api.dart';
+import 'package:locum_app/features/common_data/data/models/hospital_info_model.dart';
 import 'package:locum_app/features/common_data/data/models/hospital_model.dart';
 
 abstract class HospitalProfileRepo {
@@ -11,6 +12,50 @@ abstract class HospitalProfileRepo {
     required bool create,
     int? id,
   });
+  Future<Either<Failure, HospitalInfoModel>> updateOrCreateHospitalInfo({
+    required HospitalInfoParams params,
+    required bool create,
+    int? id,
+  });
+}
+
+class HospitalInfoParams {
+  String? licenseNumber;
+  String? licenseState;
+  String? licenseIssueDate;
+  String? licenseExpiryDate;
+  String? operatingHours;
+
+  HospitalInfoParams({
+    this.licenseNumber,
+    this.licenseState,
+    this.licenseIssueDate,
+    this.licenseExpiryDate,
+    this.operatingHours,
+  });
+
+  @override
+  String toString() {
+    return 'HospitalInfoParams(licenseNumber: $licenseNumber, licenseState: $licenseState, licenseIssueDate: $licenseIssueDate, licenseExpiryDate: $licenseExpiryDate, operatingHours: $operatingHours)';
+  }
+
+  factory HospitalInfoParams.fromJson(Map<String, dynamic> json) {
+    return HospitalInfoParams(
+      licenseNumber: json['license_number'] as String?,
+      licenseState: json['license_state'] as String?,
+      licenseIssueDate: json['license_issue_date'] as String?,
+      licenseExpiryDate: json['license_expiry_date'] as String?,
+      operatingHours: json['operating_hours'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'license_number': licenseNumber,
+        'license_state': licenseState,
+        'license_issue_date': licenseIssueDate,
+        'license_expiry_date': licenseExpiryDate,
+        'operating_hours': operatingHours,
+      };
 }
 
 class HospitalParams {

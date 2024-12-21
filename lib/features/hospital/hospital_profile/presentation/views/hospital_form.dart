@@ -27,14 +27,17 @@ class _HospitalFormState extends State<HospitalForm> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _typeController = TextEditingController();
-  final TextEditingController _contactPersonController = TextEditingController();
+  final TextEditingController _contactPersonController =
+      TextEditingController();
   final TextEditingController _contactEmailController = TextEditingController();
   final TextEditingController _contactPhoneController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
-  final TextEditingController _serviceOfferedController = TextEditingController();
+  final TextEditingController _serviceOfferedController =
+      TextEditingController();
   final TextEditingController _numberOfBidsController = TextEditingController();
   final TextEditingController _websiteUrlController = TextEditingController();
-  final TextEditingController _yearEstabishedController = TextEditingController();
+  final TextEditingController _yearEstabishedController =
+      TextEditingController();
   final TextEditingController _overviewController = TextEditingController();
   File? selectedPhoto;
   DateTime? yearEstablished;
@@ -161,7 +164,9 @@ class _HospitalFormState extends State<HospitalForm> {
                           child: const Text('Save')),
                       const SizedBox(width: 10),
                       state.responseType == ResponseEnum.loading
-                          ? const Align(alignment: Alignment.centerLeft, child: CircularProgressIndicator())
+                          ? const Align(
+                              alignment: Alignment.centerLeft,
+                              child: CircularProgressIndicator())
                           : const SizedBox(),
                     ],
                   ),
@@ -186,15 +191,20 @@ class _HospitalFormState extends State<HospitalForm> {
           contactPhone: _contactPhoneController.text,
           address: _addressController.text,
           servicesOffered: _serviceOfferedController.text,
-          numberOfBeds: _numberOfBidsController.text != '' ? int.parse(_numberOfBidsController.text) : null,
+          numberOfBeds: _numberOfBidsController.text != ''
+              ? int.parse(_numberOfBidsController.text)
+              : null,
           websiteUrl: _websiteUrlController.text,
-          yearEstablished: _yearEstabishedController.text != '' ? int.parse(_yearEstabishedController.text) : null,
+          yearEstablished: _yearEstabishedController.text != ''
+              ? int.parse(_yearEstabishedController.text)
+              : null,
           overview: _overviewController.text,
           photo: selectedPhoto,
         ),
         'hospitalParams',
       );
-      controller.updateOrCreateHospital(params: params, create: widget.create, id: hospitalModel?.id);
+      controller.updateOrCreateHospital(
+          params: params, create: widget.create, id: hospitalModel?.id);
     }
   }
 
@@ -208,9 +218,11 @@ class _HospitalFormState extends State<HospitalForm> {
     _contactPhoneController.text = hospitalModel!.contactPhone ?? '';
     _addressController.text = hospitalModel!.address ?? '';
     _serviceOfferedController.text = hospitalModel!.servicesOffered ?? '';
-    _numberOfBidsController.text = hospitalModel!.numberOfBeds?.toString() ?? '';
+    _numberOfBidsController.text =
+        hospitalModel!.numberOfBeds?.toString() ?? '';
     _websiteUrlController.text = hospitalModel!.websiteUrl ?? '';
-    _yearEstabishedController.text = hospitalModel!.yearEstablished?.toString() ?? '';
+    _yearEstabishedController.text =
+        hospitalModel!.yearEstablished?.toString() ?? '';
     _overviewController.text = hospitalModel!.overview ?? '';
   }
 }

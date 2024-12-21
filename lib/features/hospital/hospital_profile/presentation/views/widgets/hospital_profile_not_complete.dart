@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:locum_app/core/router/app_routes_names.dart';
 import 'package:locum_app/features/common_data/cubits/user_info/user_info_cubit.dart';
 import 'package:locum_app/features/common_data/data/models/hospital_user_model.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/widgets/add_info_widget.dart';
@@ -19,8 +20,8 @@ class HopitalProfileNotCompleteWidgets extends StatelessWidget {
           title: 'Your Facility Main Information Incomplete',
           isVisible: user?.hospital == null,
           onTap: () {
-            // Navigator.of(context).pushNamed(AppRoutesNames.doctorForm,
-            //     arguments: {'create': true});
+            Navigator.of(context).pushNamed(AppRoutesNames.hospitalForm,
+                arguments: {'create': true});
           },
         ),
         Visibility(
@@ -33,8 +34,9 @@ class HopitalProfileNotCompleteWidgets extends StatelessWidget {
                     "Tell us more about your facility so we can connect you with the best locum talents.",
                 isVisible: user?.hospital?.hospitalInfo == null,
                 onTap: () {
-                  // Navigator.of(context).pushNamed(AppRoutesNames.doctorInfoForm,
-                  //     arguments: {'create': true});
+                  Navigator.of(context).pushNamed(
+                      AppRoutesNames.hospitalInfoForm,
+                      arguments: {'create': true});
                 },
               ),
               // AddDoctorInfoWidget(

@@ -1,19 +1,117 @@
 {
     "data": {
-        "type": "doctor",
-        "user": {
+        "id": 1,
+        "title": "Experienced: Medical Assistant needed",
+        "hospital_id": 1,
+        "speciality_id": 1,
+        "job_info_id": 1,
+        "job_type": "Parttime",
+        "location": "7204 Emiliano Shore\nWest Norbert, OR 15719-0484",
+        "description": "And the Eaglet bent down its head impatiently, and said, 'So you did, old fellow!' said the Queen ordering off her head!' the Queen was close behind us, and he's treading on my tail. See how eagerly.",
+        "responsibilities": "The Cat's head began fading away the time. Alice had no idea what Latitude was, or Longitude I've got to the Mock Turtle interrupted, 'if you only kept on puzzling about it while the Mock Turtle.",
+        "qualifications": "Alice opened the door and went stamping about, and shouting 'Off with her friend. When she got up this morning? I almost wish I hadn't gone down that rabbit-hole--and yet--and yet--it's rather.",
+        "experience_required": "PRECIOUS nose'; as an explanation. 'Oh, you're sure to kill it in time,' said the King; 'and don't be nervous, or I'll kick you down stairs!' 'That is not said right,' said the Dormouse; '--well.",
+        "salary_min": "10000.00",
+        "salary_max": "10500.00",
+        "benefits": "Alice thoughtfully: 'but then--I shouldn't be hungry for it, while the rest of my life.' 'You are old,' said the Gryphon, half to itself, 'Oh dear! Oh dear! I wish you wouldn't squeeze so.' said the.",
+        "working_hours": "8 hours shift",
+        "application_deadline": "1972-01-10",
+        "required_documents": "Alice was beginning to grow up again! Let me see--how IS it to half-past one as long as it is.' 'Then you may SIT down,' the King very decidedly, and he went on, 'What's your name, child?' 'My name.",
+        "created_at": "2024-12-19T14:01:29.000000Z",
+        "updated_at": "2024-12-19T14:01:29.000000Z",
+        "langs": [
+            {
+                "id": 1,
+                "name": "english",
+                "created_at": "2024-12-19T14:01:27.000000Z",
+                "updated_at": "2024-12-19T14:01:27.000000Z",
+                "pivot": {
+                    "job_add_id": 1,
+                    "lang_id": 1
+                }
+            },
+            {
+                "id": 2,
+                "name": "arabic",
+                "created_at": "2024-12-19T14:01:27.000000Z",
+                "updated_at": "2024-12-19T14:01:27.000000Z",
+                "pivot": {
+                    "job_add_id": 1,
+                    "lang_id": 2
+                }
+            },
+            {
+                "id": 3,
+                "name": "spanish",
+                "created_at": "2024-12-19T14:01:27.000000Z",
+                "updated_at": "2024-12-19T14:01:27.000000Z",
+                "pivot": {
+                    "job_add_id": 1,
+                    "lang_id": 3
+                }
+            }
+        ],
+        "skills": [
+            {
+                "id": 1,
+                "name": "patient assessment",
+                "created_at": "2024-12-19T14:01:27.000000Z",
+                "updated_at": "2024-12-19T14:01:27.000000Z",
+                "pivot": {
+                    "job_add_id": 1,
+                    "skill_id": 1
+                }
+            },
+            {
+                "id": 2,
+                "name": "emr (electronic medical records)",
+                "created_at": "2024-12-19T14:01:27.000000Z",
+                "updated_at": "2024-12-19T14:01:27.000000Z",
+                "pivot": {
+                    "job_add_id": 1,
+                    "skill_id": 2
+                }
+            },
+            {
+                "id": 3,
+                "name": "surgical precision",
+                "created_at": "2024-12-19T14:01:27.000000Z",
+                "updated_at": "2024-12-19T14:01:27.000000Z",
+                "pivot": {
+                    "job_add_id": 1,
+                    "skill_id": 3
+                }
+            }
+        ],
+        "hospital": {
             "id": 1,
-            "name": "doctor",
-            "email": "doctor@gmail.com",
-            "email_verified_at": "2024-12-14T12:09:21.000000Z",
-            "created_at": "2024-12-14T12:09:21.000000Z",
-            "updated_at": "2024-12-14T12:09:21.000000Z",
-            "state_id": 1,
-            "district_id": 1,
-            "type": "doctor",
-            "district": "district model",
-            "state": "state model",
-            "doctor": "doctor model"
+            "user_id": 1,
+            "facility_name": "Riverside Health Cliniccccddddd",
+            "type": "Other",
+            "contact_person": "Rossie O'Conner",
+            "contact_email": "addie.mueller@hotmail.com",
+            "contact_phone": "320.456.1371",
+            "address": "71507 Morar Mount\nRueckerview, FL 15045-2345",
+            "services_offered": "General Surgery",
+            "number_of_beds": 150,
+            "website_url": "https://via.placeholder.com/640x480.png/00cc22?text=earum",
+            "year_established": 2025,
+            "overview": "CAN I have none, Why, I do so like that curious song about the whiting!' 'Oh, as to go and live in that soup!' Alice said to the Caterpillar, just as well as she spoke. Alice did not at all anxious.",
+            "photo": "storage/hospital/facility_imgs/KSqMk8F59rlymIqtDeqPR1kjdWHbxTK3wAnUgAFq.jpg",
+            "created_at": "2024-12-19T14:01:27.000000Z",
+            "updated_at": "2024-12-19T17:42:14.000000Z"
+        },
+        "specialty": {
+            "id": 1,
+            "name": "Allergy and Immunology",
+            "created_at": "2024-12-19T14:01:26.000000Z",
+            "updated_at": "2024-12-19T14:01:26.000000Z"
+        },
+        "job_info": {
+            "id": 1,
+            "name": "Medical Assistant",
+            "created_at": "2024-12-19T14:01:26.000000Z",
+            "updated_at": "2024-12-19T14:01:26.000000Z"
         }
     },
     "status": "success",

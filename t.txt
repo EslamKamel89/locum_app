@@ -44,10 +44,18 @@ Done todos {
     # basic hospital form 
     # Main facility information form ui
     # Main facility information form backend
+    # preparing the front to connect with the backend
+    # create job add model 
+    # show job add by id
+    # showAll job adds
+    # create the cubit to show all job adds 
+    # pagination object
 }
 
 todos {
     # view file uploaded
     # if you change the doctor image in the update method and come back the profile page the image is not updated in the ui only but it's updated successfully to the backend
-    # preparing the front to connect with the backend
+    # create job add details cubit
+    # create job and details view
+
 }

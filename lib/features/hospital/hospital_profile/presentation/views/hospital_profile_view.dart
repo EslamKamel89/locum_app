@@ -131,10 +131,10 @@ class _HospitalProfileContentState extends State<HospitalProfileContent> {
               _sectionCard(
                 children: [
                   _buildSectionHeader('Additional Information', handleEdit: () {
-                    // Navigator.of(context).pushNamed(
-                    //   AppRoutesNames.doctorForm,
-                    //   arguments: {'create': false},
-                    // );
+                    Navigator.of(context).pushNamed(
+                      AppRoutesNames.hospitalInfoForm,
+                      arguments: {'create': false},
+                    );
                   }),
                   _buildInfo('License Number',
                       user?.hospital?.hospitalInfo?.licenseNumber),
