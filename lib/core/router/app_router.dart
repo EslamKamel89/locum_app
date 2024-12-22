@@ -10,7 +10,7 @@ import 'package:locum_app/features/auth/presentation/views/sign_up/signup_screen
 import 'package:locum_app/features/doctor/doctor_home/doctor_home_view.dart';
 import 'package:locum_app/features/doctor/doctor_locum/presentation/cubits/show_all_add/show_all_adds_cubit.dart';
 import 'package:locum_app/features/doctor/doctor_locum/presentation/cubits/show_job_add/show_job_add_cubit.dart';
-import 'package:locum_app/features/doctor/doctor_locum/presentation/view/doctor_job_add_view.dart';
+import 'package:locum_app/features/doctor/doctor_locum/presentation/view/doctor_job_add_details_view.dart';
 import 'package:locum_app/features/doctor/doctor_locum/presentation/view/doctor_locum_view.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/cubits/doctor/doctor_cubit.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/cubits/doctor_info/doctor_info_cubit.dart';

@@ -46,29 +46,13 @@ class JobAdWidget extends StatelessWidget {
 
             const SizedBox(height: 8),
 
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    'Job Title: ${jobAddModel.title ?? ''}',
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black87,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Text(
-                    'Specialty: ${jobAddModel.specialty?.name ?? ''}',
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black87,
-                    ),
-                  ),
-                ),
-              ],
+            Text(
+              'Specialty: ${jobAddModel.specialty?.name ?? ''}',
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: Colors.black87,
+              ),
             ),
 
             const SizedBox(height: 12),

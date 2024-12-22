@@ -16,13 +16,18 @@ class ShowAllAddsCubit extends Cubit<ShowAllAddsState> {
     this.doctorLocumRepo,
   ) : super(ShowAllAddsState());
 
-  Future showAllJobAdds({
-    required int limit,
-    required int page,
-  }) async {
+  Future showAllJobAdds() async {
     final t = prt('showAllJobAdds - ShowAllAddsCubit');
-    emit(state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
-    final result = await doctorLocumRepo.showAllJobAdds(limit: limit, page: page);
+    if (state.responseType == ResponseEnum.loading) {
+      pr('Still loading data exiting showAllJobAdds ', t);
+      return;
+    }
+    if (state.hasNextPage != true) {
+      pr('No more pages exiting showAllJobAdds ', t);
+      return;
+    }
+    emit(state.copyWith(responseType: ResponseEnum.loading, errorMessage: null, page: state.page! + 1));
+    final result = await doctorLocumRepo.showAllJobAdds(limit: state.limit!, page: state.page!);
     result.fold(
       (Failure failure) {
         pr(failure.message, t);
@@ -31,8 +36,15 @@ class ShowAllAddsCubit extends Cubit<ShowAllAddsState> {
       },
       (ResponseModel<List<JobAddModel>> jobAdds) async {
         pr(jobAdds, t);
+        pr(jobAdds.pagination, t);
+        jobAdds.data = [...state.jobAddsResponse?.data ?? [], ...jobAdds.data ?? []];
         emit(
-          state.copyWith(jobAddsResponse: jobAdds, responseType: ResponseEnum.success, errorMessage: null),
+          state.copyWith(
+            jobAddsResponse: jobAdds,
+            responseType: ResponseEnum.success,
+            errorMessage: null,
+            hasNextPage: jobAdds.pagination?.hasMorePages ?? false,
+          ),
         );
       },
     );

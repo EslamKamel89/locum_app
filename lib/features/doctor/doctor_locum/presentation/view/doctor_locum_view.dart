@@ -20,7 +20,7 @@ class _DoctorLocumViewState extends State<DoctorLocumView> {
       bottomNavigationBar: doctorBottomNavigationBar,
       drawer: const DefaultDoctorDrawer(),
       child: const Column(children: [
-        FilterAndSearchWidget(),
+        SearchWidget(),
         Expanded(child: JobAddsWidget()),
       ]),
     );

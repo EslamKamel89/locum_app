@@ -12,9 +12,9 @@ class ShowAllAddsState {
     this.jobAddsResponse,
     this.errorMessage,
     this.responseType,
-    this.limit,
-    this.page,
-    this.hasNextPage,
+    this.limit = 5,
+    this.page = 0,
+    this.hasNextPage = true,
   });
 
   ShowAllAddsState copyWith({

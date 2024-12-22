@@ -50,12 +50,14 @@ Done todos {
     # showAll job adds
     # create the cubit to show all job adds 
     # pagination object
+    # create job and details view
+    # create job add details cubit
 }
 
 todos {
     # view file uploaded
     # if you change the doctor image in the update method and come back the profile page the image is not updated in the ui only but it's updated successfully to the backend
-    # create job add details cubit
-    # create job and details view
-
+    # define the search criteria that you want in the doctor search add
+    # handle states in view all job ads
+    # handle pagination in view all job ads
 }
