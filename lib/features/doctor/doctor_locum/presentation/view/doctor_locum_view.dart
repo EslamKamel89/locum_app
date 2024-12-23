@@ -18,6 +18,7 @@ class _DoctorLocumViewState extends State<DoctorLocumView> {
     return MainScaffold(
       appBarTitle: 'Locum Jobs',
       bottomNavigationBar: doctorBottomNavigationBar,
+      resizeToAvoidBottomInset: false,
       drawer: const DefaultDoctorDrawer(),
       child: const Column(children: [
         SearchWidget(),

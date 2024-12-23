@@ -8,11 +8,13 @@ class MainScaffold extends StatelessWidget {
     required this.child,
     this.bottomNavigationBar,
     this.drawer,
+    this.resizeToAvoidBottomInset,
   });
   final String appBarTitle;
   final Widget child;
   final Widget? bottomNavigationBar;
   final Widget? drawer;
+  final bool? resizeToAvoidBottomInset;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -21,6 +23,7 @@ class MainScaffold extends StatelessWidget {
           title: Text(appBarTitle),
         ),
         bottomNavigationBar: bottomNavigationBar,
+        resizeToAvoidBottomInset: resizeToAvoidBottomInset,
         // drawer: drawer,
         endDrawer: drawer,
         body: DefaultScreenPadding(

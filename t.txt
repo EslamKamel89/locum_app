@@ -52,12 +52,14 @@ Done todos {
     # pagination object
     # create job and details view
     # create job add details cubit
+    # handle states in view all job ads
+    # define the search criteria that you want in the doctor search add
+    # handle pagination in view all job ads
+    # work on the ui of the search widget
 }
 
 todos {
     # view file uploaded
     # if you change the doctor image in the update method and come back the profile page the image is not updated in the ui only but it's updated successfully to the backend
-    # define the search criteria that you want in the doctor search add
-    # handle states in view all job ads
-    # handle pagination in view all job ads
+    # fetch the data for the values in the search widget
 }

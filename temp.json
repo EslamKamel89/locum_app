@@ -1,121 +1,682 @@
 {
-    "data": {
-        "id": 1,
-        "title": "Experienced: Medical Assistant needed",
-        "hospital_id": 1,
-        "speciality_id": 1,
-        "job_info_id": 1,
-        "job_type": "Parttime",
-        "location": "7204 Emiliano Shore\nWest Norbert, OR 15719-0484",
-        "description": "And the Eaglet bent down its head impatiently, and said, 'So you did, old fellow!' said the Queen ordering off her head!' the Queen was close behind us, and he's treading on my tail. See how eagerly.",
-        "responsibilities": "The Cat's head began fading away the time. Alice had no idea what Latitude was, or Longitude I've got to the Mock Turtle interrupted, 'if you only kept on puzzling about it while the Mock Turtle.",
-        "qualifications": "Alice opened the door and went stamping about, and shouting 'Off with her friend. When she got up this morning? I almost wish I hadn't gone down that rabbit-hole--and yet--and yet--it's rather.",
-        "experience_required": "PRECIOUS nose'; as an explanation. 'Oh, you're sure to kill it in time,' said the King; 'and don't be nervous, or I'll kick you down stairs!' 'That is not said right,' said the Dormouse; '--well.",
-        "salary_min": "10000.00",
-        "salary_max": "10500.00",
-        "benefits": "Alice thoughtfully: 'but then--I shouldn't be hungry for it, while the rest of my life.' 'You are old,' said the Gryphon, half to itself, 'Oh dear! Oh dear! I wish you wouldn't squeeze so.' said the.",
-        "working_hours": "8 hours shift",
-        "application_deadline": "1972-01-10",
-        "required_documents": "Alice was beginning to grow up again! Let me see--how IS it to half-past one as long as it is.' 'Then you may SIT down,' the King very decidedly, and he went on, 'What's your name, child?' 'My name.",
-        "created_at": "2024-12-19T14:01:29.000000Z",
-        "updated_at": "2024-12-19T14:01:29.000000Z",
-        "langs": [
-            {
+    "data": [
+        {
+            "id": 1,
+            "title": "Experienced: Mental Health Counselor needed (2)",
+            "hospital_id": 1,
+            "speciality_id": 13,
+            "job_info_id": 8,
+            "job_type": "Locum",
+            "location": "70664 Jayden Stravenue Suite 935\nLake Trystanborough, AR 88473-7924",
+            "description": "Alice had never left off when they met in the schoolroom, and though this was not here before,' said the Mock Turtle repeated thoughtfully. 'I should like it very nice, (it had, in fact, a sort of.",
+            "responsibilities": "Footman, 'and that for the next moment she appeared; but she got to the door. 'Call the next witness.' And he added looking angrily at the end of the moment they saw Alice coming. 'There's PLENTY of.",
+            "qualifications": "Queen never left off when they liked, and left off quarrelling with the bones and the three gardeners, but she had not got into the roof of the lefthand bit of stick, and held out its arms and.",
+            "experience_required": "SHE, of course,' the Mock Turtle: 'nine the next, and so on.' 'What a pity it wouldn't stay!' sighed the Hatter. He came in sight of the mushroom, and crawled away in the window, and some of YOUR.",
+            "salary_min": "14299.00",
+            "salary_max": "18567.00",
+            "benefits": "Alice. 'Well, then,' the Cat said, waving its tail when it's angry, and wags its tail when it's angry, and wags its tail when I'm pleased, and wag my tail when it's pleased. Now I growl when I'm.",
+            "working_hours": "8 hours shift",
+            "application_deadline": "1984-09-02",
+            "required_documents": "This seemed to have wondered at this, but at last she stretched her arms folded, quietly smoking a long sleep you've had!' 'Oh, I've had such a rule at processions; 'and besides, what would happen.",
+            "created_at": "2024-12-22T15:04:08.000000Z",
+            "updated_at": "2024-12-22T15:04:08.000000Z",
+            "hospital": {
                 "id": 1,
-                "name": "english",
-                "created_at": "2024-12-19T14:01:27.000000Z",
-                "updated_at": "2024-12-19T14:01:27.000000Z",
-                "pivot": {
-                    "job_add_id": 1,
-                    "lang_id": 1
+                "user_id": 1,
+                "facility_name": "Cedarwood Health Clinic",
+                "type": "Hospital",
+                "contact_person": "Mercedes Lowe III",
+                "contact_email": "libbie26@gmail.com",
+                "contact_phone": "1-616-278-8339",
+                "address": "1668 Norval Path\nVonport, NY 67259-1843",
+                "services_offered": "Orthopedics",
+                "number_of_beds": 126,
+                "website_url": "https://via.placeholder.com/640x480.png/00aa11?text=ex",
+                "year_established": 2000,
+                "overview": "Let this be a very pretty dance,' said Alice in a moment. 'Let's go on till you come to the Queen, and Alice heard it muttering to itself 'Then I'll go round and look up in a hurry: a large canvas.",
+                "photo": null,
+                "created_at": "2024-12-22T15:04:06.000000Z",
+                "updated_at": "2024-12-22T15:04:06.000000Z",
+                "user": {
+                    "id": 1,
+                    "name": "hospital",
+                    "email": "hospital@gmail.com",
+                    "email_verified_at": "2024-12-22T15:04:05.000000Z",
+                    "created_at": "2024-12-22T15:04:06.000000Z",
+                    "updated_at": "2024-12-22T15:04:06.000000Z",
+                    "state_id": 3,
+                    "district_id": 1,
+                    "type": "hospital",
+                    "state": {
+                        "id": 3,
+                        "name": "New York",
+                        "created_at": "2024-12-22T15:04:05.000000Z",
+                        "updated_at": "2024-12-22T15:04:05.000000Z"
+                    }
                 }
             },
-            {
-                "id": 2,
-                "name": "arabic",
-                "created_at": "2024-12-19T14:01:27.000000Z",
-                "updated_at": "2024-12-19T14:01:27.000000Z",
-                "pivot": {
-                    "job_add_id": 1,
-                    "lang_id": 2
-                }
+            "specialty": {
+                "id": 13,
+                "name": "Internal Medicine",
+                "created_at": "2024-12-22T15:04:05.000000Z",
+                "updated_at": "2024-12-22T15:04:05.000000Z"
             },
-            {
-                "id": 3,
-                "name": "spanish",
-                "created_at": "2024-12-19T14:01:27.000000Z",
-                "updated_at": "2024-12-19T14:01:27.000000Z",
-                "pivot": {
-                    "job_add_id": 1,
-                    "lang_id": 3
-                }
+            "job_info": {
+                "id": 8,
+                "name": "Diagnostic Medical Sonographer",
+                "created_at": "2024-12-22T15:04:05.000000Z",
+                "updated_at": "2024-12-22T15:04:05.000000Z"
+            },
+            "jobInfo": {
+                "id": 8,
+                "name": "Diagnostic Medical Sonographer",
+                "created_at": "2024-12-22T15:04:05.000000Z",
+                "updated_at": "2024-12-22T15:04:05.000000Z"
             }
-        ],
-        "skills": [
-            {
+        },
+        {
+            "id": 7,
+            "title": "Experienced: Occupational Therapist needed (8)",
+            "hospital_id": 7,
+            "speciality_id": 37,
+            "job_info_id": 69,
+            "job_type": "Locum",
+            "location": "92641 Abigayle Points Apt. 548\nNew Christianamouth, KS 95408",
+            "description": "Alice. 'Then it wasn't very civil of you to sit down without being invited,' said the Mouse only growled in reply. 'Idiot!' said the Mock Turtle. 'Hold your tongue!' added the March Hare: she.",
+            "responsibilities": "The Mouse only growled in reply. 'Please come back again, and said, 'So you did, old fellow!' said the Queen, 'and take this young lady to see some meaning in it.' The jury all wrote down on their.",
+            "qualifications": "D,' she added in a solemn tone, 'For the Duchess. An invitation from the sky! Ugh, Serpent!' 'But I'm not looking for eggs, as it turned round and get ready for your interesting story,' but she saw.",
+            "experience_required": "Let me see: that would be quite absurd for her to carry it further. So she sat still and said 'What else have you executed, whether you're nervous or not.' 'I'm a poor man, your Majesty,' said Alice.",
+            "salary_min": "11438.00",
+            "salary_max": "19590.00",
+            "benefits": "She soon got it out loud. 'Thinking again?' the Duchess sneezed occasionally; and as the March Hare, who had been (Before she had found her way into that beautiful garden--how IS that to be afraid.",
+            "working_hours": "8 hours shift",
+            "application_deadline": "2010-03-08",
+            "required_documents": "Pray, what is the same size for ten minutes together!' 'Can't remember WHAT things?' said the Cat said, waving its tail about in the middle, nursing a baby; the cook was busily stirring the soup.",
+            "created_at": "2024-12-22T15:04:08.000000Z",
+            "updated_at": "2024-12-22T15:04:08.000000Z",
+            "hospital": {
+                "id": 7,
+                "user_id": 7,
+                "facility_name": "Sunrise Medical Center",
+                "type": "Hospital",
+                "contact_person": "Haylee Huel",
+                "contact_email": "lowe.krystal@yahoo.com",
+                "contact_phone": "+1-386-349-2883",
+                "address": "3519 Blanda Drives\nZanderview, NM 75293",
+                "services_offered": "Physical Therapy",
+                "number_of_beds": 80,
+                "website_url": "https://via.placeholder.com/640x480.png/000044?text=placeat",
+                "year_established": 1978,
+                "overview": "England the nearer is to France-- Then turn not pale, beloved snail, but come and join the dance. Would not, could not, would not, could not, could not, would not, could not tell whether they were.",
+                "photo": null,
+                "created_at": "2024-12-22T15:04:06.000000Z",
+                "updated_at": "2024-12-22T15:04:06.000000Z",
+                "user": {
+                    "id": 7,
+                    "name": "Hospital7 Audra Walker",
+                    "email": "hospital7_serena.monahan@white.com",
+                    "email_verified_at": "2024-12-22T15:04:06.000000Z",
+                    "created_at": "2024-12-22T15:04:06.000000Z",
+                    "updated_at": "2024-12-22T15:04:06.000000Z",
+                    "state_id": 3,
+                    "district_id": 1,
+                    "type": "hospital",
+                    "state": {
+                        "id": 3,
+                        "name": "New York",
+                        "created_at": "2024-12-22T15:04:05.000000Z",
+                        "updated_at": "2024-12-22T15:04:05.000000Z"
+                    }
+                }
+            },
+            "specialty": {
+                "id": 37,
+                "name": "Vascular Surgery",
+                "created_at": "2024-12-22T15:04:05.000000Z",
+                "updated_at": "2024-12-22T15:04:05.000000Z"
+            },
+            "job_info": {
+                "id": 69,
+                "name": "Gastroenterologist",
+                "created_at": "2024-12-22T15:04:05.000000Z",
+                "updated_at": "2024-12-22T15:04:05.000000Z"
+            },
+            "jobInfo": {
+                "id": 69,
+                "name": "Gastroenterologist",
+                "created_at": "2024-12-22T15:04:05.000000Z",
+                "updated_at": "2024-12-22T15:04:05.000000Z"
+            }
+        },
+        {
+            "id": 10,
+            "title": "Experienced: Hospital Administrator needed (11)",
+            "hospital_id": 10,
+            "speciality_id": 30,
+            "job_info_id": 53,
+            "job_type": "Contract",
+            "location": "81148 Kessler Junction Apt. 823\nMcLaughlinchester, MS 31257",
+            "description": "Cheshire Cat, she was dozing off, and had come back and finish your story!' Alice called out 'The race is over!' and they repeated their arguments to her, so she went nearer to watch them, and he.",
+            "responsibilities": "All the time she saw in my kitchen AT ALL. Soup does very well without--Maybe it's always pepper that makes them so shiny?' Alice looked up, and began to say 'I once tasted--' but checked herself.",
+            "qualifications": "SOME change in my time, but never ONE with such sudden violence that Alice could not answer without a grin,' thought Alice; but she heard it before,' said Alice,) and round goes the clock in a.",
+            "experience_required": "I never heard it before,' said the Cat, 'if you don't know much,' said Alice; not that she was holding, and she was playing against herself, for she had plenty of time as she fell very slowly, for.",
+            "salary_min": "10461.00",
+            "salary_max": "16118.00",
+            "benefits": "Alice. 'I'M not a regular rule: you invented it just grazed his nose, and broke to pieces against one of the other two were using it as well as she swam nearer to watch them, and just as she was in.",
+            "working_hours": "8 hours shift",
+            "application_deadline": "1979-01-08",
+            "required_documents": "I'M a Duchess,' she said to the tarts on the hearth and grinning from ear to ear. 'Please would you like the Mock Turtle yet?' 'No,' said Alice. 'Off with her head!' Those whom she sentenced were.",
+            "created_at": "2024-12-22T15:04:08.000000Z",
+            "updated_at": "2024-12-22T15:04:08.000000Z",
+            "hospital": {
+                "id": 10,
+                "user_id": 10,
+                "facility_name": "Sunrise Medical Center",
+                "type": "Other",
+                "contact_person": "Arch Lueilwitz",
+                "contact_email": "emard.roosevelt@hotmail.com",
+                "contact_phone": "+19405733101",
+                "address": "905 Schaefer Turnpike\nWest Lennaland, SD 56332-1407",
+                "services_offered": "Cardiology",
+                "number_of_beds": 150,
+                "website_url": "https://via.placeholder.com/640x480.png/00aacc?text=voluptatibus",
+                "year_established": 1994,
+                "overview": "The poor little thing was snorting like a thunderstorm. 'A fine day, your Majesty!' the soldiers did. After these came the guests, mostly Kings and Queens, and among them Alice recognised the White.",
+                "photo": null,
+                "created_at": "2024-12-22T15:04:06.000000Z",
+                "updated_at": "2024-12-22T15:04:06.000000Z",
+                "user": {
+                    "id": 10,
+                    "name": "Hospital10 Jorge Kreiger",
+                    "email": "hospital10_augustine99@gmail.com",
+                    "email_verified_at": "2024-12-22T15:04:06.000000Z",
+                    "created_at": "2024-12-22T15:04:06.000000Z",
+                    "updated_at": "2024-12-22T15:04:06.000000Z",
+                    "state_id": 3,
+                    "district_id": 1,
+                    "type": "hospital",
+                    "state": {
+                        "id": 3,
+                        "name": "New York",
+                        "created_at": "2024-12-22T15:04:05.000000Z",
+                        "updated_at": "2024-12-22T15:04:05.000000Z"
+                    }
+                }
+            },
+            "specialty": {
+                "id": 30,
+                "name": "Radiation Oncology",
+                "created_at": "2024-12-22T15:04:05.000000Z",
+                "updated_at": "2024-12-22T15:04:05.000000Z"
+            },
+            "job_info": {
+                "id": 53,
+                "name": "Neurologist",
+                "created_at": "2024-12-22T15:04:05.000000Z",
+                "updated_at": "2024-12-22T15:04:05.000000Z"
+            },
+            "jobInfo": {
+                "id": 53,
+                "name": "Neurologist",
+                "created_at": "2024-12-22T15:04:05.000000Z",
+                "updated_at": "2024-12-22T15:04:05.000000Z"
+            }
+        },
+        {
+            "id": 18,
+            "title": "Experienced: Genetic Counselor needed (19)",
+            "hospital_id": 18,
+            "speciality_id": 9,
+            "job_info_id": 67,
+            "job_type": "Fulltime",
+            "location": "69313 Hailie Stream\nNew Madysonshire, KS 98547",
+            "description": "I mentioned before, And have grown most uncommonly fat; Yet you turned a back-somersault in at the bottom of the water, and seemed to quiver all over crumbs.' 'You're wrong about the twentieth time.",
+            "responsibilities": "Hatter, and, just as well to introduce it.' 'I don't know much,' said Alice, swallowing down her flamingo, and began bowing to the Duchess: 'and the moral of that is--\"Birds of a tree in front of.",
+            "qualifications": "She was close behind her, listening: so she went on. 'Or would you like to hear his history. I must have been was not easy to know when the tide rises and sharks are around, His voice has a timid.",
+            "experience_required": "There was a very difficult question. However, at last came a little nervous about it in her lessons in here? Why, there's hardly room for YOU, and no room to grow here,' said the last concert!' on.",
+            "salary_min": "10929.00",
+            "salary_max": "16669.00",
+            "benefits": "They all sat down again in a very small cake, on which the words a little, 'From the Queen. 'I haven't the least idea what to uglify is, you ARE a simpleton.' Alice did not quite know what to do.",
+            "working_hours": "8 hours shift",
+            "application_deadline": "2020-12-16",
+            "required_documents": "Duchess to play croquet.' The Frog-Footman repeated, in the wind, and was immediately suppressed by the pope, was soon submitted to by the hedge!' then silence, and then at the cook took the hookah.",
+            "created_at": "2024-12-22T15:04:08.000000Z",
+            "updated_at": "2024-12-22T15:04:08.000000Z",
+            "hospital": {
+                "id": 18,
+                "user_id": 18,
+                "facility_name": "Sunrise Medical Center",
+                "type": "Hospital",
+                "contact_person": "Elisha Erdman",
+                "contact_email": "stiedemann.hallie@schaefer.net",
+                "contact_phone": "+1.412.403.0001",
+                "address": "9321 Cecilia Ports Apt. 428\nMitchellmouth, GA 13493",
+                "services_offered": "Oncology",
+                "number_of_beds": 178,
+                "website_url": "https://via.placeholder.com/640x480.png/0099bb?text=eum",
+                "year_established": 1982,
+                "overview": "Alice, 'how am I then? Tell me that first, and then, and holding it to his ear. Alice considered a little door was shut again, and said, 'So you did, old fellow!' said the Gryphon, the squeaking of.",
+                "photo": null,
+                "created_at": "2024-12-22T15:04:06.000000Z",
+                "updated_at": "2024-12-22T15:04:06.000000Z",
+                "user": {
+                    "id": 18,
+                    "name": "Hospital18 Dr. Elda Pollich",
+                    "email": "hospital18_rene86@yahoo.com",
+                    "email_verified_at": "2024-12-22T15:04:06.000000Z",
+                    "created_at": "2024-12-22T15:04:06.000000Z",
+                    "updated_at": "2024-12-22T15:04:06.000000Z",
+                    "state_id": 3,
+                    "district_id": 1,
+                    "type": "hospital",
+                    "state": {
+                        "id": 3,
+                        "name": "New York",
+                        "created_at": "2024-12-22T15:04:05.000000Z",
+                        "updated_at": "2024-12-22T15:04:05.000000Z"
+                    }
+                }
+            },
+            "specialty": {
+                "id": 9,
+                "name": "Gastroenterology",
+                "created_at": "2024-12-22T15:04:05.000000Z",
+                "updated_at": "2024-12-22T15:04:05.000000Z"
+            },
+            "job_info": {
+                "id": 67,
+                "name": "Infectious Disease Specialist",
+                "created_at": "2024-12-22T15:04:05.000000Z",
+                "updated_at": "2024-12-22T15:04:05.000000Z"
+            },
+            "jobInfo": {
+                "id": 67,
+                "name": "Infectious Disease Specialist",
+                "created_at": "2024-12-22T15:04:05.000000Z",
+                "updated_at": "2024-12-22T15:04:05.000000Z"
+            }
+        },
+        {
+            "id": 22,
+            "title": "Experienced: Paramedic needed (23)",
+            "hospital_id": 22,
+            "speciality_id": 8,
+            "job_info_id": 60,
+            "job_type": "Locum",
+            "location": "5142 Beier Greens\nDanielberg, NC 75652",
+            "description": "Alice did not get dry very soon. 'Ahem!' said the others. 'Are their heads downward! The Antipathies, I think--' (she was so much surprised, that for two reasons. First, because I'm on the bank, and.",
+            "responsibilities": "Soup,\" will you, old fellow?' The Mock Turtle in the distance. 'And yet what a Mock Turtle in the shade: however, the moment he was going on within--a constant howling and sneezing, and every now.",
+            "qualifications": "I've said as yet.' 'A cheap sort of knot, and then Alice put down yet, before the trial's begun.' 'They're putting down their names,' the Gryphon answered, very nearly getting up and leave the.",
+            "experience_required": "Long Tale They were just beginning to feel which way it was over at last, and they sat down and saying to herself that perhaps it was quite surprised to find quite a new pair of boots every.",
+            "salary_min": "13595.00",
+            "salary_max": "18400.00",
+            "benefits": "It was high time to see you again, you dear old thing!' said the Duchess; 'I never heard before, 'Sure then I'm here! Digging for apples, indeed!' said the Queen, and Alice, were in custody and.",
+            "working_hours": "8 hours shift",
+            "application_deadline": "1992-05-10",
+            "required_documents": "You MUST have meant some mischief, or else you'd have signed your name like an arrow. The Cat's head began fading away the time. Alice had been all the same, the next witness!' said the Cat, 'or you.",
+            "created_at": "2024-12-22T15:04:08.000000Z",
+            "updated_at": "2024-12-22T15:04:08.000000Z",
+            "hospital": {
+                "id": 22,
+                "user_id": 22,
+                "facility_name": "Oakwood Medical Center",
+                "type": "Other",
+                "contact_person": "Prof. Abdul Cummerata V",
+                "contact_email": "ortiz.raquel@hotmail.com",
+                "contact_phone": "(530) 836-9257",
+                "address": "17051 Nicolas Center Suite 287\nWest Bulah, WA 23261",
+                "services_offered": "Emergency Care",
+                "number_of_beds": 157,
+                "website_url": "https://via.placeholder.com/640x480.png/007755?text=enim",
+                "year_established": 1999,
+                "overview": "Why, there's hardly room for YOU, and no more to do THAT in a hoarse growl, 'the world would go anywhere without a cat! It's the most confusing thing I ask! It's always six o'clock now.' A bright.",
+                "photo": null,
+                "created_at": "2024-12-22T15:04:06.000000Z",
+                "updated_at": "2024-12-22T15:04:06.000000Z",
+                "user": {
+                    "id": 22,
+                    "name": "Hospital22 Richie Mueller",
+                    "email": "hospital22_nick62@yahoo.com",
+                    "email_verified_at": "2024-12-22T15:04:06.000000Z",
+                    "created_at": "2024-12-22T15:04:06.000000Z",
+                    "updated_at": "2024-12-22T15:04:06.000000Z",
+                    "state_id": 3,
+                    "district_id": 1,
+                    "type": "hospital",
+                    "state": {
+                        "id": 3,
+                        "name": "New York",
+                        "created_at": "2024-12-22T15:04:05.000000Z",
+                        "updated_at": "2024-12-22T15:04:05.000000Z"
+                    }
+                }
+            },
+            "specialty": {
+                "id": 8,
+                "name": "Family Medicine",
+                "created_at": "2024-12-22T15:04:05.000000Z",
+                "updated_at": "2024-12-22T15:04:05.000000Z"
+            },
+            "job_info": {
+                "id": 60,
+                "name": "Obstetrician",
+                "created_at": "2024-12-22T15:04:05.000000Z",
+                "updated_at": "2024-12-22T15:04:05.000000Z"
+            },
+            "jobInfo": {
+                "id": 60,
+                "name": "Obstetrician",
+                "created_at": "2024-12-22T15:04:05.000000Z",
+                "updated_at": "2024-12-22T15:04:05.000000Z"
+            }
+        },
+        {
+            "id": 26,
+            "title": "Experienced: Public Health Specialist needed (27)",
+            "hospital_id": 26,
+            "speciality_id": 2,
+            "job_info_id": 66,
+            "job_type": "Contract",
+            "location": "51119 Hill Mall Apt. 987\nHeaneytown, AL 46088",
+            "description": "He sent them word I had to be a person of authority among them, called out, 'Sit down, all of them hit her in the trial done,' she thought, and it was too small, but at last came a little timidly.",
+            "responsibilities": "She was walking hand in hand, in couples: they were gardeners, or soldiers, or courtiers, or three of her sister, as well as she wandered about in all directions, 'just like a stalk out of THIS!'.",
+            "qualifications": "Mouse, in a trembling voice:-- 'I passed by his garden.\"' Alice did not answer, so Alice went on, yawning and rubbing its eyes, 'Of course, of course; just what I could shut up like telescopes: this.",
+            "experience_required": "Dormouse is asleep again,' said the King, 'and don't be nervous, or I'll kick you down stairs!' 'That is not said right,' said the King; and as he wore his crown over the edge of her hedgehog. The.",
+            "salary_min": "14482.00",
+            "salary_max": "16395.00",
+            "benefits": "Queen had only one way up as the hall was very likely true.) Down, down, down. There was a body to cut it off from: that he had never done such a noise inside, no one else seemed inclined to say.",
+            "working_hours": "8 hours shift",
+            "application_deadline": "1996-12-02",
+            "required_documents": "Majesty,' he began. 'You're a very short time the Queen till she was a good character, But said I didn't!' interrupted Alice. 'You are,' said the Gryphon: 'I went to the other, and growing sometimes.",
+            "created_at": "2024-12-22T15:04:08.000000Z",
+            "updated_at": "2024-12-22T15:04:08.000000Z",
+            "hospital": {
+                "id": 26,
+                "user_id": 26,
+                "facility_name": "Green Valley Hospital",
+                "type": "Nursing Home",
+                "contact_person": "Dr. Cedrick Bartoletti",
+                "contact_email": "camylle.wunsch@cruickshank.info",
+                "contact_phone": "1-870-846-9054",
+                "address": "68815 Citlalli Roads\nBettieville, IA 24887",
+                "services_offered": "Oncology",
+                "number_of_beds": 43,
+                "website_url": "https://via.placeholder.com/640x480.png/00ffdd?text=et",
+                "year_established": 1984,
+                "overview": "So she tucked her arm affectionately into Alice's, and they lived at the bottom of a well?' The Dormouse had closed its eyes by this time, and was surprised to find that her idea of the trees behind.",
+                "photo": null,
+                "created_at": "2024-12-22T15:04:06.000000Z",
+                "updated_at": "2024-12-22T15:04:06.000000Z",
+                "user": {
+                    "id": 26,
+                    "name": "Hospital26 Jacinthe McLaughlin III",
+                    "email": "hospital26_floyd.altenwerth@cremin.info",
+                    "email_verified_at": "2024-12-22T15:04:06.000000Z",
+                    "created_at": "2024-12-22T15:04:06.000000Z",
+                    "updated_at": "2024-12-22T15:04:06.000000Z",
+                    "state_id": 3,
+                    "district_id": 1,
+                    "type": "hospital",
+                    "state": {
+                        "id": 3,
+                        "name": "New York",
+                        "created_at": "2024-12-22T15:04:05.000000Z",
+                        "updated_at": "2024-12-22T15:04:05.000000Z"
+                    }
+                }
+            },
+            "specialty": {
+                "id": 2,
+                "name": "Anesthesiology",
+                "created_at": "2024-12-22T15:04:05.000000Z",
+                "updated_at": "2024-12-22T15:04:05.000000Z"
+            },
+            "job_info": {
+                "id": 66,
+                "name": "Pulmonologist",
+                "created_at": "2024-12-22T15:04:05.000000Z",
+                "updated_at": "2024-12-22T15:04:05.000000Z"
+            },
+            "jobInfo": {
+                "id": 66,
+                "name": "Pulmonologist",
+                "created_at": "2024-12-22T15:04:05.000000Z",
+                "updated_at": "2024-12-22T15:04:05.000000Z"
+            }
+        },
+        {
+            "id": 36,
+            "title": "Experienced: Registered Nurse needed (37)",
+            "hospital_id": 36,
+            "speciality_id": 33,
+            "job_info_id": 66,
+            "job_type": "Parttime",
+            "location": "508 Dare Valley Apt. 819\nNorth Marisa, MT 41646-3731",
+            "description": "Which shall sing?' 'Oh, YOU sing,' said the King, the Queen, 'Really, my dear, and that in some alarm. This time there were no arches left, and all dripping wet, cross, and uncomfortable. The moment.",
+            "responsibilities": "Alice glanced rather anxiously at the Footman's head: it just now.' 'It's the stupidest tea-party I ever was at in all their simple joys, remembering her own children. 'How should I know?' said.",
+            "qualifications": "Hatter. 'He won't stand beating. Now, if you want to stay in here any longer!' She waited for some minutes. Alice thought she had never heard it muttering to itself 'Then I'll go round and swam.",
+            "experience_required": "Alice. 'And where HAVE my shoulders got to? And oh, my poor hands, how is it I can't put it more clearly,' Alice replied very readily: 'but that's because it stays the same thing, you know.' 'Not at.",
+            "salary_min": "14639.00",
+            "salary_max": "16710.00",
+            "benefits": "Queen said to one of the door of the hall; but, alas! either the locks were too large, or the key was too much frightened that she was as much use in waiting by the way YOU manage?' Alice asked. The.",
+            "working_hours": "8 hours shift",
+            "application_deadline": "1978-10-12",
+            "required_documents": "March Hare,) '--it was at the beginning,' the King said to herself, 'because of his shrill little voice, the name of the jury had a head unless there was Mystery,' the Mock Turtle went on. 'Would.",
+            "created_at": "2024-12-22T15:04:08.000000Z",
+            "updated_at": "2024-12-22T15:04:08.000000Z",
+            "hospital": {
+                "id": 36,
+                "user_id": 36,
+                "facility_name": "Oakwood Medical Center",
+                "type": "Nursing Home",
+                "contact_person": "Terry Harris V",
+                "contact_email": "bernard59@kozey.com",
+                "contact_phone": "(662) 563-1274",
+                "address": "4299 Durgan Keys\nLake Tyrell, IA 85953",
+                "services_offered": "Oncology",
+                "number_of_beds": 37,
+                "website_url": "https://via.placeholder.com/640x480.png/00bb77?text=nisi",
+                "year_established": 1962,
+                "overview": "FIT you,' said the Gryphon: and Alice looked all round her, calling out in a shrill, loud voice, and see after some executions I have done just as I'd taken the highest tree in front of the thing.",
+                "photo": null,
+                "created_at": "2024-12-22T15:04:06.000000Z",
+                "updated_at": "2024-12-22T15:04:06.000000Z",
+                "user": {
+                    "id": 36,
+                    "name": "Hospital36 Ms. Malvina Gorczany Sr.",
+                    "email": "hospital36_uhahn@hotmail.com",
+                    "email_verified_at": "2024-12-22T15:04:06.000000Z",
+                    "created_at": "2024-12-22T15:04:06.000000Z",
+                    "updated_at": "2024-12-22T15:04:06.000000Z",
+                    "state_id": 3,
+                    "district_id": 1,
+                    "type": "hospital",
+                    "state": {
+                        "id": 3,
+                        "name": "New York",
+                        "created_at": "2024-12-22T15:04:05.000000Z",
+                        "updated_at": "2024-12-22T15:04:05.000000Z"
+                    }
+                }
+            },
+            "specialty": {
+                "id": 33,
+                "name": "Sports Medicine",
+                "created_at": "2024-12-22T15:04:05.000000Z",
+                "updated_at": "2024-12-22T15:04:05.000000Z"
+            },
+            "job_info": {
+                "id": 66,
+                "name": "Pulmonologist",
+                "created_at": "2024-12-22T15:04:05.000000Z",
+                "updated_at": "2024-12-22T15:04:05.000000Z"
+            },
+            "jobInfo": {
+                "id": 66,
+                "name": "Pulmonologist",
+                "created_at": "2024-12-22T15:04:05.000000Z",
+                "updated_at": "2024-12-22T15:04:05.000000Z"
+            }
+        },
+        {
+            "id": 38,
+            "title": "Experienced: Physical Therapist needed (39)",
+            "hospital_id": 38,
+            "speciality_id": 1,
+            "job_info_id": 76,
+            "job_type": "Parttime",
+            "location": "8544 Sidney Squares Apt. 837\nTrentontown, MS 65607",
+            "description": "Said he thanked the whiting kindly, but he would not give all else for two reasons. First, because I'm on the table. 'Nothing can be clearer than THAT. Then again--\"BEFORE SHE HAD THIS FIT--\" you.",
+            "responsibilities": "Gryphon remarked: 'because they lessen from day to day.' This was quite out of sight before the end of the Queen was close behind it when she turned the corner, but the Gryphon in an encouraging.",
+            "qualifications": "I've fallen by this time, sat down in a moment: she looked up, and there was nothing on it (as she had found her head through the neighbouring pool--she could hear him sighing as if nothing had.",
+            "experience_required": "I've had such a dear little puppy it was!' said Alice, always ready to talk to.' 'How are you thinking of?' 'I beg your acceptance of this ointment--one shilling the box-- Allow me to him: She gave.",
+            "salary_min": "11741.00",
+            "salary_max": "16550.00",
+            "benefits": "Hatter. 'He won't stand beating. Now, if you please! \"William the Conqueror, whose cause was favoured by the hedge!' then silence, and then Alice dodged behind a great interest in questions of.",
+            "working_hours": "8 hours shift",
+            "application_deadline": "1974-10-03",
+            "required_documents": "Tell her to begin.' For, you see, as well say,' added the Dormouse, not choosing to notice this question, but hurriedly went on, very much confused, 'I don't see any wine,' she remarked. 'It tells.",
+            "created_at": "2024-12-22T15:04:08.000000Z",
+            "updated_at": "2024-12-22T15:04:08.000000Z",
+            "hospital": {
+                "id": 38,
+                "user_id": 38,
+                "facility_name": "Green Valley Hospital",
+                "type": "Hospital",
+                "contact_person": "Mr. Kane Oberbrunner I",
+                "contact_email": "ayden.kris@paucek.org",
+                "contact_phone": "952.481.5594",
+                "address": "3446 Hayes Lock Apt. 850\nNorth Corafort, HI 06102",
+                "services_offered": "Physical Therapy",
+                "number_of_beds": 141,
+                "website_url": "https://via.placeholder.com/640x480.png/0077bb?text=unde",
+                "year_established": 1978,
+                "overview": "I to do with you. Mind now!' The poor little Lizard, Bill, was in a tone of great curiosity. 'Soles and eels, of course,' said the Mock Turtle a little house in it about four inches deep and.",
+                "photo": null,
+                "created_at": "2024-12-22T15:04:06.000000Z",
+                "updated_at": "2024-12-22T15:04:06.000000Z",
+                "user": {
+                    "id": 38,
+                    "name": "Hospital38 Scot Hudson",
+                    "email": "hospital38_kertzmann.monique@hotmail.com",
+                    "email_verified_at": "2024-12-22T15:04:06.000000Z",
+                    "created_at": "2024-12-22T15:04:06.000000Z",
+                    "updated_at": "2024-12-22T15:04:06.000000Z",
+                    "state_id": 3,
+                    "district_id": 1,
+                    "type": "hospital",
+                    "state": {
+                        "id": 3,
+                        "name": "New York",
+                        "created_at": "2024-12-22T15:04:05.000000Z",
+                        "updated_at": "2024-12-22T15:04:05.000000Z"
+                    }
+                }
+            },
+            "specialty": {
                 "id": 1,
-                "name": "patient assessment",
-                "created_at": "2024-12-19T14:01:27.000000Z",
-                "updated_at": "2024-12-19T14:01:27.000000Z",
-                "pivot": {
-                    "job_add_id": 1,
-                    "skill_id": 1
-                }
+                "name": "Allergy and Immunology",
+                "created_at": "2024-12-22T15:04:05.000000Z",
+                "updated_at": "2024-12-22T15:04:05.000000Z"
             },
-            {
-                "id": 2,
-                "name": "emr (electronic medical records)",
-                "created_at": "2024-12-19T14:01:27.000000Z",
-                "updated_at": "2024-12-19T14:01:27.000000Z",
-                "pivot": {
-                    "job_add_id": 1,
-                    "skill_id": 2
-                }
+            "job_info": {
+                "id": 76,
+                "name": "Clinical Psychologist",
+                "created_at": "2024-12-22T15:04:05.000000Z",
+                "updated_at": "2024-12-22T15:04:05.000000Z"
             },
-            {
-                "id": 3,
-                "name": "surgical precision",
-                "created_at": "2024-12-19T14:01:27.000000Z",
-                "updated_at": "2024-12-19T14:01:27.000000Z",
-                "pivot": {
-                    "job_add_id": 1,
-                    "skill_id": 3
-                }
+            "jobInfo": {
+                "id": 76,
+                "name": "Clinical Psychologist",
+                "created_at": "2024-12-22T15:04:05.000000Z",
+                "updated_at": "2024-12-22T15:04:05.000000Z"
             }
-        ],
-        "hospital": {
-            "id": 1,
-            "user_id": 1,
-            "facility_name": "Riverside Health Cliniccccddddd",
-            "type": "Other",
-            "contact_person": "Rossie O'Conner",
-            "contact_email": "addie.mueller@hotmail.com",
-            "contact_phone": "320.456.1371",
-            "address": "71507 Morar Mount\nRueckerview, FL 15045-2345",
-            "services_offered": "General Surgery",
-            "number_of_beds": 150,
-            "website_url": "https://via.placeholder.com/640x480.png/00cc22?text=earum",
-            "year_established": 2025,
-            "overview": "CAN I have none, Why, I do so like that curious song about the whiting!' 'Oh, as to go and live in that soup!' Alice said to the Caterpillar, just as well as she spoke. Alice did not at all anxious.",
-            "photo": "storage/hospital/facility_imgs/KSqMk8F59rlymIqtDeqPR1kjdWHbxTK3wAnUgAFq.jpg",
-            "created_at": "2024-12-19T14:01:27.000000Z",
-            "updated_at": "2024-12-19T17:42:14.000000Z"
         },
-        "specialty": {
-            "id": 1,
-            "name": "Allergy and Immunology",
-            "created_at": "2024-12-19T14:01:26.000000Z",
-            "updated_at": "2024-12-19T14:01:26.000000Z"
-        },
-        "job_info": {
-            "id": 1,
-            "name": "Medical Assistant",
-            "created_at": "2024-12-19T14:01:26.000000Z",
-            "updated_at": "2024-12-19T14:01:26.000000Z"
+        {
+            "id": 41,
+            "title": "Experienced: Medical Office Manager needed (42)",
+            "hospital_id": 41,
+            "speciality_id": 11,
+            "job_info_id": 54,
+            "job_type": "Contract",
+            "location": "504 Birdie Roads Apt. 194\nMarkusside, AR 08513",
+            "description": "Duchess sneezed occasionally; and as for the Duchess said after a few minutes it seemed quite dull and stupid for life to go on in the sea, some children digging in the after-time, be herself a.",
+            "responsibilities": "Lobster Quadrille?' the Gryphon interrupted in a trembling voice:-- 'I passed by his face only, she would have appeared to them to be true): If she should meet the real Mary Ann, what ARE you doing.",
+            "qualifications": "CHAPTER V. Advice from a bottle marked 'poison,' so Alice soon began talking to herself, 'if one only knew how to speak good English); 'now I'm opening out like the name: however, it only grinned.",
+            "experience_required": "Off with his nose, you know?' 'It's the stupidest tea-party I ever was at in all directions, 'just like a frog; and both the hedgehogs were out of a sea of green leaves that had fallen into the.",
+            "salary_min": "13190.00",
+            "salary_max": "15649.00",
+            "benefits": "And the moral of that is, but I THINK I can guess that,' she added aloud. 'Do you mean that you think you might catch a bad cold if she had peeped into the garden at once; but, alas for poor Alice!.",
+            "working_hours": "8 hours shift",
+            "application_deadline": "2006-09-27",
+            "required_documents": "Mouse heard this, it turned a back-somersault in at all?' said Alice, (she had grown up,' she said to herself, 'Why, they're only a pack of cards, after all. I needn't be afraid of it. Presently the.",
+            "created_at": "2024-12-22T15:04:08.000000Z",
+            "updated_at": "2024-12-22T15:04:08.000000Z",
+            "hospital": {
+                "id": 41,
+                "user_id": 41,
+                "facility_name": "Maple Leaf Hospital",
+                "type": "Nursing Home",
+                "contact_person": "Prof. Kale Hettinger IV",
+                "contact_email": "fruecker@yahoo.com",
+                "contact_phone": "458.836.2311",
+                "address": "6196 Noah Mission Suite 068\nNorth Brandtland, OR 36492-1214",
+                "services_offered": "Maternity Services",
+                "number_of_beds": 77,
+                "website_url": "https://via.placeholder.com/640x480.png/00ccee?text=tempore",
+                "year_established": 1973,
+                "overview": "Alice was not a VERY unpleasant state of mind, she turned the corner, but the Mouse to tell me who YOU are, first.' 'Why?' said the Queen. First came ten soldiers carrying clubs; these were.",
+                "photo": null,
+                "created_at": "2024-12-22T15:04:06.000000Z",
+                "updated_at": "2024-12-22T15:04:06.000000Z",
+                "user": {
+                    "id": 41,
+                    "name": "Hospital41 Dr. Luigi Little MD",
+                    "email": "hospital41_ohalvorson@stokes.com",
+                    "email_verified_at": "2024-12-22T15:04:06.000000Z",
+                    "created_at": "2024-12-22T15:04:06.000000Z",
+                    "updated_at": "2024-12-22T15:04:06.000000Z",
+                    "state_id": 3,
+                    "district_id": 1,
+                    "type": "hospital",
+                    "state": {
+                        "id": 3,
+                        "name": "New York",
+                        "created_at": "2024-12-22T15:04:05.000000Z",
+                        "updated_at": "2024-12-22T15:04:05.000000Z"
+                    }
+                }
+            },
+            "specialty": {
+                "id": 11,
+                "name": "Hematology",
+                "created_at": "2024-12-22T15:04:05.000000Z",
+                "updated_at": "2024-12-22T15:04:05.000000Z"
+            },
+            "job_info": {
+                "id": 54,
+                "name": "Oncologist",
+                "created_at": "2024-12-22T15:04:05.000000Z",
+                "updated_at": "2024-12-22T15:04:05.000000Z"
+            },
+            "jobInfo": {
+                "id": 54,
+                "name": "Oncologist",
+                "created_at": "2024-12-22T15:04:05.000000Z",
+                "updated_at": "2024-12-22T15:04:05.000000Z"
+            }
         }
-    },
+    ],
     "status": "success",
     "message": "success",
     "errors": [],
-    "statusCode": 200
+    "statusCode": 200,
+    "meta": {
+        "hasMorePages": false,
+        "total": 9,
+        "last_page": 1,
+        "per_page": 20,
+        "current_page": 1,
+        "path": "http://127.0.0.1:8000/api/job-add"
+    }
 }

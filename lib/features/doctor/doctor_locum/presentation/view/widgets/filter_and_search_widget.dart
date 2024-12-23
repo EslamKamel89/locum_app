@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:locum_app/core/enums/filter_option_enum.dart';
+import 'package:locum_app/core/enums/sort_options_enum.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/widgets/custom_form_widgets.dart';
 
 class SearchWidget extends StatefulWidget {
@@ -9,20 +11,12 @@ class SearchWidget extends StatefulWidget {
 }
 
 class SearchWidgetState extends State<SearchWidget> {
-  final List<String> sortOptions = ['Published At', 'Salary'];
-  final List<String> filterOptions = [
-    'Speciality',
-    'Job Title',
-    'Job Type',
-    'State',
-    'District',
-    'Languages',
-    'Skills',
-  ];
+  final List<SortOptionsEnum> sortOptions = SortOptionsEnum.values;
+  final List<FilterOptionsEnum> filterOptions = FilterOptionsEnum.values;
 
-  String? selectedSort;
-  String? selectedFilter;
-  final List<Map<String, String>> activeFilters = [];
+  SortOptionsEnum? selectedSort;
+  FilterOptionsEnum? selectedFilter;
+  final Map<FilterOptionsEnum, String> activeFilters = {};
   final TextEditingController filterValueController = TextEditingController();
   bool isVisible = false;
 
@@ -87,7 +81,7 @@ class SearchWidgetState extends State<SearchWidget> {
                 Row(
                   children: [
                     Expanded(
-                      child: DropdownButtonFormField<String>(
+                      child: DropdownButtonFormField<SortOptionsEnum>(
                         decoration: InputDecoration(
                           labelText: 'Sort By',
                           border: OutlineInputBorder(
@@ -98,7 +92,7 @@ class SearchWidgetState extends State<SearchWidget> {
                         items: sortOptions.map((option) {
                           return DropdownMenuItem(
                             value: option,
-                            child: Text(option),
+                            child: Text(option.toShortString()),
                           );
                         }).toList(),
                         onChanged: (value) {
@@ -114,7 +108,7 @@ class SearchWidgetState extends State<SearchWidget> {
                 const SizedBox(height: 16),
 
                 // Filter Dropdown
-                DropdownButtonFormField<String>(
+                DropdownButtonFormField<FilterOptionsEnum>(
                   decoration: InputDecoration(
                     labelText: 'Filter By',
                     border: OutlineInputBorder(
@@ -125,7 +119,7 @@ class SearchWidgetState extends State<SearchWidget> {
                   items: filterOptions.map((option) {
                     return DropdownMenuItem(
                       value: option,
-                      child: Text(option),
+                      child: Text(option.toShortString()),
                     );
                   }).toList(),
                   onChanged: (value) {
@@ -141,7 +135,7 @@ class SearchWidgetState extends State<SearchWidget> {
                 // Filter Value Input
                 if (selectedFilter != null)
                   CustomTextFormFieldWithSuggestions(
-                    label: 'Enter $selectedFilter',
+                    label: 'Enter ${selectedFilter?.toShortString()}',
                     suggestions: const ['Value 1', 'Value 2', 'Value 3'],
                     onSelected: (suggestion) {
                       filterValueController.text = suggestion;
@@ -154,39 +148,6 @@ class SearchWidgetState extends State<SearchWidget> {
                       return null;
                     },
                   ),
-                // TypeAheadField<String>(
-                //   textFieldConfiguration: TextFieldConfiguration(
-                //     controller: filterValueController,
-                //     decoration: InputDecoration(
-                //       labelText: 'Enter $selectedFilter',
-                //       border: OutlineInputBorder(
-                //         borderRadius: BorderRadius.circular(8),
-                //       ),
-                //     ),
-                //   ),
-                //   suggestionsCallback: (pattern) async {
-                //     // Mock suggestion data, replace with API call if needed
-                //     return ['Value 1', 'Value 2', 'Value 3']
-                //         .where((item) => item.toLowerCase().contains(pattern.toLowerCase()))
-                //         .toList();
-                //   },
-                //   itemBuilder: (context, suggestion) {
-                //     return ListTile(
-                //       title: Text(suggestion),
-                //     );
-                //   },
-                //   onSuggestionSelected: (suggestion) {
-                //     filterValueController.text = suggestion;
-                //   },
-                //   validator: (value) {
-                //     if (value == null || value.isEmpty) {
-                //       return 'Please enter a value for $selectedFilter';
-                //     }
-                //     return null;
-                //   },
-                // ),
-
-                const SizedBox(height: 16),
 
                 // Add Filter Button
                 if (selectedFilter != null)
@@ -194,9 +155,8 @@ class SearchWidgetState extends State<SearchWidget> {
                     onPressed: () {
                       if (filterValueController.text.isNotEmpty) {
                         setState(() {
-                          activeFilters.add({
-                            'filter': selectedFilter!,
-                            'value': filterValueController.text,
+                          activeFilters.addAll({
+                            selectedFilter!: filterValueController.text,
                           });
                           selectedFilter = null;
                           filterValueController.clear();
@@ -206,25 +166,27 @@ class SearchWidgetState extends State<SearchWidget> {
                     child: const Text('Add Filter'),
                   ),
 
-                const SizedBox(height: 16),
+                if (selectedFilter != null) const SizedBox(height: 16),
 
                 // Active Filters Display
                 Wrap(
                   spacing: 8,
                   runSpacing: 8,
-                  children: activeFilters.map((filter) {
+                  children: activeFilters.entries.map((filter) {
                     return Chip(
-                      label: Text('${filter['filter']}: ${filter['value']}'),
+                      label: Text('${filter.key.toShortString()}: ${{filter.value}}'),
                       deleteIcon: const Icon(Icons.close),
                       onDeleted: () {
                         setState(() {
-                          activeFilters.remove(filter);
+                          activeFilters.remove(filter.key);
                         });
                       },
                     );
                   }).toList(),
                 ),
                 const SizedBox(height: 10),
+                if (activeFilters.isNotEmpty) ElevatedButton(onPressed: () {}, child: const Text('Search')),
+                if (activeFilters.isNotEmpty) const SizedBox(height: 10)
               ],
             ),
           ),
