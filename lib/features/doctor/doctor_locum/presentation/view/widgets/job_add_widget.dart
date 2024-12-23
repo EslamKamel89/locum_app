@@ -50,6 +50,14 @@ class JobAddWidget extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
+            const SizedBox(height: 8),
+            Text(
+              'Job Title: ${jobAddModel.jobInfo?.name ?? ''}',
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
             const SizedBox(height: 12),
             Text(
               jobAddModel.description ?? '',

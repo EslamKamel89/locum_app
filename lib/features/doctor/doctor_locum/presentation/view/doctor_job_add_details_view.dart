@@ -14,7 +14,8 @@ class DoctorJobAddDetailsView extends StatefulWidget {
   });
 
   @override
-  State<DoctorJobAddDetailsView> createState() => _DoctorJobAddDetailsViewState();
+  State<DoctorJobAddDetailsView> createState() =>
+      _DoctorJobAddDetailsViewState();
 }
 
 class _DoctorJobAddDetailsViewState extends State<DoctorJobAddDetailsView> {
@@ -161,7 +162,8 @@ class _DoctorJobAddDetailsViewState extends State<DoctorJobAddDetailsView> {
                 const SizedBox(height: 16),
 
                 // Salary Range
-                _buildInfoRow('Salary Range', '\$${jobAddModel?.salaryMin} - \$${jobAddModel?.salaryMax}'),
+                _buildInfoRow('Salary Range',
+                    '\$${jobAddModel?.salaryMin} - \$${jobAddModel?.salaryMax}'),
 
                 const SizedBox(height: 16),
 
@@ -189,7 +191,8 @@ class _DoctorJobAddDetailsViewState extends State<DoctorJobAddDetailsView> {
                 const SizedBox(height: 16),
 
                 // Application Deadline
-                _buildInfoRow('Application Deadline', jobAddModel?.applicationDeadline ?? ''),
+                _buildInfoRow('Application Deadline',
+                    jobAddModel?.applicationDeadline ?? ''),
 
                 const SizedBox(height: 16),
 

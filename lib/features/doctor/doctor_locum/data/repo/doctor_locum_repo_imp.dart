@@ -30,11 +30,10 @@ class DoctorLocumRepoImp implements DoctorLocumRepo {
 
   @override
   Future<Either<Failure, ResponseModel<List<JobAddModel>>>> showAllJobAdds(
-      {required int limit, required int page}) async {
+      {required ShowAllJobAddsParams params}) async {
     final t = prt('showAllJobAdds  - DoctorLocumRepoImp');
     try {
-      ResponseModel<List<JobAddModel>> response =
-          await doctorLocumRemoteDataSource.showAllJobAdds(limit: limit, page: page);
+      ResponseModel<List<JobAddModel>> response = await doctorLocumRemoteDataSource.showAllJobAdds(params: params);
       return Right(pr(response, t));
     } catch (e) {
       pr(e.toString());

@@ -56,10 +56,11 @@ Done todos {
     # define the search criteria that you want in the doctor search add
     # handle pagination in view all job ads
     # work on the ui of the search widget
+    # fetch the data for the values in the search widget
+    # transform the state from string to id
 }
 
 todos {
     # view file uploaded
     # if you change the doctor image in the update method and come back the profile page the image is not updated in the ui only but it's updated successfully to the backend
-    # fetch the data for the values in the search widget
 }

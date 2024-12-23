@@ -15,8 +15,11 @@ class ShowAllAddsCubit extends Cubit<ShowAllAddsState> {
   ShowAllAddsCubit(
     this.doctorLocumRepo,
   ) : super(ShowAllAddsState());
+  void resetState() {
+    emit(ShowAllAddsState());
+  }
 
-  Future showAllJobAdds() async {
+  Future showAllJobAdds([ShowAllJobAddsParams? params]) async {
     final t = prt('showAllJobAdds - ShowAllAddsCubit');
     if (state.responseType == ResponseEnum.loading) {
       pr('Still loading data exiting showAllJobAdds ', t);
@@ -26,8 +29,32 @@ class ShowAllAddsCubit extends Cubit<ShowAllAddsState> {
       pr('No more pages exiting showAllJobAdds ', t);
       return;
     }
-    emit(state.copyWith(responseType: ResponseEnum.loading, errorMessage: null, page: state.page! + 1));
-    final result = await doctorLocumRepo.showAllJobAdds(limit: state.limit!, page: state.page!);
+    if (params != null) {
+      params.limit = state.limit!;
+      params.page = state.page! + 1;
+      emit(state.copyWith(
+        responseType: ResponseEnum.loading,
+        errorMessage: null,
+        page: state.page! + 1,
+        params: params,
+      ));
+    } else {
+      emit(state.copyWith(
+        responseType: ResponseEnum.loading,
+        errorMessage: null,
+        page: state.page! + 1,
+        params: params?.copyWith(limit: state.limit, page: state.page),
+      ));
+    }
+    // params = params ?? ShowAllJobAddsParams();
+    // params.limit = state.limit!;
+    // params.page = state.page;
+    final result = await doctorLocumRepo.showAllJobAdds(
+      params: pr(
+        state.params ?? ShowAllJobAddsParams(limit: state.limit, page: state.page),
+        '$t params used in the request',
+      ),
+    );
     result.fold(
       (Failure failure) {
         pr(failure.message, t);

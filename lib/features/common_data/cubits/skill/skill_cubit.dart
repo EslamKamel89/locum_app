@@ -15,18 +15,23 @@ class SkillCubit extends Cubit<SkillState> {
 
   Future fetchSkills() async {
     final t = prt('fetchSkills - SkillCubit');
-    emit(state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
+    emit(
+        state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
     final result = await commonDataRepo.fetchSkills();
     result.fold(
       (Failure failure) {
         pr(failure.message, t);
         showSnackbar('Server Error', failure.message, true);
-        emit(state.copyWith(responseType: ResponseEnum.failed, errorMessage: failure.message));
+        emit(state.copyWith(
+            responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
       (List<SkillModel> skills) async {
         pr(skills, t);
         emit(
-          state.copyWith(skillModels: skills, responseType: ResponseEnum.success, errorMessage: null),
+          state.copyWith(
+              skillModels: skills,
+              responseType: ResponseEnum.success,
+              errorMessage: null),
         );
       },
     );

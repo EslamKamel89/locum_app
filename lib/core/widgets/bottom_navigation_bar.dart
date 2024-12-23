@@ -10,13 +10,16 @@ final doctorBottomNavigationBar = DefaultBottomNavigationBar(
     if (context == null) return;
     switch (index) {
       case 0:
-        Navigator.of(context).pushNamedAndRemoveUntil(AppRoutesNames.doctorHomeScreen, (_) => false);
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            AppRoutesNames.doctorHomeScreen, (_) => false);
         break;
       case 1:
-        Navigator.of(context).pushNamedAndRemoveUntil(AppRoutesNames.doctorLocumScreen, (_) => false);
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            AppRoutesNames.doctorLocumScreen, (_) => false);
         break;
       case 2:
-        Navigator.of(context).pushNamedAndRemoveUntil(AppRoutesNames.doctorProfileScreen, (_) => false);
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            AppRoutesNames.doctorProfileScreen, (_) => false);
         break;
     }
   },
@@ -28,10 +31,12 @@ final hospitalBottomNavigationBar = DefaultBottomNavigationBar(
     if (context == null) return;
     switch (index) {
       case 0:
-        Navigator.of(context).pushNamedAndRemoveUntil(AppRoutesNames.hospitalHomeScreen, (_) => false);
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            AppRoutesNames.hospitalHomeScreen, (_) => false);
         break;
       case 2:
-        Navigator.of(context).pushNamedAndRemoveUntil(AppRoutesNames.hospitalProfileScreen, (_) => false);
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            AppRoutesNames.hospitalProfileScreen, (_) => false);
         break;
     }
   },

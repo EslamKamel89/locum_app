@@ -169,6 +169,7 @@ class _CustomTextFormFieldWithSuggestionsState
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: TypeAheadField<String>(
         controller: widget.controller,
+        // suggestionsController: SuggestionsController(),
         suggestionsCallback: (search) {
           final result = widget.suggestions
               .where((String suggestion) => suggestion

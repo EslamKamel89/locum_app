@@ -27,7 +27,9 @@ class ResponseModel<T> {
         message: json['message'] as String?,
         errors: json['errors'] as List?,
         statusCode: json['statusCode'] as int?,
-        pagination: json['meta'] == null ? null : PaginationModel.fromJson(json['meta'] as Map<String, dynamic>),
+        pagination: json['meta'] == null
+            ? null
+            : PaginationModel.fromJson(json['meta'] as Map<String, dynamic>),
       );
 
   Map<String, dynamic> toJson() => {

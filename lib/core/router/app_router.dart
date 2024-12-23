@@ -79,7 +79,8 @@ class AppRouter {
       case AppRoutesNames.doctorInfoForm:
         return CustomPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => DoctorInfoCubit(doctorProfileRepo: serviceLocator()),
+            create: (context) =>
+                DoctorInfoCubit(doctorProfileRepo: serviceLocator()),
             child: DoctorInfoForm(
               create: args?['create'] ?? true,
             ),
@@ -161,7 +162,8 @@ class AppRouter {
 }
 
 class CustomPageRoute<T> extends MaterialPageRoute<T> {
-  CustomPageRoute({required super.builder, required RouteSettings super.settings});
+  CustomPageRoute(
+      {required super.builder, required RouteSettings super.settings});
   @override
   Widget buildTransitions(
     BuildContext context,

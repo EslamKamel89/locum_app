@@ -17,18 +17,23 @@ class ShowJobAddCubit extends Cubit<ShowJobAddState> {
     required int jobAddId,
   }) async {
     final t = prt('showJobAdd - ShowJobAddCubit');
-    emit(state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
+    emit(
+        state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
     final result = await doctorLocumRepo.showJobAdd(jobAddId: jobAddId);
     result.fold(
       (Failure failure) {
         pr(failure.message, t);
         showSnackbar('Server Error', failure.message, true);
-        emit(state.copyWith(responseType: ResponseEnum.failed, errorMessage: failure.message));
+        emit(state.copyWith(
+            responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
       (JobAddModel jobAddModel) async {
         pr(jobAddModel, t);
         emit(
-          state.copyWith(jobAddModel: jobAddModel, responseType: ResponseEnum.success, errorMessage: null),
+          state.copyWith(
+              jobAddModel: jobAddModel,
+              responseType: ResponseEnum.success,
+              errorMessage: null),
         );
       },
     );

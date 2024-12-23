@@ -55,7 +55,9 @@ class _JobAddsWidgetState extends State<JobAddsWidget> {
               return JobAddWidget(jobAddModel: model);
             }
 
-            return state.responseType == ResponseEnum.loading ? const JobAdLoadingWidget() : const SizedBox();
+            return state.responseType == ResponseEnum.loading
+                ? const JobAdLoadingWidget()
+                : const SizedBox();
           },
         );
       },
