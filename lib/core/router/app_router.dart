@@ -8,6 +8,7 @@ import 'package:locum_app/features/auth/presentation/cubits/sign_up/sign_up_cubi
 import 'package:locum_app/features/auth/presentation/views/sign_in/sign_in_screen.dart';
 import 'package:locum_app/features/auth/presentation/views/sign_up/signup_screen.dart';
 import 'package:locum_app/features/doctor/doctor_home/doctor_home_view.dart';
+import 'package:locum_app/features/doctor/doctor_locum/presentation/cubits/apply_to_job_add/apply_to_job_add_cubit.dart';
 import 'package:locum_app/features/doctor/doctor_locum/presentation/cubits/show_all_add/show_all_adds_cubit.dart';
 import 'package:locum_app/features/doctor/doctor_locum/presentation/cubits/show_job_add/show_job_add_cubit.dart';
 import 'package:locum_app/features/doctor/doctor_locum/presentation/view/doctor_job_add_details_view.dart';
@@ -79,8 +80,7 @@ class AppRouter {
       case AppRoutesNames.doctorInfoForm:
         return CustomPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) =>
-                DoctorInfoCubit(doctorProfileRepo: serviceLocator()),
+            create: (context) => DoctorInfoCubit(doctorProfileRepo: serviceLocator()),
             child: DoctorInfoForm(
               create: args?['create'] ?? true,
             ),
@@ -149,8 +149,11 @@ class AppRouter {
         );
       case AppRoutesNames.doctorJobDetailsScreen:
         return CustomPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => ShowJobAddCubit(serviceLocator()),
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (context) => ShowJobAddCubit(serviceLocator())),
+              BlocProvider(create: (context) => ApplyToJobAddCubit(serviceLocator())),
+            ],
             child: DoctorJobAddDetailsView(id: args?['id']),
           ),
           settings: routeSettings,
@@ -162,8 +165,7 @@ class AppRouter {
 }
 
 class CustomPageRoute<T> extends MaterialPageRoute<T> {
-  CustomPageRoute(
-      {required super.builder, required RouteSettings super.settings});
+  CustomPageRoute({required super.builder, required RouteSettings super.settings});
   @override
   Widget buildTransitions(
     BuildContext context,

@@ -58,9 +58,13 @@ Done todos {
     # work on the ui of the search widget
     # fetch the data for the values in the search widget
     # transform the state from string to id
+    # format date
+    # details screen themes and states
+    # job application ui
 }
 
 todos {
     # view file uploaded
     # if you change the doctor image in the update method and come back the profile page the image is not updated in the ui only but it's updated successfully to the backend
+    # job application connect with the backend
 }

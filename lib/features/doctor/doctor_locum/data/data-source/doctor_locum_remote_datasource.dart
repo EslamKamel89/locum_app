@@ -1,6 +1,7 @@
 import 'package:locum_app/core/api_service/api_consumer.dart';
 import 'package:locum_app/core/api_service/end_points.dart';
 import 'package:locum_app/core/heleprs/print_helper.dart';
+import 'package:locum_app/features/common_data/data/models/job_application_model.dart';
 import 'package:locum_app/features/common_data/data/models/response_model.dart';
 import 'package:locum_app/features/doctor/doctor_locum/domain/models/job_add_model.dart';
 import 'package:locum_app/features/doctor/doctor_locum/domain/repos/doctor_locum_repo.dart';
@@ -34,5 +35,19 @@ class DoctorLocumRemoteDataSource {
     response.data = jobAddModels;
 
     return pr(response, t);
+  }
+
+  Future<JobApplicationModel> applyJobAdd({required int jobAddId, required String notes}) async {
+    final t = prt('applyJobAdd - DoctorLocumRemoteDataSource');
+    final data = await api.post(
+      EndPoint.applyToJobAdd,
+      data: {
+        "job_add_id": jobAddId,
+        "additional_notes": notes,
+      },
+    );
+    JobApplicationModel model = JobApplicationModel.fromJson(data['data']);
+
+    return pr(model, t);
   }
 }
