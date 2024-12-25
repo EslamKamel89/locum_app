@@ -14,19 +14,24 @@ class ApplyToJobAddCubit extends Cubit<ApplyToJobAddState> {
 
   Future applyJobAdd({required int jobAddId, required String notes}) async {
     final t = prt('applyJobAdd - ApplyToJobAddCubit');
-    emit(state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
-    final result = await doctorLocumRepo.applyJobAdd(jobAddId: jobAddId, notes: notes);
+    emit(
+        state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
+    final result =
+        await doctorLocumRepo.applyJobAdd(jobAddId: jobAddId, notes: notes);
     result.fold(
       (Failure failure) {
         pr(failure.message, t);
         showSnackbar('Server Error', failure.message, true);
-        emit(state.copyWith(responseType: ResponseEnum.failed, errorMessage: failure.message));
+        emit(state.copyWith(
+            responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
       (JobApplicationModel jobApplicationModel) async {
         pr(jobApplicationModel, t);
         emit(
           state.copyWith(
-              jobApplicationModel: jobApplicationModel, responseType: ResponseEnum.success, errorMessage: null),
+              jobApplicationModel: jobApplicationModel,
+              responseType: ResponseEnum.success,
+              errorMessage: null),
         );
       },
     );

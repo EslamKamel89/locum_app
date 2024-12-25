@@ -15,4 +15,6 @@ class AppRoutesNames {
   static const String doctorInfoForm = '/doctorInfoForm';
   static const String doctorForm = '/doctorForm';
   static const String userDoctorForm = '/userDoctorForm';
+  static const String doctorAllJobApplicationView = '/doctorAllJobApplicationView';
+  static const String doctorJobApplicationDetailsView = '/doctorJobApplicationDetailsView';
 }

@@ -21,4 +21,5 @@ class EndPoint {
   static String showJobAdd(int id) => "$baseUrl/job-add/$id";
   static String showAllJobAdds = "$baseUrl/job-add";
   static String applyToJobAdd = "$baseUrl/job-applications";
+  static String showDoctorJobApplication = "$baseUrl/job-applications";
 }

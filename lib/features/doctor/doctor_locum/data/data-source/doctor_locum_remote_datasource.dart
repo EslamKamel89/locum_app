@@ -24,20 +24,23 @@ class DoctorLocumRemoteDataSource {
     return pr(jobAddModel, t);
   }
 
-  Future<ResponseModel<List<JobAddModel>>> showAllJobAdds({required ShowAllJobAddsParams params}) async {
+  Future<ResponseModel<List<JobAddModel>>> showAllJobAdds(
+      {required ShowAllJobAddsParams params}) async {
     final t = prt('showAllJobAdds - DoctorLocumRemoteDataSource');
     final data = await api.get(
       EndPoint.showAllJobAdds,
       queryParameter: params.toJson(),
     );
     ResponseModel<List<JobAddModel>> response = ResponseModel.fromJson(data);
-    List<JobAddModel> jobAddModels = data['data'].map<JobAddModel>((e) => JobAddModel.fromJson(e)).toList();
+    List<JobAddModel> jobAddModels =
+        data['data'].map<JobAddModel>((e) => JobAddModel.fromJson(e)).toList();
     response.data = jobAddModels;
 
     return pr(response, t);
   }
 
-  Future<JobApplicationModel> applyJobAdd({required int jobAddId, required String notes}) async {
+  Future<JobApplicationModel> applyJobAdd(
+      {required int jobAddId, required String notes}) async {
     final t = prt('applyJobAdd - DoctorLocumRemoteDataSource');
     final data = await api.post(
       EndPoint.applyToJobAdd,

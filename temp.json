@@ -1,14 +1,47 @@
 {
-    "data": {
-        "job_add_id": 3,
-        "additional_notes": "additional notes",
-        "doctor_id": 1,
-        "updated_at": "2024-12-24T14:05:00.000000Z",
-        "created_at": "2024-12-24T14:05:00.000000Z",
-        "id": 53
-    },
+    "data": [
+        {
+            "id": 4,
+            "job_add_id": 4,
+            "doctor_id": 1,
+            "status": "rejected",
+            "application_date": "2024-12-25",
+            "additional_notes": "Magpie began wrapping itself up very carefully, nibbling first at one and then they both sat silent and looked anxiously over his shoulder with some severity; 'it's very easy to know your history.",
+            "created_at": "2024-12-25T13:37:12.000000Z",
+            "updated_at": "2024-12-25T13:37:12.000000Z",
+            "job_add": {
+                "id": 4,
+                "title": "Experienced: Paramedic needed (5)",
+                "hospital_id": 4,
+                "speciality_id": 24,
+                "job_info_id": 67,
+                "job_type": "Locum",
+                "location": "278 Gutmann Motorway\nLake Nolan, WV 90272",
+                "description": "You see the Mock Turtle, and said nothing. 'Perhaps it hasn't one,' Alice ventured to taste it, and they all cheered. Alice thought to herself, and shouted out, 'You'd better not do that again!'.",
+                "responsibilities": "I know I do!' said Alice in a tone of great relief. 'Call the next thing was to eat or drink under the circumstances. There was a large pigeon had flown into her eyes; and once again the tiny hands.",
+                "qualifications": "Arithmetic--Ambition, Distraction, Uglification, and Derision.' 'I never thought about it,' added the Dormouse. 'Write that down,' the King said, for about the whiting!' 'Oh, as to go through next.",
+                "experience_required": "And he got up this morning, but I THINK I can listen all day about it!' and he went on in the after-time, be herself a grown woman; and how she would catch a bad cold if she did not notice this last.",
+                "salary_min": "12305.00",
+                "salary_max": "19697.00",
+                "benefits": "Gryphon said to the shore. CHAPTER III. A Caucus-Race and a bright idea came into her head. Still she went round the court and got behind him, and very nearly carried it out to her that she ran out.",
+                "working_hours": "8 hours shift",
+                "application_deadline": "2011-10-08",
+                "required_documents": "Alice doubtfully: 'it means--to--make--anything--prettier.' 'Well, then,' the Gryphon answered, very nearly in the face. 'I'll put a white one in by mistake; and if I was, I shouldn't want YOURS: I.",
+                "created_at": "2024-12-25T13:37:12.000000Z",
+                "updated_at": "2024-12-25T13:37:12.000000Z"
+            }
+        }
+    ],
     "status": "success",
     "message": "success",
     "errors": [],
-    "statusCode": 200
+    "statusCode": 200,
+    "meta": {
+        "hasMorePages": false,
+        "total": 1,
+        "last_page": 1,
+        "per_page": 2,
+        "current_page": 1,
+        "path": "http://127.0.0.1:8000/api/job-applications"
+    }
 }

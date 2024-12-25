@@ -18,7 +18,8 @@ class DoctorLocumRepoImp implements DoctorLocumRepo {
   }) async {
     final t = prt('updateOrCreateDoctorInfo  - DoctorLocumRepoImp');
     try {
-      JobAddModel model = await doctorLocumRemoteDataSource.showJobAdd(jobAddId: jobAddId);
+      JobAddModel model =
+          await doctorLocumRemoteDataSource.showJobAdd(jobAddId: jobAddId);
       return Right(pr(model, t));
     } catch (e) {
       pr(e.toString());
@@ -34,7 +35,8 @@ class DoctorLocumRepoImp implements DoctorLocumRepo {
       {required ShowAllJobAddsParams params}) async {
     final t = prt('showAllJobAdds  - DoctorLocumRepoImp');
     try {
-      ResponseModel<List<JobAddModel>> response = await doctorLocumRemoteDataSource.showAllJobAdds(params: params);
+      ResponseModel<List<JobAddModel>> response =
+          await doctorLocumRemoteDataSource.showAllJobAdds(params: params);
       return Right(pr(response, t));
     } catch (e) {
       pr(e.toString());
@@ -46,10 +48,12 @@ class DoctorLocumRepoImp implements DoctorLocumRepo {
   }
 
   @override
-  Future<Either<Failure, JobApplicationModel>> applyJobAdd({required int jobAddId, required String notes}) async {
+  Future<Either<Failure, JobApplicationModel>> applyJobAdd(
+      {required int jobAddId, required String notes}) async {
     final t = prt('applyJobAdd  - DoctorLocumRepoImp');
     try {
-      JobApplicationModel model = await doctorLocumRemoteDataSource.applyJobAdd(jobAddId: jobAddId, notes: notes);
+      JobApplicationModel model = await doctorLocumRemoteDataSource.applyJobAdd(
+          jobAddId: jobAddId, notes: notes);
       return Right(pr(model, t));
     } catch (e) {
       pr(e.toString());

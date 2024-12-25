@@ -7,6 +7,9 @@ import 'package:locum_app/features/auth/presentation/cubits/sign_in/sign_in_cubi
 import 'package:locum_app/features/auth/presentation/cubits/sign_up/sign_up_cubit.dart';
 import 'package:locum_app/features/auth/presentation/views/sign_in/sign_in_screen.dart';
 import 'package:locum_app/features/auth/presentation/views/sign_up/signup_screen.dart';
+import 'package:locum_app/features/doctor/doctor-job-applications/presentation/cubits/doctor_job_application/doctor_job_application_cubit.dart';
+import 'package:locum_app/features/doctor/doctor-job-applications/presentation/views/doctor_job_application_details_view.dart';
+import 'package:locum_app/features/doctor/doctor-job-applications/presentation/views/doctor_job_application_view.dart';
 import 'package:locum_app/features/doctor/doctor_home/doctor_home_view.dart';
 import 'package:locum_app/features/doctor/doctor_locum/presentation/cubits/apply_to_job_add/apply_to_job_add_cubit.dart';
 import 'package:locum_app/features/doctor/doctor_locum/presentation/cubits/show_all_add/show_all_adds_cubit.dart';
@@ -155,6 +158,21 @@ class AppRouter {
               BlocProvider(create: (context) => ApplyToJobAddCubit(serviceLocator())),
             ],
             child: DoctorJobAddDetailsView(id: args?['id']),
+          ),
+          settings: routeSettings,
+        );
+      case AppRoutesNames.doctorAllJobApplicationView:
+        return CustomPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => DoctorJobApplicationCubit(serviceLocator()),
+            child: const DoctorAllJobApplicationView(),
+          ),
+          settings: routeSettings,
+        );
+      case AppRoutesNames.doctorJobApplicationDetailsView:
+        return CustomPageRoute(
+          builder: (context) => DoctorJobApplicationDetailsView(
+            jobApplicationModel: args?['model'],
           ),
           settings: routeSettings,
         );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:locum_app/core/extensions/context-extensions.dart';
+import 'package:locum_app/core/router/app_routes_names.dart';
 import 'package:locum_app/core/themes/theme_cubit.dart';
 import 'package:locum_app/core/themes/toogle_theme_switch.dart';
 import 'package:locum_app/core/widgets/circular_image_asset.dart';
@@ -22,10 +23,7 @@ class DefaultDoctorDrawer extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              context.primaryColor.withOpacity(0.2),
-              context.primaryColor.withOpacity(0.9)
-            ],
+            colors: [context.primaryColor.withOpacity(0.2), context.primaryColor.withOpacity(0.9)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -39,9 +37,8 @@ class DefaultDoctorDrawer extends StatelessWidget {
                   const SizedBox(height: 12),
                   CircularCachedImage(
                     imageUrl: user?.doctor?.photo ?? '',
-                    imageAsset: user?.doctor?.gender == 'female'
-                        ? AssetsData.femalePlacholder
-                        : AssetsData.malePlacholder,
+                    imageAsset:
+                        user?.doctor?.gender == 'female' ? AssetsData.femalePlacholder : AssetsData.malePlacholder,
                     height: 100.h,
                     width: 100.h,
                   ),
@@ -57,9 +54,9 @@ class DefaultDoctorDrawer extends StatelessWidget {
             _createDrawerItem(
               context,
               icon: Icons.home,
-              text: 'Your Applications',
+              text: 'My Applications',
               onTap: () {
-                Navigator.pop(context);
+                Navigator.of(context).pushNamed(AppRoutesNames.doctorAllJobApplicationView);
               },
             ),
             _createDrawerItem(
@@ -89,16 +86,13 @@ class DefaultDoctorDrawer extends StatelessWidget {
             BlocBuilder<ThemeCubit, ThemeData>(
               builder: (context, state) {
                 return ListTile(
-                  leading: Icon(MdiIcons.themeLightDark,
-                      color: context.primaryColor),
+                  leading: Icon(MdiIcons.themeLightDark, color: context.primaryColor),
                   title: Row(
                     children: [
                       // SizedBox(width: 15.w),
                       // Icon(MdiIcons.themeLightDark),
                       // SizedBox(width: 10.w),
-                      Text(state.brightness == Brightness.dark
-                          ? 'Light Theme'
-                          : 'Dark Theme'),
+                      Text(state.brightness == Brightness.dark ? 'Light Theme' : 'Dark Theme'),
                       SizedBox(width: 10.w),
                       const ToggleThemeSwitch(),
                     ],
@@ -126,9 +120,7 @@ class DefaultDoctorDrawer extends StatelessWidget {
   }
 
   Widget _createDrawerItem(BuildContext context,
-      {required IconData icon,
-      required String text,
-      GestureTapCallback? onTap}) {
+      {required IconData icon, required String text, GestureTapCallback? onTap}) {
     return ListTile(
       title: Text(text),
       leading: Icon(icon, color: context.primaryColor),
@@ -148,10 +140,7 @@ class DefaultHospitalDrawer extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              context.primaryColor.withOpacity(0.2),
-              context.primaryColor.withOpacity(0.9)
-            ],
+            colors: [context.primaryColor.withOpacity(0.2), context.primaryColor.withOpacity(0.9)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -213,16 +202,13 @@ class DefaultHospitalDrawer extends StatelessWidget {
             BlocBuilder<ThemeCubit, ThemeData>(
               builder: (context, state) {
                 return ListTile(
-                  leading: Icon(MdiIcons.themeLightDark,
-                      color: context.primaryColor),
+                  leading: Icon(MdiIcons.themeLightDark, color: context.primaryColor),
                   title: Row(
                     children: [
                       // SizedBox(width: 15.w),
                       // Icon(MdiIcons.themeLightDark),
                       // SizedBox(width: 10.w),
-                      Text(state.brightness == Brightness.dark
-                          ? 'Light Theme'
-                          : 'Dark Theme'),
+                      Text(state.brightness == Brightness.dark ? 'Light Theme' : 'Dark Theme'),
                       SizedBox(width: 10.w),
                       const ToggleThemeSwitch(),
                     ],
@@ -250,9 +236,7 @@ class DefaultHospitalDrawer extends StatelessWidget {
   }
 
   Widget _createDrawerItem(BuildContext context,
-      {required IconData icon,
-      required String text,
-      GestureTapCallback? onTap}) {
+      {required IconData icon, required String text, GestureTapCallback? onTap}) {
     return ListTile(
       title: Text(text),
       leading: Icon(icon, color: context.primaryColor),
