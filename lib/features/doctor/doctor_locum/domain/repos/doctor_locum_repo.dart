@@ -7,10 +7,8 @@ import 'package:locum_app/features/doctor/doctor_locum/domain/models/job_add_mod
 
 abstract class DoctorLocumRepo {
   Future<Either<Failure, JobAddModel>> showJobAdd({required int jobAddId});
-  Future<Either<Failure, ResponseModel<List<JobAddModel>>>> showAllJobAdds(
-      {required ShowAllJobAddsParams params});
-  Future<Either<Failure, JobApplicationModel>> applyJobAdd(
-      {required int jobAddId, required String notes});
+  Future<Either<Failure, ResponseModel<List<JobAddModel>>>> showAllJobAdds({required ShowAllJobAddsParams params});
+  Future<Either<Failure, JobApplicationModel>> applyJobAdd({required int jobAddId, required String notes});
 }
 
 class ShowAllJobAddsParams {

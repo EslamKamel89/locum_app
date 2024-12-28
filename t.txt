@@ -63,10 +63,15 @@ Done todos {
     # job application ui
     # job application connect with the backend
     # work on the backend of the user job application (amount of applied adds - status - add detail)
+    # adjut the ui for the document dropdown
+    # connect the update and create method with the backend 
+    # create the ui for updatea and create new document
+    # view file uploaded
 }
 
 todos {
-    # view file uploaded
     # if you change the doctor image in the update method and come back the profile page the image is not updated in the ui only but it's updated successfully to the backend
     # i didn't handle no data any where in the applciation 
+    # handle the permissions for the user to view the jobadds     
 }
+

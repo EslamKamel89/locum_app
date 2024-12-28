@@ -2,6 +2,7 @@ import 'package:locum_app/core/api_service/api_consumer.dart';
 import 'package:locum_app/core/api_service/end_points.dart';
 import 'package:locum_app/core/heleprs/print_helper.dart';
 import 'package:locum_app/features/auth/data/models/user_model.dart';
+import 'package:locum_app/features/common_data/data/models/doctor_document_model.dart';
 import 'package:locum_app/features/common_data/data/models/doctor_info_model.dart';
 import 'package:locum_app/features/common_data/data/models/doctor_model.dart';
 import 'package:locum_app/features/doctor/doctor_profile/domain/repo/doctor_profile_repo.dart';
@@ -64,5 +65,31 @@ class DoctorProfileRemoteDataSource {
     UserModel userModel = UserModel.fromJson(data['data']);
 
     return pr(userModel, t);
+  }
+
+  Future<DoctorDocumentModel> createDoctorDocument({required CreateDoctorDocumentParams params}) async {
+    final t = prt('createDoctorDocument - DoctorProfileRemoteDataSource');
+
+    Map<String, dynamic> requestData = await params.toJson();
+
+    final data = await api.post(
+      EndPoint.createDoctorDocument,
+      isFormData: true,
+      data: requestData,
+    );
+    DoctorDocumentModel doctorDocumentModel = DoctorDocumentModel.fromJson(data['data']);
+
+    return pr(doctorDocumentModel, t);
+  }
+
+  Future<bool> deleteDoctorDocument({required int id}) async {
+    final t = prt('deleteDoctorDocument - DoctorProfileRemoteDataSource');
+
+    final data = await api.delete(
+      "${EndPoint.deleteDoctorDocument}/$id",
+    );
+    bool success = data['message'] == 'Resource Deleted Successfully';
+
+    return pr(success, t);
   }
 }

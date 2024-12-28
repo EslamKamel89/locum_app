@@ -6,8 +6,7 @@ class AddDoctorInfoWidget extends StatelessWidget {
   const AddDoctorInfoWidget({
     super.key,
     this.title = 'No Skills Added',
-    this.message =
-        'You haven\'t added any skills yet. Please add your skills to showcase your expertise.',
+    this.message = 'You haven\'t added any skills yet. Please add your skills to showcase your expertise.',
     this.buttonContent = 'Add Skills',
     this.isVisible = false,
     this.onTap,
@@ -63,12 +62,7 @@ class AddDoctorInfoWidget extends StatelessWidget {
           ),
           const SizedBox(height: 16.0),
           TextButton(
-            onPressed: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => AddSkillsScreen()),
-              // );
-            },
+            onPressed: onTap,
             child: Text(
               buttonContent,
               style: const TextStyle(

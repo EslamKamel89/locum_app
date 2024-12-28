@@ -5,6 +5,7 @@ import 'package:dartz/dartz.dart';
 import 'package:locum_app/core/Errors/failure.dart';
 import 'package:locum_app/core/api_service/upload_file_to_api.dart';
 import 'package:locum_app/features/auth/data/models/user_model.dart';
+import 'package:locum_app/features/common_data/data/models/doctor_document_model.dart';
 import 'package:locum_app/features/common_data/data/models/doctor_info_model.dart';
 import 'package:locum_app/features/common_data/data/models/doctor_model.dart';
 
@@ -19,8 +20,25 @@ abstract class DoctorProfileRepo {
     required bool create,
     int? id,
   });
-  Future<Either<Failure, UserModel>> updateUserDoctor(
-      {required UserDoctorParams params});
+  Future<Either<Failure, UserModel>> updateUserDoctor({required UserDoctorParams params});
+  Future<Either<Failure, DoctorDocumentModel>> createDoctorDocument({required CreateDoctorDocumentParams params});
+  Future<Either<Failure, bool>> deleteDoctorDocument({required int id});
+}
+
+class CreateDoctorDocumentParams {
+  final String? type;
+  final File? file;
+  CreateDoctorDocumentParams({
+    required this.type,
+    required this.file,
+  });
+
+  Future<Map<String, dynamic>> toJson() async {
+    return <String, dynamic>{
+      'type': type,
+      'file': file == null ? null : (await uploadFileToApi(file!)),
+    };
+  }
 }
 
 class UserDoctorParams {

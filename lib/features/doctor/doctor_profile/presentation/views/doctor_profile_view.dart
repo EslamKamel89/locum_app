@@ -15,10 +15,13 @@ import 'package:locum_app/features/common_data/cubits/user_info/user_info_cubit.
 import 'package:locum_app/features/common_data/data/models/doctor_document_model.dart';
 import 'package:locum_app/features/common_data/data/models/language_model.dart';
 import 'package:locum_app/features/common_data/data/models/skill_model.dart';
+import 'package:locum_app/features/doctor/doctor_profile/presentation/views/widgets/add_new_document.dart';
+import 'package:locum_app/features/doctor/doctor_profile/presentation/views/widgets/doctor_document_widget.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/widgets/doctor_profile_not_complete_widgets.dart';
 import 'package:locum_app/utils/assets/assets.dart';
 import 'package:locum_app/utils/styles/styles.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DoctorProfileView extends StatefulWidget {
   const DoctorProfileView({super.key});
@@ -69,11 +72,9 @@ class DoctorProfileContent extends StatelessWidget {
                 child: Column(
                   children: [
                     CircularCachedImage(
-                      imageUrl:
-                          "${EndPoint.imgBaseUrl}${user?.doctor?.photo ?? ''}",
-                      imageAsset: user?.doctor?.gender == 'female'
-                          ? AssetsData.femalePlacholder
-                          : AssetsData.malePlacholder,
+                      imageUrl: "${EndPoint.imgBaseUrl}${user?.doctor?.photo ?? ''}",
+                      imageAsset:
+                          user?.doctor?.gender == 'female' ? AssetsData.femalePlacholder : AssetsData.malePlacholder,
                       height: 100.h,
                       width: 100.h,
                     ),
@@ -90,9 +91,7 @@ class DoctorProfileContent extends StatelessWidget {
               _sectionCard(
                 children: [
                   _buildSectionHeader('Basic Information', handleEdit: () {
-                    Navigator.of(context).pushNamed(
-                        AppRoutesNames.userDoctorForm,
-                        arguments: {'create': false});
+                    Navigator.of(context).pushNamed(AppRoutesNames.userDoctorForm, arguments: {'create': false});
                   }),
                   _buildInfo('State', user?.state?.name),
                   _buildInfo('District', user?.district?.name),
@@ -106,8 +105,7 @@ class DoctorProfileContent extends StatelessWidget {
 
               _sectionCard(
                 children: [
-                  _buildSectionHeader('Main Professional Information',
-                      handleEdit: () {
+                  _buildSectionHeader('Main Professional Information', handleEdit: () {
                     Navigator.of(context).pushNamed(
                       AppRoutesNames.doctorForm,
                       arguments: {'create': false},
@@ -121,8 +119,7 @@ class DoctorProfileContent extends StatelessWidget {
                   _buildInfo('Phone', user?.doctor?.phone),
                   _buildInfo(
                       'Willing to Relocate',
-                      user?.doctor?.willingToRelocate == null ||
-                              user?.doctor?.willingToRelocate == false
+                      user?.doctor?.willingToRelocate == null || user?.doctor?.willingToRelocate == false
                           ? 'No'
                           : 'Yes'),
                   //  Languages Spoken
@@ -141,9 +138,7 @@ class DoctorProfileContent extends StatelessWidget {
                           ),
                           // _buildInfo(null, langsStr, isRow: false),
                           const SizedBox(height: 5),
-                          BadgeWrap(
-                              items:
-                                  langs.map((lang) => lang.name ?? '').toList())
+                          BadgeWrap(items: langs.map((lang) => lang.name ?? '').toList())
                         ],
                         visibility: langs.isNotEmpty,
                         showDivider: false,
@@ -165,10 +160,7 @@ class DoctorProfileContent extends StatelessWidget {
                           _buildSectionHeader('Skills'),
                           // _buildInfo(null, skillsStr, isRow: false),
                           const SizedBox(height: 5),
-                          BadgeWrap(
-                              items: skills
-                                  .map((skill) => skill.name ?? '')
-                                  .toList())
+                          BadgeWrap(items: skills.map((skill) => skill.name ?? '').toList())
                         ],
                         visibility: skills.isNotEmpty,
                         showDivider: false,
@@ -182,46 +174,44 @@ class DoctorProfileContent extends StatelessWidget {
 
               _sectionCard(
                 children: [
-                  _buildSectionHeader('Additional Professional Information',
-                      handleEdit: () {
-                    Navigator.of(context).pushNamed(
-                        AppRoutesNames.doctorInfoForm,
-                        arguments: {'create': false});
+                  _buildSectionHeader('Additional Professional Information', handleEdit: () {
+                    Navigator.of(context).pushNamed(AppRoutesNames.doctorInfoForm, arguments: {'create': false});
                   }),
-                  _buildInfo('Professional License No.',
-                      user?.doctor?.doctorInfo?.professionalLicenseNumber),
-                  _buildInfo(
-                      'License State', user?.doctor?.doctorInfo?.licenseState),
-                  _buildInfo('License Issue Date',
-                      user?.doctor?.doctorInfo?.licenseIssueDate),
-                  _buildInfo('License Expiry Date',
-                      user?.doctor?.doctorInfo?.licenseExpiryDate),
-                  _buildInfo(
-                      'University', user?.doctor?.doctorInfo?.university?.name),
-                  _buildInfo('Highest Degree',
-                      user?.doctor?.doctorInfo?.highestDegree),
-                  _buildInfo(
-                      'Field of Study', user?.doctor?.doctorInfo?.fieldOfStudy),
-                  _buildInfo('Graduation Year',
-                      user?.doctor?.doctorInfo?.graduationYear.toString()),
-                  _buildInfo('Work Experience',
-                      user?.doctor?.doctorInfo?.workExperience,
-                      isRow: false),
-                  _buildInfo('Biography', user?.doctor?.doctorInfo?.biography,
-                      isRow: false),
+                  _buildInfo('Professional License No.', user?.doctor?.doctorInfo?.professionalLicenseNumber),
+                  _buildInfo('License State', user?.doctor?.doctorInfo?.licenseState),
+                  _buildInfo('License Issue Date', user?.doctor?.doctorInfo?.licenseIssueDate),
+                  _buildInfo('License Expiry Date', user?.doctor?.doctorInfo?.licenseExpiryDate),
+                  _buildInfo('University', user?.doctor?.doctorInfo?.university?.name),
+                  _buildInfo('Highest Degree', user?.doctor?.doctorInfo?.highestDegree),
+                  _buildInfo('Field of Study', user?.doctor?.doctorInfo?.fieldOfStudy),
+                  _buildInfo('Graduation Year', user?.doctor?.doctorInfo?.graduationYear.toString()),
+                  _buildInfo('Work Experience', user?.doctor?.doctorInfo?.workExperience, isRow: false),
+                  _buildInfo('Biography', user?.doctor?.doctorInfo?.biography, isRow: false),
+                  InkWell(
+                    onTap: () {
+                      launchUrl(Uri.parse("${EndPoint.imgBaseUrl}${user?.doctor?.doctorInfo?.cv ?? ''}"));
+                    },
+                    child: Text(
+                      'View CV',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: navigatorKey.currentContext!.primaryColor.withRed(5),
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  )
                 ],
                 visibility: user?.doctor?.doctorInfo != null,
               ),
 
               // Section 7: Doctor Documents
               Builder(builder: (context) {
-                List<DoctorDocumentModel> documents =
-                    user?.doctor?.doctorDocuments ?? [];
+                List<DoctorDocumentModel> documents = user?.doctor?.doctorDocuments ?? [];
                 return _sectionCard(
                   children: [
-                    _buildSectionHeader('Documents', handleEdit: () {}),
-                    ...documents.map((document) => _buildDocumentRow(
-                        document.type ?? '', document.file ?? '')),
+                    _buildSectionHeader('Documents'),
+                    ...documents.map((document) => DoctorDocumentWidget(doctorDocumentModel: document)),
+                    const AddNewDocumentWidget()
                   ],
                   visibility: documents.isNotEmpty,
                 );
@@ -296,37 +286,7 @@ class DoctorProfileContent extends StatelessWidget {
     );
   }
 
-  Widget _buildDocumentRow(String docType, String docLink) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            docType,
-            style: const TextStyle(fontWeight: FontWeight.w600),
-          ),
-          GestureDetector(
-            onTap: () {
-              // Replace with actual logic to view the document
-            },
-            child: const Text(
-              'View Document',
-              style: TextStyle(
-                color: Colors.blue,
-                decoration: TextDecoration.underline,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _sectionCard(
-      {required List<Widget> children,
-      bool visibility = true,
-      bool showDivider = true}) {
+  Widget _sectionCard({required List<Widget> children, bool visibility = true, bool showDivider = true}) {
     return visibility
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,

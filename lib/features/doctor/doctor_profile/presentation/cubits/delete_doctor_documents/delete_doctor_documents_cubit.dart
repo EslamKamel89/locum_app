@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:locum_app/core/Errors/failure.dart';
 import 'package:locum_app/core/enums/response_type.dart';
@@ -6,26 +5,20 @@ import 'package:locum_app/core/globals.dart';
 import 'package:locum_app/core/heleprs/print_helper.dart';
 import 'package:locum_app/core/heleprs/snackbar.dart';
 import 'package:locum_app/features/common_data/cubits/user_info/user_info_cubit.dart';
-import 'package:locum_app/features/common_data/data/models/doctor_model.dart';
 import 'package:locum_app/features/doctor/doctor_profile/domain/repo/doctor_profile_repo.dart';
 
-part 'doctor_state.dart';
+part 'delete_doctor_documents_state.dart';
 
-class DoctorCubit extends Cubit<DoctorState> {
+class DeleteDoctorDocumentsCubit extends Cubit<DeleteDoctorDocumentsState> {
   final DoctorProfileRepo doctorProfileRepo;
-  DoctorCubit(
-    this.doctorProfileRepo,
-  ) : super(DoctorState());
-  Future updateOrCreateDoctor({required DoctorParams params, required bool create, int? id}) async {
-    final t = prt('updateOrCreateDoctor - DoctorCubit');
+  DeleteDoctorDocumentsCubit(this.doctorProfileRepo) : super(DeleteDoctorDocumentsState());
+  Future deleteDoctorDocument({required int id}) async {
+    final t = prt('deleteDoctorDocument - DeleteDoctorDocumentsCubit');
     emit(state.copyWith(
       responseType: ResponseEnum.loading,
       errorMessage: null,
-      doctorParams: params,
     ));
-    final result = await doctorProfileRepo.updateOrCreateDoctor(
-      params: params,
-      create: create,
+    final result = await doctorProfileRepo.deleteDoctorDocument(
       id: id,
     );
     result.fold(
@@ -34,10 +27,11 @@ class DoctorCubit extends Cubit<DoctorState> {
         showSnackbar('Server Error', failure.message, true);
         emit(state.copyWith(responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
-      (DoctorModel doctorModel) async {
-        pr(doctorModel, t);
+      (bool result) async {
+        pr(result, t);
         await _updateUserInfoState();
-        emit(state.copyWith(doctorModel: doctorModel, responseType: ResponseEnum.success, errorMessage: null));
+        if (isClosed) return;
+        emit(state.copyWith(deleteResult: result, responseType: ResponseEnum.success, errorMessage: null));
       },
     );
   }

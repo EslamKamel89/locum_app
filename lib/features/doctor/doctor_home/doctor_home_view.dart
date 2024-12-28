@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:locum_app/core/widgets/bottom_navigation_bar.dart';
 import 'package:locum_app/core/widgets/default_drawer.dart';
 import 'package:locum_app/core/widgets/main_scaffold.dart';
+import 'package:locum_app/features/common_data/cubits/user_info/user_info_cubit.dart';
+import 'package:locum_app/features/common_data/data/models/doctor_user_model.dart';
+import 'package:locum_app/features/doctor/doctor_home/widgets/hero_section.dart';
+import 'package:locum_app/features/doctor/doctor_home/widgets/testimonials_widget.dart';
+import 'package:locum_app/features/doctor/doctor_home/widgets/why_choose_us_widget.dart';
 
 class DoctorHomeScreen extends StatefulWidget {
   const DoctorHomeScreen({super.key});
@@ -11,9 +17,12 @@ class DoctorHomeScreen extends StatefulWidget {
 }
 
 class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
+  late final DoctorUserModel? doctorUserModel;
+
   @override
   void initState() {
-    // context.read<UserInfoCubit>().fetchUserInfo();
+    doctorUserModel = context.read<UserInfoCubit>().state.doctorUserModel;
+
     super.initState();
   }
 
@@ -21,14 +30,21 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
   Widget build(BuildContext context) {
     // serviceLocator<DoctorLocumRepo>().showAllJobAdds(limit: 10, page: 1);
     return MainScaffold(
-      appBarTitle: 'Doctor Home Page',
+      appBarTitle: '',
+      hideAppBar: true,
       bottomNavigationBar: doctorBottomNavigationBar,
       drawer: const DefaultDoctorDrawer(),
-      child: ElevatedButton(
-        child: const Text('Profile'),
-        onPressed: () {
-          doctorBottomNavigationBar.navigateTo(2);
-        },
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(height: 20),
+            HeroSection(doctorUserModel: doctorUserModel),
+            const SizedBox(height: 20),
+            const WhyChooseUsWidget(),
+            const SizedBox(height: 20),
+            const TestimonialsWidget(),
+          ],
+        ),
       ),
     );
   }

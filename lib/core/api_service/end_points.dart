@@ -1,7 +1,8 @@
 class EndPoint {
-  static const String baseUrl = "http://10.0.2.2:8000/api";
-  static const String imgBaseUrl = "http://10.0.2.2:8000/";
-  // static const String baseUrl = "http://ampm.islamdev.com/api";
+  // static const String baseUrl = "http://10.0.2.2:8000/api";
+  // static const String imgBaseUrl = "http://10.0.2.2:8000/";
+  static const String baseUrl = "https://locum.bluo.iuceg.com/api";
+  static const String imgBaseUrl = "https://locum.bluo.iuceg.com/";
   static const String fetchSpecialties = "$baseUrl/specialties";
   static const String fetchStates = "$baseUrl/states";
   static const String fetchUniversities = "$baseUrl/universities";
@@ -22,4 +23,6 @@ class EndPoint {
   static String showAllJobAdds = "$baseUrl/job-add";
   static String applyToJobAdd = "$baseUrl/job-applications";
   static String showDoctorJobApplication = "$baseUrl/job-applications";
+  static String createDoctorDocument = "$baseUrl/doctor-docs";
+  static String deleteDoctorDocument = "$baseUrl/doctor-docs";
 }

@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:locum_app/core/router/app_routes_names.dart';
+import 'package:locum_app/core/service_locator/service_locator.dart';
+import 'package:locum_app/core/widgets/update_or_create_document.dart';
 import 'package:locum_app/features/common_data/cubits/user_info/user_info_cubit.dart';
 import 'package:locum_app/features/common_data/data/models/doctor_user_model.dart';
+import 'package:locum_app/features/doctor/doctor_profile/domain/repo/doctor_profile_repo.dart';
+import 'package:locum_app/features/doctor/doctor_profile/presentation/cubits/create_doctor_documents/create_doctor_documents_cubit.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/widgets/add_info_widget.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/widgets/update_profile_widget.dart';
 
@@ -20,8 +24,7 @@ class DoctorProfileNotCompleteWidgets extends StatelessWidget {
           title: 'Your Main Professional Information Incomplete',
           isVisible: user?.doctor == null,
           onTap: () {
-            Navigator.of(context).pushNamed(AppRoutesNames.doctorForm,
-                arguments: {'create': true});
+            Navigator.of(context).pushNamed(AppRoutesNames.doctorForm, arguments: {'create': true});
           },
         ),
         Visibility(
@@ -34,8 +37,7 @@ class DoctorProfileNotCompleteWidgets extends StatelessWidget {
                     "Tell us more about your work experience so we can connect you with the best locum opportunities.",
                 isVisible: user?.doctor?.doctorInfo == null,
                 onTap: () {
-                  Navigator.of(context).pushNamed(AppRoutesNames.doctorInfoForm,
-                      arguments: {'create': true});
+                  Navigator.of(context).pushNamed(AppRoutesNames.doctorInfoForm, arguments: {'create': true});
                 },
               ),
               // AddDoctorInfoWidget(
@@ -48,12 +50,21 @@ class DoctorProfileNotCompleteWidgets extends StatelessWidget {
               // AddDoctorInfoWidget(
               //   isVisible: user?.doctor?.skills?.isEmpty ?? true,
               // ),
-              AddDoctorInfoWidget(
-                title: 'No Documents added',
-                message:
-                    "Upload your related documents to help healthcare providers find what they need.",
-                buttonContent: "Add Document",
-                isVisible: user?.doctor?.doctorDocuments?.isEmpty ?? true,
+              BlocProvider(
+                create: (context) => CreateDoctorDocumentsCubit(serviceLocator()),
+                child: Builder(builder: (context) {
+                  return AddDoctorInfoWidget(
+                    title: 'No Documents added',
+                    message: "Upload your related documents to help healthcare providers find what they need.",
+                    buttonContent: "Add Document",
+                    isVisible: user?.doctor?.doctorDocuments?.isEmpty ?? true,
+                    onTap: () async {
+                      CreateDoctorDocumentParams? params = await updateOrCreateDocument(context);
+                      if (params == null) return;
+                      context.read<CreateDoctorDocumentsCubit>().createDoctorDocument(params: params);
+                    },
+                  );
+                }),
               ),
             ],
           ),

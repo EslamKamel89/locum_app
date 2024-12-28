@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:locum_app/core/Errors/failure.dart';
 import 'package:locum_app/core/enums/response_type.dart';
@@ -6,27 +5,23 @@ import 'package:locum_app/core/globals.dart';
 import 'package:locum_app/core/heleprs/print_helper.dart';
 import 'package:locum_app/core/heleprs/snackbar.dart';
 import 'package:locum_app/features/common_data/cubits/user_info/user_info_cubit.dart';
-import 'package:locum_app/features/common_data/data/models/doctor_model.dart';
+import 'package:locum_app/features/common_data/data/models/doctor_document_model.dart';
 import 'package:locum_app/features/doctor/doctor_profile/domain/repo/doctor_profile_repo.dart';
 
-part 'doctor_state.dart';
+part 'create_doctor_documents_state.dart';
 
-class DoctorCubit extends Cubit<DoctorState> {
+class CreateDoctorDocumentsCubit extends Cubit<CreateDoctorDocumentsState> {
   final DoctorProfileRepo doctorProfileRepo;
-  DoctorCubit(
-    this.doctorProfileRepo,
-  ) : super(DoctorState());
-  Future updateOrCreateDoctor({required DoctorParams params, required bool create, int? id}) async {
-    final t = prt('updateOrCreateDoctor - DoctorCubit');
+  CreateDoctorDocumentsCubit(this.doctorProfileRepo) : super(CreateDoctorDocumentsState());
+  Future createDoctorDocument({required CreateDoctorDocumentParams params}) async {
+    final t = prt('createDoctorDocument - CreateDoctorDocumentsCubit');
     emit(state.copyWith(
       responseType: ResponseEnum.loading,
       errorMessage: null,
-      doctorParams: params,
+      doctorDocumentParams: params,
     ));
-    final result = await doctorProfileRepo.updateOrCreateDoctor(
+    final result = await doctorProfileRepo.createDoctorDocument(
       params: params,
-      create: create,
-      id: id,
     );
     result.fold(
       (Failure failure) {
@@ -34,10 +29,12 @@ class DoctorCubit extends Cubit<DoctorState> {
         showSnackbar('Server Error', failure.message, true);
         emit(state.copyWith(responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
-      (DoctorModel doctorModel) async {
-        pr(doctorModel, t);
+      (DoctorDocumentModel doctorDocumentModel) async {
+        pr(doctorDocumentModel, t);
         await _updateUserInfoState();
-        emit(state.copyWith(doctorModel: doctorModel, responseType: ResponseEnum.success, errorMessage: null));
+        if (isClosed) return;
+        emit(state.copyWith(
+            doctorDocumentModel: doctorDocumentModel, responseType: ResponseEnum.success, errorMessage: null));
       },
     );
   }
