@@ -1,0 +1,1 @@
+{"flutter":{"platforms":{"android":{"default":{"projectId":"locum-backend","appId":"1:869363886300:android:dd1c0addb1a71551bf2c19","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"locum-backend","configurations":{"android":"1:869363886300:android:dd1c0addb1a71551bf2c19","ios":"1:869363886300:ios:9cecb3ac549a9ba1bf2c19"}}}}}}

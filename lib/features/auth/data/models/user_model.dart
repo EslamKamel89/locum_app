@@ -2,6 +2,9 @@ import 'package:locum_app/features/auth/domain/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
   String? userTypeStr;
+  String? authId;
+  String? authType;
+  String? fcmToken;
   UserModel({
     super.id,
     super.name,
@@ -10,6 +13,9 @@ class UserModel extends UserEntity {
     super.districtId,
     super.token,
     this.userTypeStr,
+    this.authId,
+    this.authType,
+    this.fcmToken,
   }) : super(userType: UserType.fromStr(userTypeStr ?? ''));
 
   @override
@@ -25,6 +31,9 @@ class UserModel extends UserEntity {
         districtId: json['district_id'] as int?,
         token: json['token'] as String?,
         userTypeStr: json['type'] as String?,
+        authId: json['auth_id'] as String?,
+        authType: json['auth_type'] as String?,
+        fcmToken: json['fcm_token'] as String?,
       );
 
   Map<String, dynamic> toJson() => {
@@ -35,5 +44,8 @@ class UserModel extends UserEntity {
         'district_id': districtId,
         'token': token,
         'type': userTypeStr,
+        "authId": authId,
+        "authType": authType,
+        "fcmToken": fcmToken,
       };
 }

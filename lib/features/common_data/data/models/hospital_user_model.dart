@@ -17,6 +17,9 @@ class HospitalUserModel extends UserModel {
     super.stateId,
     super.districtId,
     super.userTypeStr,
+    super.authId,
+    super.authType,
+    super.fcmToken,
     this.type,
     this.district,
     this.state,
@@ -25,7 +28,7 @@ class HospitalUserModel extends UserModel {
 
   @override
   String toString() {
-    return 'HospitalUserModel(id: $id, name: $name, email: $email, stateId: $stateId, districtId: $districtId, type: $type, district: $district, state: $state, hospital: $hospital)';
+    return 'HospitalUserModel(id: $id, name: $name, email: $email, authId: $authId, authType: $authType , fcmToken: $fcmToken, stateId: $stateId, districtId: $districtId, type: $type, district: $district, state: $state, hospital: $hospital)';
   }
 
   factory HospitalUserModel.fromJson(Map<String, dynamic> json) {
@@ -37,13 +40,12 @@ class HospitalUserModel extends UserModel {
       districtId: json['district_id'] as int?,
       type: json['type'] == null ? null : UserType.fromStr(json['type']),
       userTypeStr: json['type'] as String,
-      district: json['district'] == null
-          ? null
-          : DistrictModel.fromJson(json['district']),
+      district: json['district'] == null ? null : DistrictModel.fromJson(json['district']),
       state: json['state'] == null ? null : StateModel.fromJson(json['state']),
-      hospital: json['hospital'] == null
-          ? null
-          : HospitalModel.fromJson(json['hospital']),
+      hospital: json['hospital'] == null ? null : HospitalModel.fromJson(json['hospital']),
+      authId: json['auth_id'] as String?,
+      authType: json['auth_type'] as String?,
+      fcmToken: json['fcm_token'] as String?,
     );
   }
 }

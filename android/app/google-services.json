@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "869363886300",
+    "project_id": "locum-backend",
+    "storage_bucket": "locum-backend.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:869363886300:android:dd1c0addb1a71551bf2c19",
+        "android_client_info": {
+          "package_name": "com.example.locum_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "869363886300-6elnuictrro5fu4r0c285kbm6nrj4nkp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.locum_app",
+            "certificate_hash": "dbc05487f1a7c3b22ddf5e9f2f1be35e881f363f"
+          }
+        },
+        {
+          "client_id": "869363886300-t28hqgd6p79b6ac2u0gn3vm1d44fhs55.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZPaWJPNq4hFzRjmB6dhFw770RM55Ql2g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "869363886300-t28hqgd6p79b6ac2u0gn3vm1d44fhs55.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "869363886300-i4ba4ieo09ej5f8tgnc5hemokgcfi1s7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.locumApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -11,12 +11,10 @@ class AuthRepoImp implements AuthRepo {
 
   AuthRepoImp({required this.authRemoteDataSource});
   @override
-  Future<Either<Failure, UserModel>> signIn(
-      {required String email, required String password}) async {
+  Future<Either<Failure, UserModel>> signIn({required String email, required String password}) async {
     final t = prt('signIn  - AuthRepoImp');
     try {
-      UserModel model =
-          await authRemoteDataSource.signIn(email: email, password: password);
+      UserModel model = await authRemoteDataSource.signIn(email: email, password: password);
       return Right(pr(model, t));
     } catch (e) {
       pr(e.toString());
@@ -32,6 +30,21 @@ class AuthRepoImp implements AuthRepo {
     final t = prt('signIn  - AuthRepoImp');
     try {
       UserModel model = await authRemoteDataSource.signup(params);
+      return Right(pr(model, t));
+    } catch (e) {
+      pr(e.toString());
+      if (e is DioException) {
+        return Left(ServerFailure.formDioError(e));
+      }
+      return Left(ServerFailure(pr(e.toString(), t)));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserModel>> socialAuth(SocialAuthParam params) async {
+    final t = prt('socialAuth  - AuthRepoImp');
+    try {
+      UserModel model = await authRemoteDataSource.socialAuth(params);
       return Right(pr(model, t));
     } catch (e) {
       pr(e.toString());

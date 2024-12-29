@@ -35,84 +35,64 @@ class SignUpCubit extends Cubit<SignUpState> {
       (Failure failure) {
         pr(failure.message, t);
         showSnackbar('Server Error', failure.message, true);
-        emit(state.copyWith(
-            responseType: ResponseEnum.failed, errorMessage: failure.message));
+        emit(state.copyWith(responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
       (List<StateModel> states) {
         pr(states, t);
-        emit(state.copyWith(
-            states: states,
-            responseType: ResponseEnum.success,
-            errorMessage: null));
+        emit(state.copyWith(states: states, responseType: ResponseEnum.success, errorMessage: null));
       },
     );
   }
 
   Future fetchDistrict(String selectedStateName) async {
     final t = prt('fetchDistrict - SignUpCubit');
-    StateModel? selectedStateModel = state.states
-        ?.where((stateModel) => stateModel.name == selectedStateName)
-        .first;
+    StateModel? selectedStateModel = state.states?.where((stateModel) => stateModel.name == selectedStateName).first;
     emit(state.copyWith(selectedState: selectedStateModel, errorMessage: null));
     if (selectedStateModel == null) {
       return;
     }
-    final result =
-        await commonDataRepo.fetchDistrictsData(selectedStateModel.id!);
+    final result = await commonDataRepo.fetchDistrictsData(selectedStateModel.id!);
     result.fold(
       (Failure failure) {
         pr(failure.message, t);
         showSnackbar('Server Error', failure.message, true);
-        emit(state.copyWith(
-            responseType: ResponseEnum.failed, errorMessage: failure.message));
+        emit(state.copyWith(responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
       (DistrictsDataModel districtsData) {
         pr(districtsData, t);
-        emit(state.copyWith(
-            districtsDataModel: districtsData,
-            responseType: ResponseEnum.success,
-            errorMessage: null));
+        emit(state.copyWith(districtsDataModel: districtsData, responseType: ResponseEnum.success, errorMessage: null));
       },
     );
   }
 
   void selectDistrict(String slectedDistricName) {
-    DistrictModel? selectedDistrictModel = state.districtsDataModel?.districts
-        ?.where((districtModel) => districtModel?.name == slectedDistricName)
-        .first;
-    emit(state.copyWith(
-        selectdDistrict: selectedDistrictModel, errorMessage: null));
+    DistrictModel? selectedDistrictModel =
+        state.districtsDataModel?.districts?.where((districtModel) => districtModel?.name == slectedDistricName).first;
+    emit(state.copyWith(selectdDistrict: selectedDistrictModel, errorMessage: null));
   }
 
   void selectUserType(String userTypeStr) {
     const t = 'selectUserType - SignUpCubit';
-    UserTypeEnum? selectedUserType = UserTypeEnum.values
-        .where((userType) => userType.toFullString() == userTypeStr)
-        .first;
-    emit(state.copyWith(
-        selectedUserType: pr(selectedUserType, t), errorMessage: null));
+    UserTypeEnum? selectedUserType =
+        UserTypeEnum.values.where((userType) => userType.toFullString() == userTypeStr).first;
+    emit(state.copyWith(selectedUserType: pr(selectedUserType, t), errorMessage: null));
   }
 
   Future signUp(SignUpParams params) async {
     final t = prt('signUp - SignUpCubit');
-    emit(
-        state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
+    emit(state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
     final result = await authRepo.signup(params);
     result.fold(
       (Failure failure) {
         pr(failure.message, t);
         showSnackbar('Server Error', failure.message, true);
-        emit(state.copyWith(
-            responseType: ResponseEnum.failed, errorMessage: failure.message));
+        emit(state.copyWith(responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
       (UserModel user) async {
         pr(user, t);
         await AuthHelpers.cacheUser(user);
         await _updateUserInfoState();
-        emit(state.copyWith(
-            userEntity: user,
-            responseType: ResponseEnum.success,
-            errorMessage: null));
+        emit(state.copyWith(userEntity: user, responseType: ResponseEnum.success, errorMessage: null));
         _navigateToHomeScreen();
       },
     );

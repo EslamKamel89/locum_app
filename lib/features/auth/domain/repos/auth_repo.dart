@@ -5,9 +5,42 @@ import 'package:locum_app/core/enums/user_type_enum.dart';
 import 'package:locum_app/features/auth/data/models/user_model.dart';
 
 abstract class AuthRepo {
-  Future<Either<Failure, UserModel>> signIn(
-      {required String email, required String password});
+  Future<Either<Failure, UserModel>> signIn({required String email, required String password});
   Future<Either<Failure, UserModel>> signup(SignUpParams params);
+  Future<Either<Failure, UserModel>> socialAuth(SocialAuthParam params);
+}
+
+class SocialAuthParam {
+  String? name;
+  String? email;
+  String? authId;
+  String? authType;
+  String? fcmToken;
+  UserTypeEnum? userType;
+  SocialAuthParam({
+    this.name,
+    this.email,
+    this.authId,
+    this.authType,
+    this.fcmToken,
+    this.userType,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'name': name,
+      'email': email,
+      'auth_id': authId,
+      'auth_type': authType,
+      'fcm_token': fcmToken,
+      'type': userType?.toShortString(),
+    };
+  }
+
+  @override
+  String toString() {
+    return 'SocialAuthParam(name: $name, email: $email, authId: $authId, authType: $authType, fcmToken: $fcmToken, userType: $userType)';
+  }
 }
 
 class SignUpParams {

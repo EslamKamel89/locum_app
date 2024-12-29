@@ -1,3 +1,25 @@
+Platform  Firebase App Id
+android   1:869363886300:android:dd1c0addb1a71551bf2c19
+ios       1:869363886300:ios:9cecb3ac549a9ba1bf2c19
+
+Alias name: androiddebugkey
+Creation date: Oct 4, 2024
+Entry type: PrivateKeyEntry
+Certificate chain length: 1
+Certificate[1]:
+Owner: C=US, O=Android, CN=Android Debug
+Issuer: C=US, O=Android, CN=Android Debug
+Serial number: 1
+Valid from: Fri Oct 04 12:29:30 EEST 2024 until: Sun Sep 27 12:29:30 EEST 2054
+Certificate fingerprints:
+         SHA1: DB:C0:54:87:F1:A7:C3:B2:2D:DF:5E:9F:2F:1B:E3:5E:88:1F:36:3F
+         SHA256: 2F:83:54:D1:78:69:81:9E:C8:F2:CD:CF:F2:A9:03:93:E7:9D:AD:35:57:DE:30:E7:95:5B:2A:24:B0:E8:BC:0D
+Signature algorithm name: SHA256withRSA
+Subject Public Key Algorithm: 2048-bit RSA key
+Version: 1
+
+
+
 Done todos {
     # fetch the userInfo endpoint and cache the result in the cache
     # always navigate to onboarding if you can't find any cached token
@@ -73,5 +95,26 @@ todos {
     # if you change the doctor image in the update method and come back the profile page the image is not updated in the ui only but it's updated successfully to the backend
     # i didn't handle no data any where in the applciation 
     # handle the permissions for the user to view the jobadds     
+}
+
+//!----------------------------------------------------------------------------------
+google finished  todo {
+    # add ["fcm_token" , "auth_id" , "auth_type"] to users table .
+    # cofigure the mobile app to use google auth signin
+    # update the user model to accept the new fields
+    # handle the permission for both android and ios for firebase auth
+    # create auth method in authcontroller
+    # collect the param after user sign in with google
+    # create the cubit to handle google auth
+}
+google todo {
+    # cast auth type to enum in laravel
+    # cofigure the mobile to accept notificaitons
+    # update the fcm token when the userinfo endpoint is triggered
+}
+
+notificaiton done todo{
+}
+notificaiton todo{
 }
 

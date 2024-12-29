@@ -10,9 +10,8 @@ class AuthRemoteDataSource {
   AuthRemoteDataSource({
     required this.api,
   });
-  Future<UserModel> signIn(
-      {required String email, required String password}) async {
-    final t = prt('signIn - CommonDataRemoteSource');
+  Future<UserModel> signIn({required String email, required String password}) async {
+    final t = prt('signIn - AuthRemoteDataSource');
     final data = await api.post(
       EndPoint.signin,
       data: {
@@ -26,9 +25,20 @@ class AuthRemoteDataSource {
   }
 
   Future<UserModel> signup(SignUpParams params) async {
-    final t = prt('signup - CommonDataRemoteSource');
+    final t = prt('signup - AuthRemoteDataSource');
     final data = await api.post(
       EndPoint.signup,
+      data: params.toMap(),
+    );
+    UserModel userModel = UserModel.fromJson(data['data']);
+
+    return pr(userModel, t);
+  }
+
+  Future<UserModel> socialAuth(SocialAuthParam params) async {
+    final t = prt('socialAuth - AuthRemoteDataSource');
+    final data = await api.post(
+      EndPoint.socialAuth,
       data: params.toMap(),
     );
     UserModel userModel = UserModel.fromJson(data['data']);
