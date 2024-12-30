@@ -106,9 +106,9 @@ google finished  todo {
     # create auth method in authcontroller
     # collect the param after user sign in with google
     # create the cubit to handle google auth
+    # cast auth type to enum in laravel
 }
 google todo {
-    # cast auth type to enum in laravel
     # cofigure the mobile to accept notificaitons
     # update the fcm token when the userinfo endpoint is triggered
 }

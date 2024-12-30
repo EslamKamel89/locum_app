@@ -1,6 +1,10 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:locum_app/core/extensions/context-extensions.dart';
+import 'package:locum_app/core/heleprs/print_helper.dart';
+import 'package:locum_app/core/heleprs/request_notification_permission.dart';
+import 'package:locum_app/core/heleprs/snackbar.dart';
 import 'package:locum_app/features/common_data/cubits/user_info/user_info_cubit.dart';
 import 'package:locum_app/utils/assets/assets.dart';
 
@@ -11,8 +15,7 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen>
-    with SingleTickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
   late UserInfoCubit userInfoCubit;
@@ -20,8 +23,8 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     super.initState();
     userInfoCubit = context.read<UserInfoCubit>();
-    _animationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 3));
+    _handleFirebaseNotification();
+    _animationController = AnimationController(vsync: this, duration: const Duration(seconds: 3));
     // _animation = CurvedAnimation(parent: _animationController, curve: Curves.easeInOut);
     _animation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
@@ -32,6 +35,33 @@ class _SplashScreenState extends State<SplashScreen>
         userInfoCubit.fetchUserInfo(true);
       }
     });
+  }
+
+  Future _handleFirebaseNotification() async {
+    final t = prt('_handleFirebaseNotification - splash screen');
+    try {
+      await requestFirebaseNotificationsPermission();
+      String? token = await FirebaseMessaging.instance.getToken();
+      pr(token, '$t - FCM token');
+      FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+        pr('Message received in foreground: ${message.notification?.title}', t);
+        showSnackbar(
+          message.notification?.title ?? 'Notification',
+          message.notification?.body ?? '',
+          false,
+        );
+      });
+      // FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
+      //   pr('Message received in background: ${message.notification?.title}', t);
+      //   showSnackbar(
+      //     message.notification?.title ?? 'Notification',
+      //     message.notification?.body ?? '',
+      //     false,
+      //   );
+      // });
+    } catch (e) {
+      pr('Exeception occured: $e', t);
+    }
   }
 
   @override
