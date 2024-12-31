@@ -6,7 +6,8 @@ import 'package:locum_app/core/widgets/custom_fading_widget.dart';
 import 'package:locum_app/features/doctor/doctor-job-applications/domain/models/job_application_details_model.dart';
 
 class JobApplicationWidget extends StatelessWidget {
-  const JobApplicationWidget({super.key, required this.jobApplicationDetailsModel});
+  const JobApplicationWidget(
+      {super.key, required this.jobApplicationDetailsModel});
   final JobApplicationDetailsModel jobApplicationDetailsModel;
   @override
   Widget build(BuildContext context) {
@@ -60,7 +61,8 @@ class JobApplicationWidget extends StatelessWidget {
                 StatusWidget(status: jobApplicationDetailsModel.status ?? ''),
                 InkWell(
                   onTap: () {
-                    Navigator.of(context).pushNamed(AppRoutesNames.doctorJobApplicationDetailsView,
+                    Navigator.of(context).pushNamed(
+                        AppRoutesNames.doctorJobApplicationDetailsView,
                         arguments: {'model': jobApplicationDetailsModel});
                   },
                   child: Text(
@@ -116,7 +118,9 @@ class JobApplicationWidget extends StatelessWidget {
                 ),
                 const SizedBox(width: 4),
                 Text(
-                  (jobApplicationDetailsModel.jobAdd?.createdAt ?? '').split('T').first,
+                  (jobApplicationDetailsModel.jobAdd?.createdAt ?? '')
+                      .split('T')
+                      .first,
                   style: const TextStyle(
                     fontSize: 12,
                   ),

@@ -84,7 +84,10 @@ class TestimonialsWidget extends StatelessWidget {
           items: testimonials.map((testimonial) {
             return SizedBox(
               height: 9000,
-              child: SliderContent(image: testimonial.image, title: testimonial.name, description: testimonial.comment),
+              child: SliderContent(
+                  image: testimonial.image,
+                  title: testimonial.name,
+                  description: testimonial.comment),
             );
             // CircularImageAsset(image: testimonial.image, height: 200.h),
             // Text(testimonial.name),
@@ -99,7 +102,11 @@ class TestimonialsWidget extends StatelessWidget {
 }
 
 class SliderContent extends StatelessWidget {
-  const SliderContent({super.key, required this.image, required this.title, required this.description});
+  const SliderContent(
+      {super.key,
+      required this.image,
+      required this.title,
+      required this.description});
   final String image;
   final String title;
   final String description;

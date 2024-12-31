@@ -32,14 +32,20 @@ class DoctorInfoForm extends StatefulWidget {
 class DoctorInfoFormState extends State<DoctorInfoForm> {
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController _licenseNumberController = TextEditingController();
+  final TextEditingController _licenseNumberController =
+      TextEditingController();
   final TextEditingController _licenseStateController = TextEditingController();
-  final TextEditingController _licenseIssueDateController = TextEditingController();
-  final TextEditingController _licenseExpireDateController = TextEditingController();
-  final TextEditingController _highestDegreeController = TextEditingController();
+  final TextEditingController _licenseIssueDateController =
+      TextEditingController();
+  final TextEditingController _licenseExpireDateController =
+      TextEditingController();
+  final TextEditingController _highestDegreeController =
+      TextEditingController();
   final TextEditingController _fieldOfStudyController = TextEditingController();
-  final TextEditingController _graduationYearController = TextEditingController();
-  final TextEditingController _workExperienceController = TextEditingController();
+  final TextEditingController _graduationYearController =
+      TextEditingController();
+  final TextEditingController _workExperienceController =
+      TextEditingController();
   final TextEditingController _biographyController = TextEditingController();
   final TextEditingController _universityController = TextEditingController();
 
@@ -94,12 +100,15 @@ class DoctorInfoFormState extends State<DoctorInfoForm> {
                   ),
                   // CustomTextField('License State', _licenseStateController, 'Enter license state'),
                   BlocProvider(
-                    create: (context) => StateCubit(serviceLocator())..fetchStates(),
+                    create: (context) =>
+                        StateCubit(serviceLocator())..fetchStates(),
                     child: BlocBuilder<StateCubit, StateState>(
                       builder: (context, state) {
                         return CustomTextFormFieldWithSuggestions(
                           label: 'License State *',
-                          suggestions: (state.stateModels ?? []).map((university) => university.name ?? '').toList(),
+                          suggestions: (state.stateModels ?? [])
+                              .map((university) => university.name ?? '')
+                              .toList(),
                           onSelected: (String state) {},
                           controller: _licenseStateController,
                           validator: (String? value) {
@@ -141,13 +150,15 @@ class DoctorInfoFormState extends State<DoctorInfoForm> {
                     },
                   ),
                   BlocProvider(
-                    create: (context) => UniversityCubit(serviceLocator())..fetchUniversities(),
+                    create: (context) =>
+                        UniversityCubit(serviceLocator())..fetchUniversities(),
                     child: BlocBuilder<UniversityCubit, UniversityState>(
                       builder: (context, state) {
                         return CustomTextFormFieldWithSuggestions(
                           label: 'University Name',
-                          suggestions:
-                              (state.universityModels ?? []).map((university) => university.name ?? '').toList(),
+                          suggestions: (state.universityModels ?? [])
+                              .map((university) => university.name ?? '')
+                              .toList(),
                           onSelected: (String university) {
                             _selectedUniversity = university;
                           },
@@ -214,7 +225,9 @@ class DoctorInfoFormState extends State<DoctorInfoForm> {
                       ),
                       const SizedBox(width: 10),
                       state.responseType == ResponseEnum.loading
-                          ? const Align(alignment: Alignment.centerLeft, child: CircularProgressIndicator())
+                          ? const Align(
+                              alignment: Alignment.centerLeft,
+                              child: CircularProgressIndicator())
                           : const SizedBox(),
                     ],
                   ),
@@ -231,17 +244,22 @@ class DoctorInfoFormState extends State<DoctorInfoForm> {
     if (_formKey.currentState!.validate()) {
       final params = pr(
           DoctorInfoParams(
-            professionalLicenseNumber: ifStrEmptyReturnNull(_licenseNumberController.text),
+            professionalLicenseNumber:
+                ifStrEmptyReturnNull(_licenseNumberController.text),
             licenseState: ifStrEmptyReturnNull(_licenseStateController.text),
-            licenseIssueDate:
-                licenseIssueDate != null ? formatDateForApi(licenseIssueDate!) : doctorInfoModel?.licenseIssueDate,
-            licenseExpiryDate:
-                licenseExpiryDate != null ? formatDateForApi(licenseExpiryDate!) : doctorInfoModel?.licenseExpiryDate,
+            licenseIssueDate: licenseIssueDate != null
+                ? formatDateForApi(licenseIssueDate!)
+                : doctorInfoModel?.licenseIssueDate,
+            licenseExpiryDate: licenseExpiryDate != null
+                ? formatDateForApi(licenseExpiryDate!)
+                : doctorInfoModel?.licenseExpiryDate,
             universityName: ifStrEmptyReturnNull(_universityController.text),
             highestDegree: ifStrEmptyReturnNull(_highestDegreeController.text),
             fieldOfStudy: ifStrEmptyReturnNull(_fieldOfStudyController.text),
-            graduationYear: parseInt(ifStrEmptyReturnNull(_graduationYearController.text)),
-            workExperience: ifStrEmptyReturnNull(_workExperienceController.text),
+            graduationYear:
+                parseInt(ifStrEmptyReturnNull(_graduationYearController.text)),
+            workExperience:
+                ifStrEmptyReturnNull(_workExperienceController.text),
             cv: selectedFile,
             biography: ifStrEmptyReturnNull(_biographyController.text),
           ),
@@ -256,15 +274,18 @@ class DoctorInfoFormState extends State<DoctorInfoForm> {
 
   void _initializeTextFieldIfUpdating() {
     if (widget.create || doctorInfoModel == null) return;
-    _licenseNumberController.text = doctorInfoModel?.professionalLicenseNumber ?? '';
+    _licenseNumberController.text =
+        doctorInfoModel?.professionalLicenseNumber ?? '';
     _licenseStateController.text = doctorInfoModel?.licenseState ?? '';
     _highestDegreeController.text = doctorInfoModel?.highestDegree ?? '';
     _fieldOfStudyController.text = doctorInfoModel?.fieldOfStudy ?? '';
-    _graduationYearController.text = doctorInfoModel?.graduationYear?.toString() ?? '';
+    _graduationYearController.text =
+        doctorInfoModel?.graduationYear?.toString() ?? '';
     _workExperienceController.text = doctorInfoModel?.workExperience ?? '';
     _biographyController.text = doctorInfoModel?.biography ?? '';
     _universityController.text = doctorInfoModel?.university?.name ?? '';
     _licenseIssueDateController.text = doctorInfoModel?.licenseIssueDate ?? '';
-    _licenseExpireDateController.text = doctorInfoModel?.licenseExpiryDate ?? '';
+    _licenseExpireDateController.text =
+        doctorInfoModel?.licenseExpiryDate ?? '';
   }
 }

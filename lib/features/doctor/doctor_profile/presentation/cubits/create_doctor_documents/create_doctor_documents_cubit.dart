@@ -12,8 +12,10 @@ part 'create_doctor_documents_state.dart';
 
 class CreateDoctorDocumentsCubit extends Cubit<CreateDoctorDocumentsState> {
   final DoctorProfileRepo doctorProfileRepo;
-  CreateDoctorDocumentsCubit(this.doctorProfileRepo) : super(CreateDoctorDocumentsState());
-  Future createDoctorDocument({required CreateDoctorDocumentParams params}) async {
+  CreateDoctorDocumentsCubit(this.doctorProfileRepo)
+      : super(CreateDoctorDocumentsState());
+  Future createDoctorDocument(
+      {required CreateDoctorDocumentParams params}) async {
     final t = prt('createDoctorDocument - CreateDoctorDocumentsCubit');
     emit(state.copyWith(
       responseType: ResponseEnum.loading,
@@ -27,14 +29,17 @@ class CreateDoctorDocumentsCubit extends Cubit<CreateDoctorDocumentsState> {
       (Failure failure) {
         pr(failure.message, t);
         showSnackbar('Server Error', failure.message, true);
-        emit(state.copyWith(responseType: ResponseEnum.failed, errorMessage: failure.message));
+        emit(state.copyWith(
+            responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
       (DoctorDocumentModel doctorDocumentModel) async {
         pr(doctorDocumentModel, t);
         await _updateUserInfoState();
         if (isClosed) return;
         emit(state.copyWith(
-            doctorDocumentModel: doctorDocumentModel, responseType: ResponseEnum.success, errorMessage: null));
+            doctorDocumentModel: doctorDocumentModel,
+            responseType: ResponseEnum.success,
+            errorMessage: null));
       },
     );
   }

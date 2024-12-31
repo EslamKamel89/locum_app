@@ -11,7 +11,8 @@ class DoctorJobApplicationRemoteDataSource {
 
   Future<ResponseModel<List<JobApplicationDetailsModel>>> showAllJobApplication(
       {required int limit, required int page, String? status}) async {
-    final t = prt('showAllJobApplication - DoctorJobApplicationRemoteDataSource');
+    final t =
+        prt('showAllJobApplication - DoctorJobApplicationRemoteDataSource');
     Map<String, dynamic> queryParamater = {
       "limit": limit,
       "page": page,
@@ -23,9 +24,12 @@ class DoctorJobApplicationRemoteDataSource {
       EndPoint.showDoctorJobApplication,
       queryParameter: queryParamater,
     );
-    ResponseModel<List<JobApplicationDetailsModel>> response = ResponseModel.fromJson(data);
-    List<JobApplicationDetailsModel> jobApplicationModels =
-        data['data'].map<JobApplicationDetailsModel>((e) => JobApplicationDetailsModel.fromJson(e)).toList();
+    ResponseModel<List<JobApplicationDetailsModel>> response =
+        ResponseModel.fromJson(data);
+    List<JobApplicationDetailsModel> jobApplicationModels = data['data']
+        .map<JobApplicationDetailsModel>(
+            (e) => JobApplicationDetailsModel.fromJson(e))
+        .toList();
     response.data = jobApplicationModels;
 
     return pr(response, t);

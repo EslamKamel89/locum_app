@@ -47,15 +47,20 @@ class _JobApplicationsWidgetState extends State<JobApplicationsWidget> {
       builder: (context, state) {
         return ListView.builder(
           controller: _scrollController,
-          itemCount: (state.jobApplicationDetailsResponse?.data?.length ?? 0) + 1,
+          itemCount:
+              (state.jobApplicationDetailsResponse?.data?.length ?? 0) + 1,
           itemBuilder: (context, index) {
-            if (index < (state.jobApplicationDetailsResponse?.data?.length ?? 0)) {
-              final JobApplicationDetailsModel? model = state.jobApplicationDetailsResponse?.data?[index];
+            if (index <
+                (state.jobApplicationDetailsResponse?.data?.length ?? 0)) {
+              final JobApplicationDetailsModel? model =
+                  state.jobApplicationDetailsResponse?.data?[index];
               if (model == null) return const SizedBox();
               return JobApplicationWidget(jobApplicationDetailsModel: model);
             }
 
-            return state.responseType == ResponseEnum.loading ? const JobApplicationLoadingWidget() : const SizedBox();
+            return state.responseType == ResponseEnum.loading
+                ? const JobApplicationLoadingWidget()
+                : const SizedBox();
           },
         );
       },

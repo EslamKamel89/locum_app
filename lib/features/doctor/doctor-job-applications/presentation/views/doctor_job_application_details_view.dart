@@ -7,14 +7,17 @@ import 'package:locum_app/features/doctor/doctor-job-applications/domain/models/
 import 'package:locum_app/features/doctor/doctor-job-applications/presentation/views/widgets/job_application_widget.dart';
 
 class DoctorJobApplicationDetailsView extends StatefulWidget {
-  const DoctorJobApplicationDetailsView({super.key, required this.jobApplicationModel});
+  const DoctorJobApplicationDetailsView(
+      {super.key, required this.jobApplicationModel});
   final JobApplicationDetailsModel jobApplicationModel;
 
   @override
-  State<DoctorJobApplicationDetailsView> createState() => _DoctorJobApplicationDetailsViewState();
+  State<DoctorJobApplicationDetailsView> createState() =>
+      _DoctorJobApplicationDetailsViewState();
 }
 
-class _DoctorJobApplicationDetailsViewState extends State<DoctorJobApplicationDetailsView> {
+class _DoctorJobApplicationDetailsViewState
+    extends State<DoctorJobApplicationDetailsView> {
   @override
   Widget build(BuildContext context) {
     return MainScaffold(
@@ -27,32 +30,55 @@ class _DoctorJobApplicationDetailsViewState extends State<DoctorJobApplicationDe
           children: [
             _titleAndStatus(widget.jobApplicationModel),
             _sizer(),
-            _buildInfoRow('Specialty', widget.jobApplicationModel.jobAdd?.specialty?.name),
-            _buildInfoRow('Job Info', widget.jobApplicationModel.jobAdd?.jobInfo?.name),
-            _buildInfoRow('Job Type', widget.jobApplicationModel.jobAdd?.jobType),
-            _buildSection('Location', widget.jobApplicationModel.jobAdd?.location),
-            _buildSection('Description', widget.jobApplicationModel.jobAdd?.description),
-            _buildSection('Responsibilities', widget.jobApplicationModel.jobAdd?.responsibilities),
-            _buildSection('Qualifications', widget.jobApplicationModel.jobAdd?.qualifications),
-            _buildSection('Experience Required', widget.jobApplicationModel.jobAdd?.experienceRequired),
+            _buildInfoRow('Specialty',
+                widget.jobApplicationModel.jobAdd?.specialty?.name),
+            _buildInfoRow(
+                'Job Info', widget.jobApplicationModel.jobAdd?.jobInfo?.name),
+            _buildInfoRow(
+                'Job Type', widget.jobApplicationModel.jobAdd?.jobType),
+            _buildSection(
+                'Location', widget.jobApplicationModel.jobAdd?.location),
+            _buildSection(
+                'Description', widget.jobApplicationModel.jobAdd?.description),
+            _buildSection('Responsibilities',
+                widget.jobApplicationModel.jobAdd?.responsibilities),
+            _buildSection('Qualifications',
+                widget.jobApplicationModel.jobAdd?.qualifications),
+            _buildSection('Experience Required',
+                widget.jobApplicationModel.jobAdd?.experienceRequired),
             _buildInfoRow('Salary Range',
                 '\$${widget.jobApplicationModel.jobAdd?.salaryMin} - \$${widget.jobApplicationModel.jobAdd?.salaryMax}'),
-            _buildSection('Benefits', widget.jobApplicationModel.jobAdd?.benefits),
-            _buildInfoRow('Working Hours', widget.jobApplicationModel.jobAdd?.workingHours),
-            _buildInfoRow('Application Deadline', widget.jobApplicationModel.jobAdd?.applicationDeadline),
-            _buildSection('Required Documents', widget.jobApplicationModel.jobAdd?.requiredDocuments),
-            _buildInfoRow('Published At', (widget.jobApplicationModel.jobAdd?.createdAt)?.split('T').first),
-            _wrapWithLabel('Required Languages',
-                (widget.jobApplicationModel.jobAdd?.langs ?? []).map((lang) => lang.name ?? '').toList()),
-            _wrapWithLabel('Required Skills',
-                (widget.jobApplicationModel.jobAdd?.skills ?? []).map((skill) => skill.name ?? '').toList()),
+            _buildSection(
+                'Benefits', widget.jobApplicationModel.jobAdd?.benefits),
+            _buildInfoRow('Working Hours',
+                widget.jobApplicationModel.jobAdd?.workingHours),
+            _buildInfoRow('Application Deadline',
+                widget.jobApplicationModel.jobAdd?.applicationDeadline),
+            _buildSection('Required Documents',
+                widget.jobApplicationModel.jobAdd?.requiredDocuments),
+            _buildInfoRow(
+                'Published At',
+                (widget.jobApplicationModel.jobAdd?.createdAt)
+                    ?.split('T')
+                    .first),
+            _wrapWithLabel(
+                'Required Languages',
+                (widget.jobApplicationModel.jobAdd?.langs ?? [])
+                    .map((lang) => lang.name ?? '')
+                    .toList()),
+            _wrapWithLabel(
+                'Required Skills',
+                (widget.jobApplicationModel.jobAdd?.skills ?? [])
+                    .map((skill) => skill.name ?? '')
+                    .toList()),
           ],
         ),
       ),
     );
   }
 
-  Widget _titleAndStatus(JobApplicationDetailsModel? jobApplicationDetailsModel) {
+  Widget _titleAndStatus(
+      JobApplicationDetailsModel? jobApplicationDetailsModel) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -62,7 +88,8 @@ class _DoctorJobApplicationDetailsViewState extends State<DoctorJobApplicationDe
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _headLine(jobApplicationDetailsModel?.jobAdd?.title),
-              _headLine(jobApplicationDetailsModel?.jobAdd?.hospital?.facilityName),
+              _headLine(
+                  jobApplicationDetailsModel?.jobAdd?.hospital?.facilityName),
             ],
           ),
         ),
@@ -124,7 +151,10 @@ class _DoctorJobApplicationDetailsViewState extends State<DoctorJobApplicationDe
   Widget _title(String title) {
     return Text(
       title,
-      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: context.primaryColor.withRed(50)),
+      style: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          color: context.primaryColor.withRed(50)),
     );
   }
 

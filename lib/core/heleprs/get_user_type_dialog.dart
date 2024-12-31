@@ -24,7 +24,9 @@ Future<UserTypeEnum?> getUserTypeDialog(BuildContext context) async {
                     children: [
                       Expanded(
                         child: DropDownWidget(
-                          options: UserTypeEnum.values.map((userType) => userType.toFullString()).toList(),
+                          options: UserTypeEnum.values
+                              .map((userType) => userType.toFullString())
+                              .toList(),
                           label: 'Provider or Professional',
                           onSelect: (String? value) {
                             if (value == null) return;
@@ -44,7 +46,8 @@ Future<UserTypeEnum?> getUserTypeDialog(BuildContext context) async {
 }
 
 UserTypeEnum? _selectUserType(String userTypeStr) {
-  UserTypeEnum? selectedUserType =
-      UserTypeEnum.values.where((userType) => userType.toFullString() == userTypeStr).first;
+  UserTypeEnum? selectedUserType = UserTypeEnum.values
+      .where((userType) => userType.toFullString() == userTypeStr)
+      .first;
   return selectedUserType;
 }

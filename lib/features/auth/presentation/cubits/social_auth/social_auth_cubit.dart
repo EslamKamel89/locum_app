@@ -20,19 +20,24 @@ class SocialAuthCubit extends Cubit<SocialAuthState> {
   SocialAuthCubit(this.authRepo) : super(SocialAuthState());
   Future socialAuth(SocialAuthParam params) async {
     final t = prt('socialAuth - SocialAuthCubit');
-    emit(state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
+    emit(
+        state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
     final result = await authRepo.socialAuth(params);
     result.fold(
       (Failure failure) {
         pr(failure.message, t);
         showSnackbar('Server Error', failure.message, true);
-        emit(state.copyWith(responseType: ResponseEnum.failed, errorMessage: failure.message));
+        emit(state.copyWith(
+            responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
       (UserModel user) async {
         pr(user, t);
         await AuthHelpers.cacheUser(user);
         await _updateUserInfoState();
-        emit(state.copyWith(userEntity: user, responseType: ResponseEnum.success, errorMessage: null));
+        emit(state.copyWith(
+            userEntity: user,
+            responseType: ResponseEnum.success,
+            errorMessage: null));
         _navigateToHomeScreen();
       },
     );

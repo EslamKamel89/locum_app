@@ -23,7 +23,9 @@ class CommonDataRemoteSource {
   Future<List<SpecialtyModel>> fetchSpecialties() async {
     final t = prt('fetchSpecialties - CommonDataRemoteSource');
     final data = await api.get(EndPoint.fetchSpecialties);
-    List<SpecialtyModel> specialties = data['data'].map<SpecialtyModel>((e) => SpecialtyModel.fromJson(e)).toList();
+    List<SpecialtyModel> specialties = data['data']
+        .map<SpecialtyModel>((e) => SpecialtyModel.fromJson(e))
+        .toList();
 
     return pr(specialties, t);
   }
@@ -31,7 +33,8 @@ class CommonDataRemoteSource {
   Future<List<StateModel>> fetchStates() async {
     final t = prt('fetchStates - CommonDataRemoteSource');
     final data = await api.get(EndPoint.fetchStates);
-    List<StateModel> stateModels = data['data'].map<StateModel>((e) => StateModel.fromJson(e)).toList();
+    List<StateModel> stateModels =
+        data['data'].map<StateModel>((e) => StateModel.fromJson(e)).toList();
 
     return pr(stateModels, t);
   }
@@ -39,8 +42,9 @@ class CommonDataRemoteSource {
   Future<List<UniversityModel>> fetchUniversities() async {
     final t = prt('fetchUniversities - CommonDataRemoteSource');
     final data = await api.get(EndPoint.fetchUniversities);
-    List<UniversityModel> universityModels =
-        data['data'].map<UniversityModel>((e) => UniversityModel.fromJson(e)).toList();
+    List<UniversityModel> universityModels = data['data']
+        .map<UniversityModel>((e) => UniversityModel.fromJson(e))
+        .toList();
 
     return pr(universityModels, t);
   }
@@ -48,7 +52,9 @@ class CommonDataRemoteSource {
   Future<List<JobInfoModel>> fetchJobInfos() async {
     final t = prt('fetchJobInfos - CommonDataRemoteSource');
     final data = await api.get(EndPoint.fetchJobInfos);
-    List<JobInfoModel> jobInfoModels = data['data'].map<JobInfoModel>((e) => JobInfoModel.fromJson(e)).toList();
+    List<JobInfoModel> jobInfoModels = data['data']
+        .map<JobInfoModel>((e) => JobInfoModel.fromJson(e))
+        .toList();
 
     return pr(jobInfoModels, t);
   }
@@ -59,7 +65,8 @@ class CommonDataRemoteSource {
       EndPoint.fetchDistrictsData,
       queryParameter: {'state_id': stateId},
     );
-    DistrictsDataModel districtsDataModel = DistrictsDataModel.fromJson(data['data']);
+    DistrictsDataModel districtsDataModel =
+        DistrictsDataModel.fromJson(data['data']);
 
     return pr(districtsDataModel, t);
   }
@@ -68,7 +75,8 @@ class CommonDataRemoteSource {
     final t = prt('fetchUserInfo - CommonDataRemoteSource');
     String? token = await FirebaseMessaging.instance.getToken();
 
-    final data = await api.get(EndPoint.userInfo, queryParameter: {'fcm_token': token});
+    final data =
+        await api.get(EndPoint.userInfo, queryParameter: {'fcm_token': token});
     if (data['data']['type'] == 'doctor') {
       return Left(pr(DoctorUserModel.fromJson(data['data']['user']), t));
     }
@@ -84,7 +92,9 @@ class CommonDataRemoteSource {
     final data = await api.get(
       EndPoint.fetchLangs,
     );
-    List<LanguageModel> languageModels = data['data'].map<LanguageModel>((e) => LanguageModel.fromJson(e)).toList();
+    List<LanguageModel> languageModels = data['data']
+        .map<LanguageModel>((e) => LanguageModel.fromJson(e))
+        .toList();
 
     return pr(languageModels, t);
   }
@@ -94,7 +104,8 @@ class CommonDataRemoteSource {
     final data = await api.get(
       EndPoint.fetchSkills,
     );
-    List<SkillModel> skillModels = data['data'].map<SkillModel>((e) => SkillModel.fromJson(e)).toList();
+    List<SkillModel> skillModels =
+        data['data'].map<SkillModel>((e) => SkillModel.fromJson(e)).toList();
 
     return pr(skillModels, t);
   }

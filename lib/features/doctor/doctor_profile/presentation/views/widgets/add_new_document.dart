@@ -15,16 +15,20 @@ class AddNewDocumentWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => CreateDoctorDocumentsCubit(serviceLocator()),
-      child: BlocConsumer<CreateDoctorDocumentsCubit, CreateDoctorDocumentsState>(
+      child:
+          BlocConsumer<CreateDoctorDocumentsCubit, CreateDoctorDocumentsState>(
         listener: (context, state) {
           // TODO: implement listener
         },
         builder: (context, state) {
           return TextButton(
             onPressed: () async {
-              CreateDoctorDocumentParams? params = await updateOrCreateDocument(context);
+              CreateDoctorDocumentParams? params =
+                  await updateOrCreateDocument(context);
               if (params == null) return;
-              context.read<CreateDoctorDocumentsCubit>().createDoctorDocument(params: params);
+              context
+                  .read<CreateDoctorDocumentsCubit>()
+                  .createDoctorDocument(params: params);
             },
             child: Row(
               children: [

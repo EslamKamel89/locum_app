@@ -5,7 +5,8 @@ import 'package:locum_app/core/enums/user_type_enum.dart';
 import 'package:locum_app/features/auth/data/models/user_model.dart';
 
 abstract class AuthRepo {
-  Future<Either<Failure, UserModel>> signIn({required String email, required String password});
+  Future<Either<Failure, UserModel>> signIn(
+      {required String email, required String password});
   Future<Either<Failure, UserModel>> signup(SignUpParams params);
   Future<Either<Failure, UserModel>> socialAuth(SocialAuthParam params);
 }

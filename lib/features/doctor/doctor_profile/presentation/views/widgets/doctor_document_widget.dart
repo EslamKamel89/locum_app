@@ -24,8 +24,10 @@ class DoctorDocumentOption {
 class _DoctorDocumentWidgetState extends State<DoctorDocumentWidget> {
   DoctorDocumentOption? selectedValue;
   List<DoctorDocumentOption> options = [
-    DoctorDocumentOption(action: 'View', icon: Icon(MdiIcons.viewCarouselOutline)),
-    DoctorDocumentOption(action: 'Delete', icon: const Icon(Icons.delete, color: Colors.red)),
+    DoctorDocumentOption(
+        action: 'View', icon: Icon(MdiIcons.viewCarouselOutline)),
+    DoctorDocumentOption(
+        action: 'Delete', icon: const Icon(Icons.delete, color: Colors.red)),
   ];
   @override
   void initState() {
@@ -37,7 +39,8 @@ class _DoctorDocumentWidgetState extends State<DoctorDocumentWidget> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => DeleteDoctorDocumentsCubit(serviceLocator()),
-      child: BlocConsumer<DeleteDoctorDocumentsCubit, DeleteDoctorDocumentsState>(
+      child:
+          BlocConsumer<DeleteDoctorDocumentsCubit, DeleteDoctorDocumentsState>(
         listener: (context, state) {
           // TODO: implement listener
         },
@@ -75,11 +78,14 @@ class _DoctorDocumentWidgetState extends State<DoctorDocumentWidget> {
                       });
                       if (value == null) return;
                       if (value.action == options[0].action) {
-                        await launchUrl(Uri.parse("${EndPoint.imgBaseUrl}${widget.doctorDocumentModel.file ?? ''}"));
+                        await launchUrl(Uri.parse(
+                            "${EndPoint.imgBaseUrl}${widget.doctorDocumentModel.file ?? ''}"));
                       } else if (value.action == options[1].action) {
-                        final controller = context.read<DeleteDoctorDocumentsCubit>();
+                        final controller =
+                            context.read<DeleteDoctorDocumentsCubit>();
                         if (widget.doctorDocumentModel.id == null) return;
-                        controller.deleteDoctorDocument(id: (widget.doctorDocumentModel.id)!);
+                        controller.deleteDoctorDocument(
+                            id: (widget.doctorDocumentModel.id)!);
                       }
                       setState(() {
                         selectedValue = null;

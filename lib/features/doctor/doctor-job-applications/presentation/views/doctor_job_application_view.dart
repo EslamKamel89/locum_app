@@ -10,13 +10,16 @@ class DoctorAllJobApplicationView extends StatefulWidget {
   const DoctorAllJobApplicationView({super.key});
 
   @override
-  State<DoctorAllJobApplicationView> createState() => _DoctorAllJobApplicationViewState();
+  State<DoctorAllJobApplicationView> createState() =>
+      _DoctorAllJobApplicationViewState();
 }
 
-class _DoctorAllJobApplicationViewState extends State<DoctorAllJobApplicationView> {
+class _DoctorAllJobApplicationViewState
+    extends State<DoctorAllJobApplicationView> {
   @override
   Widget build(BuildContext context) {
-    serviceLocator<DoctorJobApplicationRepo>().showAllJobApplication(limit: 10, page: 1);
+    serviceLocator<DoctorJobApplicationRepo>()
+        .showAllJobApplication(limit: 10, page: 1);
     return const MainScaffold(
       appBarTitle: 'My Applications',
       drawer: DefaultDoctorDrawer(),

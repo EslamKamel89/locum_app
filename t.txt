@@ -89,16 +89,6 @@ Done todos {
     # connect the update and create method with the backend 
     # create the ui for updatea and create new document
     # view file uploaded
-}
-
-todos {
-    # if you change the doctor image in the update method and come back the profile page the image is not updated in the ui only but it's updated successfully to the backend
-    # i didn't handle no data any where in the applciation 
-    # handle the permissions for the user to view the jobadds     
-}
-
-//!----------------------------------------------------------------------------------
-google finished  todo {
     # add ["fcm_token" , "auth_id" , "auth_type"] to users table .
     # cofigure the mobile app to use google auth signin
     # update the user model to accept the new fields
@@ -107,14 +97,23 @@ google finished  todo {
     # collect the param after user sign in with google
     # create the cubit to handle google auth
     # cast auth type to enum in laravel
-}
-google todo {
     # cofigure the mobile to accept notificaitons
     # update the fcm token when the userinfo endpoint is triggered
 }
 
-notificaiton done todo{
+todos {
+    # if you change the doctor image in the update method and come back the profile page the image is not updated in the ui only but it's updated successfully to the backend
+    # i didn't handle no data any where in the applciation 
+    # handle the permissions for the user to view the jobadds     
+    # there as an error occur when the user don't enter his information and try to see the job applictations
+    # handle the notificaition routing in the front and the backend
+    # handle the logic for sending the notifiction from the backend
+    # review every thing work 
+    # enter a metting with hussien 
+    # enter a metting with mohmed salama to build the ios app 
+    # change the app secondary color to make it more appealing
 }
-notificaiton todo{
-}
+
+
+
 

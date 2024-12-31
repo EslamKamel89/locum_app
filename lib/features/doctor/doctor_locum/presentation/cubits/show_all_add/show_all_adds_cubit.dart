@@ -51,7 +51,8 @@ class ShowAllAddsCubit extends Cubit<ShowAllAddsState> {
     // params.page = state.page;
     final result = await doctorLocumRepo.showAllJobAdds(
       params: pr(
-        state.params ?? ShowAllJobAddsParams(limit: state.limit, page: state.page),
+        state.params ??
+            ShowAllJobAddsParams(limit: state.limit, page: state.page),
         '$t params used in the request',
       ),
     );
@@ -59,12 +60,16 @@ class ShowAllAddsCubit extends Cubit<ShowAllAddsState> {
       (Failure failure) {
         pr(failure.message, t);
         showSnackbar('Server Error', failure.message, true);
-        emit(state.copyWith(responseType: ResponseEnum.failed, errorMessage: failure.message));
+        emit(state.copyWith(
+            responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
       (ResponseModel<List<JobAddModel>> jobAdds) async {
         pr(jobAdds, t);
         pr(jobAdds.pagination, t);
-        jobAdds.data = [...state.jobAddsResponse?.data ?? [], ...jobAdds.data ?? []];
+        jobAdds.data = [
+          ...state.jobAddsResponse?.data ?? [],
+          ...jobAdds.data ?? []
+        ];
         emit(
           state.copyWith(
             jobAddsResponse: jobAdds,

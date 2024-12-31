@@ -2,7 +2,8 @@
 part of 'doctor_job_application_cubit.dart';
 
 class DoctorJobApplicationState {
-  ResponseModel<List<JobApplicationDetailsModel>>? jobApplicationDetailsResponse;
+  ResponseModel<List<JobApplicationDetailsModel>>?
+      jobApplicationDetailsResponse;
   String? errorMessage;
   ResponseEnum? responseType = ResponseEnum.initial;
   int? limit;
@@ -20,7 +21,8 @@ class DoctorJobApplicationState {
   });
 
   DoctorJobApplicationState copyWith({
-    ResponseModel<List<JobApplicationDetailsModel>>? jobApplicationDetailsResponse,
+    ResponseModel<List<JobApplicationDetailsModel>>?
+        jobApplicationDetailsResponse,
     String? errorMessage,
     ResponseEnum? responseType,
     int? limit,
@@ -29,7 +31,8 @@ class DoctorJobApplicationState {
     String? status,
   }) {
     return DoctorJobApplicationState(
-      jobApplicationDetailsResponse: jobApplicationDetailsResponse ?? this.jobApplicationDetailsResponse,
+      jobApplicationDetailsResponse:
+          jobApplicationDetailsResponse ?? this.jobApplicationDetailsResponse,
       errorMessage: errorMessage ?? this.errorMessage,
       responseType: responseType ?? this.responseType,
       limit: limit ?? this.limit,

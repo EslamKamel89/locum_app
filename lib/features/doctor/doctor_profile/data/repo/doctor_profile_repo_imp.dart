@@ -18,7 +18,8 @@ class DoctorProfileRepoImp implements DoctorProfileRepo {
       {required DoctorInfoParams params, required bool create, int? id}) async {
     final t = prt('updateOrCreateDoctorInfo  - DoctorProfileRepoImp');
     try {
-      DoctorInfoModel model = await doctorProfileRemoteDataSource.updateOrCreateDoctorInfo(
+      DoctorInfoModel model =
+          await doctorProfileRemoteDataSource.updateOrCreateDoctorInfo(
         params: params,
         create: create,
         id: id,
@@ -38,7 +39,8 @@ class DoctorProfileRepoImp implements DoctorProfileRepo {
       {required DoctorParams params, required bool create, int? id}) async {
     final t = prt('updateOrCreateDoctor  - DoctorProfileRepoImp');
     try {
-      DoctorModel model = await doctorProfileRemoteDataSource.updateOrCreateDoctor(
+      DoctorModel model =
+          await doctorProfileRemoteDataSource.updateOrCreateDoctor(
         params: params,
         create: create,
         id: id,
@@ -54,7 +56,8 @@ class DoctorProfileRepoImp implements DoctorProfileRepo {
   }
 
   @override
-  Future<Either<Failure, UserModel>> updateUserDoctor({required UserDoctorParams params}) async {
+  Future<Either<Failure, UserModel>> updateUserDoctor(
+      {required UserDoctorParams params}) async {
     final t = prt('updateUserDoctor  - DoctorProfileRepoImp');
     try {
       UserModel model = await doctorProfileRemoteDataSource.updateUserDoctor(
@@ -75,7 +78,8 @@ class DoctorProfileRepoImp implements DoctorProfileRepo {
       {required CreateDoctorDocumentParams params}) async {
     final t = prt('updateOrCreateDoctorInfo  - DoctorProfileRepoImp');
     try {
-      DoctorDocumentModel model = await doctorProfileRemoteDataSource.createDoctorDocument(params: params);
+      DoctorDocumentModel model = await doctorProfileRemoteDataSource
+          .createDoctorDocument(params: params);
       return Right(pr(model, t));
     } catch (e) {
       pr(e.toString());
@@ -90,7 +94,8 @@ class DoctorProfileRepoImp implements DoctorProfileRepo {
   Future<Either<Failure, bool>> deleteDoctorDocument({required int id}) async {
     final t = prt('deleteDoctorDocument  - DoctorProfileRepoImp');
     try {
-      bool result = await doctorProfileRemoteDataSource.deleteDoctorDocument(id: id);
+      bool result =
+          await doctorProfileRemoteDataSource.deleteDoctorDocument(id: id);
       return Right(pr(result, t));
     } catch (e) {
       pr(e.toString());

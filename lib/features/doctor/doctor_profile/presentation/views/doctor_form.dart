@@ -80,13 +80,15 @@ class _DoctorFormState extends State<DoctorForm> {
                   ),
                   const SizedBox(height: 10),
                   BlocProvider(
-                    create: (context) => SpecialtyCubit(serviceLocator())..fetchSpecialties(),
+                    create: (context) =>
+                        SpecialtyCubit(serviceLocator())..fetchSpecialties(),
                     child: BlocBuilder<SpecialtyCubit, SpecialtyState>(
                       builder: (context, state) {
                         return CustomTextFormFieldWithSuggestions(
                           label: 'Specialty *',
-                          suggestions:
-                              (state.specialtyModels ?? []).map((specilaity) => specilaity.name ?? '').toList(),
+                          suggestions: (state.specialtyModels ?? [])
+                              .map((specilaity) => specilaity.name ?? '')
+                              .toList(),
                           onSelected: (String specialty) {
                             _jobInfoController.text = specialty;
                           },
@@ -103,12 +105,15 @@ class _DoctorFormState extends State<DoctorForm> {
                     ),
                   ),
                   BlocProvider(
-                    create: (context) => JobInfoCubit(serviceLocator())..fetchJobInfos(),
+                    create: (context) =>
+                        JobInfoCubit(serviceLocator())..fetchJobInfos(),
                     child: BlocBuilder<JobInfoCubit, JobInfoState>(
                       builder: (context, state) {
                         return CustomTextFormFieldWithSuggestions(
                           label: 'Job Title *',
-                          suggestions: (state.jobInfoModels ?? []).map((jobInfo) => jobInfo.name ?? '').toList(),
+                          suggestions: (state.jobInfoModels ?? [])
+                              .map((jobInfo) => jobInfo.name ?? '')
+                              .toList(),
                           onSelected: (String specialty) {
                             _specialityController.text = specialty;
                           },
@@ -212,7 +217,9 @@ class _DoctorFormState extends State<DoctorForm> {
                           child: const Text('Save')),
                       const SizedBox(width: 10),
                       state.responseType == ResponseEnum.loading
-                          ? const Align(alignment: Alignment.centerLeft, child: CircularProgressIndicator())
+                          ? const Align(
+                              alignment: Alignment.centerLeft,
+                              child: CircularProgressIndicator())
                           : const SizedBox(),
                     ],
                   ),
@@ -242,7 +249,8 @@ class _DoctorFormState extends State<DoctorForm> {
             photo: selectedPhoto,
           ),
           'DoctorParams');
-      controller.updateOrCreateDoctor(params: params, create: widget.create, id: doctorModel?.id);
+      controller.updateOrCreateDoctor(
+          params: params, create: widget.create, id: doctorModel?.id);
     }
   }
 

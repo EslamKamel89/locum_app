@@ -24,7 +24,8 @@ class DoctorProfileNotCompleteWidgets extends StatelessWidget {
           title: 'Your Main Professional Information Incomplete',
           isVisible: user?.doctor == null,
           onTap: () {
-            Navigator.of(context).pushNamed(AppRoutesNames.doctorForm, arguments: {'create': true});
+            Navigator.of(context).pushNamed(AppRoutesNames.doctorForm,
+                arguments: {'create': true});
           },
         ),
         Visibility(
@@ -37,7 +38,8 @@ class DoctorProfileNotCompleteWidgets extends StatelessWidget {
                     "Tell us more about your work experience so we can connect you with the best locum opportunities.",
                 isVisible: user?.doctor?.doctorInfo == null,
                 onTap: () {
-                  Navigator.of(context).pushNamed(AppRoutesNames.doctorInfoForm, arguments: {'create': true});
+                  Navigator.of(context).pushNamed(AppRoutesNames.doctorInfoForm,
+                      arguments: {'create': true});
                 },
               ),
               // AddDoctorInfoWidget(
@@ -51,17 +53,22 @@ class DoctorProfileNotCompleteWidgets extends StatelessWidget {
               //   isVisible: user?.doctor?.skills?.isEmpty ?? true,
               // ),
               BlocProvider(
-                create: (context) => CreateDoctorDocumentsCubit(serviceLocator()),
+                create: (context) =>
+                    CreateDoctorDocumentsCubit(serviceLocator()),
                 child: Builder(builder: (context) {
                   return AddDoctorInfoWidget(
                     title: 'No Documents added',
-                    message: "Upload your related documents to help healthcare providers find what they need.",
+                    message:
+                        "Upload your related documents to help healthcare providers find what they need.",
                     buttonContent: "Add Document",
                     isVisible: user?.doctor?.doctorDocuments?.isEmpty ?? true,
                     onTap: () async {
-                      CreateDoctorDocumentParams? params = await updateOrCreateDocument(context);
+                      CreateDoctorDocumentParams? params =
+                          await updateOrCreateDocument(context);
                       if (params == null) return;
-                      context.read<CreateDoctorDocumentsCubit>().createDoctorDocument(params: params);
+                      context
+                          .read<CreateDoctorDocumentsCubit>()
+                          .createDoctorDocument(params: params);
                     },
                   );
                 }),

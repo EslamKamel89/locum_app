@@ -67,7 +67,8 @@ class DoctorProfileRemoteDataSource {
     return pr(userModel, t);
   }
 
-  Future<DoctorDocumentModel> createDoctorDocument({required CreateDoctorDocumentParams params}) async {
+  Future<DoctorDocumentModel> createDoctorDocument(
+      {required CreateDoctorDocumentParams params}) async {
     final t = prt('createDoctorDocument - DoctorProfileRemoteDataSource');
 
     Map<String, dynamic> requestData = await params.toJson();
@@ -77,7 +78,8 @@ class DoctorProfileRemoteDataSource {
       isFormData: true,
       data: requestData,
     );
-    DoctorDocumentModel doctorDocumentModel = DoctorDocumentModel.fromJson(data['data']);
+    DoctorDocumentModel doctorDocumentModel =
+        DoctorDocumentModel.fromJson(data['data']);
 
     return pr(doctorDocumentModel, t);
   }

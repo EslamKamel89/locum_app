@@ -6,7 +6,8 @@ class AddDoctorInfoWidget extends StatelessWidget {
   const AddDoctorInfoWidget({
     super.key,
     this.title = 'No Skills Added',
-    this.message = 'You haven\'t added any skills yet. Please add your skills to showcase your expertise.',
+    this.message =
+        'You haven\'t added any skills yet. Please add your skills to showcase your expertise.',
     this.buttonContent = 'Add Skills',
     this.isVisible = false,
     this.onTap,

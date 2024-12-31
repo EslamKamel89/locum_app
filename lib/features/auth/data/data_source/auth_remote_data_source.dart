@@ -10,7 +10,8 @@ class AuthRemoteDataSource {
   AuthRemoteDataSource({
     required this.api,
   });
-  Future<UserModel> signIn({required String email, required String password}) async {
+  Future<UserModel> signIn(
+      {required String email, required String password}) async {
     final t = prt('signIn - AuthRemoteDataSource');
     final data = await api.post(
       EndPoint.signin,

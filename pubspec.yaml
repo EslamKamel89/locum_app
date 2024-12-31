@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  another_flushbar: ^1.12.30
   cached_network_image: ^3.4.1
   carousel_slider: ^5.0.0
   connectivity_plus: ^6.1.0

@@ -8,7 +8,12 @@ import 'package:locum_app/core/themes/theme_cubit.dart';
 import 'package:locum_app/core/widgets/custom_fading_widget.dart';
 
 class CircularImageAsset extends StatelessWidget {
-  const CircularImageAsset({super.key, required this.image, required this.height, this.boxFit, this.horizontalPadding});
+  const CircularImageAsset(
+      {super.key,
+      required this.image,
+      required this.height,
+      this.boxFit,
+      this.horizontalPadding});
 
   final String image;
   final double height;
@@ -36,7 +41,12 @@ class CircularImageAsset extends StatelessWidget {
 }
 
 class CircularLogo extends StatelessWidget {
-  const CircularLogo({super.key, required this.image, required this.height, this.boxFit, this.horizontalPadding});
+  const CircularLogo(
+      {super.key,
+      required this.image,
+      required this.height,
+      this.boxFit,
+      this.horizontalPadding});
 
   final String image;
   final double height;
@@ -53,7 +63,9 @@ class CircularLogo extends StatelessWidget {
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: isDarkMode ? context.primaryColor : context.primaryColor.withOpacity(0.8),
+          color: isDarkMode
+              ? context.primaryColor
+              : context.primaryColor.withOpacity(0.8),
         ),
         padding: EdgeInsets.symmetric(horizontal: horizontalPadding ?? 0),
         child: Image.asset(
@@ -105,7 +117,8 @@ class CircularCachedImage extends StatelessWidget {
               ),
             );
           },
-          placeholder: (context, url) => CustomFadingWidget(child: Image.asset(imageAsset)),
+          placeholder: (context, url) =>
+              CustomFadingWidget(child: Image.asset(imageAsset)),
           errorWidget: (context, url, error) => Image.asset(imageAsset),
         ),
       ),

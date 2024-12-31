@@ -12,12 +12,14 @@ class DoctorJobApplicationRepoImp implements DoctorJobApplicationRepo {
 
   DoctorJobApplicationRepoImp({required this.remoteDataSource});
   @override
-  Future<Either<Failure, ResponseModel<List<JobApplicationDetailsModel>>>> showAllJobApplication(
-      {required int limit, required int page, String? status}) async {
+  Future<Either<Failure, ResponseModel<List<JobApplicationDetailsModel>>>>
+      showAllJobApplication(
+          {required int limit, required int page, String? status}) async {
     final t = prt('showAllJobApplication  - DoctorJobApplicationRepoImp');
     try {
       ResponseModel<List<JobApplicationDetailsModel>> response =
-          await remoteDataSource.showAllJobApplication(limit: limit, page: page, status: status);
+          await remoteDataSource.showAllJobApplication(
+              limit: limit, page: page, status: status);
       return Right(pr(response, t));
     } catch (e) {
       pr(e.toString());

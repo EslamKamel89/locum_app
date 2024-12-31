@@ -39,6 +39,13 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
           children: [
             const SizedBox(height: 20),
             HeroSection(doctorUserModel: doctorUserModel),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     customNotification(context, title: 'Test Notfication', content: 'test content', onTap: () {})
+            //         .show(context);
+            //   },
+            //   child: const Text('Test'),
+            // ),
             const SizedBox(height: 20),
             const WhyChooseUsWidget(),
             const SizedBox(height: 20),

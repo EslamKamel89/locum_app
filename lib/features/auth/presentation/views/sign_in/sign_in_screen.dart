@@ -57,9 +57,13 @@ class _SignInScreenState extends State<SignInScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      txt("Welcome Back!", e: St.bold25, textAlign: TextAlign.center),
+                      txt("Welcome Back!",
+                          e: St.bold25, textAlign: TextAlign.center),
                       const SizedBox(height: 10),
-                      txt("Sign in to continue", e: St.reg16, c: Colors.grey, textAlign: TextAlign.center),
+                      txt("Sign in to continue",
+                          e: St.reg16,
+                          c: Colors.grey,
+                          textAlign: TextAlign.center),
                       const SizedBox(height: 40),
                       AuthTextFormField(
                         controller: _emailController,
@@ -133,14 +137,16 @@ class _SignInScreenState extends State<SignInScreen> {
                         child: BlocBuilder<SocialAuthCubit, SocialAuthState>(
                           builder: (context, state) {
                             return state.responseType == ResponseEnum.loading
-                                ? const Center(child: CircularProgressIndicator())
+                                ? const Center(
+                                    child: CircularProgressIndicator())
                                 : OutlinedButton.icon(
                                     onPressed: () async {
                                       _handleGoogleSignIn(context);
                                     },
                                     style: context.outlinedButtonTheme.style,
                                     icon: Icon(MdiIcons.google),
-                                    label: txt("Sign in with Google", c: Colors.black, e: St.reg16),
+                                    label: txt("Sign in with Google",
+                                        c: Colors.black, e: St.reg16),
                                   );
                           },
                         ),
@@ -152,7 +158,8 @@ class _SignInScreenState extends State<SignInScreen> {
                           txt("Don't have an account?", c: Colors.grey),
                           TextButton(
                             onPressed: () {
-                              Navigator.of(context).pushNamed(AppRoutesNames.signupScreen);
+                              Navigator.of(context)
+                                  .pushNamed(AppRoutesNames.signupScreen);
                             },
                             child: txt("Sign Up", c: Colors.blue),
                           ),
@@ -173,7 +180,8 @@ class _SignInScreenState extends State<SignInScreen> {
     final UserCredential credential = await signInWithGoogle();
     final User? user = credential.user;
     if (user == null) {
-      showSnackbar('Error', "Something went wrong with google authentication", true);
+      showSnackbar(
+          'Error', "Something went wrong with google authentication", true);
       return;
     }
     UserTypeEnum? userType = await getUserTypeDialog(context);

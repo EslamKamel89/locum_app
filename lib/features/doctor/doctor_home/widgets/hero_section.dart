@@ -73,7 +73,8 @@ class _HeroSectionState extends State<HeroSection> {
                   doctorBottomNavigationBar.navigateTo(1);
                 },
                 icon: const Icon(Icons.search),
-                label: const Text('Start Searching', style: TextStyle(fontSize: 14)),
+                label: const Text('Start Searching',
+                    style: TextStyle(fontSize: 14)),
               ).animate().moveX(),
             ],
           ),

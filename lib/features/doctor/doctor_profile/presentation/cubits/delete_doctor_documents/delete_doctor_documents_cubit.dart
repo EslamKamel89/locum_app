@@ -11,7 +11,8 @@ part 'delete_doctor_documents_state.dart';
 
 class DeleteDoctorDocumentsCubit extends Cubit<DeleteDoctorDocumentsState> {
   final DoctorProfileRepo doctorProfileRepo;
-  DeleteDoctorDocumentsCubit(this.doctorProfileRepo) : super(DeleteDoctorDocumentsState());
+  DeleteDoctorDocumentsCubit(this.doctorProfileRepo)
+      : super(DeleteDoctorDocumentsState());
   Future deleteDoctorDocument({required int id}) async {
     final t = prt('deleteDoctorDocument - DeleteDoctorDocumentsCubit');
     emit(state.copyWith(
@@ -25,13 +26,17 @@ class DeleteDoctorDocumentsCubit extends Cubit<DeleteDoctorDocumentsState> {
       (Failure failure) {
         pr(failure.message, t);
         showSnackbar('Server Error', failure.message, true);
-        emit(state.copyWith(responseType: ResponseEnum.failed, errorMessage: failure.message));
+        emit(state.copyWith(
+            responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
       (bool result) async {
         pr(result, t);
         await _updateUserInfoState();
         if (isClosed) return;
-        emit(state.copyWith(deleteResult: result, responseType: ResponseEnum.success, errorMessage: null));
+        emit(state.copyWith(
+            deleteResult: result,
+            responseType: ResponseEnum.success,
+            errorMessage: null));
       },
     );
   }

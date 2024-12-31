@@ -16,7 +16,8 @@ class DoctorCubit extends Cubit<DoctorState> {
   DoctorCubit(
     this.doctorProfileRepo,
   ) : super(DoctorState());
-  Future updateOrCreateDoctor({required DoctorParams params, required bool create, int? id}) async {
+  Future updateOrCreateDoctor(
+      {required DoctorParams params, required bool create, int? id}) async {
     final t = prt('updateOrCreateDoctor - DoctorCubit');
     emit(state.copyWith(
       responseType: ResponseEnum.loading,
@@ -32,12 +33,16 @@ class DoctorCubit extends Cubit<DoctorState> {
       (Failure failure) {
         pr(failure.message, t);
         showSnackbar('Server Error', failure.message, true);
-        emit(state.copyWith(responseType: ResponseEnum.failed, errorMessage: failure.message));
+        emit(state.copyWith(
+            responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
       (DoctorModel doctorModel) async {
         pr(doctorModel, t);
         await _updateUserInfoState();
-        emit(state.copyWith(doctorModel: doctorModel, responseType: ResponseEnum.success, errorMessage: null));
+        emit(state.copyWith(
+            doctorModel: doctorModel,
+            responseType: ResponseEnum.success,
+            errorMessage: null));
       },
     );
   }

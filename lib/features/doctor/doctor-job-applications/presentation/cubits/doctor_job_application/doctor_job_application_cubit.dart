@@ -12,7 +12,8 @@ part 'doctor_job_application_state.dart';
 
 class DoctorJobApplicationCubit extends Cubit<DoctorJobApplicationState> {
   final DoctorJobApplicationRepo doctorJobApplicationRepo;
-  DoctorJobApplicationCubit(this.doctorJobApplicationRepo) : super(DoctorJobApplicationState());
+  DoctorJobApplicationCubit(this.doctorJobApplicationRepo)
+      : super(DoctorJobApplicationState());
 
   void resetState() {
     emit(DoctorJobApplicationState());
@@ -44,17 +45,23 @@ class DoctorJobApplicationCubit extends Cubit<DoctorJobApplicationState> {
     }
 
     final result = await doctorJobApplicationRepo.showAllJobApplication(
-        limit: pr(state.limit!, '$t limit'), page: pr(state.page!, '$t page'), status: state.status);
+        limit: pr(state.limit!, '$t limit'),
+        page: pr(state.page!, '$t page'),
+        status: state.status);
     result.fold(
       (Failure failure) {
         pr(failure.message, t);
         showSnackbar('Server Error', failure.message, true);
-        emit(state.copyWith(responseType: ResponseEnum.failed, errorMessage: failure.message));
+        emit(state.copyWith(
+            responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
       (ResponseModel<List<JobApplicationDetailsModel>> jobApplications) async {
         pr(jobApplications, t);
         pr(jobApplications.pagination, t);
-        jobApplications.data = [...state.jobApplicationDetailsResponse?.data ?? [], ...jobApplications.data ?? []];
+        jobApplications.data = [
+          ...state.jobApplicationDetailsResponse?.data ?? [],
+          ...jobApplications.data ?? []
+        ];
         emit(
           state.copyWith(
             jobApplicationDetailsResponse: jobApplications,

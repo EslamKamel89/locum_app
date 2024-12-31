@@ -38,7 +38,9 @@ class JobApplicationDetailsModel {
       additionalNotes: json['additional_notes'] as String?,
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
-      jobAdd: json['job_add'] == null ? null : JobAddModel.fromJson(json['job_add']),
+      jobAdd: json['job_add'] == null
+          ? null
+          : JobAddModel.fromJson(json['job_add']),
     );
   }
 
