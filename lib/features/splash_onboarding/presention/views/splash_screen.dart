@@ -12,8 +12,7 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen>
-    with SingleTickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
   late UserInfoCubit userInfoCubit;
@@ -22,8 +21,7 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
     userInfoCubit = context.read<UserInfoCubit>();
     FirebaseHelper.handleFirebaseNotification();
-    _animationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 3));
+    _animationController = AnimationController(vsync: this, duration: const Duration(seconds: 3));
     // _animation = CurvedAnimation(parent: _animationController, curve: Curves.easeInOut);
     _animation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
@@ -48,32 +46,10 @@ class _SplashScreenState extends State<SplashScreen>
               opacity: _animation,
               child: Stack(
                 alignment: Alignment.center,
-                children: [
-                  // Icon(
-                  //   Icons.view_compact_alt_rounded,
-                  //   size: 100,
-                  //   color: context.primaryColor,
-                  // ),
-                  Image.asset(AssetsData.logo)
-                ],
+                children: [Image.asset(AssetsData.logo)],
               ),
             ),
-
-            // FadeTransition(
-            //   opacity: _animation,
-            //   child: const Text(
-            //     'AM PM\nHealth Care Stafing',
-            //     textAlign: TextAlign.center,
-            //     style: TextStyle(
-            //       fontSize: 28,
-            //       height: 1,
-            //       fontWeight: FontWeight.bold,
-            //       color: Colors.black,
-            //     ),
-            //   ),
-            // ),
             const SizedBox(height: 10),
-            // Subtitle
             FadeTransition(
               opacity: _animation,
               child: const Text(

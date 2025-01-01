@@ -6,6 +6,7 @@ import 'package:locum_app/core/Errors/failure.dart';
 import 'package:locum_app/core/enums/response_type.dart';
 import 'package:locum_app/core/globals.dart';
 import 'package:locum_app/core/heleprs/print_helper.dart';
+import 'package:locum_app/core/heleprs/snackbar.dart';
 import 'package:locum_app/core/router/app_routes_names.dart';
 import 'package:locum_app/features/auth/domain/entities/user_entity.dart';
 import 'package:locum_app/features/auth/helpers/auth_helpers.dart';
@@ -37,25 +38,22 @@ class UserInfoCubit extends Cubit<UserInfoState> {
         pr(failure.message, t);
         // showSnackbar('Server Error', failure.message, true);
         _navigateToOnBoardingScreen();
-        emit(UserInfoState(
-            responseType: ResponseEnum.failed, errorMessage: failure.message));
+        emit(UserInfoState(responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
       (Either<DoctorUserModel, HospitalUserModel> doctorOrHospital) {
         pr(doctorOrHospital, t);
         doctorOrHospital.fold(
           (DoctorUserModel doctor) {
             AuthHelpers.cacheUser(doctor);
-            emit(UserInfoState(
-                doctorUserModel: doctor,
-                userType: UserType.doctor,
-                responseType: ResponseEnum.success));
+            emit(UserInfoState(doctorUserModel: doctor, userType: UserType.doctor, responseType: ResponseEnum.success));
           },
           (HospitalUserModel hospital) {
+            showSnackbar(
+                'Error', 'This is account is registered as a health care provider. You can use the web site', true);
+            return;
             AuthHelpers.cacheUser(hospital);
             emit(UserInfoState(
-                hospitalUserModel: hospital,
-                userType: UserType.hospital,
-                responseType: ResponseEnum.success));
+                hospitalUserModel: hospital, userType: UserType.hospital, responseType: ResponseEnum.success));
           },
         );
         if (navigate) _navigateToHomeScreen();
@@ -89,12 +87,12 @@ class UserInfoCubit extends Cubit<UserInfoState> {
       return;
     }
     if (state.userType == UserType.hospital) {
-      pr('Navigate to hospitals home page', t);
+      pr('This user is signed as a health care professional cant use the mobile app', t);
+      return;
       Navigator.of(navigatorKey.currentContext!).pushNamedAndRemoveUntil(
         AppRoutesNames.hospitalHomeScreen,
         (_) => false,
       );
-      return;
     }
     if (state.userType == null) {
       pr('Navigate to onboarding screen', t);
@@ -111,7 +109,6 @@ class UserInfoCubit extends Cubit<UserInfoState> {
     emit(UserInfoState());
     BuildContext? context = navigatorKey.currentContext;
     if (context == null) return;
-    Navigator.of(context)
-        .pushNamedAndRemoveUntil(AppRoutesNames.signinScreen, (_) => false);
+    Navigator.of(context).pushNamedAndRemoveUntil(AppRoutesNames.signinScreen, (_) => false);
   }
 }

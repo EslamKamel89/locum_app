@@ -1,0 +1,32 @@
+We need to add the following data to the database:  
+
+1. Pivot Table for Hospitals and Specialties: 
+    Create a table that links the `hospitals` and `specialties` tables with a many-to-many relationship.  
+2. Reviews Table: 
+    Create a `reviews` table that can be linked to multiple types of data (doctors, hospitals, and job ads) 
+    using a polymorphic many-to-one relationship.  
+3. Update the Mobile App and Dashboard: Make sure these changes are reflected and handled properly in both 
+    the mobile app and the dashboard.   
+
+
+We need to create a new section for healthcare professionals, and their section in the 
+mobile app will be removed. Here's what the new section should include:
+
+1. Healthcare Professional Registration Page: 
+    A page where healthcare professionals can register their accounts.
+2. Profile Pages: 
+    Screens for users to view and edit their profiles.
+3. Create New Job Page: 
+    A screen where users can create job postings, including all the necessary details currently 
+    found in the job ad table.
+4. Job Ads Overview Screen: 
+    A screen that shows all the job ads created by the user.  
+    - Job Ad Details: When a user selects a specific job ad, they can view its details, see who has 
+    applied, and check if any candidates have been accepted.  
+    - Search Link: A link on the job ad details page that takes the user to a new screen to search for 
+    healthcare professionals. The search will use the job ad's specialty and job title as filters.
+5. Recommendations Screen: 
+    A screen to show recommendations for suitable healthcare professionals.  
+   - Default View: When the user opens the screen, it shows all healthcare professionals.  
+   - Filters: Users can refine the results using filters like job title, specialty, state, district, 
+   and reviews.  

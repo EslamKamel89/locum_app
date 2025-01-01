@@ -8,29 +8,10 @@ import 'package:locum_app/core/widgets/noification_widget.dart';
 import 'package:locum_app/features/common_data/data/models/notification_response/job_add_notification_payload.dart';
 
 abstract class FirebaseHelper {
-  static Future<void> requestFirebaseNotificationsPermission() async {
-    final t = prt('requestFirebaseNotificationsPermission - FirebaseHelper');
-    final FirebaseMessaging messaging = FirebaseMessaging.instance;
-    NotificationSettings settings = await messaging.requestPermission(
-      alert: true,
-      badge: true,
-      sound: true,
-    );
-
-    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      pr('User granted permission', t);
-    } else {
-      pr('User declined or has not accepted permission', t);
-      BuildContext? context = navigatorKey.currentContext;
-      if (context == null) return;
-      showSnackbar('Warning', "You didn't give the app notification permission", true);
-    }
-  }
-
   static Future handleFirebaseNotification() async {
     final t = prt('handleFirebaseNotification - FirebaseHelper');
     try {
-      await FirebaseHelper.requestFirebaseNotificationsPermission();
+      await FirebaseHelper._requestFirebaseNotificationsPermission();
       //! Foreground message listener
       FirebaseMessaging.onMessage.listen((RemoteMessage message) {
         pr('FirebaseMessaging.onMessage.listen: Message received in foreground: ${message.notification?.title}', t);
@@ -59,6 +40,25 @@ abstract class FirebaseHelper {
       });
     } catch (e) {
       pr('Exeception occured: $e', t);
+    }
+  }
+
+  static Future<void> _requestFirebaseNotificationsPermission() async {
+    final t = prt('requestFirebaseNotificationsPermission - FirebaseHelper');
+    final FirebaseMessaging messaging = FirebaseMessaging.instance;
+    NotificationSettings settings = await messaging.requestPermission(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      pr('User granted permission', t);
+    } else {
+      pr('User declined or has not accepted permission', t);
+      BuildContext? context = navigatorKey.currentContext;
+      if (context == null) return;
+      showSnackbar('Warning', "You didn't give the app notification permission", true);
     }
   }
 

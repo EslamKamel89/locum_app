@@ -22,25 +22,19 @@ class SignInCubit extends Cubit<SignInState> {
   }) : super(SignInState());
   Future signIn({required Map<String, String> signInData}) async {
     final t = prt('signIn - SignInCubit');
-    emit(
-        state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
-    final result = await authRepo.signIn(
-        email: signInData['email']!, password: signInData['password']!);
+    emit(state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
+    final result = await authRepo.signIn(email: signInData['email']!, password: signInData['password']!);
     result.fold(
       (Failure failure) {
         pr(failure.message, t);
         showSnackbar('Server Error', failure.message, true);
-        emit(state.copyWith(
-            responseType: ResponseEnum.failed, errorMessage: failure.message));
+        emit(state.copyWith(responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
       (UserModel user) async {
         pr(user, t);
         await AuthHelpers.cacheUser(user);
         await _updateUserInfoState();
-        emit(state.copyWith(
-            userEntity: user,
-            responseType: ResponseEnum.success,
-            errorMessage: null));
+        emit(state.copyWith(userEntity: user, responseType: ResponseEnum.success, errorMessage: null));
         _navigateToHomeScreen();
       },
     );
@@ -61,7 +55,8 @@ class SignInCubit extends Cubit<SignInState> {
         (_) => false,
       );
     } else {
-      pr('Navigate to hospitals home page', t);
+      pr('This user is signed as health care provider and cant use the mobile app', t);
+      return;
       Navigator.of(context).pushNamedAndRemoveUntil(
         AppRoutesNames.hospitalHomeScreen,
         (_) => false,
