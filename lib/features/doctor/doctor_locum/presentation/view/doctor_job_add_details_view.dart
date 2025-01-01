@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:locum_app/core/enums/response_type.dart';
 import 'package:locum_app/core/extensions/context-extensions.dart';
 import 'package:locum_app/core/heleprs/print_helper.dart';
@@ -21,8 +22,7 @@ class DoctorJobAddDetailsView extends StatefulWidget {
   });
 
   @override
-  State<DoctorJobAddDetailsView> createState() =>
-      _DoctorJobAddDetailsViewState();
+  State<DoctorJobAddDetailsView> createState() => _DoctorJobAddDetailsViewState();
 }
 
 class _DoctorJobAddDetailsViewState extends State<DoctorJobAddDetailsView> {
@@ -58,8 +58,7 @@ class _DoctorJobAddDetailsViewState extends State<DoctorJobAddDetailsView> {
                     }
                   },
                   builder: (context, applyToJobAddState) {
-                    final applyToJobAddCubit =
-                        context.read<ApplyToJobAddCubit>();
+                    final applyToJobAddCubit = context.read<ApplyToJobAddCubit>();
                     return _titleAndApplyBtn(
                       jobAddModel,
                       state,
@@ -71,8 +70,7 @@ class _DoctorJobAddDetailsViewState extends State<DoctorJobAddDetailsView> {
                                       'notes': notesController.text,
                                     }
                                      */
-                        final Map<String, dynamic>? application =
-                            await showDialog<Map<String, dynamic>?>(
+                        final Map<String, dynamic>? application = await showDialog<Map<String, dynamic>?>(
                           context: context,
                           builder: (context) {
                             return ApplyToJobPopup(
@@ -80,13 +78,10 @@ class _DoctorJobAddDetailsViewState extends State<DoctorJobAddDetailsView> {
                             );
                           },
                         );
-                        if (application == null || !application['applyStatus'])
-                          return;
+                        if (application == null || !application['applyStatus']) return;
                         pr(application, 'application');
                         if (jobAddModel?.id == null) return;
-                        applyToJobAddCubit.applyJobAdd(
-                            jobAddId: (jobAddModel?.id)!,
-                            notes: application['notes']);
+                        applyToJobAddCubit.applyJobAdd(jobAddId: (jobAddModel?.id)!, notes: application['notes']);
                       },
                     );
                   },
@@ -97,37 +92,20 @@ class _DoctorJobAddDetailsViewState extends State<DoctorJobAddDetailsView> {
                 _buildInfoRow('Job Type', jobAddModel?.jobType, state),
                 _buildSection('Location', jobAddModel?.location, state),
                 _buildSection('Description', jobAddModel?.description, state),
-                _buildSection(
-                    'Responsibilities', jobAddModel?.responsibilities, state),
-                _buildSection(
-                    'Qualifications', jobAddModel?.qualifications, state),
-                _buildSection('Experience Required',
-                    jobAddModel?.experienceRequired, state),
-                _buildInfoRow(
-                    'Salary Range',
-                    '\$${jobAddModel?.salaryMin} - \$${jobAddModel?.salaryMax}',
-                    state),
+                _buildSection('Responsibilities', jobAddModel?.responsibilities, state),
+                _buildSection('Qualifications', jobAddModel?.qualifications, state),
+                _buildSection('Experience Required', jobAddModel?.experienceRequired, state),
+                _buildInfoRow('Salary Range', '\$${jobAddModel?.salaryMin} - \$${jobAddModel?.salaryMax}', state),
                 _buildSection('Benefits', jobAddModel?.benefits, state),
-                _buildInfoRow(
-                    'Working Hours', jobAddModel?.workingHours, state),
-                _buildInfoRow('Application Deadline',
-                    jobAddModel?.applicationDeadline, state),
-                _buildSection('Required Documents',
-                    jobAddModel?.requiredDocuments, state),
-                _buildInfoRow('Published At',
-                    (jobAddModel?.createdAt)?.split('T').first, state),
+                _buildInfoRow('Working Hours', jobAddModel?.workingHours, state),
+                _buildInfoRow('Application Deadline', jobAddModel?.applicationDeadline, state),
+                _buildSection('Required Documents', jobAddModel?.requiredDocuments, state),
+                _buildInfoRow('Published At', (jobAddModel?.createdAt)?.split('T').first, state),
                 _wrapWithLabel(
-                    'Required Languages',
-                    (jobAddModel?.langs ?? [])
-                        .map((lang) => lang.name ?? '')
-                        .toList(),
-                    state),
+                    'Required Languages', (jobAddModel?.langs ?? []).map((lang) => lang.name ?? '').toList(), state),
                 _wrapWithLabel(
-                    'Required Skills',
-                    (jobAddModel?.skills ?? [])
-                        .map((skill) => skill.name ?? '')
-                        .toList(),
-                    state),
+                    'Required Skills', (jobAddModel?.skills ?? []).map((skill) => skill.name ?? '').toList(), state),
+                ReviewList(),
               ],
             ),
           ),
@@ -136,8 +114,7 @@ class _DoctorJobAddDetailsViewState extends State<DoctorJobAddDetailsView> {
     );
   }
 
-  Widget _titleAndApplyBtn(JobAddModel? jobAddModel, ShowJobAddState state,
-      void Function()? handleApply) {
+  Widget _titleAndApplyBtn(JobAddModel? jobAddModel, ShowJobAddState state, void Function()? handleApply) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -155,6 +132,7 @@ class _DoctorJobAddDetailsViewState extends State<DoctorJobAddDetailsView> {
           flex: 1,
           child: ElevatedButton(
             onPressed: handleApply,
+            style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(context.secondaryHeaderColor)),
             child: const Text('Apply'),
           ),
         ),
@@ -166,8 +144,7 @@ class _DoctorJobAddDetailsViewState extends State<DoctorJobAddDetailsView> {
     return const SizedBox(height: 16);
   }
 
-  Widget _wrapWithLabel(
-      String title, List<String> data, ShowJobAddState state) {
+  Widget _wrapWithLabel(String title, List<String> data, ShowJobAddState state) {
     if (data.isEmpty && state.responseType == ResponseEnum.success) {
       return const SizedBox();
     }
@@ -213,10 +190,7 @@ class _DoctorJobAddDetailsViewState extends State<DoctorJobAddDetailsView> {
   Widget _title(String title) {
     return Text(
       title,
-      style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-          color: context.primaryColor.withRed(50)),
+      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: context.secondaryHeaderColor),
     );
   }
 
@@ -248,6 +222,168 @@ class _DoctorJobAddDetailsViewState extends State<DoctorJobAddDetailsView> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class ReviewList extends StatelessWidget {
+  final List<Map<String, dynamic>> reviews = [
+    {
+      'doctorName': 'Dr. John Doe',
+      'speciality': 'Cardiologist',
+      'rating': 4.5,
+      'content': 'Excellent service and very professional. Highly recommended!'
+    },
+    {
+      'doctorName': 'Dr. Jane Smith',
+      'speciality': 'Dermatologist',
+      'rating': 4.0,
+      'content': 'Very attentive and knowledgeable. Great experience!'
+    },
+    {
+      'doctorName': 'Dr. Emily White',
+      'speciality': 'Pediatrician',
+      'rating': 5.0,
+      'content': 'Amazing with kids and very thorough in her diagnosis.'
+    },
+  ];
+
+  ReviewList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: reviews.length + 1,
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        if (index == 0) {
+          return const ReplyWidget();
+        } else {
+          return ReviewWidget(
+            doctorName: reviews[index - 1]['doctorName'],
+            speciality: reviews[index - 1]['speciality'],
+            rating: reviews[index - 1]['rating'],
+            content: reviews[index - 1]['content'],
+          );
+        }
+      },
+    );
+  }
+}
+
+class ReviewWidget extends StatelessWidget {
+  final String doctorName;
+  final String speciality;
+  final double rating;
+  final String content;
+
+  const ReviewWidget({
+    super.key,
+    required this.doctorName,
+    required this.speciality,
+    required this.rating,
+    required this.content,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.all(10),
+      elevation: 4,
+      shadowColor: context.secondaryHeaderColor,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      child: Padding(
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              doctorName,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: context.secondaryHeaderColor,
+              ),
+            ),
+            const SizedBox(height: 5),
+            Text(
+              speciality,
+              style: const TextStyle(
+                fontSize: 14,
+                color: Colors.grey,
+              ),
+            ),
+            const SizedBox(height: 10),
+            RatingBarIndicator(
+              rating: rating,
+              itemBuilder: (context, index) => const Icon(
+                Icons.star,
+                color: Colors.amber,
+              ),
+              itemCount: 5,
+              itemSize: 20,
+              direction: Axis.horizontal,
+            ),
+            const SizedBox(height: 10),
+            Text(
+              content,
+              style: const TextStyle(fontSize: 16),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ReplyWidget extends StatelessWidget {
+  const ReplyWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.all(10),
+      elevation: 4,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      child: Padding(
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Leave a Reply',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: context.secondaryHeaderColor,
+              ),
+            ),
+            const SizedBox(height: 10),
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Write your reply here...',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              maxLines: 3,
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                // Handle reply submission
+              },
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              child: const Text('Submit'),
+            ),
+          ],
+        ),
       ),
     );
   }

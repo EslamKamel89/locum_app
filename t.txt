@@ -102,6 +102,7 @@ Done todos {
     # handle the notificaition routing in the front and the backend
     # handle the logic for sending the notifiction from the backend
     # delete the navigation for the hospital from the application and show error snack bar if the user is singed in as a hospital and navigate him to the login screen
+    # change the app secondary color to make it more appealing
 }
 
 todos {
@@ -109,10 +110,10 @@ todos {
     # i didn't handle no data any where in the applciation 
     # handle the permissions for the user to view the jobadds     
     # there as an error occur when the user don't enter his information and try to see the job applictations
-    # change the app secondary color to make it more appealing
     # show the hospital profile page from the job add 
     # give the user the apility to review both the hospital and job add
 }
+
 
 
 

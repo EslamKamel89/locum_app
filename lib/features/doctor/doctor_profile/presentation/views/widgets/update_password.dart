@@ -34,9 +34,7 @@ class _PasswordUpdateState extends State<PasswordUpdate> {
                 });
               },
               child: Text(
-                showUpdatePassword
-                    ? 'Pick Safe Password'
-                    : 'Create a New Password ? ',
+                showUpdatePassword ? 'Pick Safe Password' : 'Create a New Password ? ',
                 style: TextStyle(
                   color: context.primaryColor,
                   fontWeight: FontWeight.bold,
@@ -65,7 +63,7 @@ class _PasswordUpdateState extends State<PasswordUpdate> {
                   AuthTextFormField(
                     obscureText: true,
                     labelText: "Password",
-                    prefixIcon: const Icon(Icons.lock_outline),
+                    prefixIcon: Icons.lock_outline,
                     controller: widget._passwordController,
                     validator: (input) {
                       if (input == null || input.isEmpty) return null;
@@ -82,7 +80,7 @@ class _PasswordUpdateState extends State<PasswordUpdate> {
                   AuthTextFormField(
                     obscureText: true,
                     labelText: "Confirm Password",
-                    prefixIcon: const Icon(Icons.lock_outline),
+                    prefixIcon: Icons.lock_outline,
                     controller: widget._passwordConfirmController,
                     validator: (input) {
                       if (widget._passwordController.text.isEmpty) return null;

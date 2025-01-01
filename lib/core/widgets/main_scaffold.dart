@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:locum_app/core/extensions/context-extensions.dart';
 import 'package:locum_app/core/themes/theme_cubit.dart';
 import 'package:locum_app/core/widgets/default_screen_padding.dart';
 
@@ -27,11 +28,13 @@ class MainScaffold extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: hideAppBar ? Colors.transparent : null,
           title: Text(appBarTitle),
-          foregroundColor: hideAppBar
-              ? isDark
-                  ? Colors.white
-                  : Colors.black
-              : null,
+          // foregroundColor: hideAppBar
+          //     ? isDark
+          //         ? Colors.white
+          //         : Colors.black
+          //     : null,
+          foregroundColor: hideAppBar ? context.secondaryHeaderColor : null,
+          // foregroundColor: context.secondaryHeaderColor,
         ),
         bottomNavigationBar: bottomNavigationBar,
         resizeToAvoidBottomInset: resizeToAvoidBottomInset,

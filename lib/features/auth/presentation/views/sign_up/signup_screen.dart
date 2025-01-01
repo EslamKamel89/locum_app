@@ -57,13 +57,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        txt("Create an Account", e: St.bold25, textAlign: TextAlign.center),
+                        txt("Create an Account",
+                            e: St.bold25, textAlign: TextAlign.center, c: context.secondaryHeaderColor),
                         const SizedBox(height: 10),
                         txt("Sign up to get started", e: St.reg16, c: Colors.grey, textAlign: TextAlign.center),
                         const SizedBox(height: 40),
                         AuthTextFormField(
                           labelText: "Full Name",
-                          prefixIcon: const Icon(Icons.person_outline),
+                          prefixIcon: Icons.person_outline,
                           controller: _nameController,
                           validator: (input) => valdiator(
                             input: input,
@@ -76,7 +77,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         const SizedBox(height: 20),
                         AuthTextFormField(
                           labelText: "Email Address",
-                          prefixIcon: const Icon(Icons.email_outlined),
+                          prefixIcon: Icons.email_outlined,
                           controller: _emailController,
                           validator: (input) => valdiator(
                             input: input,
@@ -91,7 +92,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         AuthTextFormField(
                           obscureText: true,
                           labelText: "Password",
-                          prefixIcon: const Icon(Icons.lock_outline),
+                          prefixIcon: Icons.lock_outline,
                           controller: _passwordController,
                           validator: (input) => valdiator(
                             input: input,
@@ -105,7 +106,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         AuthTextFormField(
                             obscureText: true,
                             labelText: "Confirm Password",
-                            prefixIcon: const Icon(Icons.lock_outline),
+                            prefixIcon: Icons.lock_outline,
                             controller: _passwordConfirmController,
                             validator: (input) {
                               return valdiator(

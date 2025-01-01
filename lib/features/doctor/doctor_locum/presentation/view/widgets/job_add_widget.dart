@@ -20,6 +20,7 @@ class JobAddWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       elevation: 5,
+      shadowColor: context.secondaryHeaderColor,
       margin: const EdgeInsets.all(16),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -37,9 +38,10 @@ class JobAddWidget extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               jobAddModel.title ?? '',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
+                color: context.secondaryHeaderColor,
               ),
             ),
             const SizedBox(height: 8),
@@ -72,9 +74,9 @@ class JobAddWidget extends StatelessWidget {
               children: [
                 Chip(
                   label: Text(jobAddModel.jobType ?? ''),
-                  backgroundColor: context.primaryColor.withOpacity(0.1),
-                  labelStyle: TextStyle(
-                    color: context.primaryColor,
+                  backgroundColor: context.primaryColor,
+                  labelStyle: const TextStyle(
+                    color: Colors.white,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -82,8 +84,9 @@ class JobAddWidget extends StatelessWidget {
                 Expanded(
                   child: Text(
                     jobAddModel.location ?? '',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 14,
+                      color: context.secondaryHeaderColor,
                     ),
                   ),
                 ),
@@ -92,16 +95,15 @@ class JobAddWidget extends StatelessWidget {
             const SizedBox(height: 12),
             InkWell(
               onTap: () {
-                Navigator.of(context).pushNamed(
-                    AppRoutesNames.doctorJobDetailsScreen,
-                    arguments: {'id': jobAddModel.id});
+                Navigator.of(context)
+                    .pushNamed(AppRoutesNames.doctorJobDetailsScreen, arguments: {'id': jobAddModel.id});
               },
               child: Text(
                 'Show Details',
                 style: TextStyle(
                   fontSize: 14,
-                  color: context.primaryColor,
                   decoration: TextDecoration.underline,
+                  color: context.secondaryHeaderColor,
                 ),
               ),
             ),

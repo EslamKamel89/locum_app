@@ -9,17 +9,18 @@ Future<bool?> showAreYouSureDialog() async {
     context: context,
     builder: (contex) {
       return AlertDialog(
+        backgroundColor: Colors.white.withOpacity(0.8),
         title: txt('Warning', e: St.bold14, c: Colors.red),
-        content: txt('Do You Want To Proceed?!', e: St.semi12),
+        content: txt('Do You Want To Proceed?!', e: St.semi12, c: Colors.black),
         actions: [
           TextButton(
-            child: txt('Yes', e: St.reg12),
+            child: txt('Yes', e: St.reg12, c: Colors.black),
             onPressed: () {
               Navigator.of(context).pop(true);
             },
           ),
           TextButton(
-            child: txt('No', e: St.reg12),
+            child: txt('No', e: St.reg12, c: Colors.black),
             onPressed: () {
               Navigator.of(context).pop(false);
             },

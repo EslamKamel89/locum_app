@@ -12,7 +12,7 @@ class AuthTextFormField extends StatefulWidget {
       this.validator,
       this.onChanged});
   final String labelText;
-  final Widget? prefixIcon;
+  final IconData? prefixIcon;
   final bool obscureText;
   final TextEditingController controller;
   final String? Function(String?)? validator;
@@ -33,7 +33,7 @@ class _AuthTextFormFieldState extends State<AuthTextFormField> {
       onChanged: widget.onChanged,
       decoration: InputDecoration(
         labelText: widget.labelText,
-        prefixIcon: widget.prefixIcon,
+        prefixIcon: Icon(widget.prefixIcon, color: context.secondaryHeaderColor),
         suffixIcon: widget.obscureText
             ? Builder(builder: (context) {
                 return IconButton(
@@ -42,11 +42,8 @@ class _AuthTextFormFieldState extends State<AuthTextFormField> {
                       showPassword = !showPassword;
                     });
                   },
-                  icon: Icon(
-                      showPassword
-                          ? MdiIcons.eyeOffOutline
-                          : MdiIcons.eyeOutline,
-                      color: context.primaryColor),
+                  icon: Icon(showPassword ? MdiIcons.eyeOffOutline : MdiIcons.eyeOutline,
+                      color: context.secondaryHeaderColor),
                 );
               })
             : null,

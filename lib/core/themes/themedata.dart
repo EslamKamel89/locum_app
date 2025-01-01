@@ -30,7 +30,7 @@ final lightClr = Clr(
   primaryColor: Color(0xFF4169E1),
   primaryColorLight: Color(0xFF6A91F0),
   primaryColorDark: Color(0xFF2747A7),
-  secondaryHeaderColor: Color(0xFFE0FFFF),
+  secondaryHeaderColor: Color(0xFF27774A),
   scaffoldBackgroundColor: Color(0xFFF5F5F5),
   dialogBackgroundColor: Color(0xFFE0FFFF),
   cardColor: Color(0xFFFFFFFF),
@@ -40,7 +40,7 @@ final darkClr = Clr(
   primaryColor: Color(0xFF5A7FFF),
   primaryColorDark: Color(0xFF2A4FBF),
   primaryColorLight: Color(0xFF7A9FFF),
-  secondaryHeaderColor: Color(0xFF88FFFF),
+  secondaryHeaderColor: Color(0xFF66CDAA),
   scaffoldBackgroundColor: Color(0xFF121212), //
   dialogBackgroundColor: Color(0xFF1A1A1A),
   cardColor: Color(0xFF1E1E1E),
@@ -107,8 +107,7 @@ final ThemeData lightTheme = ThemeData(
     foregroundColor: Colors.white, // Text and icon color
     elevation: 4,
     centerTitle: true,
-    titleTextStyle: TextStyle(
-        fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+    titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
   ),
 
   // FloatingActionButton
@@ -123,18 +122,18 @@ final ThemeData lightTheme = ThemeData(
     fillColor: Colors.white,
     border: OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(DesSys.borderRadiusMd)),
-      borderSide: BorderSide(color: lightClr.primaryColor),
+      borderSide: BorderSide(color: lightClr.secondaryHeaderColor),
     ),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(DesSys.borderRadiusMd)),
-      borderSide: BorderSide(color: lightClr.primaryColor),
+      borderSide: BorderSide(color: lightClr.secondaryHeaderColor),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(DesSys.borderRadiusMd)),
       borderSide: BorderSide(color: lightClr.primaryColorDark),
     ),
-    labelStyle: TextStyle(color: Colors.black54, fontSize: 16.sp),
-    hintStyle: TextStyle(color: Colors.black38, fontSize: 14.sp),
+    labelStyle: TextStyle(color: lightClr.secondaryHeaderColor, fontSize: 16.sp),
+    hintStyle: TextStyle(color: lightClr.secondaryHeaderColor, fontSize: 14.sp),
   ),
 
   // Divider
@@ -142,7 +141,7 @@ final ThemeData lightTheme = ThemeData(
 
   // Icons
   iconTheme: IconThemeData(
-    color: lightClr.primaryColor, // Primary color for icons
+    color: lightClr.secondaryHeaderColor, // Primary color for icons
   ),
   primaryIconTheme: IconThemeData(
     color: Colors.white, // White icons for primary elements
@@ -157,7 +156,7 @@ final ThemeData lightTheme = ThemeData(
 // bottom navigatio bar theme
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     type: BottomNavigationBarType.fixed,
-    selectedItemColor: lightClr.primaryColor, // Highlight color
+    selectedItemColor: lightClr.secondaryHeaderColor, // Highlight color
     unselectedItemColor: Colors.grey,
     showUnselectedLabels: true,
     selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
@@ -226,8 +225,7 @@ final ThemeData darkTheme = ThemeData(
     foregroundColor: Colors.white, // Text and icon color
     elevation: 4,
     centerTitle: true,
-    titleTextStyle: TextStyle(
-        fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+    titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
   ),
 
   // FloatingActionButton
@@ -242,18 +240,18 @@ final ThemeData darkTheme = ThemeData(
     fillColor: darkClr.cardColor, // Dark grey background for inputs
     border: OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(DesSys.borderRadiusMd)),
-      borderSide: BorderSide(color: darkClr.primaryColor),
+      borderSide: BorderSide(color: darkClr.secondaryHeaderColor),
     ),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(DesSys.borderRadiusMd)),
-      borderSide: BorderSide(color: darkClr.primaryColor),
+      borderSide: BorderSide(color: darkClr.secondaryHeaderColor),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(DesSys.borderRadiusMd)),
-      borderSide: BorderSide(color: darkClr.primaryColorDark),
+      borderSide: BorderSide(color: darkClr.secondaryHeaderColor),
     ),
-    labelStyle: TextStyle(color: Colors.white70, fontSize: 16.sp),
-    hintStyle: TextStyle(color: Colors.white54, fontSize: 14.sp),
+    labelStyle: TextStyle(color: darkClr.secondaryHeaderColor, fontSize: 16.sp),
+    hintStyle: TextStyle(color: darkClr.secondaryHeaderColor, fontSize: 14.sp),
   ),
 
   // Divider
@@ -261,7 +259,7 @@ final ThemeData darkTheme = ThemeData(
 
   // Icons
   iconTheme: IconThemeData(
-    color: Color(0xFF88FFFF), // Secondary color for icons
+    color: darkClr.secondaryHeaderColor, // Secondary color for icons
   ),
   primaryIconTheme: IconThemeData(
     color: Colors.white, // White icons for primary elements
@@ -275,7 +273,7 @@ final ThemeData darkTheme = ThemeData(
   // bottom navigatio bar theme
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     type: BottomNavigationBarType.fixed,
-    selectedItemColor: darkClr.primaryColor, // Highlight color
+    selectedItemColor: darkClr.secondaryHeaderColor, // Highlight color
     unselectedItemColor: Colors.grey,
     showUnselectedLabels: true,
     selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),

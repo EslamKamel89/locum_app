@@ -72,11 +72,9 @@ class DoctorProfileContent extends StatelessWidget {
                 child: Column(
                   children: [
                     CircularCachedImage(
-                      imageUrl:
-                          "${EndPoint.imgBaseUrl}${user?.doctor?.photo ?? ''}",
-                      imageAsset: user?.doctor?.gender == 'female'
-                          ? AssetsData.femalePlacholder
-                          : AssetsData.malePlacholder,
+                      imageUrl: "${EndPoint.imgBaseUrl}${user?.doctor?.photo ?? ''}",
+                      imageAsset:
+                          user?.doctor?.gender == 'female' ? AssetsData.femalePlacholder : AssetsData.malePlacholder,
                       height: 100.h,
                       width: 100.h,
                     ),
@@ -93,9 +91,7 @@ class DoctorProfileContent extends StatelessWidget {
               _sectionCard(
                 children: [
                   _buildSectionHeader('Basic Information', handleEdit: () {
-                    Navigator.of(context).pushNamed(
-                        AppRoutesNames.userDoctorForm,
-                        arguments: {'create': false});
+                    Navigator.of(context).pushNamed(AppRoutesNames.userDoctorForm, arguments: {'create': false});
                   }),
                   _buildInfo('State', user?.state?.name),
                   _buildInfo('District', user?.district?.name),
@@ -109,8 +105,7 @@ class DoctorProfileContent extends StatelessWidget {
 
               _sectionCard(
                 children: [
-                  _buildSectionHeader('Main Professional Information',
-                      handleEdit: () {
+                  _buildSectionHeader('Main Professional Information', handleEdit: () {
                     Navigator.of(context).pushNamed(
                       AppRoutesNames.doctorForm,
                       arguments: {'create': false},
@@ -124,8 +119,7 @@ class DoctorProfileContent extends StatelessWidget {
                   _buildInfo('Phone', user?.doctor?.phone),
                   _buildInfo(
                       'Willing to Relocate',
-                      user?.doctor?.willingToRelocate == null ||
-                              user?.doctor?.willingToRelocate == false
+                      user?.doctor?.willingToRelocate == null || user?.doctor?.willingToRelocate == false
                           ? 'No'
                           : 'Yes'),
                   //  Languages Spoken
@@ -144,9 +138,7 @@ class DoctorProfileContent extends StatelessWidget {
                           ),
                           // _buildInfo(null, langsStr, isRow: false),
                           const SizedBox(height: 5),
-                          BadgeWrap(
-                              items:
-                                  langs.map((lang) => lang.name ?? '').toList())
+                          BadgeWrap(items: langs.map((lang) => lang.name ?? '').toList())
                         ],
                         visibility: langs.isNotEmpty,
                         showDivider: false,
@@ -168,10 +160,7 @@ class DoctorProfileContent extends StatelessWidget {
                           _buildSectionHeader('Skills'),
                           // _buildInfo(null, skillsStr, isRow: false),
                           const SizedBox(height: 5),
-                          BadgeWrap(
-                              items: skills
-                                  .map((skill) => skill.name ?? '')
-                                  .toList())
+                          BadgeWrap(items: skills.map((skill) => skill.name ?? '').toList())
                         ],
                         visibility: skills.isNotEmpty,
                         showDivider: false,
@@ -185,44 +174,28 @@ class DoctorProfileContent extends StatelessWidget {
 
               _sectionCard(
                 children: [
-                  _buildSectionHeader('Additional Professional Information',
-                      handleEdit: () {
-                    Navigator.of(context).pushNamed(
-                        AppRoutesNames.doctorInfoForm,
-                        arguments: {'create': false});
+                  _buildSectionHeader('Additional Professional Information', handleEdit: () {
+                    Navigator.of(context).pushNamed(AppRoutesNames.doctorInfoForm, arguments: {'create': false});
                   }),
-                  _buildInfo('Professional License No.',
-                      user?.doctor?.doctorInfo?.professionalLicenseNumber),
-                  _buildInfo(
-                      'License State', user?.doctor?.doctorInfo?.licenseState),
-                  _buildInfo('License Issue Date',
-                      user?.doctor?.doctorInfo?.licenseIssueDate),
-                  _buildInfo('License Expiry Date',
-                      user?.doctor?.doctorInfo?.licenseExpiryDate),
-                  _buildInfo(
-                      'University', user?.doctor?.doctorInfo?.university?.name),
-                  _buildInfo('Highest Degree',
-                      user?.doctor?.doctorInfo?.highestDegree),
-                  _buildInfo(
-                      'Field of Study', user?.doctor?.doctorInfo?.fieldOfStudy),
-                  _buildInfo('Graduation Year',
-                      user?.doctor?.doctorInfo?.graduationYear.toString()),
-                  _buildInfo('Work Experience',
-                      user?.doctor?.doctorInfo?.workExperience,
-                      isRow: false),
-                  _buildInfo('Biography', user?.doctor?.doctorInfo?.biography,
-                      isRow: false),
+                  _buildInfo('Professional License No.', user?.doctor?.doctorInfo?.professionalLicenseNumber),
+                  _buildInfo('License State', user?.doctor?.doctorInfo?.licenseState),
+                  _buildInfo('License Issue Date', user?.doctor?.doctorInfo?.licenseIssueDate),
+                  _buildInfo('License Expiry Date', user?.doctor?.doctorInfo?.licenseExpiryDate),
+                  _buildInfo('University', user?.doctor?.doctorInfo?.university?.name),
+                  _buildInfo('Highest Degree', user?.doctor?.doctorInfo?.highestDegree),
+                  _buildInfo('Field of Study', user?.doctor?.doctorInfo?.fieldOfStudy),
+                  _buildInfo('Graduation Year', user?.doctor?.doctorInfo?.graduationYear.toString()),
+                  _buildInfo('Work Experience', user?.doctor?.doctorInfo?.workExperience, isRow: false),
+                  _buildInfo('Biography', user?.doctor?.doctorInfo?.biography, isRow: false),
                   InkWell(
                     onTap: () {
-                      launchUrl(Uri.parse(
-                          "${EndPoint.imgBaseUrl}${user?.doctor?.doctorInfo?.cv ?? ''}"));
+                      launchUrl(Uri.parse("${EndPoint.imgBaseUrl}${user?.doctor?.doctorInfo?.cv ?? ''}"));
                     },
                     child: Text(
                       'View CV',
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
-                        color: navigatorKey.currentContext!.primaryColor
-                            .withRed(5),
+                        color: navigatorKey.currentContext!.primaryColor.withRed(5),
                         decoration: TextDecoration.underline,
                       ),
                     ),
@@ -233,13 +206,11 @@ class DoctorProfileContent extends StatelessWidget {
 
               // Section 7: Doctor Documents
               Builder(builder: (context) {
-                List<DoctorDocumentModel> documents =
-                    user?.doctor?.doctorDocuments ?? [];
+                List<DoctorDocumentModel> documents = user?.doctor?.doctorDocuments ?? [];
                 return _sectionCard(
                   children: [
                     _buildSectionHeader('Documents'),
-                    ...documents.map((document) =>
-                        DoctorDocumentWidget(doctorDocumentModel: document)),
+                    ...documents.map((document) => DoctorDocumentWidget(doctorDocumentModel: document)),
                     const AddNewDocumentWidget()
                   ],
                   visibility: documents.isNotEmpty,
@@ -285,7 +256,7 @@ class DoctorProfileContent extends StatelessWidget {
               label,
               style: TextStyle(
                 fontWeight: FontWeight.w600,
-                color: navigatorKey.currentContext!.primaryColor.withRed(5),
+                color: navigatorKey.currentContext!.secondaryHeaderColor,
               ),
             ),
       label == null ? const SizedBox() : SizedBox(width: 15.w, height: 5.w),
@@ -315,10 +286,7 @@ class DoctorProfileContent extends StatelessWidget {
     );
   }
 
-  Widget _sectionCard(
-      {required List<Widget> children,
-      bool visibility = true,
-      bool showDivider = true}) {
+  Widget _sectionCard({required List<Widget> children, bool visibility = true, bool showDivider = true}) {
     return visibility
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -20,8 +20,7 @@ class SearchableDropdownWidget extends StatefulWidget {
   final bool isRequired;
   final String? initalValue;
   @override
-  State<SearchableDropdownWidget> createState() =>
-      _SearchableDropdownWidgetState();
+  State<SearchableDropdownWidget> createState() => _SearchableDropdownWidgetState();
 }
 
 class _SearchableDropdownWidgetState extends State<SearchableDropdownWidget> {
@@ -127,7 +126,7 @@ class _SearchDialogState extends State<SearchDialog> {
     return SizedBox(
       height: 500.h,
       child: AlertDialog(
-        title: txt('Search And Select ${widget.label}'),
+        title: txt('Search And Select ${widget.label}', c: Colors.white),
         content: SizedBox(
           height: 500.h,
           child: SingleChildScrollView(
@@ -138,13 +137,13 @@ class _SearchDialogState extends State<SearchDialog> {
                 AuthTextFormField(
                   labelText: 'Search',
                   controller: searchController,
-                  prefixIcon: const Icon(Icons.search),
+                  prefixIcon: Icons.search,
                   onChanged: _filterOptions,
                 ),
                 const SizedBox(height: 10),
                 ...List.generate(filteredOptions.length, (index) {
                   return ListTile(
-                      title: txt(filteredOptions[index]),
+                      title: txt(filteredOptions[index], c: Colors.white),
                       onTap: () {
                         Navigator.of(context).pop(filteredOptions[index]);
                       });

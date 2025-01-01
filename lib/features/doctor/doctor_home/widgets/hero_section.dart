@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:locum_app/core/extensions/context-extensions.dart';
 import 'package:locum_app/core/widgets/bottom_navigation_bar.dart';
 import 'package:locum_app/core/widgets/circular_image_asset.dart';
 import 'package:locum_app/features/common_data/data/models/doctor_user_model.dart';
@@ -56,9 +57,9 @@ class _HeroSectionState extends State<HeroSection> {
                 children: [
                   Icon(MdiIcons.stethoscope, size: 30.w),
                   const SizedBox(width: 10),
-                  const Text(
+                  Text(
                     'Welcome',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: context.secondaryHeaderColor),
                   ).animate().fadeIn(delay: 500.ms, duration: 1.seconds),
                 ],
               ),
@@ -73,8 +74,7 @@ class _HeroSectionState extends State<HeroSection> {
                   doctorBottomNavigationBar.navigateTo(1);
                 },
                 icon: const Icon(Icons.search),
-                label: const Text('Start Searching',
-                    style: TextStyle(fontSize: 14)),
+                label: const Text('Start Searching', style: TextStyle(fontSize: 14)),
               ).animate().moveX(),
             ],
           ),

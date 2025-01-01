@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:locum_app/core/extensions/context-extensions.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/widgets/custom_form_widgets.dart';
 
 class ApplyToJobPopup extends StatefulWidget {
@@ -23,6 +24,7 @@ class _ApplyToJobPopupState extends State<ApplyToJobPopup> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: context.scaffoldBackgroundColor.withOpacity(0.8),
       title: Column(
         children: [
           Align(
@@ -43,8 +45,7 @@ class _ApplyToJobPopupState extends State<ApplyToJobPopup> {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Text(
-              "Highlight the qualities and experiences that make you perfect for this job."),
+          const Text("Highlight the qualities and experiences that make you perfect for this job."),
           CustomTextField(
             'Notes',
             notesController,

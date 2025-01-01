@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:locum_app/core/extensions/context-extensions.dart';
 import 'package:locum_app/core/widgets/sizer.dart';
 import 'package:locum_app/utils/assets/assets.dart';
 import 'package:locum_app/utils/styles/styles.dart';
@@ -84,10 +85,7 @@ class TestimonialsWidget extends StatelessWidget {
           items: testimonials.map((testimonial) {
             return SizedBox(
               height: 9000,
-              child: SliderContent(
-                  image: testimonial.image,
-                  title: testimonial.name,
-                  description: testimonial.comment),
+              child: SliderContent(image: testimonial.image, title: testimonial.name, description: testimonial.comment),
             );
             // CircularImageAsset(image: testimonial.image, height: 200.h),
             // Text(testimonial.name),
@@ -102,11 +100,7 @@ class TestimonialsWidget extends StatelessWidget {
 }
 
 class SliderContent extends StatelessWidget {
-  const SliderContent(
-      {super.key,
-      required this.image,
-      required this.title,
-      required this.description});
+  const SliderContent({super.key, required this.image, required this.title, required this.description});
   final String image;
   final String title;
   final String description;
@@ -126,7 +120,7 @@ class SliderContent extends StatelessWidget {
             ),
           ),
           Sizer(height: 30.h),
-          txt(title, e: St.bold14, textAlign: TextAlign.center),
+          txt(title, e: St.bold14, textAlign: TextAlign.center, c: context.secondaryHeaderColor),
           Sizer(height: 15.h),
           txt(
             description,

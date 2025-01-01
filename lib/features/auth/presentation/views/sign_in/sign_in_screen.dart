@@ -56,14 +56,14 @@ class _SignInScreenState extends State<SignInScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      txt("Welcome Back!", e: St.bold25, textAlign: TextAlign.center),
+                      txt("Welcome Back!", e: St.bold25, textAlign: TextAlign.center, c: context.secondaryHeaderColor),
                       const SizedBox(height: 10),
                       txt("Sign in to continue", e: St.reg16, c: Colors.grey, textAlign: TextAlign.center),
                       const SizedBox(height: 40),
                       AuthTextFormField(
                         controller: _emailController,
                         labelText: "Email Address",
-                        prefixIcon: const Icon(Icons.email_outlined),
+                        prefixIcon: Icons.email_outlined,
                         validator: (String? value) {
                           return valdiator(
                             input: value,
@@ -80,7 +80,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         controller: _passwordController,
                         obscureText: true,
                         labelText: "Password",
-                        prefixIcon: const Icon(Icons.lock_outline),
+                        prefixIcon: Icons.lock_outline,
                         validator: (String? value) {
                           return valdiator(
                             input: value,
