@@ -26,4 +26,5 @@ class EndPoint {
   static String showDoctorJobApplication = "$baseUrl/job-applications";
   static String createDoctorDocument = "$baseUrl/doctor-docs";
   static String deleteDoctorDocument = "$baseUrl/doctor-docs";
+  static String getComments = "$baseUrl/comments";
 }

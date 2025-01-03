@@ -20,7 +20,8 @@ class SearchableDropdownWidget extends StatefulWidget {
   final bool isRequired;
   final String? initalValue;
   @override
-  State<SearchableDropdownWidget> createState() => _SearchableDropdownWidgetState();
+  State<SearchableDropdownWidget> createState() =>
+      _SearchableDropdownWidgetState();
 }
 
 class _SearchableDropdownWidgetState extends State<SearchableDropdownWidget> {

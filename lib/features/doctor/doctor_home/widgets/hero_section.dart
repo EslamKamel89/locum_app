@@ -59,7 +59,10 @@ class _HeroSectionState extends State<HeroSection> {
                   const SizedBox(width: 10),
                   Text(
                     'Welcome',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: context.secondaryHeaderColor),
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: context.secondaryHeaderColor),
                   ).animate().fadeIn(delay: 500.ms, duration: 1.seconds),
                 ],
               ),
@@ -74,7 +77,8 @@ class _HeroSectionState extends State<HeroSection> {
                   doctorBottomNavigationBar.navigateTo(1);
                 },
                 icon: const Icon(Icons.search),
-                label: const Text('Start Searching', style: TextStyle(fontSize: 14)),
+                label: const Text('Start Searching',
+                    style: TextStyle(fontSize: 14)),
               ).animate().moveX(),
             ],
           ),

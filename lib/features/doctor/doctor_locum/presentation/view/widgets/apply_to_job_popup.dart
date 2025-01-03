@@ -45,7 +45,8 @@ class _ApplyToJobPopupState extends State<ApplyToJobPopup> {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Text("Highlight the qualities and experiences that make you perfect for this job."),
+          const Text(
+              "Highlight the qualities and experiences that make you perfect for this job."),
           CustomTextField(
             'Notes',
             notesController,

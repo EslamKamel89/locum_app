@@ -95,8 +95,9 @@ class JobAddWidget extends StatelessWidget {
             const SizedBox(height: 12),
             InkWell(
               onTap: () {
-                Navigator.of(context)
-                    .pushNamed(AppRoutesNames.doctorJobDetailsScreen, arguments: {'id': jobAddModel.id});
+                Navigator.of(context).pushNamed(
+                    AppRoutesNames.doctorJobDetailsScreen,
+                    arguments: {'id': jobAddModel.id});
               },
               child: Text(
                 'Show Details',
