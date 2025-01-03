@@ -28,7 +28,8 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // serviceLocator<DoctorLocumRepo>().showAllJobAdds(limit: 10, page: 1);
+    // serviceLocator<CommentRepo>()
+    //     .getCommentByParentType(params: GetCommentParams(parent: 'doctor', limit: 10, page: 1));
     return MainScaffold(
       appBarTitle: '',
       hideAppBar: true,

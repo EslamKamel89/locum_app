@@ -8,6 +8,7 @@ import 'package:locum_app/core/widgets/badge_wrap.dart';
 import 'package:locum_app/core/widgets/bottom_navigation_bar.dart';
 import 'package:locum_app/core/widgets/default_drawer.dart';
 import 'package:locum_app/core/widgets/main_scaffold.dart';
+import 'package:locum_app/features/comments/presentation/views/comment_view.dart';
 import 'package:locum_app/features/doctor/doctor_locum/domain/models/job_add_model.dart';
 import 'package:locum_app/features/doctor/doctor_locum/presentation/cubits/apply_to_job_add/apply_to_job_add_cubit.dart';
 import 'package:locum_app/features/doctor/doctor_locum/presentation/cubits/show_job_add/show_job_add_cubit.dart';
@@ -105,7 +106,8 @@ class _DoctorJobAddDetailsViewState extends State<DoctorJobAddDetailsView> {
                     'Required Languages', (jobAddModel?.langs ?? []).map((lang) => lang.name ?? '').toList(), state),
                 _wrapWithLabel(
                     'Required Skills', (jobAddModel?.skills ?? []).map((skill) => skill.name ?? '').toList(), state),
-                ReviewList(),
+                CommentView(commentableType: 'jobAdd', commentableId: widget.id)
+                // ReviewList(),
               ],
             ),
           ),
@@ -125,6 +127,15 @@ class _DoctorJobAddDetailsViewState extends State<DoctorJobAddDetailsView> {
             children: [
               _headLine(jobAddModel?.title, state),
               _headLine(jobAddModel?.hospital?.facilityName, state),
+              InkWell(
+                child: Text(
+                  'View Health Care Provider Profile',
+                  style: TextStyle(
+                    color: context.secondaryHeaderColor,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              )
             ],
           ),
         ),

@@ -107,7 +107,8 @@ final ThemeData lightTheme = ThemeData(
     foregroundColor: Colors.white, // Text and icon color
     elevation: 4,
     centerTitle: true,
-    titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+    titleTextStyle: TextStyle(
+        fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
   ),
 
   // FloatingActionButton
@@ -132,7 +133,8 @@ final ThemeData lightTheme = ThemeData(
       borderRadius: BorderRadius.all(Radius.circular(DesSys.borderRadiusMd)),
       borderSide: BorderSide(color: lightClr.primaryColorDark),
     ),
-    labelStyle: TextStyle(color: lightClr.secondaryHeaderColor, fontSize: 16.sp),
+    labelStyle:
+        TextStyle(color: lightClr.secondaryHeaderColor, fontSize: 16.sp),
     hintStyle: TextStyle(color: lightClr.secondaryHeaderColor, fontSize: 14.sp),
   ),
 
@@ -225,7 +227,8 @@ final ThemeData darkTheme = ThemeData(
     foregroundColor: Colors.white, // Text and icon color
     elevation: 4,
     centerTitle: true,
-    titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+    titleTextStyle: TextStyle(
+        fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
   ),
 
   // FloatingActionButton

@@ -33,7 +33,8 @@ class _AuthTextFormFieldState extends State<AuthTextFormField> {
       onChanged: widget.onChanged,
       decoration: InputDecoration(
         labelText: widget.labelText,
-        prefixIcon: Icon(widget.prefixIcon, color: context.secondaryHeaderColor),
+        prefixIcon:
+            Icon(widget.prefixIcon, color: context.secondaryHeaderColor),
         suffixIcon: widget.obscureText
             ? Builder(builder: (context) {
                 return IconButton(
@@ -42,7 +43,10 @@ class _AuthTextFormFieldState extends State<AuthTextFormField> {
                       showPassword = !showPassword;
                     });
                   },
-                  icon: Icon(showPassword ? MdiIcons.eyeOffOutline : MdiIcons.eyeOutline,
+                  icon: Icon(
+                      showPassword
+                          ? MdiIcons.eyeOffOutline
+                          : MdiIcons.eyeOutline,
                       color: context.secondaryHeaderColor),
                 );
               })

@@ -13,8 +13,14 @@ Flushbar<dynamic> customNotification({
     reverseAnimationCurve: Curves.decelerate,
     forwardAnimationCurve: Curves.elasticOut,
     backgroundColor: Colors.red,
-    boxShadows: [BoxShadow(color: Colors.blue[800]!, offset: const Offset(0.0, 2.0), blurRadius: 3.0)],
-    backgroundGradient: const LinearGradient(colors: [Colors.blueGrey, Colors.black]),
+    boxShadows: [
+      BoxShadow(
+          color: Colors.blue[800]!,
+          offset: const Offset(0.0, 2.0),
+          blurRadius: 3.0)
+    ],
+    backgroundGradient:
+        const LinearGradient(colors: [Colors.blueGrey, Colors.black]),
     isDismissible: false,
     duration: const Duration(seconds: 4),
     icon: const Icon(
@@ -33,11 +39,17 @@ Flushbar<dynamic> customNotification({
     titleText: Text(
       title,
       style: TextStyle(
-          fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.yellow[600], fontFamily: "ShadowsIntoLightTwo"),
+          fontWeight: FontWeight.bold,
+          fontSize: 20.0,
+          color: Colors.yellow[600],
+          fontFamily: "ShadowsIntoLightTwo"),
     ),
     messageText: Text(
       content,
-      style: const TextStyle(fontSize: 18.0, color: Colors.white, fontFamily: "ShadowsIntoLightTwo"),
+      style: const TextStyle(
+          fontSize: 18.0,
+          color: Colors.white,
+          fontFamily: "ShadowsIntoLightTwo"),
     ),
   );
 }

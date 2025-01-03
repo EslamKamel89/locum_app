@@ -12,7 +12,8 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
   late UserInfoCubit userInfoCubit;
@@ -21,7 +22,8 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     super.initState();
     userInfoCubit = context.read<UserInfoCubit>();
     FirebaseHelper.handleFirebaseNotification();
-    _animationController = AnimationController(vsync: this, duration: const Duration(seconds: 3));
+    _animationController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 3));
     // _animation = CurvedAnimation(parent: _animationController, curve: Curves.easeInOut);
     _animation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),

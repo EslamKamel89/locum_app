@@ -14,7 +14,8 @@ abstract class FirebaseHelper {
       await FirebaseHelper._requestFirebaseNotificationsPermission();
       //! Foreground message listener
       FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-        pr('FirebaseMessaging.onMessage.listen: Message received in foreground: ${message.notification?.title}', t);
+        pr('FirebaseMessaging.onMessage.listen: Message received in foreground: ${message.notification?.title}',
+            t);
         BuildContext? context = navigatorKey.currentContext;
         if (context == null) return;
         customNotification(
@@ -27,13 +28,15 @@ abstract class FirebaseHelper {
       });
 
       //! background and terminated notification listener
-      RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
+      RemoteMessage? initialMessage =
+          await FirebaseMessaging.instance.getInitialMessage();
       BuildContext? context = navigatorKey.currentContext;
       if (context == null) return;
       if (initialMessage != null) {
         _handleNotificationNavigatin(context, initialMessage.data);
       }
-      FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage remoteMessage) {
+      FirebaseMessaging.onMessageOpenedApp
+          .listen((RemoteMessage remoteMessage) {
         BuildContext? context = navigatorKey.currentContext;
         if (context == null) return;
         _handleNotificationNavigatin(context, remoteMessage.data);
@@ -58,11 +61,13 @@ abstract class FirebaseHelper {
       pr('User declined or has not accepted permission', t);
       BuildContext? context = navigatorKey.currentContext;
       if (context == null) return;
-      showSnackbar('Warning', "You didn't give the app notification permission", true);
+      showSnackbar(
+          'Warning', "You didn't give the app notification permission", true);
     }
   }
 
-  static void _handleNotificationNavigatin(BuildContext context, Map<String, dynamic> data) {
+  static void _handleNotificationNavigatin(
+      BuildContext context, Map<String, dynamic> data) {
     final t = prt('_handleNotificationNavigatin - FirebaseHelper');
     String? routeName = data['routeName'] as String?;
     pr(routeName, '$t - routeName');
@@ -75,7 +80,6 @@ abstract class FirebaseHelper {
   }
 }
 
-
 // class Application extends StatefulWidget {
 //   @override
 //   State<StatefulWidget> createState() => _Application();
@@ -83,10 +87,10 @@ abstract class FirebaseHelper {
 
 // class _Application extends State<Application> {
 //   // It is assumed that all messages contain a data field with the key 'type'
- 
+
 //   void _handleMessage(RemoteMessage message) {
 //     if (message.data['type'] == 'chat') {
-//       Navigator.pushNamed(context, '/chat', 
+//       Navigator.pushNamed(context, '/chat',
 //         arguments: ChatArguments(message),
 //       );
 //     }

@@ -34,7 +34,9 @@ class _PasswordUpdateState extends State<PasswordUpdate> {
                 });
               },
               child: Text(
-                showUpdatePassword ? 'Pick Safe Password' : 'Create a New Password ? ',
+                showUpdatePassword
+                    ? 'Pick Safe Password'
+                    : 'Create a New Password ? ',
                 style: TextStyle(
                   color: context.primaryColor,
                   fontWeight: FontWeight.bold,
