@@ -46,8 +46,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           child: Column(
             children: [
               const SizedBox(height: 20),
-              SizedBox(
-                height: 500.h,
+              Expanded(
+                // height: 500.h,
                 child: PageView.builder(
                   controller: _pageController,
                   itemCount: _onBoardingData.length,
