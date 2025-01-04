@@ -127,15 +127,15 @@ class _DoctorJobAddDetailsViewState extends State<DoctorJobAddDetailsView> {
             children: [
               _headLine(jobAddModel?.title, state),
               _headLine(jobAddModel?.hospital?.facilityName, state),
-              InkWell(
-                child: Text(
-                  'View Health Care Provider Profile',
-                  style: TextStyle(
-                    color: context.secondaryHeaderColor,
-                    decoration: TextDecoration.underline,
-                  ),
-                ),
-              )
+              // InkWell(
+              //   child: Text(
+              //     'View Health Care Provider Profile',
+              //     style: TextStyle(
+              //       color: context.secondaryHeaderColor,
+              //       decoration: TextDecoration.underline,
+              //     ),
+              //   ),
+              // )
             ],
           ),
         ),

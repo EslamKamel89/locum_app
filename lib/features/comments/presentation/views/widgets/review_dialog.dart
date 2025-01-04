@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:locum_app/core/extensions/context-extensions.dart';
+import 'package:locum_app/core/heleprs/snackbar.dart';
 
 class ReviewDialog extends StatefulWidget {
   const ReviewDialog({super.key});
@@ -50,38 +51,6 @@ class _ReviewDialogState extends State<ReviewDialog> {
             ),
 
             const SizedBox(height: 16),
-
-            // // Rating Selector
-            // const Text(
-            //   'Your Rating',
-            //   style: TextStyle(
-            //     fontSize: 16,
-            //     fontWeight: FontWeight.w600,
-            //     color: Colors.black87,
-            //   ),
-            // ),
-            // const SizedBox(height: 8),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: List.generate(5, (index) {
-            //     return IconButton(
-            //       onPressed: () {
-            //         setState(() {
-            //           _selectedRating = index + 1;
-            //         });
-            //       },
-            //       icon: Icon(
-            //         Icons.star,
-            //         color: _selectedRating > index ? Colors.amber : Colors.grey.shade400,
-            //         size: 32,
-            //       ),
-            //     );
-            //   }),
-            // ),
-
-            // const SizedBox(height: 16),
-
-            // Save Button
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -89,14 +58,10 @@ class _ReviewDialogState extends State<ReviewDialog> {
                   // Handle Save Logic
                   final comment = _commentController.text;
                   final rating = _selectedRating;
-                  if (comment.isNotEmpty && rating > 0) {
-                    Navigator.pop(context, {'comment': comment, 'rating': rating});
+                  if (comment.isNotEmpty) {
+                    Navigator.pop(context, {'comment': comment});
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Please provide a comment and rating.'),
-                      ),
-                    );
+                    showSnackbar('Error', 'Please Enter a reply', true);
                   }
                 },
                 style: ElevatedButton.styleFrom(
@@ -116,16 +81,11 @@ class _ReviewDialogState extends State<ReviewDialog> {
 }
 
 // Usage Example
-void showReviewDialog(BuildContext context) {
-  showDialog(
+Future<String?> showReviewDialog(BuildContext context) async {
+  return (await showDialog(
     context: context,
     builder: (BuildContext context) {
       return const ReviewDialog();
     },
-  ).then((result) {
-    if (result != null) {
-      print('Comment: ${result['comment']}');
-      print('Rating: ${result['rating']}');
-    }
-  });
+  ))?['comment'];
 }

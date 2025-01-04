@@ -17,7 +17,7 @@ class ViewCommentsState {
     this.responseType,
     this.commentableType,
     this.commentableId,
-    this.limit = 10,
+    this.limit = 5,
     this.page = 0,
     this.hasNextPage = true,
     this.params,

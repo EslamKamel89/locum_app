@@ -26,4 +26,19 @@ class CommentRepoImp implements CommentRepo {
       return Left(ServerFailure(pr(e.toString(), t)));
     }
   }
+
+  @override
+  Future<Either<Failure, CommentModel>> addComment({required AddCommentParams params}) async {
+    final t = prt('addComment  - CommentRepoImp');
+    try {
+      CommentModel response = await commentRemoteDataSource.addComment(params: params);
+      return Right(pr(response, t));
+    } catch (e) {
+      pr(e.toString());
+      if (e is DioException) {
+        return Left(ServerFailure.formDioError(e));
+      }
+      return Left(ServerFailure(pr(e.toString(), t)));
+    }
+  }
 }

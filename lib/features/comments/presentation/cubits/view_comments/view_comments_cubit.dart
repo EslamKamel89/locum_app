@@ -1,10 +1,14 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:locum_app/core/Errors/failure.dart';
 import 'package:locum_app/core/enums/response_type.dart';
+import 'package:locum_app/core/globals.dart';
 import 'package:locum_app/core/heleprs/print_helper.dart';
 import 'package:locum_app/core/heleprs/snackbar.dart';
 import 'package:locum_app/features/comments/domain/models/comment_model.dart';
 import 'package:locum_app/features/comments/domain/repos/comment_repo.dart';
+import 'package:locum_app/features/common_data/cubits/user_info/user_info_cubit.dart';
+import 'package:locum_app/features/common_data/data/models/doctor_user_model.dart';
 import 'package:locum_app/features/common_data/data/models/response_model.dart';
 
 part 'view_comments_state.dart';
@@ -19,6 +23,28 @@ class ViewCommentsCubit extends Cubit<ViewCommentsState> {
             params: GetCommentParams(commentableType: commentableType, commentableId: commentableId),
           ),
         );
+
+  void addComment(CommentModel commentModel) async {
+    final t = prt('addComment - ViewCommentsCubit');
+    pr(commentModel, '$t - commentModel');
+    BuildContext? context = navigatorKey.currentContext;
+    if (context == null) return;
+    DoctorUserModel? user = context.read<UserInfoCubit>().state.doctorUserModel;
+    commentModel.user = user;
+    final ResponseModel<List<CommentModel>>? comments = state.commentModelsResponse;
+    comments?.data = [commentModel, ...comments.data ?? []];
+    pr(comments?.data, '$t - commentModelsResponse after adding model');
+    emit(state.copyWith(
+      commentModelsResponse: comments,
+    ));
+  }
+
+  void updateState() {
+    final t = prt('updateState - ViewCommentsCubit');
+
+    emit(state.copyWith());
+    pr('state udpated', t);
+  }
 
   Future getCommentByParentType() async {
     final t = prt('getCommentByParentType - ViewCommentsCubit');
@@ -35,7 +61,7 @@ class ViewCommentsCubit extends Cubit<ViewCommentsState> {
       responseType: ResponseEnum.loading,
       errorMessage: null,
       page: state.page! + 1,
-      params: state.params?.copyWith(page: state.page! + 1),
+      params: state.params?.copyWith(page: state.page! + 1, limit: state.limit),
     ));
 
     final result = await commentRepo.getCommentByParentType(

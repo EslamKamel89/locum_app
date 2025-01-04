@@ -20,4 +20,14 @@ class CommentRemoteDataSource {
     response.data = comments;
     return pr(response, t);
   }
+
+  Future<CommentModel> addComment({required AddCommentParams params}) async {
+    final t = prt('addComment - CommentRemoteDataSource');
+    final data = await api.post(
+      EndPoint.addComment,
+      data: params.toMap(),
+    );
+    CommentModel comment = CommentModel.fromJson(data['data']);
+    return pr(comment, t);
+  }
 }
