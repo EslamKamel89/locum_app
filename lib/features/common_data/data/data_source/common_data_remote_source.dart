@@ -75,6 +75,7 @@ class CommonDataRemoteSource {
     final t = prt('fetchUserInfo - CommonDataRemoteSource');
     // String? token = await FirebaseMessaging.instance.getToken();
     String? token;
+
     final data =
         await api.get(EndPoint.userInfo, queryParameter: {'fcm_token': token});
     if (data['data']['type'] == 'doctor') {
