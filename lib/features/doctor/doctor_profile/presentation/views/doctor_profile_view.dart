@@ -256,12 +256,14 @@ class DoctorProfileContent extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          title,
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: navigatorKey.currentContext!.primaryColor,
+        Expanded(
+          child: Text(
+            title,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: navigatorKey.currentContext!.primaryColor,
+            ),
           ),
         ),
         if (handleEdit != null)
