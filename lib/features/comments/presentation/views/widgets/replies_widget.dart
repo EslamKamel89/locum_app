@@ -8,6 +8,7 @@ import 'package:locum_app/features/comments/domain/repos/comment_repo.dart';
 import 'package:locum_app/features/comments/presentation/cubits/add_comment/add_comment_cubit.dart';
 import 'package:locum_app/features/comments/presentation/cubits/view_comments/view_comments_cubit.dart';
 import 'package:locum_app/features/comments/presentation/views/widgets/review_dialog.dart';
+import 'package:locum_app/features/common_data/cubits/user_info/user_info_cubit.dart';
 
 class RepliesWidget extends StatelessWidget {
   const RepliesWidget({super.key, required this.commentModel});
@@ -108,6 +109,7 @@ class SingleReplyWidget extends StatelessWidget {
           content: comment,
         ),
         onAddComment: (CommentModel model) {
+          model.user = context.read<UserInfoCubit>().state.doctorUserModel;
           commentModel?.children = commentModel?.children ?? [];
           commentModel?.children?.insert(0, model);
         });

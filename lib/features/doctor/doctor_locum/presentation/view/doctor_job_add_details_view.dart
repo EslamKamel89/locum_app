@@ -4,6 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:locum_app/core/enums/response_type.dart';
 import 'package:locum_app/core/extensions/context-extensions.dart';
 import 'package:locum_app/core/heleprs/print_helper.dart';
+import 'package:locum_app/core/router/app_routes_names.dart';
 import 'package:locum_app/core/widgets/badge_wrap.dart';
 import 'package:locum_app/core/widgets/bottom_navigation_bar.dart';
 import 'package:locum_app/core/widgets/default_drawer.dart';
@@ -127,15 +128,20 @@ class _DoctorJobAddDetailsViewState extends State<DoctorJobAddDetailsView> {
             children: [
               _headLine(jobAddModel?.title, state),
               _headLine(jobAddModel?.hospital?.facilityName, state),
-              // InkWell(
-              //   child: Text(
-              //     'View Health Care Provider Profile',
-              //     style: TextStyle(
-              //       color: context.secondaryHeaderColor,
-              //       decoration: TextDecoration.underline,
-              //     ),
-              //   ),
-              // )
+              InkWell(
+                onTap: () {
+                  if (jobAddModel?.hospitalId == null) return;
+                  Navigator.of(context)
+                      .pushNamed(AppRoutesNames.viewHospitalProfile, arguments: {'id': jobAddModel?.hospitalId});
+                },
+                child: Text(
+                  'View Health Care Provider Profile',
+                  style: TextStyle(
+                    color: context.secondaryHeaderColor,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              )
             ],
           ),
         ),

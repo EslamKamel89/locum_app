@@ -38,30 +38,22 @@ class UserInfoCubit extends Cubit<UserInfoState> {
         pr(failure.message, t);
         // showSnackbar('Server Error', failure.message, true);
         _navigateToOnBoardingScreen();
-        emit(UserInfoState(
-            responseType: ResponseEnum.failed, errorMessage: failure.message));
+        emit(UserInfoState(responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
       (Either<DoctorUserModel, HospitalUserModel> doctorOrHospital) {
         pr(doctorOrHospital, t);
         doctorOrHospital.fold(
           (DoctorUserModel doctor) {
             AuthHelpers.cacheUser(doctor);
-            emit(UserInfoState(
-                doctorUserModel: doctor,
-                userType: UserType.doctor,
-                responseType: ResponseEnum.success));
+            emit(UserInfoState(doctorUserModel: doctor, userType: UserType.doctor, responseType: ResponseEnum.success));
           },
           (HospitalUserModel hospital) {
             showSnackbar(
-                'Error',
-                'This is account is registered as a health care provider. You can use the web site',
-                true);
+                'Error', 'This is account is registered as a health care provider. You can use the web site', true);
             return;
             AuthHelpers.cacheUser(hospital);
             emit(UserInfoState(
-                hospitalUserModel: hospital,
-                userType: UserType.hospital,
-                responseType: ResponseEnum.success));
+                hospitalUserModel: hospital, userType: UserType.hospital, responseType: ResponseEnum.success));
           },
         );
         if (navigate) _navigateToHomeScreen();
@@ -95,8 +87,7 @@ class UserInfoCubit extends Cubit<UserInfoState> {
       return;
     }
     if (state.userType == UserType.hospital) {
-      pr('This user is signed as a health care professional cant use the mobile app',
-          t);
+      pr('This user is signed as a health care professional cant use the mobile app', t);
       return;
       Navigator.of(navigatorKey.currentContext!).pushNamedAndRemoveUntil(
         AppRoutesNames.hospitalHomeScreen,
@@ -118,7 +109,6 @@ class UserInfoCubit extends Cubit<UserInfoState> {
     emit(UserInfoState());
     BuildContext? context = navigatorKey.currentContext;
     if (context == null) return;
-    Navigator.of(context)
-        .pushNamedAndRemoveUntil(AppRoutesNames.signinScreen, (_) => false);
+    Navigator.of(context).pushNamedAndRemoveUntil(AppRoutesNames.signinScreen, (_) => false);
   }
 }

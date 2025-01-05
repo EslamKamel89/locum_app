@@ -23,6 +23,9 @@ import 'package:locum_app/features/doctor/doctor_locum/domain/repos/doctor_locum
 import 'package:locum_app/features/doctor/doctor_profile/data/remote_data_source/doctor_profile_remote_datasource.dart';
 import 'package:locum_app/features/doctor/doctor_profile/data/repo/doctor_profile_repo_imp.dart';
 import 'package:locum_app/features/doctor/doctor_profile/domain/repo/doctor_profile_repo.dart';
+import 'package:locum_app/features/doctor/hospital_profile/data/remote_datasource/view_hospital_profile_remote_datasource.dart';
+import 'package:locum_app/features/doctor/hospital_profile/data/repo/view_hospital_profile_repo_imp.dart';
+import 'package:locum_app/features/doctor/hospital_profile/domain/repo/view_hospital_profile_repo.dart';
 import 'package:locum_app/features/hospital/hospital_profile/data/remote_data_source/hospital_profile_remote_datasource.dart';
 import 'package:locum_app/features/hospital/hospital_profile/data/repo/hospital_profile_repo_imp.dart';
 import 'package:locum_app/features/hospital/hospital_profile/domain/repo/hospital_profile_repo.dart';
@@ -69,4 +72,10 @@ Future initServiceLocator() async {
   //!
   serviceLocator.registerLazySingleton<CommentRemoteDataSource>(() => CommentRemoteDataSource(api: serviceLocator()));
   serviceLocator.registerLazySingleton<CommentRepo>(() => CommentRepoImp(commentRemoteDataSource: serviceLocator()));
+
+  //!
+  serviceLocator.registerLazySingleton<ViewHospitalProfileRemoteDatasource>(
+      () => ViewHospitalProfileRemoteDatasource(api: serviceLocator()));
+  serviceLocator.registerLazySingleton<ViewHospitalProfileRepo>(
+      () => ViewHospitalProfileRepoImp(remoteDatasource: serviceLocator()));
 }

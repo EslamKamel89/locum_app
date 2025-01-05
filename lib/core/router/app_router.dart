@@ -21,8 +21,11 @@ import 'package:locum_app/features/doctor/doctor_profile/presentation/cubits/doc
 import 'package:locum_app/features/doctor/doctor_profile/presentation/cubits/user_update/user_update_cubit.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/doctor_form.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/doctor_info_form.dart';
+import 'package:locum_app/features/doctor/doctor_profile/presentation/views/doctor_profile_reviews_view.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/doctor_profile_view.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/user_doctor_form.dart';
+import 'package:locum_app/features/doctor/hospital_profile/presentation/cubits/view_hospital_profile/view_hospital_profile_cubit.dart';
+import 'package:locum_app/features/doctor/hospital_profile/presentation/views/view_hospital_profile.dart';
 import 'package:locum_app/features/hospital/hospital_home/hospital_home_view.dart';
 import 'package:locum_app/features/hospital/hospital_profile/presentation/cubits/hospital-info/hospital_info_cubit.dart';
 import 'package:locum_app/features/hospital/hospital_profile/presentation/cubits/hospital/hospital_cubit.dart';
@@ -83,8 +86,7 @@ class AppRouter {
       case AppRoutesNames.doctorInfoForm:
         return CustomPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) =>
-                DoctorInfoCubit(doctorProfileRepo: serviceLocator()),
+            create: (context) => DoctorInfoCubit(doctorProfileRepo: serviceLocator()),
             child: DoctorInfoForm(
               create: args?['create'] ?? true,
             ),
@@ -155,10 +157,8 @@ class AppRouter {
         return CustomPageRoute(
           builder: (context) => MultiBlocProvider(
             providers: [
-              BlocProvider(
-                  create: (context) => ShowJobAddCubit(serviceLocator())),
-              BlocProvider(
-                  create: (context) => ApplyToJobAddCubit(serviceLocator())),
+              BlocProvider(create: (context) => ShowJobAddCubit(serviceLocator())),
+              BlocProvider(create: (context) => ApplyToJobAddCubit(serviceLocator())),
             ],
             child: DoctorJobAddDetailsView(id: args?['id']),
           ),
@@ -179,6 +179,19 @@ class AppRouter {
           ),
           settings: routeSettings,
         );
+      case AppRoutesNames.doctorProfileReviewsView:
+        return CustomPageRoute(
+          builder: (context) => const DoctorProfileReviewsView(),
+          settings: routeSettings,
+        );
+      case AppRoutesNames.viewHospitalProfile:
+        return CustomPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => ViewHospitalProfileCubit(serviceLocator()),
+            child: ViewHospitalProfile(id: args?['id']),
+          ),
+          settings: routeSettings,
+        );
       default:
         return null;
     }
@@ -186,8 +199,7 @@ class AppRouter {
 }
 
 class CustomPageRoute<T> extends MaterialPageRoute<T> {
-  CustomPageRoute(
-      {required super.builder, required RouteSettings super.settings});
+  CustomPageRoute({required super.builder, required RouteSettings super.settings});
   @override
   Widget buildTransitions(
     BuildContext context,
