@@ -1,149 +1,73 @@
 {
-    "data": [
-        {
-            "id": 511,
-            "user_id": 60,
-            "parent_id": null,
-            "commentable_type": "App\\Models\\JobAdd",
-            "commentable_id": 3,
-            "content": "REVIEW_1: Dormouse turned out, and, by the officers of the.",
-            "rating": 3,
-            "created_at": "2025-01-04T16:15:22.000000Z",
-            "updated_at": "2025-01-04T16:15:22.000000Z",
-            "children": [
+    "data": {
+        "id": 2,
+        "name": "Hospital2 Regan Haley",
+        "email": "hospital2_yfunk@hotmail.com",
+        "email_verified_at": "2025-01-05T13:13:50.000000Z",
+        "auth_type": "normal",
+        "auth_id": null,
+        "fcm_token": null,
+        "created_at": "2025-01-05T13:13:50.000000Z",
+        "updated_at": "2025-01-05T13:13:50.000000Z",
+        "state_id": 4,
+        "district_id": 1,
+        "type": "hospital",
+        "district": {
+            "id": 1,
+            "state_id": 1,
+            "name": "Los Angeles County",
+            "created_at": "2025-01-05T13:13:48.000000Z",
+            "updated_at": "2025-01-05T13:13:48.000000Z"
+        },
+        "state": {
+            "id": 4,
+            "name": "Florida",
+            "created_at": "2025-01-05T13:13:48.000000Z",
+            "updated_at": "2025-01-05T13:13:48.000000Z"
+        },
+        "hospital": {
+            "id": 2,
+            "user_id": 2,
+            "facility_name": "Green Valley Hospital",
+            "type": "Other",
+            "contact_person": "Ms. Rachel Kemmer",
+            "contact_email": "carissa.huels@yahoo.com",
+            "contact_phone": "(419) 619-7243",
+            "address": "59084 Sterling Lane Suite 753\nJerrelltown, NH 85048",
+            "services_offered": "Neurology",
+            "number_of_beds": 159,
+            "website_url": "https://via.placeholder.com/640x480.png/007788?text=sint",
+            "year_established": 1999,
+            "overview": "Hatter, and, just as well as she could do to ask: perhaps I shall remember it in the sea, 'and in that case I can guess that,' she added aloud. 'Do you play croquet with the Duchess, who seemed.",
+            "photo": null,
+            "created_at": "2025-01-05T13:13:50.000000Z",
+            "updated_at": "2025-01-05T13:13:50.000000Z",
+            "hospital_info": {
+                "id": 2,
+                "hospital_id": 2,
+                "license_number": "562573",
+                "license_state": "California",
+                "license_issue_date": "2002-09-28",
+                "license_expiry_date": "1997-02-03",
+                "operating_hours": "24HR",
+                "created_at": "2025-01-05T13:13:50.000000Z",
+                "updated_at": "2025-01-05T13:13:50.000000Z"
+            },
+            "hospital_documents": [
                 {
-                    "id": 512,
-                    "user_id": 52,
-                    "parent_id": 511,
-                    "commentable_type": "App\\Models\\JobAdd",
-                    "commentable_id": 3,
-                    "content": "COMMNET_1 ON REVIEW_1: Alice with one finger pressed upon its nose. The.",
-                    "rating": null,
-                    "created_at": "2025-01-04T16:15:22.000000Z",
-                    "updated_at": "2025-01-04T16:15:22.000000Z",
-                    "children": [
-                        {
-                            "id": 513,
-                            "user_id": 98,
-                            "parent_id": 512,
-                            "commentable_type": "App\\Models\\JobAdd",
-                            "commentable_id": 3,
-                            "content": "COMMNET_2 ON COMMENT_1: I BEG your pardon!' cried Alice (she was so.",
-                            "rating": null,
-                            "created_at": "2025-01-04T16:15:22.000000Z",
-                            "updated_at": "2025-01-04T16:15:22.000000Z",
-                            "children": [],
-                            "user": {
-                                "id": 98,
-                                "name": "Dr48 Lucile Hessel",
-                                "email": "dr48_wuckert.jaime@yahoo.com",
-                                "email_verified_at": "2025-01-04T16:15:16.000000Z",
-                                "auth_type": "normal",
-                                "auth_id": null,
-                                "fcm_token": null,
-                                "created_at": "2025-01-04T16:15:17.000000Z",
-                                "updated_at": "2025-01-04T16:15:17.000000Z",
-                                "state_id": 3,
-                                "district_id": 1,
-                                "type": "doctor"
-                            }
-                        }
-                    ],
-                    "user": {
-                        "id": 52,
-                        "name": "Dr2 Enid Gusikowski",
-                        "email": "dr2_mara.williamson@hotmail.com",
-                        "email_verified_at": "2025-01-04T16:15:16.000000Z",
-                        "auth_type": "normal",
-                        "auth_id": null,
-                        "fcm_token": null,
-                        "created_at": "2025-01-04T16:15:16.000000Z",
-                        "updated_at": "2025-01-04T16:15:16.000000Z",
-                        "state_id": 2,
-                        "district_id": 1,
-                        "type": "doctor"
-                    }
-                },
-                {
-                    "id": 514,
-                    "user_id": 21,
-                    "parent_id": 511,
-                    "commentable_type": "App\\Models\\JobAdd",
-                    "commentable_id": 3,
-                    "content": "COMMNET_3 ON REVIEW_1: King. 'It began with the dream of Wonderland of.",
-                    "rating": null,
-                    "created_at": "2025-01-04T16:15:22.000000Z",
-                    "updated_at": "2025-01-04T16:15:22.000000Z",
-                    "children": [
-                        {
-                            "id": 515,
-                            "user_id": 33,
-                            "parent_id": 514,
-                            "commentable_type": "App\\Models\\JobAdd",
-                            "commentable_id": 3,
-                            "content": "COMMNET_4 ON COMMENT_3: Alice: '--where's the Duchess?' 'Hush! Hush!'.",
-                            "rating": null,
-                            "created_at": "2025-01-04T16:15:22.000000Z",
-                            "updated_at": "2025-01-04T16:15:22.000000Z",
-                            "children": [],
-                            "user": {
-                                "id": 33,
-                                "name": "Hospital33 Arnoldo Denesik",
-                                "email": "hospital33_baron92@yahoo.com",
-                                "email_verified_at": "2025-01-04T16:15:15.000000Z",
-                                "auth_type": "normal",
-                                "auth_id": null,
-                                "fcm_token": null,
-                                "created_at": "2025-01-04T16:15:16.000000Z",
-                                "updated_at": "2025-01-04T16:15:16.000000Z",
-                                "state_id": 6,
-                                "district_id": 1,
-                                "type": "hospital"
-                            }
-                        }
-                    ],
-                    "user": {
-                        "id": 21,
-                        "name": "Hospital21 Mona Jast",
-                        "email": "hospital21_dillan.wisozk@yahoo.com",
-                        "email_verified_at": "2025-01-04T16:15:15.000000Z",
-                        "auth_type": "normal",
-                        "auth_id": null,
-                        "fcm_token": null,
-                        "created_at": "2025-01-04T16:15:16.000000Z",
-                        "updated_at": "2025-01-04T16:15:16.000000Z",
-                        "state_id": 6,
-                        "district_id": 1,
-                        "type": "hospital"
-                    }
+                    "id": 2,
+                    "hospital_id": 2,
+                    "type": "Certificate",
+                    "file": "https://via.placeholder.com/640x480.png/0033ee?text=qui",
+                    "name": "Kasandra.itp",
+                    "created_at": "2025-01-05T13:13:50.000000Z",
+                    "updated_at": "2025-01-05T13:13:50.000000Z"
                 }
-            ],
-            "user": {
-                "id": 60,
-                "name": "Dr10 Braxton Homenick",
-                "email": "dr10_nrunolfsdottir@gmail.com",
-                "email_verified_at": "2025-01-04T16:15:16.000000Z",
-                "auth_type": "normal",
-                "auth_id": null,
-                "fcm_token": null,
-                "created_at": "2025-01-04T16:15:16.000000Z",
-                "updated_at": "2025-01-04T16:15:16.000000Z",
-                "state_id": 5,
-                "district_id": 1,
-                "type": "doctor"
-            }
+            ]
         }
-    ],
+    },
     "status": "success",
     "message": "success",
     "errors": [],
-    "statusCode": 200,
-    "meta": {
-        "hasMorePages": false,
-        "total": 1,
-        "last_page": 1,
-        "per_page": 10,
-        "current_page": 1,
-        "path": "http://127.0.0.1:8000/api/comments"
-    }
+    "statusCode": 200
 }
