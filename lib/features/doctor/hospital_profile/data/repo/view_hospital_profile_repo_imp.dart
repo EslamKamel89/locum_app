@@ -11,10 +11,12 @@ class ViewHospitalProfileRepoImp implements ViewHospitalProfileRepo {
 
   ViewHospitalProfileRepoImp({required this.remoteDatasource});
   @override
-  Future<Either<Failure, HospitalUserModel>> fetchHospitalProfileInfo({required int id}) async {
+  Future<Either<Failure, HospitalUserModel>> fetchHospitalProfileInfo(
+      {required int id}) async {
     final t = prt('fetchHospitalProfileInfo  - ViewHospitalProfileRepoImp');
     try {
-      HospitalUserModel model = await remoteDatasource.fetchHospitalProfileInfo(id: id);
+      HospitalUserModel model =
+          await remoteDatasource.fetchHospitalProfileInfo(id: id);
       return Right(pr(model, t));
     } catch (e) {
       pr(e.toString());

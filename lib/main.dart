@@ -10,6 +10,7 @@ import 'package:locum_app/core/router/app_routes_names.dart';
 import 'package:locum_app/core/service_locator/service_locator.dart';
 import 'package:locum_app/core/themes/theme_cubit.dart';
 import 'package:locum_app/features/common_data/cubits/user_info/user_info_cubit.dart';
+import 'package:locum_app/features/doctor/messages/presentation/cubits/get_all_chat/get_all_chat_cubit.dart';
 import 'package:locum_app/firebase_options.dart';
 
 void main() async {
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
               sharedPreferences: serviceLocator(),
             ),
           ),
+          BlocProvider(create: (_) => GetAllChatCubit(repo: serviceLocator())),
         ],
         child: Builder(builder: (context) {
           final themeCubit = context.watch<ThemeCubit>();

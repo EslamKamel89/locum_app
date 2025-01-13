@@ -20,8 +20,10 @@ abstract class DoctorProfileRepo {
     required bool create,
     int? id,
   });
-  Future<Either<Failure, UserModel>> updateUserDoctor({required UserDoctorParams params});
-  Future<Either<Failure, DoctorDocumentModel>> createDoctorDocument({required CreateDoctorDocumentParams params});
+  Future<Either<Failure, UserModel>> updateUserDoctor(
+      {required UserDoctorParams params});
+  Future<Either<Failure, DoctorDocumentModel>> createDoctorDocument(
+      {required CreateDoctorDocumentParams params});
   Future<Either<Failure, bool>> deleteDoctorDocument({required int id});
 }
 

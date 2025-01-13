@@ -46,8 +46,13 @@ class HospitalInfoModel {
       licenseExpiryDate: json['license_expiry_date'] as String?,
       operatingHours: json['operating_hours'] as String?,
       staffingLevels: json['staffing_levels'] as String?,
-      servicesOffered: (json['services_offered'] as List<dynamic>?)?.map((e) => e.toString()).toList(),
-      notifcationPreferences: (json['notifcation_preferences'] as List<dynamic>?)?.map((e) => e.toString()).toList(),
+      servicesOffered: (json['services_offered'] as List<dynamic>?)
+          ?.map((e) => e.toString())
+          .toList(),
+      notifcationPreferences:
+          (json['notifcation_preferences'] as List<dynamic>?)
+              ?.map((e) => e.toString())
+              .toList(),
       feedbackMethod: json['feedback_method'] as String?,
       generalPolicy: json['general_policy'] as String?,
       emergencyPolicy: json['emergency_policy'] as String?,

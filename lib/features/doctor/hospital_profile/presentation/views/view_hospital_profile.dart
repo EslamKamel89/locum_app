@@ -51,7 +51,8 @@ class _HospitalProfileContentState extends State<HospitalProfileContent> {
   HospitalUserModel? user;
   @override
   void initState() {
-    controller = context.read<ViewHospitalProfileCubit>()..fetchHospitalProfileInfo(id: widget.id);
+    controller = context.read<ViewHospitalProfileCubit>()
+      ..fetchHospitalProfileInfo(id: widget.id);
     super.initState();
   }
 
@@ -73,7 +74,8 @@ class _HospitalProfileContentState extends State<HospitalProfileContent> {
                 child: Column(
                   children: [
                     CircularCachedImage(
-                      imageUrl: "${EndPoint.imgBaseUrl}${user?.hospital?.photo ?? ''}",
+                      imageUrl:
+                          "${EndPoint.imgBaseUrl}${user?.hospital?.photo ?? ''}",
                       imageAsset: AssetsData.malePlacholder,
                       height: 100.h,
                       width: 100.h,
@@ -104,11 +106,17 @@ class _HospitalProfileContentState extends State<HospitalProfileContent> {
                   _buildInfo('Contact Email', user?.hospital?.contactEmail),
                   _buildInfo('Contact Phone', user?.hospital?.contactPhone),
                   _buildInfo('Address', user?.hospital?.address),
-                  _buildInfo('Services Offered', user?.hospital?.servicesOffered, isRow: false),
-                  _buildInfo('Number of beds', user?.hospital?.numberOfBeds?.toString()),
-                  _buildInfo('Website Url', user?.hospital?.websiteUrl, isRow: false),
-                  _buildInfo('Year Established', user?.hospital?.yearEstablished?.toString()),
-                  _buildInfo('Facility Overview', user?.hospital?.overview, isRow: false),
+                  _buildInfo(
+                      'Services Offered', user?.hospital?.servicesOffered,
+                      isRow: false),
+                  _buildInfo('Number of beds',
+                      user?.hospital?.numberOfBeds?.toString()),
+                  _buildInfo('Website Url', user?.hospital?.websiteUrl,
+                      isRow: false),
+                  _buildInfo('Year Established',
+                      user?.hospital?.yearEstablished?.toString()),
+                  _buildInfo('Facility Overview', user?.hospital?.overview,
+                      isRow: false),
                 ],
                 visibility: user?.hospital != null,
                 showDivider: true,
@@ -117,25 +125,48 @@ class _HospitalProfileContentState extends State<HospitalProfileContent> {
               _sectionCard(
                 children: [
                   _buildSectionHeader('Additional Information'),
-                  _buildInfo('License Number', user?.hospital?.hospitalInfo?.licenseNumber),
-                  _buildInfo('License State', user?.hospital?.hospitalInfo?.licenseState),
-                  _buildInfo('License Issue Date', user?.hospital?.hospitalInfo?.licenseIssueDate),
-                  _buildInfo('License Expiry Date', user?.hospital?.hospitalInfo?.licenseExpiryDate),
-                  _buildInfo('Operating Hours', user?.hospital?.hospitalInfo?.operatingHours),
-                  _buildInfo('Staffing Levels', user?.hospital?.hospitalInfo?.staffingLevels, isRow: false),
-                  _buildInfo('Feedback Method', user?.hospital?.hospitalInfo?.feedbackMethod, isRow: false),
-                  _buildInfo('General Policy', user?.hospital?.hospitalInfo?.generalPolicy, isRow: false),
-                  _buildInfo('Emergency Policy', user?.hospital?.hospitalInfo?.emergencyPolicy, isRow: false),
-                  _buildInfo('Affiliations', user?.hospital?.hospitalInfo?.affiliations, isRow: false),
-                  if (user?.hospital?.hospitalInfo?.servicesOffered?.isNotEmpty == true)
+                  _buildInfo('License Number',
+                      user?.hospital?.hospitalInfo?.licenseNumber),
+                  _buildInfo('License State',
+                      user?.hospital?.hospitalInfo?.licenseState),
+                  _buildInfo('License Issue Date',
+                      user?.hospital?.hospitalInfo?.licenseIssueDate),
+                  _buildInfo('License Expiry Date',
+                      user?.hospital?.hospitalInfo?.licenseExpiryDate),
+                  _buildInfo('Operating Hours',
+                      user?.hospital?.hospitalInfo?.operatingHours),
+                  _buildInfo('Staffing Levels',
+                      user?.hospital?.hospitalInfo?.staffingLevels,
+                      isRow: false),
+                  _buildInfo('Feedback Method',
+                      user?.hospital?.hospitalInfo?.feedbackMethod,
+                      isRow: false),
+                  _buildInfo('General Policy',
+                      user?.hospital?.hospitalInfo?.generalPolicy,
+                      isRow: false),
+                  _buildInfo('Emergency Policy',
+                      user?.hospital?.hospitalInfo?.emergencyPolicy,
+                      isRow: false),
+                  _buildInfo('Affiliations',
+                      user?.hospital?.hospitalInfo?.affiliations,
+                      isRow: false),
+                  if (user?.hospital?.hospitalInfo?.servicesOffered
+                          ?.isNotEmpty ==
+                      true)
                     Column(
                       children: [
                         SizedBox(height: 15.h),
                         _buildSectionHeader('Services Offered'),
-                        BadgeWrap(items: user?.hospital?.hospitalInfo?.servicesOffered ?? []),
+                        BadgeWrap(
+                            items:
+                                user?.hospital?.hospitalInfo?.servicesOffered ??
+                                    []),
                         SizedBox(height: 15.h),
                         _buildSectionHeader('Notification Preferences'),
-                        BadgeWrap(items: user?.hospital?.hospitalInfo?.notifcationPreferences ?? []),
+                        BadgeWrap(
+                            items: user?.hospital?.hospitalInfo
+                                    ?.notifcationPreferences ??
+                                []),
                       ],
                     ),
                 ],
@@ -143,7 +174,9 @@ class _HospitalProfileContentState extends State<HospitalProfileContent> {
                 showDivider: true,
               ),
               if (user?.hospital?.id != null)
-                CommentView(commentableType: 'hospital', commentableId: (user?.hospital?.id)!)
+                CommentView(
+                    commentableType: 'hospital',
+                    commentableId: (user?.hospital?.id)!)
               // Builder(builder: (context) {
               //   List<HospitalDocumentModel> documents = user?.hospital?.hospitalDocuments ?? [];
               //   return _sectionCard(
@@ -224,7 +257,10 @@ class _HospitalProfileContentState extends State<HospitalProfileContent> {
     );
   }
 
-  Widget _sectionCard({required List<Widget> children, bool visibility = true, bool showDivider = true}) {
+  Widget _sectionCard(
+      {required List<Widget> children,
+      bool visibility = true,
+      bool showDivider = true}) {
     return visibility
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -46,7 +46,8 @@ class _JobAddsWidgetState extends State<JobAddsWidget> {
         // TODO: implement listener
       },
       builder: (context, state) {
-        if (state.jobAddsResponse?.data?.isEmpty == true && state.responseType == ResponseEnum.success) {
+        if (state.jobAddsResponse?.data?.isEmpty == true &&
+            state.responseType == ResponseEnum.success) {
           return const NoDataWidget();
         }
         return ListView.builder(
@@ -59,7 +60,9 @@ class _JobAddsWidgetState extends State<JobAddsWidget> {
               return JobAddWidget(jobAddModel: model);
             }
 
-            return state.responseType == ResponseEnum.loading ? const JobAdLoadingWidget() : const SizedBox();
+            return state.responseType == ResponseEnum.loading
+                ? const JobAdLoadingWidget()
+                : const SizedBox();
           },
         );
       },

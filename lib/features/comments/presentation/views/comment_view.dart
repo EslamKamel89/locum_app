@@ -3,7 +3,10 @@ import 'package:locum_app/features/comments/presentation/views/widgets/view_comm
 
 class CommentView extends StatefulWidget {
   const CommentView(
-      {super.key, required this.commentableType, required this.commentableId, this.showLeaveReply = true});
+      {super.key,
+      required this.commentableType,
+      required this.commentableId,
+      this.showLeaveReply = true});
   final String commentableType;
   final int commentableId;
   final bool showLeaveReply;

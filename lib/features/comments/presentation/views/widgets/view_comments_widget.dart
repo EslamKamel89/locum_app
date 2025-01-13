@@ -10,7 +10,10 @@ import 'package:locum_app/features/comments/presentation/views/widgets/review_wi
 
 class ViewCommentsWidget extends StatefulWidget {
   const ViewCommentsWidget(
-      {super.key, required this.commentableType, required this.commentableId, this.showLeaveReply = true});
+      {super.key,
+      required this.commentableType,
+      required this.commentableId,
+      this.showLeaveReply = true});
   final String commentableType;
   final int commentableId;
   final bool showLeaveReply;
@@ -34,7 +37,8 @@ class _ViewCommentWidgetState extends State<ViewCommentsWidget> {
             // TODO: implement listener
           },
           builder: (context, state) {
-            if (state.responseType == ResponseEnum.success && state.commentModelsResponse?.data?.isEmpty == true) {
+            if (state.responseType == ResponseEnum.success &&
+                state.commentModelsResponse?.data?.isEmpty == true) {
               return const NoReviewsWidget();
             }
             return Column(
@@ -51,10 +55,13 @@ class _ViewCommentWidgetState extends State<ViewCommentsWidget> {
                 ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: (state.commentModelsResponse?.data?.length ?? 0) + 1,
+                  itemCount:
+                      (state.commentModelsResponse?.data?.length ?? 0) + 1,
                   itemBuilder: (context, index) {
-                    if (index < (state.commentModelsResponse?.data?.length ?? 0)) {
-                      final CommentModel? commentModel = state.commentModelsResponse?.data?[index];
+                    if (index <
+                        (state.commentModelsResponse?.data?.length ?? 0)) {
+                      final CommentModel? commentModel =
+                          state.commentModelsResponse?.data?[index];
                       if (commentModel == null) return const SizedBox();
                       return ReviewWidget(commentModel);
                     }
@@ -71,7 +78,9 @@ class _ViewCommentWidgetState extends State<ViewCommentsWidget> {
                 state.commentModelsResponse?.pagination?.hasMorePages == true
                     ? ElevatedButton(
                         onPressed: () {
-                          context.read<ViewCommentsCubit>().getCommentByParentType();
+                          context
+                              .read<ViewCommentsCubit>()
+                              .getCommentByParentType();
                         },
                         child: const Text('Load More'),
                       )

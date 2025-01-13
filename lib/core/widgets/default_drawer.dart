@@ -75,6 +75,14 @@ class DefaultDoctorDrawer extends StatelessWidget {
             ),
             _createDrawerItem(
               context,
+              icon: Icons.message,
+              text: 'Inbox',
+              onTap: () {
+                Navigator.of(context).pushNamed(AppRoutesNames.messagesView);
+              },
+            ),
+            _createDrawerItem(
+              context,
               icon: Icons.settings,
               text: 'Settings',
               onTap: () {

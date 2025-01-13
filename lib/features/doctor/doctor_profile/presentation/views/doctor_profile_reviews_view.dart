@@ -11,7 +11,8 @@ class DoctorProfileReviewsView extends StatefulWidget {
   const DoctorProfileReviewsView({super.key});
 
   @override
-  State<DoctorProfileReviewsView> createState() => _DoctorProfileReviewsViewState();
+  State<DoctorProfileReviewsView> createState() =>
+      _DoctorProfileReviewsViewState();
 }
 
 class _DoctorProfileReviewsViewState extends State<DoctorProfileReviewsView> {

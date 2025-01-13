@@ -26,6 +26,7 @@ import 'package:locum_app/features/doctor/doctor_profile/presentation/views/doct
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/user_doctor_form.dart';
 import 'package:locum_app/features/doctor/hospital_profile/presentation/cubits/view_hospital_profile/view_hospital_profile_cubit.dart';
 import 'package:locum_app/features/doctor/hospital_profile/presentation/views/view_hospital_profile.dart';
+import 'package:locum_app/features/doctor/messages/presentation/views/messages_view.dart';
 import 'package:locum_app/features/hospital/hospital_home/hospital_home_view.dart';
 import 'package:locum_app/features/hospital/hospital_profile/presentation/cubits/hospital-info/hospital_info_cubit.dart';
 import 'package:locum_app/features/hospital/hospital_profile/presentation/cubits/hospital/hospital_cubit.dart';
@@ -193,6 +194,11 @@ class AppRouter {
             create: (context) => ViewHospitalProfileCubit(serviceLocator()),
             child: ViewHospitalProfile(id: args?['id']),
           ),
+          settings: routeSettings,
+        );
+      case AppRoutesNames.messagesView:
+        return CustomPageRoute(
+          builder: (context) => MessagesView(),
           settings: routeSettings,
         );
       default:

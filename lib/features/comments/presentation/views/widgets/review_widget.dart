@@ -31,7 +31,8 @@ class _ReviewWidgetState extends State<ReviewWidget> {
             margin: const EdgeInsets.all(10),
             elevation: 4,
             shadowColor: context.secondaryHeaderColor,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             child: Padding(
               padding: const EdgeInsets.all(15),
               child: Column(
@@ -71,42 +72,51 @@ class _ReviewWidgetState extends State<ReviewWidget> {
                     widget.commentModel.content ?? '',
                     style: const TextStyle(fontSize: 16),
                   ),
-                  if (widget.commentModel.children == null || widget.commentModel.children?.isNotEmpty == false)
+                  if (widget.commentModel.children == null ||
+                      widget.commentModel.children?.isNotEmpty == false)
                     Align(
                       alignment: Alignment.centerRight,
                       child: InkWell(
                           onTap: () async {
                             await _addReply(context);
                           },
-                          child: Icon(Icons.add, color: context.secondaryHeaderColor)),
+                          child: Icon(Icons.add,
+                              color: context.secondaryHeaderColor)),
                     ),
                   if (widget.commentModel.children?.isNotEmpty == true)
                     Column(
                       children: [
-                        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                          InkWell(
-                            onTap: () {
-                              setState(() {
-                                showReplies = !showReplies;
-                              });
-                            },
-                            child: Text(
-                              showReplies ? 'Hide Replies' : 'Show Replies',
-                              style: TextStyle(color: context.primaryColor, decoration: TextDecoration.underline),
-                            ),
-                          ),
-                          InkWell(
-                              onTap: () async {
-                                await _addReply(context);
-                              },
-                              child: Icon(Icons.add, color: context.secondaryHeaderColor)),
-                        ]),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    showReplies = !showReplies;
+                                  });
+                                },
+                                child: Text(
+                                  showReplies ? 'Hide Replies' : 'Show Replies',
+                                  style: TextStyle(
+                                      color: context.primaryColor,
+                                      decoration: TextDecoration.underline),
+                                ),
+                              ),
+                              InkWell(
+                                  onTap: () async {
+                                    await _addReply(context);
+                                  },
+                                  child: Icon(Icons.add,
+                                      color: context.secondaryHeaderColor)),
+                            ]),
                       ],
                     ),
                   const SizedBox(height: 2),
-                  if (showReplies) Divider(color: context.secondaryHeaderColor, thickness: 2),
+                  if (showReplies)
+                    Divider(color: context.secondaryHeaderColor, thickness: 2),
                   const SizedBox(height: 2),
-                  if (showReplies) RepliesWidget(commentModel: widget.commentModel),
+                  if (showReplies)
+                    RepliesWidget(commentModel: widget.commentModel),
                 ],
               ),
             ),

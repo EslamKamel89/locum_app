@@ -10,7 +10,8 @@ Future<ImageSource?> chooseGalleryOrCameraDialog() async {
     context: context,
     builder: (contex) {
       return AlertDialog(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.8),
+        backgroundColor:
+            Theme.of(context).scaffoldBackgroundColor.withOpacity(0.8),
         title: txt(
           'Pick Image From',
           e: St.bold14,

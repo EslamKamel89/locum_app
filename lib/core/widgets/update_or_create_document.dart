@@ -5,8 +5,10 @@ import 'package:locum_app/core/heleprs/pick_file.dart';
 import 'package:locum_app/core/heleprs/validator.dart';
 import 'package:locum_app/features/doctor/doctor_profile/domain/repo/doctor_profile_repo.dart';
 
-Future<CreateDoctorDocumentParams?> updateOrCreateDocument(BuildContext context) async {
-  final CreateDoctorDocumentParams? docData = await showModalBottomSheet<CreateDoctorDocumentParams>(
+Future<CreateDoctorDocumentParams?> updateOrCreateDocument(
+    BuildContext context) async {
+  final CreateDoctorDocumentParams? docData =
+      await showModalBottomSheet<CreateDoctorDocumentParams>(
     context: context,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
@@ -41,7 +43,8 @@ class _UploadDocumentWidgetState extends State<UploadDocumentWidget> {
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Padding(
-          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: ListView(
             // mainAxisSize: MainAxisSize.min,
             // crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,7 +82,8 @@ class _UploadDocumentWidgetState extends State<UploadDocumentWidget> {
                   ),
                   contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                 ),
-                validator: (input) => valdiator(input: input, label: 'Document Name', isRequired: true),
+                validator: (input) => valdiator(
+                    input: input, label: 'Document Name', isRequired: true),
               ),
               const SizedBox(height: 20),
               const Text(
@@ -96,7 +100,8 @@ class _UploadDocumentWidgetState extends State<UploadDocumentWidget> {
                   ),
                   contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                 ),
-                validator: (input) => valdiator(input: input, label: 'Document Type', isRequired: true),
+                validator: (input) => valdiator(
+                    input: input, label: 'Document Type', isRequired: true),
               ),
               const SizedBox(height: 20),
               GestureDetector(
@@ -128,7 +133,9 @@ class _UploadDocumentWidgetState extends State<UploadDocumentWidget> {
               ),
               const SizedBox(height: 20),
               Text(
-                selectedFile == null ? 'No file selected' : 'You selected ${_getFileName(selectedFile!)}',
+                selectedFile == null
+                    ? 'No file selected'
+                    : 'You selected ${_getFileName(selectedFile!)}',
                 style: const TextStyle(color: Colors.grey, fontSize: 12),
               ),
               if (showFileErrorMsg)
