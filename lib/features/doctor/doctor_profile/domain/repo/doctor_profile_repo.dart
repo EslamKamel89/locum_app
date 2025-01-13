@@ -20,23 +20,24 @@ abstract class DoctorProfileRepo {
     required bool create,
     int? id,
   });
-  Future<Either<Failure, UserModel>> updateUserDoctor(
-      {required UserDoctorParams params});
-  Future<Either<Failure, DoctorDocumentModel>> createDoctorDocument(
-      {required CreateDoctorDocumentParams params});
+  Future<Either<Failure, UserModel>> updateUserDoctor({required UserDoctorParams params});
+  Future<Either<Failure, DoctorDocumentModel>> createDoctorDocument({required CreateDoctorDocumentParams params});
   Future<Either<Failure, bool>> deleteDoctorDocument({required int id});
 }
 
 class CreateDoctorDocumentParams {
+  final String name;
   final String? type;
   final File? file;
   CreateDoctorDocumentParams({
+    required this.name,
     required this.type,
     required this.file,
   });
 
   Future<Map<String, dynamic>> toJson() async {
     return <String, dynamic>{
+      'name': name,
       'type': type,
       'file': file == null ? null : (await uploadFileToApi(file!)),
     };

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:locum_app/core/enums/response_type.dart';
+import 'package:locum_app/core/widgets/no_data_widget.dart';
 import 'package:locum_app/features/doctor/doctor_locum/domain/models/job_add_model.dart';
 import 'package:locum_app/features/doctor/doctor_locum/presentation/cubits/show_all_add/show_all_adds_cubit.dart';
 import 'package:locum_app/features/doctor/doctor_locum/presentation/view/widgets/job_add_widget.dart';
@@ -45,6 +46,9 @@ class _JobAddsWidgetState extends State<JobAddsWidget> {
         // TODO: implement listener
       },
       builder: (context, state) {
+        if (state.jobAddsResponse?.data?.isEmpty == true && state.responseType == ResponseEnum.success) {
+          return const NoDataWidget();
+        }
         return ListView.builder(
           controller: _scrollController,
           itemCount: (state.jobAddsResponse?.data?.length ?? 0) + 1,
@@ -55,9 +59,7 @@ class _JobAddsWidgetState extends State<JobAddsWidget> {
               return JobAddWidget(jobAddModel: model);
             }
 
-            return state.responseType == ResponseEnum.loading
-                ? const JobAdLoadingWidget()
-                : const SizedBox();
+            return state.responseType == ResponseEnum.loading ? const JobAdLoadingWidget() : const SizedBox();
           },
         );
       },

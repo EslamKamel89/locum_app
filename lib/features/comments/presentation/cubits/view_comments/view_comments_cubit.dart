@@ -15,12 +15,16 @@ part 'view_comments_state.dart';
 
 class ViewCommentsCubit extends Cubit<ViewCommentsState> {
   final CommentRepo commentRepo;
-  ViewCommentsCubit({required this.commentRepo, required String commentableType, required int commentableId})
+  ViewCommentsCubit(
+      {required this.commentRepo,
+      required String commentableType,
+      required int commentableId})
       : super(
           ViewCommentsState(
             commentableType: commentableType,
             commentableId: commentableId,
-            params: GetCommentParams(commentableType: commentableType, commentableId: commentableId),
+            params: GetCommentParams(
+                commentableType: commentableType, commentableId: commentableId),
           ),
         );
 
@@ -31,7 +35,8 @@ class ViewCommentsCubit extends Cubit<ViewCommentsState> {
     if (context == null) return;
     DoctorUserModel? user = context.read<UserInfoCubit>().state.doctorUserModel;
     commentModel.user = user;
-    final ResponseModel<List<CommentModel>>? comments = state.commentModelsResponse;
+    final ResponseModel<List<CommentModel>>? comments =
+        state.commentModelsResponse;
     comments?.data = [commentModel, ...comments.data ?? []];
     pr(comments?.data, '$t - commentModelsResponse after adding model');
     emit(state.copyWith(
@@ -74,12 +79,16 @@ class ViewCommentsCubit extends Cubit<ViewCommentsState> {
       (Failure failure) {
         pr(failure.message, t);
         showSnackbar('Server Error', failure.message, true);
-        emit(state.copyWith(responseType: ResponseEnum.failed, errorMessage: failure.message));
+        emit(state.copyWith(
+            responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
       (ResponseModel<List<CommentModel>> comments) async {
         pr(comments, t);
         pr(comments.pagination, t);
-        comments.data = [...state.commentModelsResponse?.data ?? [], ...comments.data ?? []];
+        comments.data = [
+          ...state.commentModelsResponse?.data ?? [],
+          ...comments.data ?? []
+        ];
         emit(
           state.copyWith(
             commentModelsResponse: comments,

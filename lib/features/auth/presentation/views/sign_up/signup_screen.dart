@@ -1,14 +1,20 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:locum_app/core/enums/response_type.dart';
 import 'package:locum_app/core/enums/user_type_enum.dart';
 import 'package:locum_app/core/extensions/context-extensions.dart';
+import 'package:locum_app/core/heleprs/google_signin.dart';
+import 'package:locum_app/core/heleprs/print_helper.dart';
+import 'package:locum_app/core/heleprs/snackbar.dart';
 import 'package:locum_app/core/heleprs/validator.dart';
+import 'package:locum_app/core/service_locator/service_locator.dart';
 import 'package:locum_app/core/widgets/auth_text_form_field.dart';
 import 'package:locum_app/core/widgets/default_screen_padding.dart';
 import 'package:locum_app/core/widgets/searchable_dropdown_widget.dart';
 import 'package:locum_app/features/auth/domain/repos/auth_repo.dart';
 import 'package:locum_app/features/auth/presentation/cubits/sign_up/sign_up_cubit.dart';
+import 'package:locum_app/features/auth/presentation/cubits/social_auth/social_auth_cubit.dart';
 import 'package:locum_app/utils/styles/styles.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -23,8 +29,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _passwordConfirmController =
-      TextEditingController();
+  final TextEditingController _passwordConfirmController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   Map<String, String> _collectData() => {
         "name": _nameController.text,
@@ -59,14 +64,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         txt("Create an Account",
-                            e: St.bold25,
-                            textAlign: TextAlign.center,
-                            c: context.secondaryHeaderColor),
+                            e: St.bold25, textAlign: TextAlign.center, c: context.secondaryHeaderColor),
                         const SizedBox(height: 10),
-                        txt("Sign up to get started",
-                            e: St.reg16,
-                            c: Colors.grey,
-                            textAlign: TextAlign.center),
+                        txt("Sign up to get started", e: St.reg16, c: Colors.grey, textAlign: TextAlign.center),
                         const SizedBox(height: 40),
                         AuthTextFormField(
                           labelText: "Full Name",
@@ -130,17 +130,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           label: 'State',
                           hintText: 'Select State',
                           isRequired: true,
-                          options: state.states
-                                  ?.map((stateModel) => stateModel.name ?? '')
-                                  .toList() ??
-                              [],
+                          options: state.states?.map((stateModel) => stateModel.name ?? '').toList() ?? [],
                           handleSelectOption: (String option) {
                             controller.fetchDistrict(option);
                           },
                         ),
-                        state.districtsDataModel == null
-                            ? const SizedBox()
-                            : const SizedBox(height: 20),
+                        state.districtsDataModel == null ? const SizedBox() : const SizedBox(height: 20),
                         state.districtsDataModel == null
                             ? const SizedBox()
                             : SearchableDropdownWidget(
@@ -148,8 +143,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 hintText: 'Select District',
                                 isRequired: false,
                                 options: state.districtsDataModel?.districts
-                                        ?.map((districtModel) =>
-                                            districtModel?.name ?? '')
+                                        ?.map((districtModel) => districtModel?.name ?? '')
                                         .toList() ??
                                     [],
                                 handleSelectOption: (String option) {
@@ -196,22 +190,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           children: [
                             const Expanded(child: Divider(thickness: 1)),
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
+                              padding: const EdgeInsets.symmetric(horizontal: 10),
                               child: txt("OR", c: Colors.grey),
                             ),
                             const Expanded(child: Divider(thickness: 1)),
                           ],
                         ),
                         const SizedBox(height: 20),
-                        OutlinedButton.icon(
-                          onPressed: () {
-                            // Handle Google sign-up
-                          },
-                          style: context.outlinedButtonTheme.style,
-                          icon: Icon(MdiIcons.google),
-                          label: txt("Sign up with Google",
-                              c: Colors.black, e: St.reg16),
+                        BlocProvider(
+                          create: (context) => SocialAuthCubit(serviceLocator()),
+                          child: BlocBuilder<SocialAuthCubit, SocialAuthState>(
+                            builder: (context, state) {
+                              return state.responseType == ResponseEnum.loading
+                                  ? const Center(child: CircularProgressIndicator())
+                                  : OutlinedButton.icon(
+                                      onPressed: () async {
+                                        _handleGoogleSignIn(context);
+                                      },
+                                      style: context.outlinedButtonTheme.style,
+                                      icon: Icon(MdiIcons.google),
+                                      label: txt("Sign in with Google", e: St.reg16),
+                                    );
+                            },
+                          ),
                         ),
                         const SizedBox(height: 40),
                         Row(
@@ -221,8 +222,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             TextButton(
                               onPressed: () {
                                 // Handle navigation to sign-in screen
-                                Navigator.pop(
-                                    context); // Navigate back to Sign In
+                                Navigator.pop(context); // Navigate back to Sign In
                               },
                               child: txt("Sign In", c: Colors.blue),
                             ),
@@ -238,5 +238,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
       ),
     );
+  }
+
+  Future _handleGoogleSignIn(BuildContext context) async {
+    final UserCredential credential = await signInWithGoogle();
+    final User? user = credential.user;
+    if (user == null) {
+      showSnackbar('Error', "Something went wrong with google authentication", true);
+      return;
+    }
+    // UserTypeEnum? userType = await getUserTypeDialog(context);
+    // if (userType == null) {
+    //   showSnackbar('Error', "You must choose your type", true);
+    //   return;
+    // }
+    final params = pr(
+      SocialAuthParam(
+        authId: user.uid,
+        authType: 'google',
+        name: user.displayName,
+        email: user.email,
+        userType: UserTypeEnum.doctor,
+      ),
+      'SocialAuthParam',
+    );
+    context.read<SocialAuthCubit>().socialAuth(params);
   }
 }

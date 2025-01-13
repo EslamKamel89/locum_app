@@ -6,6 +6,7 @@ import 'package:locum_app/core/enums/response_type.dart';
 import 'package:locum_app/core/extensions/context-extensions.dart';
 import 'package:locum_app/core/globals.dart';
 import 'package:locum_app/core/heleprs/print_helper.dart';
+import 'package:locum_app/core/widgets/badge_wrap.dart';
 import 'package:locum_app/core/widgets/circular_image_asset.dart';
 import 'package:locum_app/core/widgets/default_drawer.dart';
 import 'package:locum_app/core/widgets/main_scaffold.dart';
@@ -121,6 +122,22 @@ class _HospitalProfileContentState extends State<HospitalProfileContent> {
                   _buildInfo('License Issue Date', user?.hospital?.hospitalInfo?.licenseIssueDate),
                   _buildInfo('License Expiry Date', user?.hospital?.hospitalInfo?.licenseExpiryDate),
                   _buildInfo('Operating Hours', user?.hospital?.hospitalInfo?.operatingHours),
+                  _buildInfo('Staffing Levels', user?.hospital?.hospitalInfo?.staffingLevels, isRow: false),
+                  _buildInfo('Feedback Method', user?.hospital?.hospitalInfo?.feedbackMethod, isRow: false),
+                  _buildInfo('General Policy', user?.hospital?.hospitalInfo?.generalPolicy, isRow: false),
+                  _buildInfo('Emergency Policy', user?.hospital?.hospitalInfo?.emergencyPolicy, isRow: false),
+                  _buildInfo('Affiliations', user?.hospital?.hospitalInfo?.affiliations, isRow: false),
+                  if (user?.hospital?.hospitalInfo?.servicesOffered?.isNotEmpty == true)
+                    Column(
+                      children: [
+                        SizedBox(height: 15.h),
+                        _buildSectionHeader('Services Offered'),
+                        BadgeWrap(items: user?.hospital?.hospitalInfo?.servicesOffered ?? []),
+                        SizedBox(height: 15.h),
+                        _buildSectionHeader('Notification Preferences'),
+                        BadgeWrap(items: user?.hospital?.hospitalInfo?.notifcationPreferences ?? []),
+                      ],
+                    ),
                 ],
                 visibility: user?.hospital != null,
                 showDivider: true,

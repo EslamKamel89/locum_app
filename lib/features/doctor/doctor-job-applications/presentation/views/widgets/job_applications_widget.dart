@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:locum_app/core/enums/response_type.dart';
+import 'package:locum_app/core/widgets/no_data_widget.dart';
 import 'package:locum_app/features/doctor/doctor-job-applications/domain/models/job_application_details_model.dart';
 import 'package:locum_app/features/doctor/doctor-job-applications/presentation/cubits/doctor_job_application/doctor_job_application_cubit.dart';
 import 'package:locum_app/features/doctor/doctor-job-applications/presentation/views/widgets/job_application_widget.dart';
@@ -45,22 +46,20 @@ class _JobApplicationsWidgetState extends State<JobApplicationsWidget> {
         // TODO: implement listener
       },
       builder: (context, state) {
+        if (state.jobApplicationDetailsResponse?.data?.isEmpty == true && state.responseType == ResponseEnum.success) {
+          return const NoDataWidget();
+        }
         return ListView.builder(
           controller: _scrollController,
-          itemCount:
-              (state.jobApplicationDetailsResponse?.data?.length ?? 0) + 1,
+          itemCount: (state.jobApplicationDetailsResponse?.data?.length ?? 0) + 1,
           itemBuilder: (context, index) {
-            if (index <
-                (state.jobApplicationDetailsResponse?.data?.length ?? 0)) {
-              final JobApplicationDetailsModel? model =
-                  state.jobApplicationDetailsResponse?.data?[index];
+            if (index < (state.jobApplicationDetailsResponse?.data?.length ?? 0)) {
+              final JobApplicationDetailsModel? model = state.jobApplicationDetailsResponse?.data?[index];
               if (model == null) return const SizedBox();
               return JobApplicationWidget(jobApplicationDetailsModel: model);
             }
 
-            return state.responseType == ResponseEnum.loading
-                ? const JobApplicationLoadingWidget()
-                : const SizedBox();
+            return state.responseType == ResponseEnum.loading ? const JobApplicationLoadingWidget() : const SizedBox();
           },
         );
       },

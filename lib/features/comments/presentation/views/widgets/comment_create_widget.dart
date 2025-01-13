@@ -11,7 +11,10 @@ import 'package:locum_app/features/comments/presentation/cubits/add_comment/add_
 
 class CommentCreateWidget extends StatefulWidget {
   const CommentCreateWidget(
-      {super.key, required this.commentableType, required this.commentableId, required this.handleAddComment});
+      {super.key,
+      required this.commentableType,
+      required this.commentableId,
+      required this.handleAddComment});
   final String commentableType;
   final int commentableId;
   final Function(CommentModel model) handleAddComment;
@@ -38,7 +41,8 @@ class _CommentCreateWidgetState extends State<CommentCreateWidget> {
             child: Card(
               margin: const EdgeInsets.all(10),
               elevation: 4,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
               child: Padding(
                 padding: const EdgeInsets.all(15),
                 child: Column(
@@ -65,7 +69,9 @@ class _CommentCreateWidgetState extends State<CommentCreateWidget> {
                           },
                           icon: Icon(
                             Icons.star,
-                            color: _selectedRating > index ? Colors.amber : Colors.grey.shade400,
+                            color: _selectedRating > index
+                                ? Colors.amber
+                                : Colors.grey.shade400,
                             size: 32,
                           ),
                         );
@@ -90,7 +96,8 @@ class _CommentCreateWidgetState extends State<CommentCreateWidget> {
                         ),
                       ),
                       maxLines: 3,
-                      validator: (value) => valdiator(input: value, label: 'Review', isRequired: true),
+                      validator: (value) => valdiator(
+                          input: value, label: 'Review', isRequired: true),
                     ),
                     const SizedBox(height: 16),
                     state.responseType == ResponseEnum.loading
@@ -129,7 +136,8 @@ class _CommentCreateWidgetState extends State<CommentCreateWidget> {
           ),
           'AddCommentParams');
 
-      await controller.addComment(params: params, onAddComment: widget.handleAddComment);
+      await controller.addComment(
+          params: params, onAddComment: widget.handleAddComment);
       // pr(newComment, 'newComment');
       // pr(state.commentModel, 'state.commentModel');
       // pr(state.responseType, 'state.responseType');

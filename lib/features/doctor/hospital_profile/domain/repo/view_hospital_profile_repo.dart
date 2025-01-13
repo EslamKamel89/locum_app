@@ -3,5 +3,6 @@ import 'package:locum_app/core/Errors/failure.dart';
 import 'package:locum_app/features/common_data/data/models/hospital_user_model.dart';
 
 abstract class ViewHospitalProfileRepo {
-  Future<Either<Failure, HospitalUserModel>> fetchHospitalProfileInfo({required int id});
+  Future<Either<Failure, HospitalUserModel>> fetchHospitalProfileInfo(
+      {required int id});
 }

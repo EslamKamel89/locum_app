@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dartz/dartz.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:locum_app/core/Errors/failure.dart';
 import 'package:locum_app/core/api_service/api_consumer.dart';
 import 'package:locum_app/core/api_service/end_points.dart';
@@ -66,8 +65,8 @@ class CommonDataRemoteSource {
 
   Future<Either<DoctorUserModel, HospitalUserModel>> fetchUserInfo() async {
     final t = prt('fetchUserInfo - CommonDataRemoteSource');
-    String? token = await FirebaseMessaging.instance.getToken();
-    // String? token;
+    // String? token = await FirebaseMessaging.instance.getToken();
+    String? token;
 
     final data = await api.get(EndPoint.userInfo, queryParameter: {'fcm_token': token});
     if (data['data']['type'] == 'doctor') {

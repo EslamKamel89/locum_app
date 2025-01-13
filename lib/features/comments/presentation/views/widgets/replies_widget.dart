@@ -28,7 +28,8 @@ class RepliesWidget extends StatelessWidget {
               if (commentModel?.children?[index]?.children?.isNotEmpty == true)
                 Padding(
                   padding: const EdgeInsets.only(left: 15),
-                  child: RepliesWidget(commentModel: commentModel?.children?[index]),
+                  child: RepliesWidget(
+                      commentModel: commentModel?.children?[index]),
                 )
             ],
           );
@@ -56,7 +57,8 @@ class SingleReplyWidget extends StatelessWidget {
           return Container(
             decoration: BoxDecoration(
                 border: Border(
-                  left: BorderSide(color: context.secondaryHeaderColor, width: 3),
+                  left:
+                      BorderSide(color: context.secondaryHeaderColor, width: 3),
                 ),
                 borderRadius: BorderRadius.circular(10)),
             padding: const EdgeInsets.only(left: 5),
@@ -86,7 +88,8 @@ class SingleReplyWidget extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.only(bottom: 5, right: 5),
                       alignment: Alignment.centerRight,
-                      child: Icon(Icons.add, color: context.secondaryHeaderColor),
+                      child:
+                          Icon(Icons.add, color: context.secondaryHeaderColor),
                     ),
                   ),
                 ],

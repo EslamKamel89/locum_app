@@ -12,11 +12,12 @@ class CommentRepoImp implements CommentRepo {
 
   CommentRepoImp({required this.commentRemoteDataSource});
   @override
-  Future<Either<Failure, ResponseModel<List<CommentModel>>>> getCommentByParentType(
-      {required GetCommentParams params}) async {
+  Future<Either<Failure, ResponseModel<List<CommentModel>>>>
+      getCommentByParentType({required GetCommentParams params}) async {
     final t = prt('getCommentByParentType  - CommentRepoImp');
     try {
-      ResponseModel<List<CommentModel>> response = await commentRemoteDataSource.getCommentByParentType(params: params);
+      ResponseModel<List<CommentModel>> response =
+          await commentRemoteDataSource.getCommentByParentType(params: params);
       return Right(pr(response, t));
     } catch (e) {
       pr(e.toString());
@@ -28,10 +29,12 @@ class CommentRepoImp implements CommentRepo {
   }
 
   @override
-  Future<Either<Failure, CommentModel>> addComment({required AddCommentParams params}) async {
+  Future<Either<Failure, CommentModel>> addComment(
+      {required AddCommentParams params}) async {
     final t = prt('addComment  - CommentRepoImp');
     try {
-      CommentModel response = await commentRemoteDataSource.addComment(params: params);
+      CommentModel response =
+          await commentRemoteDataSource.addComment(params: params);
       return Right(pr(response, t));
     } catch (e) {
       pr(e.toString());

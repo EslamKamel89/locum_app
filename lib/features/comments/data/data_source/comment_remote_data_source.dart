@@ -9,14 +9,17 @@ class CommentRemoteDataSource {
   final ApiConsumer api;
 
   CommentRemoteDataSource({required this.api});
-  Future<ResponseModel<List<CommentModel>>> getCommentByParentType({required GetCommentParams params}) async {
+  Future<ResponseModel<List<CommentModel>>> getCommentByParentType(
+      {required GetCommentParams params}) async {
     final t = prt('getCommentByParentType - CommentRemoteDataSource');
     final data = await api.get(
       EndPoint.getComments,
       queryParameter: params.toMap(),
     );
     ResponseModel<List<CommentModel>> response = ResponseModel.fromJson(data);
-    List<CommentModel> comments = data['data'].map<CommentModel>((e) => CommentModel.fromJson(e)).toList();
+    List<CommentModel> comments = data['data']
+        .map<CommentModel>((e) => CommentModel.fromJson(e))
+        .toList();
     response.data = comments;
     return pr(response, t);
   }

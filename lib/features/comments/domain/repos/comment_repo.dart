@@ -5,8 +5,10 @@ import 'package:locum_app/features/comments/domain/models/comment_model.dart';
 import 'package:locum_app/features/common_data/data/models/response_model.dart';
 
 abstract class CommentRepo {
-  Future<Either<Failure, ResponseModel<List<CommentModel>>>> getCommentByParentType({required GetCommentParams params});
-  Future<Either<Failure, CommentModel>> addComment({required AddCommentParams params});
+  Future<Either<Failure, ResponseModel<List<CommentModel>>>>
+      getCommentByParentType({required GetCommentParams params});
+  Future<Either<Failure, CommentModel>> addComment(
+      {required AddCommentParams params});
 }
 
 class AddCommentParams {

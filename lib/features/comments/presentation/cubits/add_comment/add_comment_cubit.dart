@@ -13,21 +13,28 @@ class AddCommentCubit extends Cubit<AddCommentState> {
   final CommentRepo commentRepo;
   AddCommentCubit(this.commentRepo) : super(AddCommentState());
 
-  Future addComment({required AddCommentParams params, required Function(CommentModel model) onAddComment}) async {
+  Future addComment(
+      {required AddCommentParams params,
+      required Function(CommentModel model) onAddComment}) async {
     final t = prt('addComment - AddCommentCubit');
-    emit(state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
+    emit(
+        state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
     final result = await commentRepo.addComment(params: params);
     result.fold(
       (Failure failure) {
         pr(failure.message, t);
         showSnackbar('Server Error', failure.message, true);
-        emit(state.copyWith(responseType: ResponseEnum.failed, errorMessage: failure.message));
+        emit(state.copyWith(
+            responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
       (CommentModel model) async {
         pr(model, t);
         onAddComment(model);
         emit(
-          state.copyWith(commentModel: model, responseType: ResponseEnum.success, errorMessage: null),
+          state.copyWith(
+              commentModel: model,
+              responseType: ResponseEnum.success,
+              errorMessage: null),
         );
       },
     );

@@ -23,7 +23,7 @@
     </intent>
     </queries>
     <application
-        android:label="locum_app"
+        android:label="AmPm Locum"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

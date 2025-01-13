@@ -16,18 +16,23 @@ class ViewHospitalProfileCubit extends Cubit<ViewHospitalProfileState> {
   ) : super(ViewHospitalProfileState());
   Future fetchHospitalProfileInfo({required int id}) async {
     final t = prt('fetchHospitalProfileInfo - ViewHospitalProfileCubit');
-    emit(state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
+    emit(
+        state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
     final result = await repo.fetchHospitalProfileInfo(id: id);
     result.fold(
       (Failure failure) {
         pr(failure.message, t);
         showSnackbar('Server Error', failure.message, true);
-        emit(state.copyWith(responseType: ResponseEnum.failed, errorMessage: failure.message));
+        emit(state.copyWith(
+            responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
       (HospitalUserModel model) {
         pr(model, t);
         emit(
-          state.copyWith(hospitalUserModel: model, responseType: ResponseEnum.success, errorMessage: null),
+          state.copyWith(
+              hospitalUserModel: model,
+              responseType: ResponseEnum.success,
+              errorMessage: null),
         );
       },
     );

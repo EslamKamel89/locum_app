@@ -35,7 +35,8 @@ class ViewCommentsState {
     GetCommentParams? params,
   }) {
     return ViewCommentsState(
-      commentModelsResponse: commentModelsResponse ?? this.commentModelsResponse,
+      commentModelsResponse:
+          commentModelsResponse ?? this.commentModelsResponse,
       errorMessage: errorMessage ?? this.errorMessage,
       responseType: responseType ?? this.responseType,
       commentableType: commentableType ?? this.commentableType,

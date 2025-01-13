@@ -33,7 +33,11 @@ class _DoctorProfileReviewsViewState extends State<DoctorProfileReviewsView> {
           child: Column(
         children: [
           if (doctorUserModel?.id != null)
-            CommentView(commentableType: 'doctor', commentableId: (doctorUserModel?.id)!),
+            CommentView(
+              commentableType: 'doctor',
+              commentableId: (doctorUserModel?.id)!,
+              showLeaveReply: false,
+            ),
         ],
       )),
     );

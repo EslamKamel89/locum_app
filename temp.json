@@ -1,73 +1,648 @@
-{
-    "data": {
-        "id": 2,
-        "name": "Hospital2 Regan Haley",
-        "email": "hospital2_yfunk@hotmail.com",
-        "email_verified_at": "2025-01-05T13:13:50.000000Z",
-        "auth_type": "normal",
-        "auth_id": null,
-        "fcm_token": null,
-        "created_at": "2025-01-05T13:13:50.000000Z",
-        "updated_at": "2025-01-05T13:13:50.000000Z",
-        "state_id": 4,
-        "district_id": 1,
-        "type": "hospital",
-        "district": {
-            "id": 1,
-            "state_id": 1,
-            "name": "Los Angeles County",
-            "created_at": "2025-01-05T13:13:48.000000Z",
-            "updated_at": "2025-01-05T13:13:48.000000Z"
+[
+    {
+        "sender_id": 51,
+        "receiver_id": 72,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
         },
-        "state": {
-            "id": 4,
-            "name": "Florida",
-            "created_at": "2025-01-05T13:13:48.000000Z",
-            "updated_at": "2025-01-05T13:13:48.000000Z"
-        },
-        "hospital": {
-            "id": 2,
-            "user_id": 2,
-            "facility_name": "Green Valley Hospital",
-            "type": "Other",
-            "contact_person": "Ms. Rachel Kemmer",
-            "contact_email": "carissa.huels@yahoo.com",
-            "contact_phone": "(419) 619-7243",
-            "address": "59084 Sterling Lane Suite 753\nJerrelltown, NH 85048",
-            "services_offered": "Neurology",
-            "number_of_beds": 159,
-            "website_url": "https://via.placeholder.com/640x480.png/007788?text=sint",
-            "year_established": 1999,
-            "overview": "Hatter, and, just as well as she could do to ask: perhaps I shall remember it in the sea, 'and in that case I can guess that,' she added aloud. 'Do you play croquet with the Duchess, who seemed.",
-            "photo": null,
-            "created_at": "2025-01-05T13:13:50.000000Z",
-            "updated_at": "2025-01-05T13:13:50.000000Z",
-            "hospital_info": {
-                "id": 2,
-                "hospital_id": 2,
-                "license_number": "562573",
-                "license_state": "California",
-                "license_issue_date": "2002-09-28",
-                "license_expiry_date": "1997-02-03",
-                "operating_hours": "24HR",
-                "created_at": "2025-01-05T13:13:50.000000Z",
-                "updated_at": "2025-01-05T13:13:50.000000Z"
-            },
-            "hospital_documents": [
-                {
-                    "id": 2,
-                    "hospital_id": 2,
-                    "type": "Certificate",
-                    "file": "https://via.placeholder.com/640x480.png/0033ee?text=qui",
-                    "name": "Kasandra.itp",
-                    "created_at": "2025-01-05T13:13:50.000000Z",
-                    "updated_at": "2025-01-05T13:13:50.000000Z"
-                }
-            ]
+        "receiver": {
+            "id": 72,
+            "name": "Dr22 Dylan Stokes",
+            "doctor": null,
+            "hospital": null
         }
     },
-    "status": "success",
-    "message": "success",
-    "errors": [],
-    "statusCode": 200
-}
+    {
+        "sender_id": 72,
+        "receiver_id": 51,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 72,
+            "name": "Dr22 Dylan Stokes",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 65,
+        "receiver_id": 51,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 65,
+            "name": "Dr15 Krista Nicolas",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 51,
+        "receiver_id": 65,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 65,
+            "name": "Dr15 Krista Nicolas",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 91,
+        "receiver_id": 51,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 91,
+            "name": "Dr41 Americo O'Kon",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 51,
+        "receiver_id": 91,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 91,
+            "name": "Dr41 Americo O'Kon",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 51,
+        "receiver_id": 23,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 23,
+            "name": "Hospital23 Alexandria Hirthe I",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 23,
+        "receiver_id": 51,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 23,
+            "name": "Hospital23 Alexandria Hirthe I",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 29,
+        "receiver_id": 51,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 29,
+            "name": "Hospital29 Prof. Travon Turner",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 51,
+        "receiver_id": 29,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 29,
+            "name": "Hospital29 Prof. Travon Turner",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 51,
+        "receiver_id": 55,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 55,
+            "name": "Dr5 Sage Welch",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 55,
+        "receiver_id": 51,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 55,
+            "name": "Dr5 Sage Welch",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 45,
+        "receiver_id": 51,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 45,
+            "name": "Hospital45 Dr. Cathrine Dooley PhD",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 51,
+        "receiver_id": 45,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 45,
+            "name": "Hospital45 Dr. Cathrine Dooley PhD",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 95,
+        "receiver_id": 51,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 95,
+            "name": "Dr45 Prof. Julien Wintheiser",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 51,
+        "receiver_id": 95,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 95,
+            "name": "Dr45 Prof. Julien Wintheiser",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 26,
+        "receiver_id": 51,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 26,
+            "name": "Hospital26 Dr. Trever Kozey DDS",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 51,
+        "receiver_id": 26,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 26,
+            "name": "Hospital26 Dr. Trever Kozey DDS",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 18,
+        "receiver_id": 51,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 18,
+            "name": "Hospital18 Florian Romaguera",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 51,
+        "receiver_id": 18,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 18,
+            "name": "Hospital18 Florian Romaguera",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 35,
+        "receiver_id": 51,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 35,
+            "name": "Hospital35 Ibrahim Schneider",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 51,
+        "receiver_id": 35,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 35,
+            "name": "Hospital35 Ibrahim Schneider",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 51,
+        "receiver_id": 93,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 93,
+            "name": "Dr43 Dr. Edwin Schneider II",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 93,
+        "receiver_id": 51,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 93,
+            "name": "Dr43 Dr. Edwin Schneider II",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 51,
+        "receiver_id": 81,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 81,
+            "name": "Dr31 Demarcus Pfeffer",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 51,
+        "receiver_id": 50,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 50,
+            "name": "Hospital50 Hilma Weimann",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 50,
+        "receiver_id": 51,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 50,
+            "name": "Hospital50 Hilma Weimann",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 56,
+        "receiver_id": 51,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 56,
+            "name": "Dr6 Keely Schmitt",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 51,
+        "receiver_id": 56,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 56,
+            "name": "Dr6 Keely Schmitt",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 81,
+        "receiver_id": 51,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 81,
+            "name": "Dr31 Demarcus Pfeffer",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 51,
+        "receiver_id": 17,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 17,
+            "name": "Hospital17 Lavon Jacobi",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 17,
+        "receiver_id": 51,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 17,
+            "name": "Hospital17 Lavon Jacobi",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 51,
+        "receiver_id": 19,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 19,
+            "name": "Hospital19 Josue Gibson",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 19,
+        "receiver_id": 51,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 19,
+            "name": "Hospital19 Josue Gibson",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 51,
+        "receiver_id": 98,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 98,
+            "name": "Dr48 Elwyn Block",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 98,
+        "receiver_id": 51,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 98,
+            "name": "Dr48 Elwyn Block",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 80,
+        "receiver_id": 51,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 80,
+            "name": "Dr30 Ms. Carolanne Feeney",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        }
+    },
+    {
+        "sender_id": 51,
+        "receiver_id": 80,
+        "not_seen_count": "2",
+        "sender": {
+            "id": 51,
+            "name": "doctor",
+            "doctor": null,
+            "hospital": null
+        },
+        "receiver": {
+            "id": 80,
+            "name": "Dr30 Ms. Carolanne Feeney",
+            "doctor": null,
+            "hospital": null
+        }
+    }
+]

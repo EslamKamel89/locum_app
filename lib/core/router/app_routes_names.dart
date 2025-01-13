@@ -16,7 +16,9 @@ class AppRoutesNames {
   static const String doctorForm = '/doctorForm';
   static const String userDoctorForm = '/userDoctorForm';
   static const String doctorProfileReviewsView = '/doctorProfileReviewsView';
-  static const String doctorAllJobApplicationView = '/doctorAllJobApplicationView';
-  static const String doctorJobApplicationDetailsView = '/doctorJobApplicationDetailsView';
+  static const String doctorAllJobApplicationView =
+      '/doctorAllJobApplicationView';
+  static const String doctorJobApplicationDetailsView =
+      '/doctorJobApplicationDetailsView';
   static const String viewHospitalProfile = '/viewHospitalProfile';
 }

@@ -105,18 +105,22 @@ Done todos {
     # change the app secondary color to make it more appealing
     # display the review and replies on the jobadds
     # handle the pagination
+    # show the hospital profile page from the job add 
+    # add top level review
+    # add reply 
+    # there as an error occur when the user don't enter his information and try to see the job applictations
+    # i didn't handle no data any where in the applciation 
+    # handle the permissions for the user to view the jobadds     
 }
 
 todos {
     # if you change the doctor image in the update method and come back the profile page the image is not updated in the ui only but it's updated successfully to the backend
-    # i didn't handle no data any where in the applciation 
-    # handle the permissions for the user to view the jobadds     
-    # there as an error occur when the user don't enter his information and try to see the job applictations
-    # show the hospital profile page from the job add 
-    # add top level review
-    # add reply 
-
+    # address one and address two in hostpiatsl and adddresss trwo is ooptional
+    # dostrict cshould be named city
+    # api to fetch address with suggestions
+    # work on show all messages
 }
+
 
 
 

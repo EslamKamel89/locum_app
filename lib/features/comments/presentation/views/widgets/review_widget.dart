@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:locum_app/core/extensions/context-extensions.dart';
-import 'package:locum_app/core/heleprs/print_helper.dart';
 import 'package:locum_app/core/service_locator/service_locator.dart';
 import 'package:locum_app/features/auth/domain/entities/user_entity.dart';
 import 'package:locum_app/features/comments/domain/models/comment_model.dart';
@@ -131,7 +130,7 @@ class _ReviewWidgetState extends State<ReviewWidget> {
           widget.commentModel.children = widget.commentModel.children ?? [];
           widget.commentModel.children?.insert(0, model);
         });
-    pr(widget.commentModel.children?.last, 'Last inserted reply');
+    // pr(widget.commentModel.children?.last, 'Last inserted reply');
     context.read<ViewCommentsCubit>().updateState();
   }
 }

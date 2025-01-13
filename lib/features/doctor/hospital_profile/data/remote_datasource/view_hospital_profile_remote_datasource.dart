@@ -8,7 +8,8 @@ class ViewHospitalProfileRemoteDatasource {
 
   ViewHospitalProfileRemoteDatasource({required this.api});
   Future<HospitalUserModel> fetchHospitalProfileInfo({required int id}) async {
-    final t = prt('fetchHospitalProfileInfo - ViewHospitalProfileRemoteDatasource');
+    final t =
+        prt('fetchHospitalProfileInfo - ViewHospitalProfileRemoteDatasource');
 
     final data = await api.get(EndPoint.showHospialProfile(id));
 

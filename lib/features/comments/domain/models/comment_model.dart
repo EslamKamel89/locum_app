@@ -43,7 +43,9 @@ class CommentModel {
         user: json['user'] == null ? null : UserModel.fromJson(json['user']),
         children: json['children'] == null
             ? null
-            : (json['children'] as List).map((json) => CommentModel.fromJson(json)).toList(),
+            : (json['children'] as List)
+                .map((json) => CommentModel.fromJson(json))
+                .toList(),
       );
 
   Map<String, dynamic> toJson() => {
