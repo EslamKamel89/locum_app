@@ -23,7 +23,8 @@ class DoctorJobAddDetailsView extends StatefulWidget {
   });
 
   @override
-  State<DoctorJobAddDetailsView> createState() => _DoctorJobAddDetailsViewState();
+  State<DoctorJobAddDetailsView> createState() =>
+      _DoctorJobAddDetailsViewState();
 }
 
 class _DoctorJobAddDetailsViewState extends State<DoctorJobAddDetailsView> {
@@ -59,7 +60,8 @@ class _DoctorJobAddDetailsViewState extends State<DoctorJobAddDetailsView> {
                     }
                   },
                   builder: (context, applyToJobAddState) {
-                    final applyToJobAddCubit = context.read<ApplyToJobAddCubit>();
+                    final applyToJobAddCubit =
+                        context.read<ApplyToJobAddCubit>();
                     return _titleAndApplyBtn(
                       jobAddModel,
                       state,
@@ -71,7 +73,8 @@ class _DoctorJobAddDetailsViewState extends State<DoctorJobAddDetailsView> {
                                       'notes': notesController.text,
                                     }
                                      */
-                        final Map<String, dynamic>? application = await showDialog<Map<String, dynamic>?>(
+                        final Map<String, dynamic>? application =
+                            await showDialog<Map<String, dynamic>?>(
                           context: context,
                           builder: (context) {
                             return ApplyToJobPopup(
@@ -79,10 +82,13 @@ class _DoctorJobAddDetailsViewState extends State<DoctorJobAddDetailsView> {
                             );
                           },
                         );
-                        if (application == null || !application['applyStatus']) return;
+                        if (application == null || !application['applyStatus'])
+                          return;
                         pr(application, 'application');
                         if (jobAddModel?.id == null) return;
-                        applyToJobAddCubit.applyJobAdd(jobAddId: (jobAddModel?.id)!, notes: application['notes']);
+                        applyToJobAddCubit.applyJobAdd(
+                            jobAddId: (jobAddModel?.id)!,
+                            notes: application['notes']);
                       },
                     );
                   },
@@ -93,19 +99,37 @@ class _DoctorJobAddDetailsViewState extends State<DoctorJobAddDetailsView> {
                 _buildInfoRow('Job Type', jobAddModel?.jobType, state),
                 _buildSection('Location', jobAddModel?.location, state),
                 _buildSection('Description', jobAddModel?.description, state),
-                _buildSection('Responsibilities', jobAddModel?.responsibilities, state),
-                _buildSection('Qualifications', jobAddModel?.qualifications, state),
-                _buildSection('Experience Required', jobAddModel?.experienceRequired, state),
-                _buildInfoRow('Salary Range', '\$${jobAddModel?.salaryMin} - \$${jobAddModel?.salaryMax}', state),
+                _buildSection(
+                    'Responsibilities', jobAddModel?.responsibilities, state),
+                _buildSection(
+                    'Qualifications', jobAddModel?.qualifications, state),
+                _buildSection('Experience Required',
+                    jobAddModel?.experienceRequired, state),
+                _buildInfoRow(
+                    'Salary Range',
+                    '\$${jobAddModel?.salaryMin} - \$${jobAddModel?.salaryMax}',
+                    state),
                 _buildSection('Benefits', jobAddModel?.benefits, state),
-                _buildInfoRow('Working Hours', jobAddModel?.workingHours, state),
-                _buildInfoRow('Application Deadline', jobAddModel?.applicationDeadline, state),
-                _buildSection('Required Documents', jobAddModel?.requiredDocuments, state),
-                _buildInfoRow('Published At', (jobAddModel?.createdAt)?.split('T').first, state),
+                _buildInfoRow(
+                    'Working Hours', jobAddModel?.workingHours, state),
+                _buildInfoRow('Application Deadline',
+                    jobAddModel?.applicationDeadline, state),
+                _buildSection('Required Documents',
+                    jobAddModel?.requiredDocuments, state),
+                _buildInfoRow('Published At',
+                    (jobAddModel?.createdAt)?.split('T').first, state),
                 _wrapWithLabel(
-                    'Required Languages', (jobAddModel?.langs ?? []).map((lang) => lang.name ?? '').toList(), state),
+                    'Required Languages',
+                    (jobAddModel?.langs ?? [])
+                        .map((lang) => lang.name ?? '')
+                        .toList(),
+                    state),
                 _wrapWithLabel(
-                    'Required Skills', (jobAddModel?.skills ?? []).map((skill) => skill.name ?? '').toList(), state),
+                    'Required Skills',
+                    (jobAddModel?.skills ?? [])
+                        .map((skill) => skill.name ?? '')
+                        .toList(),
+                    state),
                 CommentView(commentableType: 'jobAdd', commentableId: widget.id)
                 // ReviewList(),
               ],
@@ -116,7 +140,8 @@ class _DoctorJobAddDetailsViewState extends State<DoctorJobAddDetailsView> {
     );
   }
 
-  Widget _titleAndApplyBtn(JobAddModel? jobAddModel, ShowJobAddState state, void Function()? handleApply) {
+  Widget _titleAndApplyBtn(JobAddModel? jobAddModel, ShowJobAddState state,
+      void Function()? handleApply) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -130,8 +155,9 @@ class _DoctorJobAddDetailsViewState extends State<DoctorJobAddDetailsView> {
               InkWell(
                 onTap: () {
                   if (jobAddModel?.hospitalId == null) return;
-                  Navigator.of(context)
-                      .pushNamed(AppRoutesNames.viewHospitalProfile, arguments: {'id': jobAddModel?.hospitalId});
+                  Navigator.of(context).pushNamed(
+                      AppRoutesNames.viewHospitalProfile,
+                      arguments: {'id': jobAddModel?.hospitalId});
                 },
                 child: Text(
                   'View Health Care Provider Profile',
@@ -148,7 +174,9 @@ class _DoctorJobAddDetailsViewState extends State<DoctorJobAddDetailsView> {
           flex: 1,
           child: ElevatedButton(
             onPressed: handleApply,
-            style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(context.secondaryHeaderColor)),
+            style: ButtonStyle(
+                backgroundColor:
+                    WidgetStatePropertyAll(context.secondaryHeaderColor)),
             child: const Text(
               'Apply',
               style: TextStyle(fontSize: 14),
@@ -163,7 +191,8 @@ class _DoctorJobAddDetailsViewState extends State<DoctorJobAddDetailsView> {
     return const SizedBox(height: 16);
   }
 
-  Widget _wrapWithLabel(String title, List<String> data, ShowJobAddState state) {
+  Widget _wrapWithLabel(
+      String title, List<String> data, ShowJobAddState state) {
     if (data.isEmpty && state.responseType == ResponseEnum.success) {
       return const SizedBox();
     }
@@ -209,7 +238,10 @@ class _DoctorJobAddDetailsViewState extends State<DoctorJobAddDetailsView> {
   Widget _title(String title) {
     return Text(
       title,
-      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: context.secondaryHeaderColor),
+      style: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          color: context.secondaryHeaderColor),
     );
   }
 

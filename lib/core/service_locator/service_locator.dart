@@ -29,6 +29,9 @@ import 'package:locum_app/features/doctor/hospital_profile/domain/repo/view_hosp
 import 'package:locum_app/features/doctor/messages/data/remote_datasource/message_remote_datasource.dart';
 import 'package:locum_app/features/doctor/messages/data/repos/message_repo_impl.dart';
 import 'package:locum_app/features/doctor/messages/domain/repos/message_repo.dart';
+import 'package:locum_app/features/doctor/support/data/remote-datasource/support_remotedatasource.dart';
+import 'package:locum_app/features/doctor/support/data/repos/support_rep_imp.dart';
+import 'package:locum_app/features/doctor/support/domain/repos/support_repo.dart';
 import 'package:locum_app/features/hospital/hospital_profile/data/remote_data_source/hospital_profile_remote_datasource.dart';
 import 'package:locum_app/features/hospital/hospital_profile/data/repo/hospital_profile_repo_imp.dart';
 import 'package:locum_app/features/hospital/hospital_profile/domain/repo/hospital_profile_repo.dart';
@@ -84,4 +87,7 @@ Future initServiceLocator() async {
   //!
   serviceLocator.registerLazySingleton<MessageRemoteDatasource>(() => MessageRemoteDatasource(api: serviceLocator()));
   serviceLocator.registerLazySingleton<MessageRepo>(() => MessageRepoImp(remoteSource: serviceLocator()));
+  //!
+  serviceLocator.registerLazySingleton<SupportRemoteDatasource>(() => SupportRemoteDatasource(api: serviceLocator()));
+  serviceLocator.registerLazySingleton<SupportRepo>(() => SupportRepoImp(remoteSource: serviceLocator()));
 }

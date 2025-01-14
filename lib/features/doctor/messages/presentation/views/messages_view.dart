@@ -62,7 +62,8 @@ class _MessagesViewState extends State<MessagesView> {
                           alignment: Alignment.center,
                           clipBehavior: Clip.hardEdge,
                           decoration: const BoxDecoration(),
-                          child: const CircularProgressIndicator(strokeWidth: 2))
+                          child:
+                              const CircularProgressIndicator(strokeWidth: 2))
                       : Text(
                           '$totalUnseenCount',
                           style: const TextStyle(
@@ -77,18 +78,23 @@ class _MessagesViewState extends State<MessagesView> {
           ),
           endDrawer: const DefaultDoctorDrawer(),
           body: RefreshIndicator(
-            child: state.messageCards?.isEmpty == true && state.responseType != ResponseEnum.loading
+            child: state.messageCards?.isEmpty == true &&
+                    state.responseType != ResponseEnum.loading
                 ? const NoDataWidget()
-                : state.messageCards?.isEmpty == true && state.responseType == ResponseEnum.loading
+                : state.messageCards?.isEmpty == true &&
+                        state.responseType == ResponseEnum.loading
                     ? const Center(child: CircularProgressIndicator())
                     : ListView.builder(
                         itemCount: state.messageCards?.length,
                         // itemCount: 5,
                         padding: const EdgeInsets.all(16),
                         itemBuilder: (context, index) {
-                          final MessageCardModel? model = state.messageCards?[index];
+                          final MessageCardModel? model =
+                              state.messageCards?[index];
                           if (model == null) return const SizedBox();
-                          return ChatTile(messageCardModel: model).animate().scale(delay: (index * 100).ms);
+                          return ChatTile(messageCardModel: model)
+                              .animate()
+                              .scale(delay: (index * 100).ms);
                         },
                       ),
             onRefresh: () async {
@@ -116,13 +122,16 @@ class ChatTile extends StatelessWidget {
         leading: SizedBox(
           width: 50.h,
           child: CircularCachedImage(
-              imageUrl: messageCardModel.otherUserPhoto ?? '', imageAsset: AssetsData.malePlacholder, height: 50.h),
+              imageUrl: messageCardModel.otherUserPhoto ?? '',
+              imageAsset: AssetsData.malePlacholder,
+              height: 50.h),
         ),
         title: Text(
           messageCardModel.otherUserName ?? '',
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        subtitle: messageCardModel.notSeenCount != null && messageCardModel.notSeenCount! > 0
+        subtitle: messageCardModel.notSeenCount != null &&
+                messageCardModel.notSeenCount! > 0
             ? Text(
                 'You have ${messageCardModel.notSeenCount} unseen messages',
                 style: const TextStyle(color: Colors.redAccent),
@@ -131,7 +140,8 @@ class ChatTile extends StatelessWidget {
                 'No new messages',
                 style: TextStyle(color: Colors.grey),
               ),
-        trailing: messageCardModel.notSeenCount != null && messageCardModel.notSeenCount! > 0
+        trailing: messageCardModel.notSeenCount != null &&
+                messageCardModel.notSeenCount! > 0
             ? Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(

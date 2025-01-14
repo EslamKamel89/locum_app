@@ -22,4 +22,5 @@ class AppRoutesNames {
       '/doctorJobApplicationDetailsView';
   static const String viewHospitalProfile = '/viewHospitalProfile';
   static const String messagesView = '/messagesView';
+  static const String supportView = '/supportView';
 }

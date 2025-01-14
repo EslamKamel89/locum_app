@@ -16,19 +16,24 @@ class GetAllChatCubit extends Cubit<GetAllChatState> {
   }) : super(GetAllChatState(messageCards: []));
   Future fetchAllChat() async {
     final t = prt('fetchAllChat - GetAllChatCubit');
-    emit(state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
+    emit(
+        state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
     final result = await repo.fetchAllChat();
     result.fold(
       (Failure failure) {
         pr(failure.message, t);
         showSnackbar('Server Error', failure.message, true);
-        emit(state.copyWith(responseType: ResponseEnum.failed, errorMessage: failure.message));
+        emit(state.copyWith(
+            responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
       (List<MessageCardModel> models) async {
         pr(models, t);
         state.messageCards = [];
         emit(
-          state.copyWith(messageCards: models, responseType: ResponseEnum.success, errorMessage: null),
+          state.copyWith(
+              messageCards: models,
+              responseType: ResponseEnum.success,
+              errorMessage: null),
         );
       },
     );

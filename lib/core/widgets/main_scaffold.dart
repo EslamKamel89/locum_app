@@ -13,11 +13,13 @@ class MainScaffold extends StatelessWidget {
     this.drawer,
     this.resizeToAvoidBottomInset,
     this.hideAppBar = false,
+    this.floatingActionButton,
   });
   final String appBarTitle;
   final Widget child;
   final Widget? bottomNavigationBar;
   final Widget? drawer;
+  final Widget? floatingActionButton;
   final bool? resizeToAvoidBottomInset;
   final bool hideAppBar;
   @override
@@ -40,6 +42,8 @@ class MainScaffold extends StatelessWidget {
         resizeToAvoidBottomInset: resizeToAvoidBottomInset,
         // drawer: drawer,
         endDrawer: drawer,
+        floatingActionButton: floatingActionButton,
+        // floatingActionButtonLocation: floatingActionButton == null ? null : FloatingActionButtonLocation.centerDocked,
         body: DefaultScreenPadding(
           child: child,
         ),
