@@ -9,14 +9,12 @@ import 'package:locum_app/core/heleprs/print_helper.dart';
 import 'package:locum_app/core/heleprs/snackbar.dart';
 import 'package:locum_app/core/heleprs/validator.dart';
 import 'package:locum_app/core/router/app_routes_names.dart';
-import 'package:locum_app/core/service_locator/service_locator.dart';
 import 'package:locum_app/core/widgets/auth_text_form_field.dart';
 import 'package:locum_app/core/widgets/default_screen_padding.dart';
 import 'package:locum_app/features/auth/domain/repos/auth_repo.dart';
 import 'package:locum_app/features/auth/presentation/cubits/sign_in/sign_in_cubit.dart';
 import 'package:locum_app/features/auth/presentation/cubits/social_auth/social_auth_cubit.dart';
 import 'package:locum_app/utils/styles/styles.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -56,15 +54,9 @@ class _SignInScreenState extends State<SignInScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      txt("Welcome Back!",
-                          e: St.bold25,
-                          textAlign: TextAlign.center,
-                          c: context.secondaryHeaderColor),
+                      txt("Welcome Back!", e: St.bold25, textAlign: TextAlign.center, c: context.secondaryHeaderColor),
                       const SizedBox(height: 10),
-                      txt("Sign in to continue",
-                          e: St.reg16,
-                          c: Colors.grey,
-                          textAlign: TextAlign.center),
+                      txt("Sign in to continue", e: St.reg16, c: Colors.grey, textAlign: TextAlign.center),
                       const SizedBox(height: 40),
                       AuthTextFormField(
                         controller: _emailController,
@@ -122,36 +114,36 @@ class _SignInScreenState extends State<SignInScreen> {
                               ),
                             ),
                       const SizedBox(height: 20),
-                      Row(
-                        children: [
-                          const Expanded(child: Divider(thickness: 1)),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: txt("OR", c: Colors.grey),
-                          ),
-                          const Expanded(child: Divider(thickness: 1)),
-                        ],
-                      ),
-                      const SizedBox(height: 20),
-                      BlocProvider(
-                        create: (context) => SocialAuthCubit(serviceLocator()),
-                        child: BlocBuilder<SocialAuthCubit, SocialAuthState>(
-                          builder: (context, state) {
-                            return state.responseType == ResponseEnum.loading
-                                ? const Center(
-                                    child: CircularProgressIndicator())
-                                : OutlinedButton.icon(
-                                    onPressed: () async {
-                                      _handleGoogleSignIn(context);
-                                    },
-                                    style: context.outlinedButtonTheme.style,
-                                    icon: Icon(MdiIcons.google),
-                                    label:
-                                        txt("Sign in with Google", e: St.reg16),
-                                  );
-                          },
-                        ),
-                      ),
+                      // Row(
+                      //   children: [
+                      //     const Expanded(child: Divider(thickness: 1)),
+                      //     Padding(
+                      //       padding: const EdgeInsets.symmetric(horizontal: 10),
+                      //       child: txt("OR", c: Colors.grey),
+                      //     ),
+                      //     const Expanded(child: Divider(thickness: 1)),
+                      //   ],
+                      // ),
+                      // const SizedBox(height: 20),
+                      // BlocProvider(
+                      //   create: (context) => SocialAuthCubit(serviceLocator()),
+                      //   child: BlocBuilder<SocialAuthCubit, SocialAuthState>(
+                      //     builder: (context, state) {
+                      //       return state.responseType == ResponseEnum.loading
+                      //           ? const Center(
+                      //               child: CircularProgressIndicator())
+                      //           : OutlinedButton.icon(
+                      //               onPressed: () async {
+                      //                 _handleGoogleSignIn(context);
+                      //               },
+                      //               style: context.outlinedButtonTheme.style,
+                      //               icon: Icon(MdiIcons.google),
+                      //               label:
+                      //                   txt("Sign in with Google", e: St.reg16),
+                      //             );
+                      //     },
+                      //   ),
+                      // ),
                       const SizedBox(height: 40),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -159,8 +151,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           txt("Don't have an account?", c: Colors.grey),
                           TextButton(
                             onPressed: () {
-                              Navigator.of(context)
-                                  .pushNamed(AppRoutesNames.signupScreen);
+                              Navigator.of(context).pushNamed(AppRoutesNames.signupScreen);
                             },
                             child: txt("Sign Up", c: Colors.blue),
                           ),
@@ -181,8 +172,7 @@ class _SignInScreenState extends State<SignInScreen> {
     final UserCredential credential = await signInWithGoogle();
     final User? user = credential.user;
     if (user == null) {
-      showSnackbar(
-          'Error', "Something went wrong with google authentication", true);
+      showSnackbar('Error', "Something went wrong with google authentication", true);
       return;
     }
     // UserTypeEnum? userType = await getUserTypeDialog(context);

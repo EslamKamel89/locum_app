@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:locum_app/core/enums/response_type.dart';
+import 'package:locum_app/core/heleprs/print_helper.dart';
 import 'package:locum_app/core/widgets/circular_image_asset.dart';
 import 'package:locum_app/core/widgets/default_drawer.dart';
 import 'package:locum_app/core/widgets/no_data_widget.dart';
@@ -39,6 +40,7 @@ class _MessagesViewState extends State<MessagesView> {
   Widget build(BuildContext context) {
     return BlocBuilder<GetAllChatCubit, GetAllChatState>(
       builder: (context, state) {
+        pr(state.messageCards?.length, 'state.messageCards?.length');
         return Scaffold(
           appBar: AppBar(
             title: Row(
@@ -74,17 +76,25 @@ class _MessagesViewState extends State<MessagesView> {
             centerTitle: true,
           ),
           endDrawer: const DefaultDoctorDrawer(),
-          body: state.messageCards?.isEmpty == true && state.responseType != ResponseEnum.loading
-              ? const NoDataWidget()
-              : ListView.builder(
-                  itemCount: state.messageCards?.length,
-                  padding: const EdgeInsets.all(16),
-                  itemBuilder: (context, index) {
-                    final MessageCardModel? model = state.messageCards?[index];
-                    if (model == null) return const SizedBox();
-                    return ChatTile(messageCardModel: model).animate().scale(duration: 300.ms, delay: (index * 500).ms);
-                  },
-                ),
+          body: RefreshIndicator(
+            child: state.messageCards?.isEmpty == true && state.responseType != ResponseEnum.loading
+                ? const NoDataWidget()
+                : state.messageCards?.isEmpty == true && state.responseType == ResponseEnum.loading
+                    ? const Center(child: CircularProgressIndicator())
+                    : ListView.builder(
+                        itemCount: state.messageCards?.length,
+                        // itemCount: 5,
+                        padding: const EdgeInsets.all(16),
+                        itemBuilder: (context, index) {
+                          final MessageCardModel? model = state.messageCards?[index];
+                          if (model == null) return const SizedBox();
+                          return ChatTile(messageCardModel: model).animate().scale(delay: (index * 100).ms);
+                        },
+                      ),
+            onRefresh: () async {
+              controller.fetchAllChat();
+            },
+          ),
         );
       },
     );
@@ -103,8 +113,11 @@ class ChatTile extends StatelessWidget {
       elevation: 4,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
-        leading: CircularCachedImage(
-            imageUrl: messageCardModel.otherUserPhoto ?? '', imageAsset: AssetsData.malePlacholder, height: 50.h),
+        leading: SizedBox(
+          width: 50.h,
+          child: CircularCachedImage(
+              imageUrl: messageCardModel.otherUserPhoto ?? '', imageAsset: AssetsData.malePlacholder, height: 50.h),
+        ),
         title: Text(
           messageCardModel.otherUserName ?? '',
           style: const TextStyle(fontWeight: FontWeight.bold),

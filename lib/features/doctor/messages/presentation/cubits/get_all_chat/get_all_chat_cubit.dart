@@ -13,7 +13,7 @@ class GetAllChatCubit extends Cubit<GetAllChatState> {
   MessageRepo repo;
   GetAllChatCubit({
     required this.repo,
-  }) : super(GetAllChatState());
+  }) : super(GetAllChatState(messageCards: []));
   Future fetchAllChat() async {
     final t = prt('fetchAllChat - GetAllChatCubit');
     emit(state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
@@ -26,6 +26,7 @@ class GetAllChatCubit extends Cubit<GetAllChatState> {
       },
       (List<MessageCardModel> models) async {
         pr(models, t);
+        state.messageCards = [];
         emit(
           state.copyWith(messageCards: models, responseType: ResponseEnum.success, errorMessage: null),
         );
