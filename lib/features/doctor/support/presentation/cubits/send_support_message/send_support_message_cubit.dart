@@ -14,18 +14,23 @@ class SendSupportMessageCubit extends Cubit<SendSupportMessageState> {
   SendSupportMessageCubit(this.repo) : super(SendSupportMessageState());
   Future sendSupportMessage(String content) async {
     final t = prt('sendSupportMessage - SendSupportMessageCubit');
-    emit(state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
+    emit(
+        state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
     final result = await repo.sendSupportMessage(content);
     result.fold(
       (Failure failure) {
         pr(failure.message, t);
         showSnackbar('Server Error', failure.message, true);
-        emit(state.copyWith(responseType: ResponseEnum.failed, errorMessage: failure.message));
+        emit(state.copyWith(
+            responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
       (SupportModel model) async {
         pr(model, t);
         emit(
-          state.copyWith(supportModel: model, responseType: ResponseEnum.success, errorMessage: null),
+          state.copyWith(
+              supportModel: model,
+              responseType: ResponseEnum.success,
+              errorMessage: null),
         );
       },
     );

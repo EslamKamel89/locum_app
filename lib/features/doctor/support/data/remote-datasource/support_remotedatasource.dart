@@ -1,6 +1,7 @@
 import 'package:locum_app/core/api_service/api_consumer.dart';
 import 'package:locum_app/core/api_service/end_points.dart';
 import 'package:locum_app/core/heleprs/print_helper.dart';
+import 'package:locum_app/features/doctor/support/domain/models/not_seen_count_model.dart';
 import 'package:locum_app/features/doctor/support/domain/models/support_model.dart';
 
 class SupportRemoteDatasource {
@@ -20,6 +21,14 @@ class SupportRemoteDatasource {
     final t = prt('sendSupportMessage - SupportRemoteDatasource');
     final data = await api.post(EndPoint.sendSupportMessage, data: {'content': content});
     SupportModel model = SupportModel.fromJson(data['data']);
+
+    return pr(model, t);
+  }
+
+  Future<NotSeenCountModel> getUnseenCount() async {
+    final t = prt('getUnseenCount - SupportRemoteDatasource');
+    final data = await api.get(EndPoint.unseenCount);
+    NotSeenCountModel model = NotSeenCountModel.fromJson(data['data']);
 
     return pr(model, t);
   }

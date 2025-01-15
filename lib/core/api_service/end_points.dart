@@ -32,4 +32,5 @@ class EndPoint {
   static String getAllChat = "$baseUrl/message/all-chat";
   static String getAllSupport = "$baseUrl/support/get-support";
   static String sendSupportMessage = "$baseUrl/support/send-message";
+  static String unseenCount = "$baseUrl/support/unseen-count";
 }

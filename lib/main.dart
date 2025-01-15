@@ -12,6 +12,7 @@ import 'package:locum_app/core/themes/theme_cubit.dart';
 import 'package:locum_app/features/common_data/cubits/user_info/user_info_cubit.dart';
 import 'package:locum_app/features/doctor/messages/presentation/cubits/get_all_chat/get_all_chat_cubit.dart';
 import 'package:locum_app/features/doctor/support/presentation/cubits/get_all_messages/get_all_messages_cubit.dart';
+import 'package:locum_app/features/doctor/support/presentation/cubits/unseen_support_message_count/unseen_support_message_count_cubit.dart';
 import 'package:locum_app/firebase_options.dart';
 
 void main() async {
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(create: (_) => GetAllChatCubit(repo: serviceLocator())),
           BlocProvider(create: (_) => GetAllMessagesCubit(repo: serviceLocator())),
+          BlocProvider(create: (_) => UnseenSupportMessageCountCubit(serviceLocator())),
         ],
         child: Builder(builder: (context) {
           final themeCubit = context.watch<ThemeCubit>();

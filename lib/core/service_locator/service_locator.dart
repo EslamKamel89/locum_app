@@ -44,40 +44,49 @@ Future initServiceLocator() async {
   serviceLocator.registerLazySingleton<SharedPreferences>(() => prefs);
   serviceLocator.registerLazySingleton<ImagePicker>(() => ImagePicker());
   serviceLocator.registerLazySingleton<Dio>(() => Dio());
-  serviceLocator.registerLazySingleton<ApiConsumer>(() => DioConsumer(dio: serviceLocator()));
-  serviceLocator.registerLazySingleton<AppMiddleWare>(() => AppMiddleWare(sharedPreferences: serviceLocator()));
-  serviceLocator.registerLazySingleton<AppRouter>(() => AppRouter(appMiddleWare: serviceLocator()));
+  serviceLocator.registerLazySingleton<ApiConsumer>(
+      () => DioConsumer(dio: serviceLocator()));
+  serviceLocator.registerLazySingleton<AppMiddleWare>(
+      () => AppMiddleWare(sharedPreferences: serviceLocator()));
+  serviceLocator.registerLazySingleton<AppRouter>(
+      () => AppRouter(appMiddleWare: serviceLocator()));
   //!
-  serviceLocator.registerLazySingleton<CommonDataRemoteSource>(() => CommonDataRemoteSource(api: serviceLocator()));
-  serviceLocator
-      .registerLazySingleton<CommonDataRepo>(() => CommonDataRepoImp(commonDataRemoteSource: serviceLocator()));
+  serviceLocator.registerLazySingleton<CommonDataRemoteSource>(
+      () => CommonDataRemoteSource(api: serviceLocator()));
+  serviceLocator.registerLazySingleton<CommonDataRepo>(
+      () => CommonDataRepoImp(commonDataRemoteSource: serviceLocator()));
   //!
-  serviceLocator.registerLazySingleton<AuthRemoteDataSource>(() => AuthRemoteDataSource(api: serviceLocator()));
-  serviceLocator.registerLazySingleton<AuthRepo>(() => AuthRepoImp(authRemoteDataSource: serviceLocator()));
+  serviceLocator.registerLazySingleton<AuthRemoteDataSource>(
+      () => AuthRemoteDataSource(api: serviceLocator()));
+  serviceLocator.registerLazySingleton<AuthRepo>(
+      () => AuthRepoImp(authRemoteDataSource: serviceLocator()));
   //!
-  serviceLocator
-      .registerLazySingleton<DoctorProfileRemoteDataSource>(() => DoctorProfileRemoteDataSource(api: serviceLocator()));
-  serviceLocator.registerLazySingleton<DoctorProfileRepo>(
-      () => DoctorProfileRepoImp(doctorProfileRemoteDataSource: serviceLocator()));
+  serviceLocator.registerLazySingleton<DoctorProfileRemoteDataSource>(
+      () => DoctorProfileRemoteDataSource(api: serviceLocator()));
+  serviceLocator.registerLazySingleton<DoctorProfileRepo>(() =>
+      DoctorProfileRepoImp(doctorProfileRemoteDataSource: serviceLocator()));
 
   //!
   serviceLocator.registerLazySingleton<HospitalProfileRemoteDatasource>(
       () => HospitalProfileRemoteDatasource(api: serviceLocator()));
-  serviceLocator.registerLazySingleton<HospitalProfileRepo>(
-      () => HospitalProfileRepoImp(hospitalProfileRemoteDatasource: serviceLocator()));
+  serviceLocator.registerLazySingleton<HospitalProfileRepo>(() =>
+      HospitalProfileRepoImp(
+          hospitalProfileRemoteDatasource: serviceLocator()));
   //!
-  serviceLocator
-      .registerLazySingleton<DoctorLocumRemoteDataSource>(() => DoctorLocumRemoteDataSource(api: serviceLocator()));
-  serviceLocator
-      .registerLazySingleton<DoctorLocumRepo>(() => DoctorLocumRepoImp(doctorLocumRemoteDataSource: serviceLocator()));
+  serviceLocator.registerLazySingleton<DoctorLocumRemoteDataSource>(
+      () => DoctorLocumRemoteDataSource(api: serviceLocator()));
+  serviceLocator.registerLazySingleton<DoctorLocumRepo>(
+      () => DoctorLocumRepoImp(doctorLocumRemoteDataSource: serviceLocator()));
   //!
   serviceLocator.registerLazySingleton<DoctorJobApplicationRemoteDataSource>(
       () => DoctorJobApplicationRemoteDataSource(api: serviceLocator()));
   serviceLocator.registerLazySingleton<DoctorJobApplicationRepo>(
       () => DoctorJobApplicationRepoImp(remoteDataSource: serviceLocator()));
   //!
-  serviceLocator.registerLazySingleton<CommentRemoteDataSource>(() => CommentRemoteDataSource(api: serviceLocator()));
-  serviceLocator.registerLazySingleton<CommentRepo>(() => CommentRepoImp(commentRemoteDataSource: serviceLocator()));
+  serviceLocator.registerLazySingleton<CommentRemoteDataSource>(
+      () => CommentRemoteDataSource(api: serviceLocator()));
+  serviceLocator.registerLazySingleton<CommentRepo>(
+      () => CommentRepoImp(commentRemoteDataSource: serviceLocator()));
 
   //!
   serviceLocator.registerLazySingleton<ViewHospitalProfileRemoteDatasource>(
@@ -85,9 +94,13 @@ Future initServiceLocator() async {
   serviceLocator.registerLazySingleton<ViewHospitalProfileRepo>(
       () => ViewHospitalProfileRepoImp(remoteDatasource: serviceLocator()));
   //!
-  serviceLocator.registerLazySingleton<MessageRemoteDatasource>(() => MessageRemoteDatasource(api: serviceLocator()));
-  serviceLocator.registerLazySingleton<MessageRepo>(() => MessageRepoImp(remoteSource: serviceLocator()));
+  serviceLocator.registerLazySingleton<MessageRemoteDatasource>(
+      () => MessageRemoteDatasource(api: serviceLocator()));
+  serviceLocator.registerLazySingleton<MessageRepo>(
+      () => MessageRepoImp(remoteSource: serviceLocator()));
   //!
-  serviceLocator.registerLazySingleton<SupportRemoteDatasource>(() => SupportRemoteDatasource(api: serviceLocator()));
-  serviceLocator.registerLazySingleton<SupportRepo>(() => SupportRepoImp(remoteSource: serviceLocator()));
+  serviceLocator.registerLazySingleton<SupportRemoteDatasource>(
+      () => SupportRemoteDatasource(api: serviceLocator()));
+  serviceLocator.registerLazySingleton<SupportRepo>(
+      () => SupportRepoImp(remoteSource: serviceLocator()));
 }

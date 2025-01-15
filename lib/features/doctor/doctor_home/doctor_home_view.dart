@@ -22,7 +22,6 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
   @override
   void initState() {
     doctorUserModel = context.read<UserInfoCubit>().state.doctorUserModel;
-
     super.initState();
   }
 

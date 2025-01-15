@@ -11,8 +11,9 @@ class MessageRemoteDatasource {
   Future<List<MessageCardModel>> fetchAllChat() async {
     final t = prt('fetchAllChat - MessageRemoteDatasource');
     final data = await api.get(EndPoint.getAllChat);
-    List<MessageCardModel> messageCard =
-        data['data'].map<MessageCardModel>((e) => MessageCardModel.fromJson(e)).toList();
+    List<MessageCardModel> messageCard = data['data']
+        .map<MessageCardModel>((e) => MessageCardModel.fromJson(e))
+        .toList();
 
     return pr(messageCard, t);
   }

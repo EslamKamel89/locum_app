@@ -11,22 +11,28 @@ part 'get_all_messages_state.dart';
 
 class GetAllMessagesCubit extends Cubit<GetAllMessagesState> {
   final SupportRepo repo;
-  GetAllMessagesCubit({required this.repo}) : super(GetAllMessagesState(supportModels: []));
+  GetAllMessagesCubit({required this.repo})
+      : super(GetAllMessagesState(supportModels: []));
   Future fetchAllSupport() async {
     final t = prt('fetchAllSupport - GetAllMessagesCubit');
-    emit(state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
+    emit(
+        state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
     final result = await repo.fetchAllSupport();
     result.fold(
       (Failure failure) {
         pr(failure.message, t);
         showSnackbar('Server Error', failure.message, true);
-        emit(state.copyWith(responseType: ResponseEnum.failed, errorMessage: failure.message));
+        emit(state.copyWith(
+            responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
       (List<SupportModel> models) async {
         pr(models, t);
         state.supportModels = [];
         emit(
-          state.copyWith(supportModels: models, responseType: ResponseEnum.success, errorMessage: null),
+          state.copyWith(
+              supportModels: models,
+              responseType: ResponseEnum.success,
+              errorMessage: null),
         );
       },
     );
