@@ -3,10 +3,13 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:locum_app/core/enums/response_type.dart';
 import 'package:locum_app/core/extensions/context-extensions.dart';
+import 'package:locum_app/core/heleprs/validator.dart';
+import 'package:locum_app/core/service_locator/service_locator.dart';
 import 'package:locum_app/core/widgets/default_drawer.dart';
 import 'package:locum_app/core/widgets/main_scaffold.dart';
 import 'package:locum_app/core/widgets/no_data_widget.dart';
 import 'package:locum_app/features/doctor/support/presentation/cubits/get_all_messages/get_all_messages_cubit.dart';
+import 'package:locum_app/features/doctor/support/presentation/cubits/send_support_message/send_support_message_cubit.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class SupportChatView extends StatefulWidget {
@@ -18,7 +21,8 @@ class SupportChatView extends StatefulWidget {
 
 class _SupportChatViewState extends State<SupportChatView> {
   late final GetAllMessagesCubit controller;
-
+  final _messageController = TextEditingController();
+  final GlobalKey<FormState> _key = GlobalKey();
   @override
   void initState() {
     _initState();
@@ -112,48 +116,62 @@ class _SupportChatViewState extends State<SupportChatView> {
   }
 
   Widget _buildMessageInput() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      decoration: const BoxDecoration(
-          // color: Colors.white,
-          // boxShadow: [
-          //   BoxShadow(
-          //     color: context.secondaryHeaderColor,
-          //     blurRadius: 4.0,
-          //     offset: const Offset(0, -2),
-          //   ),
-          // ],
-          ),
-      child: Row(
-        children: [
-          const Expanded(
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: "Type a message",
-                border: InputBorder.none,
+    return BlocProvider(
+      create: (context) => SendSupportMessageCubit(serviceLocator()),
+      child: BlocConsumer<SendSupportMessageCubit, SendSupportMessageState>(
+        listener: (context, state) {
+          // TODO: implement listener
+        },
+        builder: (context, state) {
+          return Form(
+            key: _key,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              decoration: const BoxDecoration(),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      controller: _messageController,
+                      decoration: const InputDecoration(
+                        hintText: "Type a message",
+                        border: InputBorder.none,
+                      ),
+                      validator: (value) => valdiator(input: value, label: 'Message Content', isRequired: true),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      if (_key.currentState!.validate()) {
+                        context.read<SendSupportMessageCubit>().sendSupportMessage(_messageController.text);
+                        context.read<GetAllMessagesCubit>().addMessage(_messageController.text);
+                        _messageController.text = '';
+                        FocusManager.instance.primaryFocus?.unfocus();
+                      }
+                    },
+                    icon: Icon(Icons.send, color: context.secondaryHeaderColor),
+                  ),
+                  controller.state.responseType == ResponseEnum.loading
+                      ? Container(
+                          width: 20, height: 20, alignment: Alignment.center, child: const CircularProgressIndicator())
+                      : InkWell(
+                          onTap: () {
+                            controller.fetchAllSupport();
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: context.secondaryHeaderColor,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            padding: const EdgeInsets.all(5),
+                            child: Icon(MdiIcons.refresh, color: Colors.white),
+                          ),
+                        )
+                ],
               ),
             ),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.send, color: context.secondaryHeaderColor),
-          ),
-          controller.state.responseType == ResponseEnum.loading
-              ? Container(width: 20, height: 20, alignment: Alignment.center, child: const CircularProgressIndicator())
-              : InkWell(
-                  onTap: () {
-                    controller.fetchAllSupport();
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: context.secondaryHeaderColor,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    padding: const EdgeInsets.all(5),
-                    child: Icon(MdiIcons.refresh, color: Colors.white),
-                  ),
-                )
-        ],
+          );
+        },
       ),
     );
   }

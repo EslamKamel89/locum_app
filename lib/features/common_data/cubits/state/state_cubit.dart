@@ -13,23 +13,18 @@ class StateCubit extends Cubit<StateState> {
   StateCubit(this.commonDataRepo) : super(StateState());
   Future fetchStates() async {
     final t = prt('fetchStates - StateCubit');
-    emit(
-        state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
+    emit(state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
     final result = await commonDataRepo.fetchStates();
     result.fold(
       (Failure failure) {
         pr(failure.message, t);
         showSnackbar('Server Error', failure.message, true);
-        emit(state.copyWith(
-            responseType: ResponseEnum.failed, errorMessage: failure.message));
+        emit(state.copyWith(responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
       (List<StateModel> states) async {
         pr(states, t);
         emit(
-          state.copyWith(
-              stateModels: states,
-              responseType: ResponseEnum.success,
-              errorMessage: null),
+          state.copyWith(stateModels: states, responseType: ResponseEnum.success, errorMessage: null),
         );
       },
     );

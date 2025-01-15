@@ -7,40 +7,27 @@ import 'package:locum_app/core/heleprs/snackbar.dart';
 import 'package:locum_app/features/doctor/support/domain/models/support_model.dart';
 import 'package:locum_app/features/doctor/support/domain/repos/support_repo.dart';
 
-part 'get_all_messages_state.dart';
+part 'send_support_message_state.dart';
 
-class GetAllMessagesCubit extends Cubit<GetAllMessagesState> {
+class SendSupportMessageCubit extends Cubit<SendSupportMessageState> {
   final SupportRepo repo;
-  GetAllMessagesCubit({required this.repo}) : super(GetAllMessagesState(supportModels: []));
-  Future fetchAllSupport() async {
-    final t = prt('fetchAllSupport - GetAllMessagesCubit');
+  SendSupportMessageCubit(this.repo) : super(SendSupportMessageState());
+  Future sendSupportMessage(String content) async {
+    final t = prt('sendSupportMessage - SendSupportMessageCubit');
     emit(state.copyWith(responseType: ResponseEnum.loading, errorMessage: null));
-    final result = await repo.fetchAllSupport();
+    final result = await repo.sendSupportMessage(content);
     result.fold(
       (Failure failure) {
         pr(failure.message, t);
         showSnackbar('Server Error', failure.message, true);
         emit(state.copyWith(responseType: ResponseEnum.failed, errorMessage: failure.message));
       },
-      (List<SupportModel> models) async {
-        pr(models, t);
-        state.supportModels = [];
+      (SupportModel model) async {
+        pr(model, t);
         emit(
-          state.copyWith(supportModels: models, responseType: ResponseEnum.success, errorMessage: null),
+          state.copyWith(supportModel: model, responseType: ResponseEnum.success, errorMessage: null),
         );
       },
     );
-  }
-
-  void addMessage(String content) async {
-    emit(state.copyWith(
-      supportModels: [
-        ...state.supportModels ?? [],
-        SupportModel(content: content, sender: 'user', createdAt: 'Pending...'),
-      ],
-      responseType: ResponseEnum.success,
-      errorMessage: null,
-    ));
-    fetchAllSupport();
   }
 }

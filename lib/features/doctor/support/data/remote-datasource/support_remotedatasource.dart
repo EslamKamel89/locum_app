@@ -9,10 +9,18 @@ class SupportRemoteDatasource {
     required this.api,
   });
   Future<List<SupportModel>> fetchAllSupport() async {
-    final t = prt('fetchAllSupport - MessageRemoteDatasource');
+    final t = prt('fetchAllSupport - SupportRemoteDatasource');
     final data = await api.get(EndPoint.getAllSupport);
     List<SupportModel> models = data['data'].map<SupportModel>((e) => SupportModel.fromJson(e)).toList();
 
     return pr(models, t);
+  }
+
+  Future<SupportModel> sendSupportMessage(String content) async {
+    final t = prt('sendSupportMessage - SupportRemoteDatasource');
+    final data = await api.post(EndPoint.sendSupportMessage, data: {'content': content});
+    SupportModel model = SupportModel.fromJson(data['data']);
+
+    return pr(model, t);
   }
 }

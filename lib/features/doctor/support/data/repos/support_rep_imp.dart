@@ -25,4 +25,20 @@ class SupportRepoImp implements SupportRepo {
       return Left(ServerFailure(pr(e.toString(), t)));
     }
   }
+
+  @override
+  Future<Either<Failure, SupportModel>> sendSupportMessage(String content) async {
+    final t = prt('sendSupportMessage  - SupportRepoImp');
+    try {
+      SupportModel model = await remoteSource.sendSupportMessage(content);
+      return Right(pr(model, t));
+    } catch (e) {
+      pr(e.toString());
+      if (e is DioException) {
+        pr(e.response?.data, t);
+        return Left(ServerFailure.formDioError(e));
+      }
+      return Left(ServerFailure(pr(e.toString(), t)));
+    }
+  }
 }

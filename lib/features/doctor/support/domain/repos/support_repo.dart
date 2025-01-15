@@ -4,4 +4,5 @@ import 'package:locum_app/features/doctor/support/domain/models/support_model.da
 
 abstract class SupportRepo {
   Future<Either<Failure, List<SupportModel>>> fetchAllSupport();
+  Future<Either<Failure, SupportModel>> sendSupportMessage(String content);
 }
