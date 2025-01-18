@@ -7,6 +7,7 @@ import 'package:locum_app/features/auth/presentation/cubits/sign_in/sign_in_cubi
 import 'package:locum_app/features/auth/presentation/cubits/sign_up/sign_up_cubit.dart';
 import 'package:locum_app/features/auth/presentation/views/sign_in/sign_in_screen.dart';
 import 'package:locum_app/features/auth/presentation/views/sign_up/signup_screen.dart';
+import 'package:locum_app/features/doctor/about/presentation/about_view.dart';
 import 'package:locum_app/features/doctor/doctor-job-applications/presentation/cubits/doctor_job_application/doctor_job_application_cubit.dart';
 import 'package:locum_app/features/doctor/doctor-job-applications/presentation/views/doctor_job_application_details_view.dart';
 import 'package:locum_app/features/doctor/doctor-job-applications/presentation/views/doctor_job_application_view.dart';
@@ -88,8 +89,7 @@ class AppRouter {
       case AppRoutesNames.doctorInfoForm:
         return CustomPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) =>
-                DoctorInfoCubit(doctorProfileRepo: serviceLocator()),
+            create: (context) => DoctorInfoCubit(doctorProfileRepo: serviceLocator()),
             child: DoctorInfoForm(
               create: args?['create'] ?? true,
             ),
@@ -160,10 +160,8 @@ class AppRouter {
         return CustomPageRoute(
           builder: (context) => MultiBlocProvider(
             providers: [
-              BlocProvider(
-                  create: (context) => ShowJobAddCubit(serviceLocator())),
-              BlocProvider(
-                  create: (context) => ApplyToJobAddCubit(serviceLocator())),
+              BlocProvider(create: (context) => ShowJobAddCubit(serviceLocator())),
+              BlocProvider(create: (context) => ApplyToJobAddCubit(serviceLocator())),
             ],
             child: DoctorJobAddDetailsView(id: args?['id']),
           ),
@@ -204,7 +202,12 @@ class AppRouter {
         );
       case AppRoutesNames.supportView:
         return CustomPageRoute(
-          builder: (context) => SupportChatView(),
+          builder: (context) => const SupportChatView(),
+          settings: routeSettings,
+        );
+      case AppRoutesNames.aboutView:
+        return CustomPageRoute(
+          builder: (context) => const AboutView(),
           settings: routeSettings,
         );
       default:
@@ -214,8 +217,7 @@ class AppRouter {
 }
 
 class CustomPageRoute<T> extends MaterialPageRoute<T> {
-  CustomPageRoute(
-      {required super.builder, required RouteSettings super.settings});
+  CustomPageRoute({required super.builder, required RouteSettings super.settings});
   @override
   Widget buildTransitions(
     BuildContext context,

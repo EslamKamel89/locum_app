@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:locum_app/core/heleprs/format_date.dart';
 
 class CustomDateField extends StatefulWidget {
   const CustomDateField({
@@ -42,8 +43,7 @@ class _CustomDateFieldState extends State<CustomDateField> {
               hintText: widget.initialDate != null
                   ? '${widget.initialDate?.year}-${widget.initialDate?.month.toString().padLeft(2, '0')}-${widget.initialDate?.day.toString().padLeft(2, '0')}'
                   : 'Select a date',
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
             ),
             // validator: (_) => widget.selectedDate == null ? '${widget.label} is required' : null,
             validator: widget.validator,
@@ -66,8 +66,9 @@ class _CustomDateFieldState extends State<CustomDateField> {
       setState(() {
         selectedDate = pickedDate;
         widget.onDateSubmit(pickedDate);
-        widget.textEditingController.text =
-            '${selectedDate?.year}-${selectedDate?.month.toString().padLeft(2, '0')}-${selectedDate?.day.toString().padLeft(2, '0')}';
+        // widget.textEditingController.text =
+        //     '${selectedDate?.year}-${selectedDate?.month.toString().padLeft(2, '0')}-${selectedDate?.day.toString().padLeft(2, '0')}';
+        widget.textEditingController.text = formatDateToAmerican(selectedDate) ?? '';
       });
     }
   }
@@ -104,6 +105,8 @@ class CustomTextField extends StatelessWidget {
     this.inputType = TextInputType.text,
     this.validator,
     this.showMulitLine = false,
+    this.readOnly = false,
+    this.onTap,
   });
   final String label;
   final TextEditingController controller;
@@ -111,13 +114,17 @@ class CustomTextField extends StatelessWidget {
   final TextInputType inputType;
   final String? Function(String?)? validator;
   final bool showMulitLine;
+  final bool readOnly;
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
+        readOnly: readOnly,
         controller: controller,
         keyboardType: inputType,
+        onTap: onTap,
         decoration: InputDecoration(
           labelText: label,
           hintText: hint,
@@ -148,12 +155,10 @@ class CustomTextFormFieldWithSuggestions extends StatefulWidget {
   final String? Function(String?)? validator;
   final void Function()? onSave;
   @override
-  State<CustomTextFormFieldWithSuggestions> createState() =>
-      _CustomTextFormFieldWithSuggestionsState();
+  State<CustomTextFormFieldWithSuggestions> createState() => _CustomTextFormFieldWithSuggestionsState();
 }
 
-class _CustomTextFormFieldWithSuggestionsState
-    extends State<CustomTextFormFieldWithSuggestions> {
+class _CustomTextFormFieldWithSuggestionsState extends State<CustomTextFormFieldWithSuggestions> {
   String selectedValue = '';
   @override
   void initState() {
@@ -172,10 +177,7 @@ class _CustomTextFormFieldWithSuggestionsState
         // suggestionsController: SuggestionsController(),
         suggestionsCallback: (search) {
           final result = widget.suggestions
-              .where((String suggestion) => suggestion
-                  .toLowerCase()
-                  .trim()
-                  .contains(search.trim().toLowerCase()))
+              .where((String suggestion) => suggestion.toLowerCase().trim().contains(search.trim().toLowerCase()))
               .toList();
           return result;
         },

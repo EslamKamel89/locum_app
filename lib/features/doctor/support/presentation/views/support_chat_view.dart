@@ -48,66 +48,46 @@ class _SupportChatViewState extends State<SupportChatView> {
           child: Column(
             children: [
               Expanded(
-                child: state.supportModels?.isEmpty == true &&
-                        state.responseType != ResponseEnum.loading
+                child: state.supportModels?.isEmpty == true && state.responseType != ResponseEnum.loading
                     ? const NoDataWidget()
-                    : state.supportModels?.isEmpty == true &&
-                            state.responseType == ResponseEnum.loading
+                    : state.supportModels?.isEmpty == true && state.responseType == ResponseEnum.loading
                         ? const Center(child: CircularProgressIndicator())
                         : ListView.builder(
                             itemCount: state.supportModels!.length,
                             reverse: true,
                             padding: const EdgeInsets.all(16.0),
                             itemBuilder: (context, index) {
-                              final message = state.supportModels![
-                                  state.supportModels!.length - 1 - index];
+                              final message = state.supportModels![state.supportModels!.length - 1 - index];
                               // final message = state.supportModels![index];
                               final isUser = message.sender == "user";
 
                               return Align(
-                                alignment: isUser
-                                    ? Alignment.centerRight
-                                    : Alignment.centerLeft,
+                                alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
                                 child: Animate(
                                   effects: [
-                                    SlideEffect(
-                                        duration: 300.ms,
-                                        begin: const Offset(1, 0)),
+                                    SlideEffect(duration: 300.ms, begin: const Offset(1, 0)),
                                     FadeEffect(duration: 300.ms),
                                   ],
                                   child: Container(
                                     padding: const EdgeInsets.all(12.0),
-                                    margin: const EdgeInsets.symmetric(
-                                        vertical: 8.0),
-                                    constraints: BoxConstraints(
-                                        maxWidth:
-                                            MediaQuery.of(context).size.width *
-                                                0.7),
+                                    margin: const EdgeInsets.symmetric(vertical: 8.0),
+                                    constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.7),
                                     decoration: BoxDecoration(
-                                      color: isUser
-                                          ? context.primaryColor
-                                          : Colors.grey[300],
+                                      color: isUser ? context.primaryColor : Colors.grey[300],
                                       borderRadius: BorderRadius.only(
                                         topLeft: const Radius.circular(12.0),
                                         topRight: const Radius.circular(12.0),
-                                        bottomLeft: isUser
-                                            ? const Radius.circular(12.0)
-                                            : Radius.zero,
-                                        bottomRight: isUser
-                                            ? Radius.zero
-                                            : const Radius.circular(12.0),
+                                        bottomLeft: isUser ? const Radius.circular(12.0) : Radius.zero,
+                                        bottomRight: isUser ? Radius.zero : const Radius.circular(12.0),
                                       ),
                                     ),
                                     child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           message.content ?? '',
                                           style: TextStyle(
-                                            color: isUser
-                                                ? Colors.white
-                                                : Colors.black,
+                                            color: isUser ? Colors.white : Colors.black,
                                             fontSize: 16.0,
                                           ),
                                         ),
@@ -115,9 +95,7 @@ class _SupportChatViewState extends State<SupportChatView> {
                                         Text(
                                           message.createdAt ?? '',
                                           style: TextStyle(
-                                            color: isUser
-                                                ? Colors.white70
-                                                : Colors.black54,
+                                            color: isUser ? Colors.white70 : Colors.black54,
                                             fontSize: 12.0,
                                           ),
                                         ),
@@ -148,8 +126,7 @@ class _SupportChatViewState extends State<SupportChatView> {
           return Form(
             key: _key,
             child: Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               decoration: const BoxDecoration(),
               child: Row(
                 children: [
@@ -160,21 +137,14 @@ class _SupportChatViewState extends State<SupportChatView> {
                         hintText: "Type a message",
                         border: InputBorder.none,
                       ),
-                      validator: (value) => valdiator(
-                          input: value,
-                          label: 'Message Content',
-                          isRequired: true),
+                      validator: (value) => valdiator(input: value, label: 'Message Content', isRequired: true),
                     ),
                   ),
                   IconButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_key.currentState!.validate()) {
-                        context
-                            .read<SendSupportMessageCubit>()
-                            .sendSupportMessage(_messageController.text);
-                        context
-                            .read<GetAllMessagesCubit>()
-                            .addMessage(_messageController.text);
+                        await context.read<SendSupportMessageCubit>().sendSupportMessage(_messageController.text);
+                        context.read<GetAllMessagesCubit>().addMessage(_messageController.text);
                         _messageController.text = '';
                         FocusManager.instance.primaryFocus?.unfocus();
                       }
@@ -183,10 +153,7 @@ class _SupportChatViewState extends State<SupportChatView> {
                   ),
                   controller.state.responseType == ResponseEnum.loading
                       ? Container(
-                          width: 20,
-                          height: 20,
-                          alignment: Alignment.center,
-                          child: const CircularProgressIndicator())
+                          width: 20, height: 20, alignment: Alignment.center, child: const CircularProgressIndicator())
                       : InkWell(
                           onTap: () {
                             controller.fetchAllSupport();

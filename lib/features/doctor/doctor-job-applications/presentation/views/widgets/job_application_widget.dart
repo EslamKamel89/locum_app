@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:locum_app/core/extensions/context-extensions.dart';
 import 'package:locum_app/core/globals.dart';
+import 'package:locum_app/core/heleprs/format_date.dart';
 import 'package:locum_app/core/router/app_routes_names.dart';
 import 'package:locum_app/core/widgets/custom_fading_widget.dart';
 import 'package:locum_app/features/doctor/doctor-job-applications/domain/models/job_application_details_model.dart';
 
 class JobApplicationWidget extends StatelessWidget {
-  const JobApplicationWidget(
-      {super.key, required this.jobApplicationDetailsModel});
+  const JobApplicationWidget({super.key, required this.jobApplicationDetailsModel});
   final JobApplicationDetailsModel jobApplicationDetailsModel;
   @override
   Widget build(BuildContext context) {
@@ -61,8 +61,7 @@ class JobApplicationWidget extends StatelessWidget {
                 StatusWidget(status: jobApplicationDetailsModel.status ?? ''),
                 InkWell(
                   onTap: () {
-                    Navigator.of(context).pushNamed(
-                        AppRoutesNames.doctorJobApplicationDetailsView,
+                    Navigator.of(context).pushNamed(AppRoutesNames.doctorJobApplicationDetailsView,
                         arguments: {'model': jobApplicationDetailsModel});
                   },
                   child: Text(
@@ -118,9 +117,7 @@ class JobApplicationWidget extends StatelessWidget {
                 ),
                 const SizedBox(width: 4),
                 Text(
-                  (jobApplicationDetailsModel.jobAdd?.createdAt ?? '')
-                      .split('T')
-                      .first,
+                  formatStrDateToAmerican(jobApplicationDetailsModel.jobAdd?.createdAt) ?? '',
                   style: const TextStyle(
                     fontSize: 12,
                   ),

@@ -6,7 +6,7 @@ enum FilterOptionsEnum {
   jobType,
   state,
   languages,
-  skills,
+  // skills,
   address,
 }
 
@@ -23,8 +23,8 @@ extension FilterOptionsEnumExtension on FilterOptionsEnum {
         return 'State';
       case FilterOptionsEnum.languages:
         return 'Languages';
-      case FilterOptionsEnum.skills:
-        return 'Skills';
+      // case FilterOptionsEnum.skills:
+      // return 'Skills';
       case FilterOptionsEnum.address:
         return 'Address';
     }

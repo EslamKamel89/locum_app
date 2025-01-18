@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:locum_app/core/extensions/context-extensions.dart';
 import 'package:locum_app/core/globals.dart';
+import 'package:locum_app/core/heleprs/format_date.dart';
 import 'package:locum_app/core/router/app_routes_names.dart';
 import 'package:locum_app/core/widgets/custom_fading_widget.dart';
 import 'package:locum_app/features/doctor/doctor_locum/domain/models/job_add_model.dart';
@@ -81,23 +82,21 @@ class JobAddWidget extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    jobAddModel.location ?? '',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: context.secondaryHeaderColor,
-                    ),
-                  ),
-                ),
               ],
+            ),
+            const SizedBox(height: 12),
+            Text(
+              jobAddModel.location ?? '',
+              style: TextStyle(
+                fontSize: 14,
+                color: context.secondaryHeaderColor,
+              ),
             ),
             const SizedBox(height: 12),
             InkWell(
               onTap: () {
-                Navigator.of(context).pushNamed(
-                    AppRoutesNames.doctorJobDetailsScreen,
-                    arguments: {'id': jobAddModel.id});
+                Navigator.of(context)
+                    .pushNamed(AppRoutesNames.doctorJobDetailsScreen, arguments: {'id': jobAddModel.id});
               },
               child: Text(
                 'Show Details',
@@ -117,12 +116,14 @@ class JobAddWidget extends StatelessWidget {
                   size: 16,
                 ),
                 const SizedBox(width: 4),
-                Text(
-                  (jobAddModel.createdAt ?? '').split('T').first,
-                  style: const TextStyle(
-                    fontSize: 12,
+                if (jobAddModel.createdAt != null)
+                  Text(
+                    // (jobAddModel.createdAt ?? '').split('T').first,
+                    formatStrDateToAmerican(jobAddModel.createdAt)!,
+                    style: const TextStyle(
+                      fontSize: 12,
+                    ),
                   ),
-                ),
               ],
             ),
           ],

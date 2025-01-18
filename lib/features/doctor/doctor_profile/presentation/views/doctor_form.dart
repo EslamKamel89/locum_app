@@ -3,9 +3,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:locum_app/core/enums/response_type.dart';
+import 'package:locum_app/core/heleprs/format_date.dart';
 import 'package:locum_app/core/heleprs/print_helper.dart';
 import 'package:locum_app/core/heleprs/validator.dart';
 import 'package:locum_app/core/service_locator/service_locator.dart';
+import 'package:locum_app/core/widgets/address_form.dart';
 import 'package:locum_app/core/widgets/default_drawer.dart';
 import 'package:locum_app/core/widgets/dropdown_widget.dart';
 import 'package:locum_app/core/widgets/main_scaffold.dart';
@@ -19,7 +21,6 @@ import 'package:locum_app/features/doctor/doctor_profile/presentation/cubits/doc
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/widgets/custom_form_widgets.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/widgets/doctor_profile_image_view_upload.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/widgets/mulitple_lang_selector.dart';
-import 'package:locum_app/features/doctor/doctor_profile/presentation/views/widgets/mulitple_skill_selector.dart';
 
 class DoctorForm extends StatefulWidget {
   const DoctorForm({super.key, required this.create});
@@ -80,15 +81,13 @@ class _DoctorFormState extends State<DoctorForm> {
                   ),
                   const SizedBox(height: 10),
                   BlocProvider(
-                    create: (context) =>
-                        SpecialtyCubit(serviceLocator())..fetchSpecialties(),
+                    create: (context) => SpecialtyCubit(serviceLocator())..fetchSpecialties(),
                     child: BlocBuilder<SpecialtyCubit, SpecialtyState>(
                       builder: (context, state) {
                         return CustomTextFormFieldWithSuggestions(
                           label: 'Specialty *',
-                          suggestions: (state.specialtyModels ?? [])
-                              .map((specilaity) => specilaity.name ?? '')
-                              .toList(),
+                          suggestions:
+                              (state.specialtyModels ?? []).map((specilaity) => specilaity.name ?? '').toList(),
                           onSelected: (String specialty) {
                             _jobInfoController.text = specialty;
                           },
@@ -105,15 +104,12 @@ class _DoctorFormState extends State<DoctorForm> {
                     ),
                   ),
                   BlocProvider(
-                    create: (context) =>
-                        JobInfoCubit(serviceLocator())..fetchJobInfos(),
+                    create: (context) => JobInfoCubit(serviceLocator())..fetchJobInfos(),
                     child: BlocBuilder<JobInfoCubit, JobInfoState>(
                       builder: (context, state) {
                         return CustomTextFormFieldWithSuggestions(
                           label: 'Job Title *',
-                          suggestions: (state.jobInfoModels ?? [])
-                              .map((jobInfo) => jobInfo.name ?? '')
-                              .toList(),
+                          suggestions: (state.jobInfoModels ?? []).map((jobInfo) => jobInfo.name ?? '').toList(),
                           onSelected: (String specialty) {
                             _specialityController.text = specialty;
                           },
@@ -161,6 +157,7 @@ class _DoctorFormState extends State<DoctorForm> {
                     'Address *',
                     _addressController,
                     'Enter Your Address',
+                    readOnly: true,
                     validator: (String? value) {
                       return valdiator(
                         input: value,
@@ -168,7 +165,27 @@ class _DoctorFormState extends State<DoctorForm> {
                         isRequired: true,
                       );
                     },
+                    onTap: () async {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return BottomSheet(
+                            onClosing: () {},
+                            builder: (_) {
+                              return AddressFormWithDropdowns(
+                                handleSaveAddress: (value) {
+                                  setState(() {
+                                    _addressController.text = value;
+                                  });
+                                },
+                              );
+                            },
+                          );
+                        },
+                      );
+                    },
                   ),
+
                   // const SizedBox(height: 5),
                   CustomTextField(
                     'Phone *',
@@ -202,11 +219,11 @@ class _DoctorFormState extends State<DoctorForm> {
                       selectdLangs = langs;
                     },
                   ),
-                  MuiltipleValueSkillSelector(
-                    onSkillSelect: (String skills) {
-                      selectdSkills = skills;
-                    },
-                  ),
+                  // MuiltipleValueSkillSelector(
+                  //   onSkillSelect: (String skills) {
+                  //     selectdSkills = skills;
+                  //   },
+                  // ),
                   const SizedBox(height: 50),
                   Row(
                     children: [
@@ -217,9 +234,7 @@ class _DoctorFormState extends State<DoctorForm> {
                           child: const Text('Save')),
                       const SizedBox(width: 10),
                       state.responseType == ResponseEnum.loading
-                          ? const Align(
-                              alignment: Alignment.centerLeft,
-                              child: CircularProgressIndicator())
+                          ? const Align(alignment: Alignment.centerLeft, child: CircularProgressIndicator())
                           : const SizedBox(),
                     ],
                   ),
@@ -239,7 +254,7 @@ class _DoctorFormState extends State<DoctorForm> {
           DoctorParams(
             specialtyName: _specialityController.text,
             jobInfoName: _jobInfoController.text,
-            dateOfBirth: _dateOfBirthController.text,
+            dateOfBirth: dateOfBirth != null ? formatDateForApi(dateOfBirth!) : doctorModel?.dateOfBirth,
             gender: gender,
             address: _addressController.text,
             phone: _phoneController.text,
@@ -249,8 +264,7 @@ class _DoctorFormState extends State<DoctorForm> {
             photo: selectedPhoto,
           ),
           'DoctorParams');
-      controller.updateOrCreateDoctor(
-          params: params, create: widget.create, id: doctorModel?.id);
+      controller.updateOrCreateDoctor(params: params, create: widget.create, id: doctorModel?.id);
     }
   }
 
@@ -258,7 +272,7 @@ class _DoctorFormState extends State<DoctorForm> {
     if (widget.create || doctorModel == null) return;
     _specialityController.text = doctorModel!.specialty?.name ?? '';
     _jobInfoController.text = doctorModel!.jobInfo?.name ?? '';
-    _dateOfBirthController.text = doctorModel!.dateOfBirth ?? '';
+    _dateOfBirthController.text = formatStrDateToAmerican(doctorModel!.dateOfBirth) ?? '';
     _addressController.text = doctorModel!.address ?? '';
     _phoneController.text = doctorModel!.phone ?? '';
     willingToRelcoate = doctorModel?.willingToRelocate ?? false;

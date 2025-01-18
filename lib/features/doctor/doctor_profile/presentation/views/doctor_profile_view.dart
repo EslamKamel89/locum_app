@@ -5,6 +5,7 @@ import 'package:locum_app/core/api_service/end_points.dart';
 import 'package:locum_app/core/enums/response_type.dart';
 import 'package:locum_app/core/extensions/context-extensions.dart';
 import 'package:locum_app/core/globals.dart';
+import 'package:locum_app/core/heleprs/format_date.dart';
 import 'package:locum_app/core/router/app_routes_names.dart';
 import 'package:locum_app/core/widgets/badge_wrap.dart';
 import 'package:locum_app/core/widgets/bottom_navigation_bar.dart';
@@ -14,7 +15,6 @@ import 'package:locum_app/core/widgets/main_scaffold.dart';
 import 'package:locum_app/features/common_data/cubits/user_info/user_info_cubit.dart';
 import 'package:locum_app/features/common_data/data/models/doctor_document_model.dart';
 import 'package:locum_app/features/common_data/data/models/language_model.dart';
-import 'package:locum_app/features/common_data/data/models/skill_model.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/widgets/add_new_document.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/widgets/doctor_document_widget.dart';
 import 'package:locum_app/features/doctor/doctor_profile/presentation/views/widgets/doctor_profile_not_complete_widgets.dart';
@@ -72,11 +72,9 @@ class DoctorProfileContent extends StatelessWidget {
                 child: Column(
                   children: [
                     CircularCachedImage(
-                      imageUrl:
-                          "${EndPoint.imgBaseUrl}${user?.doctor?.photo ?? ''}",
-                      imageAsset: user?.doctor?.gender == 'female'
-                          ? AssetsData.femalePlacholder
-                          : AssetsData.malePlacholder,
+                      imageUrl: "${EndPoint.imgBaseUrl}${user?.doctor?.photo ?? ''}",
+                      imageAsset:
+                          user?.doctor?.gender == 'female' ? AssetsData.femalePlacholder : AssetsData.malePlacholder,
                       height: 100.h,
                       width: 100.h,
                     ),
@@ -93,13 +91,11 @@ class DoctorProfileContent extends StatelessWidget {
               _sectionCard(
                 children: [
                   _buildSectionHeader('Basic Information', handleEdit: () {
-                    Navigator.of(context).pushNamed(
-                        AppRoutesNames.userDoctorForm,
-                        arguments: {'create': false});
+                    Navigator.of(context).pushNamed(AppRoutesNames.userDoctorForm, arguments: {'create': false});
                   }),
                   _buildInfo('Email', user?.email),
                   _buildInfo('State', user?.state?.name),
-                  _buildInfo('District', user?.district?.name),
+                  _buildInfo('City', user?.district?.name),
                 ],
                 visibility: user != null,
               ),
@@ -110,8 +106,7 @@ class DoctorProfileContent extends StatelessWidget {
 
               _sectionCard(
                 children: [
-                  _buildSectionHeader('Main Professional Information',
-                      handleEdit: () {
+                  _buildSectionHeader('Main Professional Information', handleEdit: () {
                     Navigator.of(context).pushNamed(
                       AppRoutesNames.doctorForm,
                       arguments: {'create': false},
@@ -119,14 +114,13 @@ class DoctorProfileContent extends StatelessWidget {
                   }),
                   _buildInfo('Specialty', user?.doctor?.specialty?.name),
                   _buildInfo('Job Title', user?.doctor?.jobInfo?.name),
-                  _buildInfo('Date of Birth', user?.doctor?.dateOfBirth),
+                  _buildInfo('Date of Birth', formatStrDateToAmerican(user?.doctor?.dateOfBirth)),
                   _buildInfo('Gender', user?.doctor?.gender),
                   _buildInfo('Address', user?.doctor?.address),
                   _buildInfo('Phone', user?.doctor?.phone),
                   _buildInfo(
                       'Willing to Relocate',
-                      user?.doctor?.willingToRelocate == null ||
-                              user?.doctor?.willingToRelocate == false
+                      user?.doctor?.willingToRelocate == null || user?.doctor?.willingToRelocate == false
                           ? 'No'
                           : 'Yes'),
                   //  Languages Spoken
@@ -145,9 +139,7 @@ class DoctorProfileContent extends StatelessWidget {
                           ),
                           // _buildInfo(null, langsStr, isRow: false),
                           const SizedBox(height: 5),
-                          BadgeWrap(
-                              items:
-                                  langs.map((lang) => lang.name ?? '').toList())
+                          BadgeWrap(items: langs.map((lang) => lang.name ?? '').toList())
                         ],
                         visibility: langs.isNotEmpty,
                         showDivider: false,
@@ -156,29 +148,26 @@ class DoctorProfileContent extends StatelessWidget {
                   ),
 
                   //  Doctor Skills
-                  Builder(
-                    builder: (context) {
-                      List<SkillModel> skills = user?.doctor?.skills ?? [];
-                      String skillsStr = '';
-                      for (var skill in skills) {
-                        skillsStr = '$skillsStr , ${skill.name} ';
-                      }
-                      skillsStr = skillsStr.replaceFirst(',', '').trim();
-                      return _sectionCard(
-                        children: [
-                          _buildSectionHeader('Skills'),
-                          // _buildInfo(null, skillsStr, isRow: false),
-                          const SizedBox(height: 5),
-                          BadgeWrap(
-                              items: skills
-                                  .map((skill) => skill.name ?? '')
-                                  .toList())
-                        ],
-                        visibility: skills.isNotEmpty,
-                        showDivider: false,
-                      );
-                    },
-                  ),
+                  // Builder(
+                  //   builder: (context) {
+                  //     List<SkillModel> skills = user?.doctor?.skills ?? [];
+                  //     String skillsStr = '';
+                  //     for (var skill in skills) {
+                  //       skillsStr = '$skillsStr , ${skill.name} ';
+                  //     }
+                  //     skillsStr = skillsStr.replaceFirst(',', '').trim();
+                  //     return _sectionCard(
+                  //       children: [
+                  //         _buildSectionHeader('Skills'),
+                  //         // _buildInfo(null, skillsStr, isRow: false),
+                  //         const SizedBox(height: 5),
+                  //         BadgeWrap(items: skills.map((skill) => skill.name ?? '').toList())
+                  //       ],
+                  //       visibility: skills.isNotEmpty,
+                  //       showDivider: false,
+                  //     );
+                  //   },
+                  // ),
                 ],
                 visibility: user?.doctor != null,
               ),
@@ -186,44 +175,29 @@ class DoctorProfileContent extends StatelessWidget {
 
               _sectionCard(
                 children: [
-                  _buildSectionHeader('Additional Professional Information',
-                      handleEdit: () {
-                    Navigator.of(context).pushNamed(
-                        AppRoutesNames.doctorInfoForm,
-                        arguments: {'create': false});
+                  _buildSectionHeader('Additional Professional Information', handleEdit: () {
+                    Navigator.of(context).pushNamed(AppRoutesNames.doctorInfoForm, arguments: {'create': false});
                   }),
-                  _buildInfo('Professional License No.',
-                      user?.doctor?.doctorInfo?.professionalLicenseNumber),
+                  _buildInfo('Professional License No.', user?.doctor?.doctorInfo?.professionalLicenseNumber),
+                  _buildInfo('License State', user?.doctor?.doctorInfo?.licenseState),
+                  _buildInfo('License Issue Date', formatStrDateToAmerican(user?.doctor?.doctorInfo?.licenseIssueDate)),
                   _buildInfo(
-                      'License State', user?.doctor?.doctorInfo?.licenseState),
-                  _buildInfo('License Issue Date',
-                      user?.doctor?.doctorInfo?.licenseIssueDate),
-                  _buildInfo('License Expiry Date',
-                      user?.doctor?.doctorInfo?.licenseExpiryDate),
-                  _buildInfo(
-                      'University', user?.doctor?.doctorInfo?.university?.name),
-                  _buildInfo('Highest Degree',
-                      user?.doctor?.doctorInfo?.highestDegree),
-                  _buildInfo(
-                      'Field of Study', user?.doctor?.doctorInfo?.fieldOfStudy),
-                  _buildInfo('Graduation Year',
-                      user?.doctor?.doctorInfo?.graduationYear.toString()),
-                  _buildInfo('Work Experience',
-                      user?.doctor?.doctorInfo?.workExperience,
-                      isRow: false),
-                  _buildInfo('Biography', user?.doctor?.doctorInfo?.biography,
-                      isRow: false),
+                      'License Expiry Date', formatStrDateToAmerican(user?.doctor?.doctorInfo?.licenseExpiryDate)),
+                  _buildInfo('University', user?.doctor?.doctorInfo?.university?.name),
+                  _buildInfo('Highest Degree', user?.doctor?.doctorInfo?.highestDegree),
+                  _buildInfo('Residency ', user?.doctor?.doctorInfo?.fieldOfStudy),
+                  _buildInfo('Graduation Year', user?.doctor?.doctorInfo?.graduationYear.toString()),
+                  _buildInfo('Work Experience', user?.doctor?.doctorInfo?.workExperience, isRow: false),
+                  _buildInfo('Biography', user?.doctor?.doctorInfo?.biography, isRow: false),
                   InkWell(
                     onTap: () {
-                      launchUrl(Uri.parse(
-                          "${EndPoint.imgBaseUrl}${user?.doctor?.doctorInfo?.cv ?? ''}"));
+                      launchUrl(Uri.parse("${EndPoint.imgBaseUrl}${user?.doctor?.doctorInfo?.cv ?? ''}"));
                     },
                     child: Text(
                       'View CV',
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
-                        color: navigatorKey.currentContext!.primaryColor
-                            .withRed(5),
+                        color: navigatorKey.currentContext!.primaryColor.withRed(5),
                         decoration: TextDecoration.underline,
                       ),
                     ),
@@ -234,13 +208,11 @@ class DoctorProfileContent extends StatelessWidget {
 
               // Section 7: Doctor Documents
               Builder(builder: (context) {
-                List<DoctorDocumentModel> documents =
-                    user?.doctor?.doctorDocuments ?? [];
+                List<DoctorDocumentModel> documents = user?.doctor?.doctorDocuments ?? [];
                 return _sectionCard(
                   children: [
                     _buildSectionHeader('Documents'),
-                    ...documents.map((document) =>
-                        DoctorDocumentWidget(doctorDocumentModel: document)),
+                    ...documents.map((document) => DoctorDocumentWidget(doctorDocumentModel: document)),
                     const AddNewDocumentWidget()
                   ],
                   visibility: documents.isNotEmpty,
@@ -318,10 +290,7 @@ class DoctorProfileContent extends StatelessWidget {
     );
   }
 
-  Widget _sectionCard(
-      {required List<Widget> children,
-      bool visibility = true,
-      bool showDivider = true}) {
+  Widget _sectionCard({required List<Widget> children, bool visibility = true, bool showDivider = true}) {
     return visibility
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,

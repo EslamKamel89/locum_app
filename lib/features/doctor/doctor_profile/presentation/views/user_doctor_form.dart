@@ -31,8 +31,7 @@ class _UserDoctorFormState extends State<UserDoctorForm> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _passwordConfirmController =
-      TextEditingController();
+  final TextEditingController _passwordConfirmController = TextEditingController();
   late UserUpdateCubit controller;
   late DoctorUserModel? _doctorUserModel;
   String _selectedState = '';
@@ -94,17 +93,12 @@ class _UserDoctorFormState extends State<UserDoctorForm> {
                   _customDivider(),
                   MultiBlocProvider(
                       providers: [
-                        BlocProvider(
-                            create: (context) =>
-                                StateCubit(serviceLocator())..fetchStates()),
-                        BlocProvider(
-                            create: (context) =>
-                                DistrictsDataCubit(serviceLocator())),
+                        BlocProvider(create: (context) => StateCubit(serviceLocator())..fetchStates()),
+                        BlocProvider(create: (context) => DistrictsDataCubit(serviceLocator())),
                       ],
                       child: Builder(builder: (context) {
                         final stateController = context.watch<StateCubit>();
-                        final districtDataController =
-                            context.watch<DistrictsDataCubit>();
+                        final districtDataController = context.watch<DistrictsDataCubit>();
                         return Column(
                           children: [
                             SearchableDropdownWidget(
@@ -113,38 +107,31 @@ class _UserDoctorFormState extends State<UserDoctorForm> {
                               isRequired: true,
                               initalValue: _doctorUserModel?.state?.name,
                               options: stateController.state.stateModels
-                                      ?.map(
-                                          (stateModel) => stateModel.name ?? '')
+                                      ?.map((stateModel) => stateModel.name ?? '')
                                       .toList() ??
                                   [],
                               handleSelectOption: (String option) {
                                 _selectedState = option;
-                                int? stateId = getStateId(_selectedState,
-                                    stateController.state.stateModels);
+                                int? stateId = getStateId(_selectedState, stateController.state.stateModels);
                                 _selectedStateId = stateId;
                                 if (stateId == null) return;
-                                districtDataController
-                                    .fetchDistrictsData(stateId);
+                                districtDataController.fetchDistrictsData(stateId);
                               },
                             ),
                             const SizedBox(height: 15),
                             SearchableDropdownWidget(
-                              label: 'District (Optional)',
-                              hintText: 'Select District',
+                              label: 'City (Optional)',
+                              hintText: 'Select City',
                               isRequired: false,
                               initalValue: _doctorUserModel?.district?.name,
-                              options: districtDataController
-                                      .state.districtsDataModel?.districts
-                                      ?.map((districtModel) =>
-                                          districtModel?.name ?? '')
+                              options: districtDataController.state.districtsDataModel?.districts
+                                      ?.map((districtModel) => districtModel?.name ?? '')
                                       .toList() ??
                                   [],
                               handleSelectOption: (String option) {
                                 _selectedDistrict = option;
-                                _selectedDistrictId = getDistrictId(
-                                    option,
-                                    districtDataController
-                                        .state.districtsDataModel);
+                                _selectedDistrictId =
+                                    getDistrictId(option, districtDataController.state.districtsDataModel);
                                 // controller.selectDistrict(option);
                               },
                             ),
@@ -167,9 +154,7 @@ class _UserDoctorFormState extends State<UserDoctorForm> {
                       ),
                       const SizedBox(width: 10),
                       state.responseType == ResponseEnum.loading
-                          ? const Align(
-                              alignment: Alignment.centerLeft,
-                              child: CircularProgressIndicator())
+                          ? const Align(alignment: Alignment.centerLeft, child: CircularProgressIndicator())
                           : const SizedBox(),
                     ],
                   ),
@@ -210,16 +195,13 @@ class _UserDoctorFormState extends State<UserDoctorForm> {
 
   int? getStateId(String? stateName, List<StateModel>? states) {
     if (stateName == null || states == null) return null;
-    StateModel? selectedStateModel =
-        states.where((stateModel) => stateModel.name == stateName).first;
+    StateModel? selectedStateModel = states.where((stateModel) => stateModel.name == stateName).first;
     return selectedStateModel.id;
   }
 
-  int? getDistrictId(
-      String slectedDistricName, DistrictsDataModel? districtsDataModel) {
-    DistrictModel? selectedDistrictModel = districtsDataModel?.districts
-        ?.where((districtModel) => districtModel?.name == slectedDistricName)
-        .first;
+  int? getDistrictId(String slectedDistricName, DistrictsDataModel? districtsDataModel) {
+    DistrictModel? selectedDistrictModel =
+        districtsDataModel?.districts?.where((districtModel) => districtModel?.name == slectedDistricName).first;
 
     return selectedDistrictModel?.id;
   }

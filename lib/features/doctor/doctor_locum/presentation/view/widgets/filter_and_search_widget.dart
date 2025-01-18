@@ -8,7 +8,6 @@ import 'package:locum_app/core/service_locator/service_locator.dart';
 import 'package:locum_app/core/widgets/searchable_dropdown_widget.dart';
 import 'package:locum_app/features/common_data/cubits/job_info/job_info_cubit.dart';
 import 'package:locum_app/features/common_data/cubits/language/language_cubit.dart';
-import 'package:locum_app/features/common_data/cubits/skill/skill_cubit.dart';
 import 'package:locum_app/features/common_data/cubits/speciality/speciality_cubit.dart';
 import 'package:locum_app/features/common_data/cubits/state/state_cubit.dart';
 import 'package:locum_app/features/doctor/doctor_locum/domain/repos/doctor_locum_repo.dart';
@@ -47,10 +46,8 @@ class SearchWidgetState extends State<SearchWidget> {
                   isVisible
                       ? Text(
                           'Find Your Dream Job',
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: context.secondaryHeaderColor),
+                          style:
+                              TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: context.secondaryHeaderColor),
                         )
                       : ElevatedButton(
                           onPressed: () {
@@ -64,8 +61,7 @@ class SearchWidgetState extends State<SearchWidget> {
                               SizedBox(width: 10),
                               Text(
                                 'Search For Your Perfect Job',
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
+                                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
@@ -127,67 +123,48 @@ class SearchWidgetState extends State<SearchWidget> {
                 MultiBlocProvider(
                   providers: [
                     BlocProvider<SpecialtyCubit>(
-                        create: (context) => SpecialtyCubit(serviceLocator())
-                          ..fetchSpecialties()),
-                    BlocProvider<JobInfoCubit>(
-                        create: (context) =>
-                            JobInfoCubit(serviceLocator())..fetchJobInfos()),
-                    BlocProvider<StateCubit>(
-                        create: (context) =>
-                            StateCubit(serviceLocator())..fetchStates()),
-                    BlocProvider<LanguageCubit>(
-                        create: (context) =>
-                            LanguageCubit(serviceLocator())..fetchLanugages()),
-                    BlocProvider<SkillCubit>(
-                        create: (context) =>
-                            SkillCubit(serviceLocator())..fetchSkills()),
+                        create: (context) => SpecialtyCubit(serviceLocator())..fetchSpecialties()),
+                    BlocProvider<JobInfoCubit>(create: (context) => JobInfoCubit(serviceLocator())..fetchJobInfos()),
+                    BlocProvider<StateCubit>(create: (context) => StateCubit(serviceLocator())..fetchStates()),
+                    BlocProvider<LanguageCubit>(create: (context) => LanguageCubit(serviceLocator())..fetchLanugages()),
+                    // BlocProvider<SkillCubit>(
+                    //     create: (context) =>
+                    //         SkillCubit(serviceLocator())..fetchSkills()),
                   ],
                   child: Builder(builder: (context) {
                     final specialtyController = context.watch<SpecialtyCubit>();
                     final jobInfoController = context.watch<JobInfoCubit>();
                     final stateController = context.watch<StateCubit>();
                     final languageController = context.watch<LanguageCubit>();
-                    final skillController = context.watch<SkillCubit>();
+                    // final skillController = context.watch<SkillCubit>();
                     List<String> options = [];
                     switch (selectedFilter) {
                       case null:
                         break;
                       case FilterOptionsEnum.specialty:
-                        options = specialtyController.state.specialtyModels
-                                ?.map((model) => model.name ?? '')
-                                .toList() ??
-                            [];
+                        options =
+                            specialtyController.state.specialtyModels?.map((model) => model.name ?? '').toList() ?? [];
                       case FilterOptionsEnum.jobTitle:
-                        options = jobInfoController.state.jobInfoModels
-                                ?.map((model) => model.name ?? '')
-                                .toList() ??
-                            [];
+                        options =
+                            jobInfoController.state.jobInfoModels?.map((model) => model.name ?? '').toList() ?? [];
                       case FilterOptionsEnum.jobType:
                         break;
                       case FilterOptionsEnum.state:
-                        options = stateController.state.stateModels
-                                ?.map((model) => model.name ?? '')
-                                .toList() ??
-                            [];
+                        options = stateController.state.stateModels?.map((model) => model.name ?? '').toList() ?? [];
                       case FilterOptionsEnum.languages:
-                        options = languageController.state.languageModels
-                                ?.map((model) => model.name ?? '')
-                                .toList() ??
-                            [];
-                      case FilterOptionsEnum.skills:
-                        options = skillController.state.skillModels
-                                ?.map((model) => model.name ?? '')
-                                .toList() ??
-                            [];
+                        options =
+                            languageController.state.languageModels?.map((model) => model.name ?? '').toList() ?? [];
+                      // case FilterOptionsEnum.skills:
+                      //   options = skillController.state.skillModels
+                      //           ?.map((model) => model.name ?? '')
+                      //           .toList() ??
+                      //       [];
                       case FilterOptionsEnum.address:
                         break;
                     }
-                    if (selectedFilter != null &&
-                        selectedFilter == FilterOptionsEnum.specialty) {
-                      options = specialtyController.state.specialtyModels
-                              ?.map((model) => model.name ?? '')
-                              .toList() ??
-                          [];
+                    if (selectedFilter != null && selectedFilter == FilterOptionsEnum.specialty) {
+                      options =
+                          specialtyController.state.specialtyModels?.map((model) => model.name ?? '').toList() ?? [];
                     }
                     return Column(
                       children: [
@@ -214,8 +191,7 @@ class SearchWidgetState extends State<SearchWidget> {
                           },
                         ),
                         if (selectedFilter != null)
-                          selectedFilter == FilterOptionsEnum.jobType ||
-                                  selectedFilter == FilterOptionsEnum.address
+                          selectedFilter == FilterOptionsEnum.jobType || selectedFilter == FilterOptionsEnum.address
                               ? CustomTextField(
                                   'Enter ${selectedFilter?.toShortString()}',
                                   filterValueController,
@@ -228,10 +204,8 @@ class SearchWidgetState extends State<SearchWidget> {
                                     handleSelectOption: (suggestion) {
                                       filterValueController.text = suggestion;
                                     },
-                                    label:
-                                        'Enter ${selectedFilter?.toShortString()}',
-                                    hintText:
-                                        selectedFilter?.toShortString() ?? '',
+                                    label: 'Enter ${selectedFilter?.toShortString()}',
+                                    hintText: selectedFilter?.toShortString() ?? '',
                                     isRequired: false,
                                   ),
                                 ),
@@ -258,8 +232,7 @@ class SearchWidgetState extends State<SearchWidget> {
                                   setState(
                                     () {
                                       activeFilters.addAll({
-                                        selectedFilter!:
-                                            filterValueController.text,
+                                        selectedFilter!: filterValueController.text,
                                       });
                                       selectedFilter = null;
                                       filterValueController.clear();
@@ -283,8 +256,7 @@ class SearchWidgetState extends State<SearchWidget> {
                   runSpacing: 8,
                   children: activeFilters.entries.map((filter) {
                     return Chip(
-                      label: Text(
-                          '${filter.key.toShortString()}: ${filter.value}'),
+                      label: Text('${filter.key.toShortString()}: ${filter.value}'),
                       deleteIcon: const Icon(Icons.close),
                       onDeleted: () {
                         setState(() {
@@ -314,9 +286,8 @@ class SearchWidgetState extends State<SearchWidget> {
   _sendRequest() {
     final params = pr(
         ShowAllJobAddsParams(
-          jobInfo: activeFilters.containsKey(FilterOptionsEnum.jobTitle)
-              ? activeFilters[FilterOptionsEnum.jobTitle]
-              : null,
+          jobInfo:
+              activeFilters.containsKey(FilterOptionsEnum.jobTitle) ? activeFilters[FilterOptionsEnum.jobTitle] : null,
           specialty: activeFilters.containsKey(FilterOptionsEnum.specialty)
               ? activeFilters[FilterOptionsEnum.specialty]
               : null,
@@ -325,18 +296,14 @@ class SearchWidgetState extends State<SearchWidget> {
           langs: activeFilters.containsKey(FilterOptionsEnum.languages)
               ? activeFilters[FilterOptionsEnum.languages]
               : null,
-          skills: activeFilters.containsKey(FilterOptionsEnum.skills)
-              ? activeFilters[FilterOptionsEnum.skills]
-              : null,
-          jobType: activeFilters.containsKey(FilterOptionsEnum.jobType)
-              ? activeFilters[FilterOptionsEnum.jobType]
-              : null,
-          state: activeFilters.containsKey(FilterOptionsEnum.state)
-              ? activeFilters[FilterOptionsEnum.state]
-              : null,
-          location: activeFilters.containsKey(FilterOptionsEnum.address)
-              ? activeFilters[FilterOptionsEnum.address]
-              : null,
+          // skills: activeFilters.containsKey(FilterOptionsEnum.skills)
+          //     ? activeFilters[FilterOptionsEnum.skills]
+          //     : null,
+          jobType:
+              activeFilters.containsKey(FilterOptionsEnum.jobType) ? activeFilters[FilterOptionsEnum.jobType] : null,
+          state: activeFilters.containsKey(FilterOptionsEnum.state) ? activeFilters[FilterOptionsEnum.state] : null,
+          location:
+              activeFilters.containsKey(FilterOptionsEnum.address) ? activeFilters[FilterOptionsEnum.address] : null,
         ),
         'ShowAllJobAddsParams');
     context.read<ShowAllAddsCubit>().resetState();

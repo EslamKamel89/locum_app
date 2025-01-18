@@ -78,33 +78,33 @@ class DefaultDoctorDrawer extends StatelessWidget {
             //   },
             // ),
 
-            BlocBuilder<UnseenSupportMessageCountCubit, UnseenSupportMessageCountState>(
-              builder: (context, state) {
-                return ListTile(
-                  title: const Text('Support'),
-                  leading: Icon(MdiIcons.faceAgent, color: context.primaryColor),
-                  trailing: state.notSeenCountModel?.notSeenCount == null || state.notSeenCountModel?.notSeenCount == 0
-                      ? null
-                      : Container(
-                          decoration: BoxDecoration(color: Colors.redAccent, borderRadius: BorderRadius.circular(100)),
-                          padding: const EdgeInsets.all(5),
-                          child: Text(
-                            state.notSeenCountModel?.notSeenCount?.toString() ?? '0',
-                            style: const TextStyle(color: Colors.white, fontSize: 18),
-                          ),
-                        ),
-                  onTap: () {
-                    Navigator.of(context).pushNamed(AppRoutesNames.supportView);
-                  },
-                );
-              },
-            ),
+            // BlocBuilder<UnseenSupportMessageCountCubit, UnseenSupportMessageCountState>(
+            //   builder: (context, state) {
+            //     return ListTile(
+            //       title: const Text('Support'),
+            //       leading: Icon(MdiIcons.faceAgent, color: context.primaryColor),
+            //       trailing: state.notSeenCountModel?.notSeenCount == null || state.notSeenCountModel?.notSeenCount == 0
+            //           ? null
+            //           : Container(
+            //               decoration: BoxDecoration(color: Colors.redAccent, borderRadius: BorderRadius.circular(100)),
+            //               padding: const EdgeInsets.all(5),
+            //               child: Text(
+            //                 state.notSeenCountModel?.notSeenCount?.toString() ?? '0',
+            //                 style: const TextStyle(color: Colors.white, fontSize: 18),
+            //               ),
+            //             ),
+            //       onTap: () {
+            //         Navigator.of(context).pushNamed(AppRoutesNames.supportView);
+            //       },
+            //     );
+            //   },
+            // ),
             _createDrawerItem(
               context,
               icon: Icons.settings,
               text: 'Settings',
               onTap: () {
-                Navigator.pop(context);
+                Navigator.of(context).pushNamed(AppRoutesNames.userDoctorForm, arguments: {'create': false});
               },
             ),
             _createDrawerItem(
@@ -120,7 +120,7 @@ class DefaultDoctorDrawer extends StatelessWidget {
               title: const Text('About'),
               leading: Icon(Icons.info, color: context.primaryColor),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.of(context).pushNamed(AppRoutesNames.aboutView);
               },
             ),
             BlocBuilder<ThemeCubit, ThemeData>(

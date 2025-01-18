@@ -111,15 +111,38 @@ Done todos {
     # there as an error occur when the user don't enter his information and try to see the job applictations
     # i didn't handle no data any where in the applciation 
     # handle the permissions for the user to view the jobadds     
+    # setting page will be rssponsbile on ujpdating username and password
+    # any district will be city anywhere
+    # dostrict cshould be named city
+    # remove the langs and skills
+    # remove the skills from the profile page 
+    # removing the support
+    # work on show all messages
+    # filter by speciality the background for the dropdown is white
+    # any date will be shown month-day-year
+    # filed study in profile page wil be residency 
+    # profile job type will be [locum-parttime]
+    # profile salary range will be pay rate
+    # profile working hours will be shift hours 
+    # profile published at will be date published 
+    # about page 
 }
 
 todos {
     # if you change the doctor image in the update method and come back the profile page the image is not updated in the ui only but it's updated successfully to the backend
     # address one and address two in hostpiatsl and adddresss trwo is ooptional
-    # dostrict cshould be named city
     # api to fetch address with suggestions
-    # work on show all messages
+
 }
+
+the color of the app will be similar to the site
+filter then show jobs 
+add lang and lat to job add only ui first then the implemenation after approval the distance in the drop down are(30 , 50 , 100 , 250 , 500 mile)
+the adress must contian a drop down for state and district as a dropdown then concatinate the result and send it to the backend
+
+
+
+
 
 
 
