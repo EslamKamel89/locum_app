@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:locum_app/core/extensions/context-extensions.dart';
 import 'package:locum_app/core/heleprs/print_helper.dart';
 import 'package:locum_app/core/widgets/default_drawer.dart';
 import 'package:locum_app/core/widgets/main_scaffold.dart';
@@ -24,9 +25,9 @@ class AboutView extends StatelessWidget {
       scheme: 'mailto',
       path: email,
     );
-    if (await canLaunchUrl(uri)) {
+    try {
       await launchUrl(uri);
-    } else {
+    } catch (e) {
       pr('Could not launch $email', 'AboutView');
     }
   }
@@ -64,8 +65,10 @@ class AboutView extends StatelessWidget {
               e: St.reg14,
             ).animate().fade(duration: 800.ms, delay: 200.ms).slideX(begin: -0.3, duration: 800.ms),
             const SizedBox(height: 8),
+
             Container(
                 decoration: BoxDecoration(
+                  color: context.scaffoldBackgroundColor,
                   borderRadius: BorderRadius.circular(15),
                 ),
                 clipBehavior: Clip.hardEdge,

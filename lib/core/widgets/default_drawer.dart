@@ -107,14 +107,14 @@ class DefaultDoctorDrawer extends StatelessWidget {
                 Navigator.of(context).pushNamed(AppRoutesNames.userDoctorForm, arguments: {'create': false});
               },
             ),
-            _createDrawerItem(
-              context,
-              icon: Icons.contact_mail,
-              text: 'Contact Us',
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
+            // _createDrawerItem(
+            //   context,
+            //   icon: Icons.contact_mail,
+            //   text: 'Contact Us',
+            //   onTap: () {
+            //     Navigator.pop(context);
+            //   },
+            // ),
             const Divider(color: Colors.white70),
             ListTile(
               title: const Text('About'),

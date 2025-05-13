@@ -126,6 +126,7 @@ Done todos {
     # profile working hours will be shift hours 
     # profile published at will be date published 
     # about page 
+    # the adress must contian a drop down for state and district as a dropdown then concatinate the result and send it to the backend
 }
 
 todos {
@@ -138,7 +139,6 @@ todos {
 the color of the app will be similar to the site
 filter then show jobs 
 add lang and lat to job add only ui first then the implemenation after approval the distance in the drop down are(30 , 50 , 100 , 250 , 500 mile)
-the adress must contian a drop down for state and district as a dropdown then concatinate the result and send it to the backend
 
 
 

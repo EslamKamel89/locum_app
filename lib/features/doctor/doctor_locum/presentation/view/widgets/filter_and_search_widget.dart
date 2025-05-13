@@ -161,6 +161,9 @@ class SearchWidgetState extends State<SearchWidget> {
                       //       [];
                       case FilterOptionsEnum.address:
                         break;
+                      case FilterOptionsEnum.distance:
+                        options = ["30 Mile", "50 Mile", "100 Mile", "250 Mile", "500 Mile"];
+                        break;
                     }
                     if (selectedFilter != null && selectedFilter == FilterOptionsEnum.specialty) {
                       options =

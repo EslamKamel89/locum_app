@@ -8,6 +8,7 @@ enum FilterOptionsEnum {
   languages,
   // skills,
   address,
+  distance,
 }
 
 extension FilterOptionsEnumExtension on FilterOptionsEnum {
@@ -27,6 +28,8 @@ extension FilterOptionsEnumExtension on FilterOptionsEnum {
       // return 'Skills';
       case FilterOptionsEnum.address:
         return 'Address';
+      case FilterOptionsEnum.distance:
+        return 'Distance';
     }
   }
 }
